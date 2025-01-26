@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lから始まるLinux - 2章52話 テキスト関連コマンド(その2)</title>
+<meta charset="UTF-8">
+<meta http-equiv="content-language" content="ja">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,cut,tr,wc,fold">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<base href="../..">
+<link rel="prev" href="2/51/" />
+<link rel="next" href="2/53/" />
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/story.css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章51話</div>
+<div><a href="2/51/">テキスト関連コマンド(その1)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章52話 テキスト関連コマンド(その2)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章53話</div>
+<div><a href="2/53/">パス関連コマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>テキスト関連コマンド(その2)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><code>sort</code><span>, <wbr></span><code>uniq</code><span>, <wbr></span><code>tac</code><span>, <wbr></span><code>rev</code><span> …</span></span>
+<span><span>テキスト関連だけでも</span></span>
+<span><span>色々なコマンドがあるんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>他にもおさえたいテキスト関連コマンドがあるよ</span></span>
+<span><span>今回は前回に続いてそのようなコマンドを紹介するね</span></span>
+</div>
+</article>
+<article class="header2"><code>cut</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>cut</code><span> は文字列の一部分を切り出すよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">cut <wbr>[オプション]... <wbr>[ファイル]...
+</code></pre></article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>オプション</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-c 範囲</code><span>, <wbr></span><code>--characters=範囲</code></td>
+<td><span>指定された範囲の文字を切り出す</span></td>
+</tr>
+<tr>
+<td><code>-f 範囲</code><span>, <wbr></span><code>--fields=範囲</code></td>
+<td><span>指定された範囲のフィールドを切り出す</span></td>
+</tr>
+<tr>
+<td><code>-d 文字</code><span>, <wbr></span><code>--delimiter=文字</code></td>
+<td><span>フィールド区切り文字を指定（デフォルトはタブ文字）</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>こんな感じで使えるよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>コマンド</span></th>
+<th><span>出力</span></th>
+<th><span>意味</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cut -d 2 &lt;&lt;&lt; hello</code></td>
+<td><code>e</code></td>
+<td><span>2文字目を切り出す</span></td>
+</tr>
+<tr>
+<td><code>cut -d 2,5 &lt;&lt;&lt; hello</code></td>
+<td><code>eo</code></td>
+<td><span>2文字目と5文字目を切り出す</span></td>
+</tr>
+<tr>
+<td><code>cut -d 2-4 &lt;&lt;&lt; hello</code></td>
+<td><code>ell</code></td>
+<td><span>2文字目から4文字目までを切り出す</span></td>
+</tr>
+<tr>
+<td><code>cut -d / <wbr>-f 4 &lt;&lt;&lt; /usr/share/zoneinfo/Asia/Tokyo</code></td>
+<td><code>zoneinfo</code></td>
+<td><span>区切り文字を </span><code>/</code><span> として4番目のフィールドを切り出す</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ！</span></span>
+<span><span>必要な部分だけ取り出すのに使えるね！</span></span>
+</div>
+</article>
+<article class="header2"><code>tr</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>tr</code><span> は文字列中の文字を置き換えたり取り除いたりするよ</span></span>
+<span><span>translate の略で<wbr>「変換する」<wbr>や<wbr>「転換する」<wbr>という意味なんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">tr <wbr>[オプション] <wbr>セット1 <wbr>[セット2]
+</code></pre></article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>オプション</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-c</code><span>, <wbr></span><code>-C</code><span>, <wbr></span><code>--complement</code></td>
+<td><span><wbr>「セット1」<wbr>の代わりに<wbr>「セット1以外」<wbr>を使う</span></td>
+</tr>
+<tr>
+<td><code>-d</code><span>, <wbr></span><code>--delete</code></td>
+<td><span><wbr>「セット1」<wbr>に指定された文字を削除する</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「セット」<wbr>がわかりづらいので</span></span>
+<span><span>例を見たほうがわかりやすいよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>コマンド</span></th>
+<th><span>出力</span></th>
+<th><span>意味</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tr a-z A-Z &lt;&lt;&lt; hello</code></td>
+<td><code>HELLO</code></td>
+<td><span><wbr>「英小文字(</span><code>a-z</code><span>)」<wbr>を<wbr>「英大文字(</span><code>A-Z</code><span>)」<wbr>に変換する</span></td>
+</tr>
+<tr>
+<td><code>tr -d l &lt;&lt;&lt; hello</code></td>
+<td><code>heo</code></td>
+<td><span><wbr>「文字 </span><code>l</code><span>」<wbr>を削除する</span></td>
+</tr>
+<tr>
+<td><code>tr -cd l &lt;&lt;&lt; hello</code></td>
+<td><code>ll</code></td>
+<td><span><wbr>「</span><code>l</code><span> 以外の文字」<wbr>を削除する</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>慣れるのに時間が掛かりそうだけど</span></span>
+<span><span>賢い処理をしてくれるコマンドなんだね！</span></span>
+</div>
+</article>
+<article class="header2"><code>wc</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>wc</code><span> は文字数などを数えてくれるよ</span></span>
+<span><span>word count の略なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>オプションの指定がなければ</span></span>
+<span><span><wbr>「行数・単語数・文字数」<wbr>の3つを表示するんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">wc <wbr>[オプション]... <wbr>[ファイル]...
+</code></pre></article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>オプション</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-l</code><span>, <wbr></span><code>--lines</code></td>
+<td><span>行数のみ表示する</span></td>
+</tr>
+<tr>
+<td><code>-w</code><span>, <wbr></span><code>--words</code></td>
+<td><span>単語数のみ表示する</span></td>
+</tr>
+<tr>
+<td><code>-m</code><span>, <wbr></span><code>--chars</code></td>
+<td><span>文字数のみ表示する</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>色々な使い道がありそうなコマンドだね！</span></span>
+<span><code>test</code><span> の数値比較とも相性が良さそう！</span></span>
+</div>
+</article>
+<article class="header2"><code>fold</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>fold</code><span> は行を指定された文字数で改行するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">fold <wbr>[オプション]... <wbr>[ファイル]...
+</code></pre></article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>オプション</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-w 文字数</code><span>, <wbr></span><code>--width=文字数</code></td>
+<td><span>行を</span><code>文字数</code><span>で改行(デフォルトは</span><code>80</code><span>)</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>でも行を文字数で折り返すことはあまりないかも？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうだね</span></span>
+<span><span>閲覧のために行を折り返すのではなく</span></span>
+<span><span>テキスト加工で使われることが多いんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>例えばどんなのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>以下は英大文字小文字数字で構成された</span></span>
+<span><span>ランダムな16文字を取り出すよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">cat <wbr>/dev/random <wbr>| <wbr>tr <wbr>-cd <wbr>a-zA-Z0-9 <wbr>| <wbr>fold <wbr>-w <wbr>16 <wbr>| <wbr>head <wbr>-n <wbr>1
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>今まで習ったことの集大成みたいだね！</span></span>
+<span><span>パスワード生成に使えそう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>/dev/random</code><span> からの出力は</span></span>
+<span><span><wbr>「擬似乱数(pseudorandom numbers)」<wbr>と呼ばれるもので</span></span>
+<span><span>本物の乱数ではないんだ</span></span>
+<span><span>計算から生成される<wbr>「乱数っぽい数字」<wbr>で</span></span>
+<span><span>たくさんの値を高速に生成できるけど</span></span>
+<span><span>生成される値が推測可能な場合があるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>そうなんだ！</span></span>
+<span><span>パスワードに使うのはちょっと心配だね…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>セキュリティがからむ場合は </span><code>/dev/random</code><span> ではなく</span></span>
+<span><span>本物の乱数を返す </span><code>/dev/urandom</code><span> を使おう！</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回はテキストを処理するコマンド</span></span>
+<span><code>cut</code><span>, <wbr></span><code>tr</code><span>, <wbr></span><code>wc</code><span>, <wbr></span><code>fold</code><span> を学んだよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>これらもアイデア次第で色々活用できるよ</span></span>
+<span><span>面白い使い方を思いついたら兄にも教えてね！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章51話</div>
+<div><a href="2/51/">テキスト関連コマンド(その1)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章52話 テキスト関連コマンド(その2)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章53話</div>
+<div><a href="2/53/">パス関連コマンド</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>
