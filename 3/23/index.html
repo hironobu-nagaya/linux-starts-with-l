@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lから始まるLinux - 3章23話 ドットコマンド</title>
+<meta charset="UTF-8">
+<meta http-equiv="content-language" content="ja">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,dot command">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<base href="../..">
+<link rel="prev" href="3/22/" />
+<link rel="next" href="3/24/" />
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/story.css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章22話</div>
+<div><a href="3/22/">シェル関数</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章23話 ドットコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章24話</div>
+<div><a href="3/24/">setコマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ドットコマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>自作スクリプトは関数を使って読みやすくなったけど</span></span>
+<span><span>そもそもの記述量が減っていないから分量が多くてやっぱり大変だよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それなら今回はドットコマンド </span><code>.</code><span> を学ぼう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><code>.</code><span> だけでコマンドなんだ？</span></span>
+<span><span>それってどういうものなの？</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ドットコマンド </span><code>.</code><span> は他のファイルに書かれた内容を読み込むよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>. <wbr>読み込むファイルのパス
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>指定されたファイルの内容がその場にあるかのように使えるんだね</span></span>
+<span><span>読み込むファイルに何か特別な設定は必要？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>実行権限は不要だけど読み込み権限は必要だよ</span></span>
+</div>
+</article>
+<article class="header2"><span>実践</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ドットコマンドを使えばスクリプトを複数のファイルに分割して管理できるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>例えば以下のようなスクリプトがあったとしよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code>#!/bin/bash
+
+<span class="silver"># <wbr>変数設定</span>
+A=...
+B=...
+C=...
+
+<span class="silver"># <wbr>関数定義</span>
+x() <wbr>{
+  <wbr>...
+}
+y() <wbr>{
+  <wbr>...
+}
+z() <wbr>{
+  <wbr>...
+}
+
+<span class="silver"># <wbr>変数や関数を使った処理</span>
+...
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>変数や関数が増えたらこのファイルの内容はすぐに膨れ上がりそうだね</span></span>
+<span><span>実際私のスクリプトはそんな感じになっちゃったよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そこで、<wbr>これらを別ファイルに分けて必要な時に読むようにすると便利なんだ</span></span>
+<span><span>例えば以下のように分割して管理できるよ</span></span>
+</div>
+</article>
+<article class="situation"><strong>variables</strong></article>
+<article class="code"><pre><code><span class="silver"># <wbr>変数設定</span>
+A=...
+B=...
+C=...
+</code></pre></article>
+<article class="situation"><strong>functions</strong></article>
+<article class="code"><pre><code><span class="silver"># <wbr>関数定義</span>
+x() <wbr>{
+  <wbr>...
+}
+y() <wbr>{
+  <wbr>...
+}
+z() <wbr>{
+  <wbr>...
+}
+</code></pre></article>
+<article class="situation"><strong>script</strong></article>
+<article class="code"><pre><code>#!/bin/bash
+
+<span class="silver"># <wbr>他のファイルを読み込む</span>
+. <wbr>./variables
+. <wbr>./functions
+
+<span class="silver"># <wbr>変数や関数を使った処理</span>
+...
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>それぞれのファイルは役割ごとに内容がまとまっていて分量が少なく読みやすくなったね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ファイルを細かく分けすぎると逆に管理が煩雑になることがあるんだ</span></span>
+<span><span>自分が使いやすい粒度で分割するのがポイントだよ</span></span>
+</div>
+</article>
+<article class="header2"><code>source</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ドットコマンドと同じ動きをするものに </span><code>source</code><span> があるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>同じ動きなんだけど二つコマンドがあるんだ？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>.</code><span> は短く書けるけど見落としやすいんだ</span></span>
+<span><code>.</code><span> と書く人が多い印象だけど </span><code>source</code><span> を使う人も一定数いるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>どちらを使っても良いんだね！</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回はドットコマンドや </span><code>source</code><span> で</span></span>
+<span><span>他のファイルの内容を読み込めることを学んだよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>スクリプトが大きくなって管理しづらくなった時はスクリプトを分割することを考えよう</span></span>
+<span><span>個々のスクリプトは短くなるので内容を把握しやすくなるよ！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章22話</div>
+<div><a href="3/22/">シェル関数</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章23話 ドットコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章24話</div>
+<div><a href="3/24/">setコマンド</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>
