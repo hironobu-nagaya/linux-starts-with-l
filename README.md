@@ -6,7 +6,7 @@ Lから始まるLinux
 
 兄妹の対話を通してLinuxへの理解を深めていくお話です
 
-[Lから始まるLinux](https://hironobu-nagaya.github.io/linux-starts-with-l) - コンテンツ
+[Lから始まるLinux](https://hironobu-nagaya.github.io/linux-starts-with-l) - コンテンツ  
 [hironobu-nagaya/linux-starts-with-l](https://github.com/hironobu-nagaya/linux-starts-with-l) - Git リポジトリ
 
 免責など
