@@ -1,0 +1,121 @@
+#!/bin/bash
+# Begin libexec/generate-index
+
+#---
+## Generate index.html files and place to destination directory
+## @Globals PROJECT_HOME_DIR project home directory
+#---
+function generate-index() {
+  local GREP="${GREP:=grep}"
+  local SED="${SED:=sed}"
+  local AWK="${AWK:=awk}"
+  local MARKDOWN_DIR="${MARKDOWN_DIR:="$PROJECT_HOME_DIR/src/markdown"}"
+  local DEST_DIR="${DEST_DIR:="$PROJECT_HOME_DIR/dest"}"
+  local INDEXES="${INDEXES:="$PROJECT_HOME_DIR/share/indexes"}"
+  local INDEXES_CONTENT="$("$AWK" '! /^ *$/ && ! /^#/' "$INDEXES")"
+  local MAIN_INDEX="$DEST_DIR/index.html"
+  local MINIFY_HTML="$PROJECT_HOME_DIR/bin/minify-html"
+  [ -d "$DEST_DIR" ] || mkdir -p "$DEST_DIR"
+  cat > "$MAIN_INDEX" << \EOF
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>Lから始まるLinux - もくじ</title>
+  <meta charset="utf-8" />
+  <meta name="robots" content="all" />
+  <meta name="keywords" content="Lから始まるLinux,Linux starts with L,Linux" />
+  <meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.65" />
+  <meta name="format-detection" content="telephone=no, email=no, address=no" />
+  <link rel="icon" href="favicon.svg" />
+  <link rel="stylesheet" type="text/css" href="css/common.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<body>
+<header>
+  <h1>Lから始まるLinux</h1>
+</header>
+<main>
+EOF
+  local LAST_CHAPTER="$(wc -l <<< "$INDEXES_CONTENT" | "$AWK" '{ print $1 }')"
+  local CHAPTER=
+  for CHAPTER in $(seq "$LAST_CHAPTER")
+  do
+    local PREV_CHAPTER="$((CHAPTER - 1))"
+    local NEXT_CHAPTER="$((CHAPTER + 1))"
+    local CHAPTER_TITLE="$("$AWK" "NR == $CHAPTER" <<< "$INDEXES_CONTENT")"
+    local PREV_CHAPTER_TITLE="$([ "$CHAPTER" -le 1 ] && echo "" || "$AWK" "NR == $((CHAPTER - 1))" <<< "$INDEXES_CONTENT")"
+    local NEXT_CHAPTER_TITLE="$([ "$CHAPTER" -ge "$LAST_CHAPTER" ] && echo "" || "$AWK" "NR == $((CHAPTER + 1))" <<< "$INDEXES_CONTENT")"
+    local SUB_INDEX="$DEST_DIR/$CHAPTER/index.html"
+    [ -d "$DEST_DIR/$CHAPTER" ] || mkdir -p "$DEST_DIR/$CHAPTER"
+    cat > "$SUB_INDEX" << EOF
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lから始まるLinux - 第${CHAPTER}章 $CHAPTER_TITLE</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-language" content="ja">
+  <meta name="keywords" content="Lから始まるLinux,Linux starts with L,Linux">
+  <meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+  <meta name="viewport" content="width=device-width, initial-scale=0.65" />
+  <meta name="format-detection" content="telephone=no, email=no, address=no" />
+  <base href="..">
+$([ "$CHAPTER" -gt 1 ] && echo "  <link rel=\"prev\" href=\"$PREV_CHAPTER/\" />")
+$([ "$CHAPTER" -lt "$LAST_CHAPTER" ] && echo "  <link rel=\"next\" href=\"$NEXT_CHAPTER/\" />")
+  <link rel="icon" href="favicon.svg" />
+  <link rel="stylesheet" type="text/css" href="css/common.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<body>
+<header>
+  <h1>Lから始まるLinux</h1>
+  <div class="relation">
+    <div>$([ "$CHAPTER" -gt 1 ] && echo "<div>前</div><div>第${PREV_CHAPTER}章</div><div><a href=\"$PREV_CHAPTER/\">$PREV_CHAPTER_TITLE</a></div>")</div>
+    <div><div>今</div><div>第${CHAPTER}章 $CHAPTER_TITLE</div><div><a href=".">もくじ</a></div></div>
+    <div>$([ "$CHAPTER" -lt "$LAST_CHAPTER" ] && echo "<div>次</div><div>第${NEXT_CHAPTER}章</div><div><a href=\"$NEXT_CHAPTER/\">$NEXT_CHAPTER_TITLE</a></div>")</div>
+  </div>
+</header>
+<main>
+EOF
+    {
+      cat << EOF
+<section>
+<div>
+<h1>
+第${CHAPTER}章 <a href="$CHAPTER/">$CHAPTER_TITLE</a>
+</h1>
+</div>
+EOF
+      local MARKDOWN
+      for MARKDOWN in "$MARKDOWN_DIR/"$(printf "%02d" "$CHAPTER")-*-*.md
+      do
+        local NAME="${MARKDOWN##*/}"
+        local CHAPTER="$("$AWK" -F- '{print $1}' <<< "$NAME" | "$SED" 's/^0*//')"
+        local STORY="$("$AWK" -F- '{print $2}' <<< "$NAME" | "$SED" 's/^0*//')"
+        local TITLE="$("$GREP" -m1 "^title=" "$MARKDOWN" | "$SED" 's%^title=%%')"
+        cat << EOF
+<div class="story">
+<div>${CHAPTER}章${STORY}話</div>
+<div><a href="$CHAPTER/$STORY/">$TITLE</a></div>
+</div>
+EOF
+      done
+      echo "</section>"
+  } | tee -a "$SUB_INDEX"
+    cat >> "$SUB_INDEX" << \EOF
+</main>
+</body>
+</html>
+EOF
+    SED="$SED" "$MINIFY_HTML" "$SUB_INDEX"
+    CHAPTER="$((CHAPTER + 1))"
+done >> "$MAIN_INDEX"
+  cat >> "$MAIN_INDEX" << \EOF
+</main>
+</body>
+</html>
+EOF
+SED="$SED" "$MINIFY_HTML" "$MAIN_INDEX"
+}
+
+# End libexec/generate-index

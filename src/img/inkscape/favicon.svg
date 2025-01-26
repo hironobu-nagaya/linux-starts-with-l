@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512pt"
+   height="512pt"
+   viewBox="0 0 180.62223 180.62222"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="favicon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title
+     id="title4031">favicon</title>
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="pt"
+     inkscape:zoom="0.5"
+     inkscape:cx="983"
+     inkscape:cy="672"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="ふきだし"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <circle
+       style="fill:#080808;fill-opacity:1;stroke:none;stroke-width:0.356411;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:4"
+       id="path846"
+       cx="90.307915"
+       cy="90.306702"
+       r="90.128448" />
+    <path
+       style="fill:#080808;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 15.714368,140.89299 c 4.418946,8.4123 0.108169,32.0014 -15.75145514,39.74906 7.93055554,0 38.36040114,-3.07518 51.44329014,-9.03486"
+       id="path1183"
+       sodipodi:nodetypes="ccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="もじ"
+     sodipodi:insensitive="true">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:33.0729;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 66.68106,42.378336 v 85.873704 h 57.43622"
+       id="path2415"
+       sodipodi:nodetypes="ccc" />
+  </g>
+  <metadata
+     id="metadata4029">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>favicon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

@@ -1,0 +1,47 @@
+#!/bin/bash
+# Begin bin/delete-markdown
+
+set -e
+
+PROJECT_HOME_DIR="${PROJECT_HOME_DIR:=$(
+  (
+    cd "$(realpath "${0%/*}/..")"
+    pwd
+  )
+)}"
+MARKDOWN_DIR="${MARKDOWN_DIR:=$PROJECT_HOME_DIR/src/markdown}"
+GREP="${GREP:=grep}"
+SED="${SED:=sed}"
+AWK="${AWK:=awk}"
+
+[ "$#" -gt 0 ] || {
+  echo "USAGE: ${0##*/} MARKDOWN"
+  exit 1
+} >&2
+
+[ -d "$MARKDOWN_DIR" ] || {
+  echo "${0##*/}: directory '$MARKDOWN_DIR' not found"
+  exit 1
+} >&2
+
+[ -e "$MARKDOWN_DIR/$1" ] || {
+  echo "${0##*/}: target file '$1' not found"
+  exit 1
+} >&2
+
+TARGET_CHAPTER="$("$AWK" -F- '{print $1}' <<< "$1" | "$SED" 's/^0*//')"
+TARGET_STORY="$("$AWK" -F- '{print $2}' <<< "$1" | "$SED" 's/^0*//')"
+CHAPTER="$TARGET_CHAPTER"
+
+for MARKDOWN in $(ls -1r "$MARKDOWN_DIR/$(printf '%02d' "$TARGET_CHAPTER")"-*-*.md | "$SED" 's%.*/%%' | "$AWK" -F"-0?" "$TARGET_STORY"' < $2')
+do
+  STORY="$("$AWK" -F- '{print $2}' <<< "$MARKDOWN" | "$SED" 's/^0*//')"
+  TITLE="$(cut -d- -f3- <<< "$MARKDOWN")"
+  mv "$MARKDOWN_DIR/$MARKDOWN" "$MARKDOWN_DIR/$(printf '%02d' "$CHAPTER")-$(printf '%02d' "$((STORY - 1))")-$TITLE"
+done
+rm "$MARKDOWN_DIR/$1"
+
+. "$PROJECT_HOME_DIR/libexec/fix-markdown"
+GREP="$GREP" SED="$SED" AWK="$AWK" fix-markdown
+
+# End bin/delete-markdown

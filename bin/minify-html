@@ -1,0 +1,81 @@
+#!/bin/bash
+# Begin bin/minify-html
+
+set -e
+
+if [ "$#" -ne 1 ]
+then
+  echo "${0##*/}: USAGE: ${0##*/} HTML"
+  exit 1
+fi >&2
+
+readonly SED="${SED:=sed}"
+
+{
+  rm "$1"
+  cat |
+  "$SED" -n '{
+    x
+    /^$/!b post
+    x
+    s/^[ \t]*//
+    s/[ \t]$//
+    x
+    :post
+    x
+    /<pre>/ {
+      x
+      s/.*/not minify/
+      x
+    }
+    /<\/pre>/ {
+      x
+      s/.*//
+      x
+    }
+    x
+    /^$/b print
+    x
+    p
+    b
+    :print
+    x
+    /^$/!p
+  }' |
+  "$SED" -n '{
+    1 {
+      /^<!DOCTYPE/b print
+    }
+    :process
+    /<\/pre>/ {
+      x
+      s/.*//
+      x
+    }
+    x
+    $b print
+    /^$/!b post
+    x
+    N
+    s/\n//
+    /<pre>/!b process
+    x
+    :post
+    x
+    /<pre>/ {
+      x
+      s/.*/as-is/
+      x
+    }
+    x
+    /^$/b print
+    x
+    p
+    b
+    :print
+    x
+    /^$/!p
+  }' > "$1"
+} < "$1"
+
+# End bin/minify-html

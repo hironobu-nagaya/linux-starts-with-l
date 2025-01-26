@@ -1,0 +1,33 @@
+#!/bin/bash
+# Begin libexec/generate-html
+
+#---
+## Generate HTML files from Markdown files and place to destination directory
+## @Globals PROJECT_HOME_DIR project home directory
+#---
+function generate-html() {
+  local GREP="${GREP:=grep}"
+  local SED="${SED:=sed}"
+  local AWK="${AWK:=awk}"
+  local MARKDOWN_DIR="${MARKDOWN_DIR:="$PROJECT_HOME_DIR/src/markdown"}"
+  local DEST_DIR="${DEST_DIR:="$PROJECT_HOME_DIR/dest"}"
+  local MARKDOWN
+  local PIDS
+  for MARKDOWN in "$MARKDOWN_DIR"/*-*-*.md
+  do
+    local CHAPTER="$("$AWK" -F- '{print $1}' <<< "${MARKDOWN##*/}" | "$SED" 's/^0*//')"
+    local STORY="$("$AWK" -F- '{print $2}' <<< "${MARKDOWN##*/}" | "$SED" 's/^0*//')"
+    [ -d "$DEST_DIR/$CHAPTER/$STORY" ] || mkdir -p "$DEST_DIR/$CHAPTER/$STORY"
+    {
+      "$AWK" \
+        -v emotion_str="$("$AWK" -F, 'NF >= 2' "$PROJECT_HOME_DIR/share/emotions" | "$SED" -z -e 's/\n/;/g' -e 's/;*$//')" \
+        -v speaker_str="$("$AWK" -F, 'NF >= 2' "$PROJECT_HOME_DIR/share/speakers" | "$SED" -z -e 's/\n/;/g' -e 's/;*$//')" \
+        -f "$PROJECT_HOME_DIR/libexec/generate-html.awk" "$MARKDOWN" > "$DEST_DIR/$CHAPTER/$STORY/index.html"
+      SED="$SED" "$PROJECT_HOME_DIR/bin/minify-html" "$DEST_DIR/$CHAPTER/$STORY/index.html"
+    } &
+    PIDS="$PIDS${PIDS:+ }$!"
+  done
+  [ -z "$PIDS" ] || wait $PIDS
+}
+
+# End libexec/generate-html
