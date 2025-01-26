@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lから始まるLinux - 6章15話 ClamAV</title>
+<meta charset="UTF-8">
+<meta http-equiv="content-language" content="ja">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,daemon,ClamAV,clamd,freshclam,clamdscan,clamscan,Eicar">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<base href="../..">
+<link rel="prev" href="6/14/" />
+<link rel="next" href="6/16/" />
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/story.css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>6章14話</div>
+<div><a href="6/14/">Samba</a></div>
+</div>
+<div>
+<div>今</div>
+<div>6章15話 ClamAV</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>6章16話</div>
+<div><a href="6/16/">Apache HTTP Server</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ClamAV</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Linux にはアンチウイルスソフトは無いのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんあるよ！</span></span>
+<span><span>今回はオープンソースのアンチウイルスソフト </span><a href="https://www.clamav.net" target="_blank" rel="noopener noreferrer">ClamAV</a><span> を紹介しよう</span></span>
+</div>
+</article>
+<article class="header2"><span>インストール</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ClamAV のパッケージ名は </span><code>clamav</code><span> だよ</span></span>
+<span><span>パッケージ管理システムからインストールしよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>apt <wbr>install <wbr>-y <wbr>clamav
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+<span><span>もう </span><code>apt</code><span> でのインストールは慣れっこだね！</span></span>
+</div>
+</article>
+<article class="header2"><span>設定</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ClamAV の設定ファイルは </span><code>/etc/clamd.d/scan.conf</code><span> にあるよ</span></span>
+<span><span>まずはオリジナルのバックアップを作成しよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>cp <wbr>-v <wbr>/etc/clamd.d/scan.conf{,.dist}
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+<span><span>オリジナルの設定をバックアップしたよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次はエディタで設定ファイルを開こう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>vim <wbr>/etc/clamd.d/scan.conf
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>いつでも編集できるよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>設定ファイル中の </span><code>Example</code><span> をコメントアウトすることで ClamAV が使えるようになるんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="scan.conf">Example
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>こうかな？</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="scan.conf"><span class="silver">#Example</span>
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そう、<wbr>それで大丈夫だよ！</span></span>
+<span><span>保存して終了しよう！</span></span>
+</div>
+</article>
+<article class="header2"><span>起動</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>freshclam</code><span> はウイルス定義ファイルを更新するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">freshclam <wbr>[オプション]...
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>オプションなしで実行しよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>freshclam
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>できたよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>でも毎回手動で更新するのは面倒だね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>定義ファイル自動更新サービス </span><code>clamav-freshclam</code><span> が用意されているよ</span></span>
+<span><span>サービスを起動し自動起動も有効にしよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>enable <wbr>--now <wbr>clamav-freshclam
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>起動したら正常に動作しているか確認しよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>status <wbr>clamav-freshclam
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>無事動いたよ！</span></span>
+<span><span>これで定義ファイルは自動更新されるんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次は ClamAV デーモン </span><code>clamd</code><span> を起動しよう！</span></span>
+<span><span>ディストリビューションによっては </span><code>@設定ファイル名</code><span> を続けて </span><code>clamd@scan</code><span> とする必要があるんだ</span></span>
+<span><span>以下のコマンドで </span><code>clamd</code><span> を起動し自動起動を有効にしよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>enable <wbr>--now <wbr>clamd@scan
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>これも起動したら動作確認をしよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>status <wbr>clamd@scan
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>こっちも OK だよ！</span></span>
+<span><span>これでウイルススキャンの準備ができたんだね！</span></span>
+</div>
+</article>
+<article class="header2"><span>実行</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>いよいよ実行だね！</span></span>
+<span><span>ウイルスってどこで手に入れたら良いのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>本物のウイルスを手元に置くのは危ないよ！</span></span>
+<span><span>別の方法で動作確認をしよう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ここでは Eicar を用意するよ</span></span>
+<span><span>これは無害だけどウイルスとして検知されると決められているファイルなんだ</span></span>
+<span><span>ウイルス検出の動作テストなどで使われるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>そんなファイルがあるんだ！</span></span>
+<span><span>どうやって用意するの？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ファイルの内容が特定の文字列であるだけで良いんだ</span></span>
+<span><span>以下のコマンドで Eicar ファイル </span><code>/tmp/eicar</code><span> を作成するよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ダミーといえども本当にウイルスとして検知されるものだよ</span></span>
+<span><span>会社や学校などの場で試すと誤解を招く可能性があるんだ</span></span>
+<span><span>必ず個人の環境などで実行してね</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">echo <wbr>-n <wbr>'P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*' <wbr>&gt; <wbr>/tmp/eicar
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>これでウイルスの代わりが用意できたんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ClamAV のスキャンは2種類のコマンドが用意されているんだ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>コマンド</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clamscan</code></td>
+<td><code>clamd</code><span> を使わないスキャン</span></td>
+</tr>
+<tr>
+<td><code>clamdscan</code></td>
+<td><code>clamd</code><span> を使うスキャン、<wbr>高速で並列スキャン対応</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>clamd</code><span> を起動しているので </span><code>clamdscan</code><span> を実行してみよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">clamdscan <wbr>/tmp/eicar
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うまく見つけてくれるかな？</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="console">/tmp/eicar: <wbr>Win.Test.EICAR_HDB-1 <wbr>FOUND
+
+----------- <wbr>SCAN <wbr>SUMMARY <wbr>-----------
+Infected <wbr>files: <wbr>1
+Time: <wbr>0.004 <wbr>sec <wbr>(0 <wbr>m <wbr>0 <wbr>s)
+Start <wbr>Date: <wbr>2024:12:25 <wbr>10:00:00
+End <wbr>Date:   <wbr>2024:12:25 <wbr>10:00:00
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><code>FOUND</code><span> ということは検出できているね！</span></span>
+<span><span>結果に<wbr>「感染ファイル: 1(Infected files: 1)」<wbr>と出ているよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>上手く行ったようだね！</span></span>
+<span><span>確認ができたら Eicar は削除しよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">rm <wbr>/tmp/eicar
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>後片付けも完了だよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は Linux で使えるアンチウイルスソフト ClamAV を学んだよ！</span></span>
+<span><span>これでウイルスも怖くないね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>インストールしただけで安心せず今後の運用も考えよう！</span></span>
+<span><span>スキャンを定期的に実行する、<wbr>検出されたファイルの扱いを決めておくなどを考えておき</span></span>
+<span><span>悪意のあるプログラムを検出できる体制を作っておこう！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>6章14話</div>
+<div><a href="6/14/">Samba</a></div>
+</div>
+<div>
+<div>今</div>
+<div>6章15話 ClamAV</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>6章16話</div>
+<div><a href="6/16/">Apache HTTP Server</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>

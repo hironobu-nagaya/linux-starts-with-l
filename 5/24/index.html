@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lから始まるLinux - 5章24話 ビルド(実践)</title>
+<meta charset="UTF-8">
+<meta http-equiv="content-language" content="ja">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,build,gcc,make,configure,GNU Hello">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<base href="../..">
+<link rel="prev" href="5/23/" />
+<link rel="next" href="5/25/" />
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/story.css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章23話</div>
+<div><a href="5/23/">ビルド(手順)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章24話 ビルド(実践)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章25話</div>
+<div><a href="5/25/">BOINC</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ビルド(実践)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回はソースコードをビルドする手順を教わったよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は実際にソースコードをビルドしよう！</span></span>
+</div>
+</article>
+<article class="header2"><span>必要パッケージインストール</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は </span><a href="https://gnu.org/software/hello" target="_blank" rel="noopener noreferrer">GNU Hello</a><span> をビルドしよう！</span></span>
+<span><span><wbr>「Hello, <wbr>world!」<wbr>と表示するコードをパッケージ化したものだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>初心者向けでちょうど良い題材だね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは必要となるパッケージ </span><code>gcc</code><span> と </span><code>make</code><span> をインストールしよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>apt <wbr>install <wbr>-y <wbr>gcc <wbr>make
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>OK！</span></span>
+<span><span>インストールできたよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>ダウンロード</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次に GNU Hello のソースコードをダウンロードしよう</span></span>
+<span><span>作業用ディレクトリを作りそこへ移動しておいてね</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="">mkdir <wbr>-p <wbr>~/hello
+cd <wbr>~/hello
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ディレクトリを作って移動したよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうしたら </span><a href="https://ftp.gnu.org/gnu/hello/" target="_blank" rel="noopener noreferrer">公式ページ</a><span> からソースコードを取得しよう</span></span>
+<span><span>バージョン番号は変数に分けておくと便利だよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">VERSION=2.12.1
+curl <wbr>-LO <wbr>&quot;https://ftp.gnu.org/gnu/hello/hello-$VERSION.tar.gz&quot;
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ダウンロードが終わったよ</span></span>
+<span><span>拡張子が </span><code>.tar.gz</code><span> ということは tarball なんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのとおり！</span></span>
+<span><span>そのままでは使えないので </span><code>tar</code><span> で展開して</span></span>
+<span><span>展開されたディレクトリへ移動しよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">tar <wbr>xf <wbr>&quot;hello-$VERSION.tar.gz&quot;
+cd <wbr>&quot;hello-$VERSION&quot;
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>いよいよソースコードとご対面だね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>あっ！</span></span>
+<span><span>README ファイルもある！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>README を読んでビルドに必要な情報を確認しておこう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">less <wbr>README
+</code></pre></article>
+<article class="header2"><code>configure</code></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次は configure スクリプトだよ</span></span>
+<span><span>まずはどんなオプションがあるか確認しよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">./configure <wbr>--help
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>たくさんオプションがあるけど</span></span>
+<span><span>どれを使えばいいの？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>一般的にはインストール先を指定する</span></span>
+<span><code>--prefix</code><span> オプションを使うよ</span></span>
+<span><span>以下のようにして実行しよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">./configure <wbr>--prefix=/usr
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+<span><code>/usr</code><span> へインストールするようにしたよ！</span></span>
+</div>
+</article>
+<article class="header2"><code>make</code></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次に </span><code>make</code><span> を実行しよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">make
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>おお！</span></span>
+<span><code>hello</code><span> という実行ファイルができた！</span></span>
+<span><span>これはもう動くの？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>実行ファイルは完成しているよ</span></span>
+<span><span>以下のように動かしてみよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">./hello
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+<span><span>やってみるね！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="console">Hello, <wbr>world!
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>実行ファイルが期待どおりに動いているね！</span></span>
+<span><span>ビルド成功だよ！</span></span>
+</div>
+</article>
+<article class="header2"><code>make install</code></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最後に </span><code>make install</code><span> を実行しよう</span></span>
+<span><code>/usr</code><span> 配下にファイルを配置するので</span></span>
+<span><code>sudo</code><span> が必要になるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>make <wbr>install
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>これでシステム全体で </span><code>hello</code><span> が使えるようになったんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>実行ファイルと一緒に関連ファイルも適切な場所に配置されるんだ</span></span>
+<span><span>例えば </span><code>hello</code><span> のマニュアルも見れるようになっているよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">man <wbr>hello
+</code></pre></article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は GNU Hello をビルドしてインストールしたよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>パッケージ管理システムから手に入るパッケージは</span></span>
+<span><span>大多数のユーザが使えるよう無難な設定のビルドで作られているんだ</span></span>
+<span><span>ソースコードからビルドすることで特別な機能を有効にしたり</span></span>
+<span><span>自分の環境に最適化した実行ファイルを作ることができるよ！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章23話</div>
+<div><a href="5/23/">ビルド(手順)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章24話 ビルド(実践)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章25話</div>
+<div><a href="5/25/">BOINC</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>
