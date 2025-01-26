@@ -1,0 +1,76 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章17話 cron</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,cron,crontab">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/16/" />
+<link rel="next" href="5/18/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+<link rel="stylesheet" href="css/cron.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章16話</div>
+<div><a href="5/16/">サウンド再生</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章17話 cron</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章18話</div>
+<div><a href="5/18/">動画再生</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>cron</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>毎朝 Linux マシンから</span></span>
+<span><span>音楽が流れているんだよ！</span></span>
+<span><span>目覚まし時計にしているのかな？</span></span>
+<span><span>それってどうやるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「クロン(cron)」<wbr>という</span></span>
+<span><span>定期的なタスク実行の</span></span>
+<span><span>仕組みを使っているよ</span></span>
+<span><span>今回は </span><code>cron</code><span> について</span></span>
+<span><span>学んでいこう！</span></span>
+</div>
+</article>
+<article class="header2"><code>crontab</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>crontab</code><span> は</span></span>
+<span><code>cron</code><span> 設定を行うよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">crontab <wbr>[オプション]...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><span>-e</span></td><td><span>設定を編集</span></td></tr><tr><td><span>-l</span></td><td><span>設定を表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>みどり自身の</span></span><span><code>cron</code><span> 設定を</span></span><span><span>作ってみよう！</span></span></div></article><article class="code"><pre><code class="bash">crontab <wbr>-e
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>エディタが開かれたよ！</span></span><span><span>これを編集すればいいんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>cron</code><span> 書式は</span></span><span><span>以下のとおりだよ</span></span></div></article><article class="code"><pre><code class="cron">分 <wbr>時 <wbr>日 <wbr>月 <wbr>曜日 <wbr>コマンド
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>数値の代わりに </span><code>*</code><span> を書けるよ</span></span><span><span>こうすると<wbr>「毎」<wbr>を表すんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「毎日」<wbr>とか</span></span><span><span><wbr>「毎月」<wbr>のように</span></span><span><span>指定できるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>また </span><code>*/2</code><span> のように表現することで</span></span><span><span><wbr>「2回に1回」<wbr>を表現できるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「隔月」<wbr>とかを</span></span><span><span>指定できるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>毎朝音楽を流している設定は</span></span><span><span>以下のようにしているよ</span></span></div></article><article class="code"><pre><code class="cron">30 <wbr>6 <wbr>* <wbr>* <wbr>* <wbr>mpg123 <wbr>--no-control <wbr>/home/shigeru/music/ohayo.mp3
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>30分、<wbr>6時、<wbr></span><code>mgp123</code><span>…</span></span><span><span>毎日6時30分に </span><code>mpg123</code><span> で</span></span><span><span>MP3 ファイルを再生しているんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうことだね！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>曜日の指定が</span></span><span><span>ちょっとわからないな…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>0 ～ 7 の数値で表されて</span></span><span><span>0 と 7 は日曜日を表すよ</span></span><span><span>また3文字英字の表現も使えるんだ</span></span><span><span>まとめると以下のようになるよ</span></span></div></article><article class="table"><table><thead><tr><th><span>曜日</span></th><th><span>数値</span></th><th><span>3文字英字</span></th></tr></thead><tbody><tr><td><span>日曜日</span></td><td><code>0</code><span>, <wbr></span><code>7</code></td><td><code>sun</code></td></tr><tr><td><span>月曜日</span></td><td><code>1</code></td><td><code>mon</code></td></tr><tr><td><span>火曜日</span></td><td><code>2</code></td><td><code>tue</code></td></tr><tr><td><span>水曜日</span></td><td><code>3</code></td><td><code>wed</code></td></tr><tr><td><span>木曜日</span></td><td><code>4</code></td><td><code>thu</code></td></tr><tr><td><span>金曜日</span></td><td><code>5</code></td><td><code>fri</code></td></tr><tr><td><span>土曜日</span></td><td><code>6</code></td><td><code>sat</code></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>また </span><code>mon-fri</code><span> で</span></span><span><span><wbr>「月曜日から金曜日まで」<wbr>としたり</span></span><span><code>mon,wed,fri</code><span> で</span></span><span><span><wbr>「月、<wbr>水、<wbr>金曜日」<wbr>を表現できるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>色々な指定ができるんだね</span></span><span><span>情報が多くて混乱してきたよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>いくつか例を</span></span><span><span>挙げてみるね</span></span></div></article><article class="table"><table><thead><tr><th><span>cron 設定</span></th><th><span>意味</span></th></tr></thead><tbody><tr><td><code>0 12 * * * コマンド</code></td><td><span>毎日正午に </span><code>コマンド</code><span> を実行</span></td></tr><tr><td><code>0 1 1 * * コマンド</code></td><td><span>月初め 1:00 に </span><code>コマンド</code><span> を実行</span></td></tr><tr><td><code>0 0 * * 0 コマンド</code></td><td><span>毎週日曜日 00:00 に </span><code>コマンド</code><span> を実行</span></td></tr><tr><td><code>0 10 * * mon-fri コマンド</code></td><td><span>平日 10:00 に </span><code>コマンド</code><span> を実行</span></td></tr><tr><td><code>50 23 15 */3 * コマンド</code></td><td><span>3ヶ月ごとの15日 23:50 に </span><code>コマンド</code><span> を実行</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>例を真似して</span></span><span><span>覚えるよ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>cron</code><span> について学んだよ！</span></span><span><span>コマンド定期実行の仕組みで</span></span><span><code>crontab</code><span> から設定できるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>定期的に実行している</span></span><span><span>コマンドがあれば</span></span><span><span>cron に任せてみよう！</span></span><span><span>手間も省けるし</span></span><span><span>実行し忘れもないよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章16話</div><div><a href="5/16/">サウンド再生</a></div></div><div><div>今</div><div>5章17話 cron</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章18話</div><div><a href="5/18/">動画再生</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

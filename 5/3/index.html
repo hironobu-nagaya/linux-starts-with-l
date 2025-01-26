@@ -1,0 +1,92 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章3話 ロケール</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,locale,lang">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/2/" />
+<link rel="next" href="5/4/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章2話</div>
+<div><a href="5/2/">エイリアス</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章3話 ロケール</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章4話</div>
+<div><a href="5/4/">dircolorsコマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ロケール</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Linux がこんなに広まっているなら</span></span>
+<span><span>多言語対応とかないのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんあるよ！</span></span>
+<span><span>そのような言語対応を</span></span>
+<span><span><wbr>「ロケール(locale)」<wbr>というんだ</span></span>
+<span><span>今回はロケールを見ていこう！</span></span>
+</div>
+</article>
+<article class="header2"><code>locale</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>locale</code><span> は</span></span>
+<span><span>ロケールの設定を</span></span>
+<span><span>表示するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">locale <wbr>[オプション]...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-a</code><span>, <wbr></span><code>--all</code></td><td><span>設定可能なロケールを一覧表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>オプションを指定しないと</span></span><span><span>現在のロケール設定を</span></span><span><span>表示するよ</span></span><span><span>実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">locale
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どれどれ？</span></span></div></article><article class="code"><pre><code class="bash">LANG=ja_JP.utf8
+LC_CTYPE=&quot;ja_JP.utf8&quot;
+LC_NUMERIC=&quot;ja_JP.utf8&quot;
+LC_TIME=POSIX
+LC_COLLATE=&quot;ja_JP.utf8&quot;
+LC_MONETARY=&quot;ja_JP.utf8&quot;
+LC_MESSAGES=POSIX
+LC_PAPER=&quot;ja_JP.utf8&quot;
+LC_NAME=&quot;ja_JP.utf8&quot;
+LC_ADDRESS=&quot;ja_JP.utf8&quot;
+LC_TELEPHONE=&quot;ja_JP.utf8&quot;
+LC_MEASUREMENT=&quot;ja_JP.utf8&quot;
+LC_IDENTIFICATION=&quot;ja_JP.utf8&quot;
+LC_ALL=
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>設定がいっぱい</span></span><span><span>あるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これらの環境変数を</span></span><span><span>上書きすることで</span></span><span><span>ロケールを変えられるよ</span></span><span><span>大抵は </span><code>LC_</code><span> の後に続く単語の</span></span><span><span>ロケールを設定しているんだ</span></span><span><span>重要なのは一部だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>ja_JP.utf8</code><span> は</span></span><span><span>日本語だなぁとわかるけど</span></span><span><code>POSIX</code><span> はどんな値なんだろう？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>POSIX</code><span> や </span><code>C</code><span> は</span></span><span><span>多言語対応がなかった時代の</span></span><span><span>英語表示を意味するよ</span></span></div></article><article class="header2"><span>環境変数</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>一番良く設定されるのは</span></span><span><code>LANG</code><span> 環境変数だよ</span></span><span><span>これは設定されていない場合の</span></span><span><span>デフォルトのロケールを指定するんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあ最低でも</span></span><span><code>LANG</code><span> 環境変数だけ</span></span><span><span>設定しておけばいいんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次は </span><code>LC_MESSAGES</code><span> 環境変数を見よう</span></span><span><span>これはコマンドなどが出力する</span></span><span><span>メッセージのロケールを指定するよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>この設定は日本語に</span></span><span><span>していないんだ？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>日本語のウェブ検索結果は少ないんだ</span></span><span><span>出力メッセージを英語で</span></span><span><span>検索できるようにするため</span></span><span><span>あえて </span><code>POSIX</code><span> を設定しているよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もう一つ押さえておきたいのは</span></span><span><code>LC_TIME</code><span> 環境変数だよ</span></span><span><span>これは日時のロケールを</span></span><span><span>指定しているんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これも日本語に</span></span><span><span>していないんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ls -l</code><span> のように</span></span><span><span>日時が表示される機会は結構あるよ</span></span><span><span>英文に日本語が混じって</span></span><span><span>違和感を感じるので</span></span><span><span>日本語にはしていないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うーん…</span></span><span><span>言葉だけだと</span></span><span><span>よくわからないなぁ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>実際に例を見てみよう</span></span><span><span>以下は </span><code>LC_TIME</code><span> 変数を指定して</span></span><span><code>date</code><span> を実行した結果だよ</span></span></div></article><article class="code"><pre><code class="bash">LC_TIME=ja_JP.utf8 <wbr>date
+</code></pre></article><article class="code"><pre><code class="console ja-date">2025年  <wbr>1月 <wbr>15日 <wbr>水曜日 <wbr>17:49:32 <wbr>JST
+</code></pre></article><article class="situation"><span>---</span></article><article class="code"><pre><code class="bash">LC_TIME=POSIX <wbr>date
+</code></pre></article><article class="code"><pre><code class="console date">Wed <wbr>Jan <wbr>15 <wbr>17:49:32 <wbr>JST <wbr>2025
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おお！</span></span><span><span>印象がずいぶんと違うね！</span></span></div></article><article class="header2"><span>設定</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これらのロケール設定は</span></span><span><span>どうすればいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>~/.bash_profile</code><span> に</span></span><span><code>export</code><span> を書いてあげよう！</span></span><span><span>他のユーザに影響なく</span></span><span><span>自分だけの言語設定ができるよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下は</span></span><span><span>これまでの説明のような</span></span><span><span>設定にする記述だよ</span></span></div></article><article class="code"><pre><code class="bash">export <wbr>LANG=ja_JP.utf8
+export <wbr>LC_MESSAGES=POSIX
+export <wbr>LC_TIME=POSIX
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はロケールを学んだよ！</span></span><span><span>デフォルト言語を</span></span><span><code>LANG</code><span> 環境変数に設定したあと</span></span><span><span>上書きしたい環境変数だけを</span></span><span><span>個別に設定すればいいんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>LC_MESSAGES</code><span> と </span><code>LC_TIME</code><span> を</span></span><span><code>POSIX</code><span> にしているのは僕の好みだよ</span></span><span><span>言語設定は自分が使いやすいよう</span></span><span><span>好みに設定しよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章2話</div><div><a href="5/2/">エイリアス</a></div></div><div><div>今</div><div>5章3話 ロケール</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章4話</div><div><a href="5/4/">dircolorsコマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script><script src="js/locale.js"></script></body></html>

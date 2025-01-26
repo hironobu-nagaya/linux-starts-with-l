@@ -1,0 +1,119 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章44話 差分</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/43/" />
+<link rel="next" href="2/45/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+<link rel="stylesheet" href="css/diff.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章43話</div>
+<div><a href="2/43/">evalコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章44話 差分</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章45話</div>
+<div><a href="2/45/">パッチ</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>差分</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>少しだけ内容が違う</span></span>
+<span><span>二つのファイルがあるんだ</span></span>
+<span><span>どこが違っているか</span></span>
+<span><span>調べられないかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんできるよ！</span></span>
+<span><span>今回はファイルの差分を</span></span>
+<span><span>確認する方法を覚えよう！</span></span>
+</div>
+</article>
+<article class="header2"><code>diff</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>diff</code><span> は</span></span>
+<span><span>ファイルの差分を表示するよ</span></span>
+<span><span>difference の略なんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">diff <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-u</code><span>, <wbr></span><code>--unified</code></td><td><span>unified diff 形式で出力する(後述)</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>diff</code><span> の基本的な使い方は</span></span><span><span>二つのファイルの比較だよ</span></span><span><span>なので </span><code>ファイル</code><span> の箇所は</span></span><span><span>通常は二つ指定すると覚えよう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「比較元」<wbr><wbr>「比較先」<wbr>の</span></span><span><span>二つのファイルになるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ここでは差分を出力するために</span></span><span><span>比較する二つのファイル</span></span><span><code>a.txt</code><span> と </span><code>b.txt</code><span> を作成しよう！</span></span></div></article><article class="code"><pre><code class="bash">cat <wbr>&gt; <wbr>a.txt <wbr>&lt;&lt; <wbr>EOF
+111
+222
+333
+444
+555
+666
+777
+888
+999
+EOF
+</code></pre></article><article class="code"><pre><code class="bash">cat <wbr>&gt; <wbr>b.txt <wbr>&lt;&lt; <wbr>EOF
+111
+333
+444
+555
+656
+777
+888
+999
+000
+EOF
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ヒアドキュメントで</span></span><span><span>ファイルを作っているんだね</span></span><span><code>a.txt</code><span> と </span><code>b.txt</code><span> …</span></span><span><span>微妙に内容が違うみたいだよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>その違いを </span><code>diff</code><span> に</span></span><span><span>判定させてみよう！</span></span></div></article><article class="code"><pre><code class="bash">diff <wbr>a.txt <wbr>b.txt
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>実行するね！</span></span></div></article><article class="code"><pre><code class="console">2d1
+&lt; <wbr>222
+6c5
+&lt; <wbr>666
+---
+&gt; <wbr>656
+9a9
+&gt; <wbr>000
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>複数の行が出力されたよ！</span></span><span><span>二つのファイルの違いを</span></span><span><span>表しているようだけど…</span></span></div></article><article class="header2"><span>diff 形式</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>diff</code><span> がデフォルトで</span></span><span><span>出力する形式を</span></span><span><code>diff</code><span> 形式と呼ぶよ</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>そのまんまだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>2d1</code><span> や </span><code>6c5</code><span> などが</span></span><span><span>差分のある位置を</span></span><span><span>示しているよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>左の数字が1番目のファイルの行数</span></span><span><span>右の数字が2番目のファイルの行数</span></span><span><span>真ん中の英字がどのような差分かを</span></span><span><span>示しているんだ</span></span></div></article><article class="table"><table><thead><tr><th><span>英字</span></th><th><span>意味</span></th></tr></thead><tbody><tr><td><code>a</code></td><td><span>追加(</span><strong>a</strong><span>ppend)</span></td></tr><tr><td><code>d</code></td><td><span>削除(</span><strong>d</strong><span>elete)</span></td></tr><tr><td><code>c</code></td><td><span>変更(</span><strong>c</strong><span>hange)</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>その位置の表す行の下に続いて</span></span><span><span>差分の内容が示されているんだ</span></span></div></article><article class="table"><table><thead><tr><th><span>記号</span></th><th><span>意味</span></th></tr></thead><tbody><tr><td><code>&lt;</code></td><td><span>1番目のファイルにあり2番目のファイルにない行</span></td></tr><tr><td><code>&gt;</code></td><td><span>2番目のファイルにあり1番目のファイルにない行</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>さっきの </span><code>diff</code><span> の出力は</span></span><span><span>差分の位置を表す行が三つあるね！</span></span><span><span>ということはこれらを区切りにして</span></span><span><span>以下の三つの差分を表しているんだ！</span></span></div></article><article class="code"><pre><code class="console">2d1
+&lt; <wbr>222
+</code></pre></article><article class="code"><pre><code class="console">6c5
+&lt; <wbr>666
+---
+&gt; <wbr>656
+</code></pre></article><article class="code"><pre><code class="console">9a9
+&gt; <wbr>000
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうことだね</span></span><span><span>一つずつ差分の出力内容を</span></span><span><span>見ていこう！</span></span></div></article><hr /><article class="code"><pre><code class="console">2d1
+&lt; <wbr>222
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>d</code><span> は delete だったよね</span></span><span><span>2番目のファイルと比較すると</span></span><span><span>1番目のファイルから</span></span><span><span>行がなくなっているんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだね</span></span><span><span>1番目のファイルの2行目から</span></span><span><code>222</code><span> という行が</span></span><span><span>なくなっていることを</span></span><span><span>表しているよ！</span></span><span><span>2番目のファイルでは</span></span><span><span>その位置は1行目ということだね</span></span></div></article><hr /><article class="code"><pre><code class="console">6c5
+&lt; <wbr>666
+---
+&gt; <wbr>656
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>c</code><span> は change で</span></span><span><span><wbr>「変更」<wbr>だったよね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>---</code><span> は見やすくするための区切りだよ</span></span><span><span>1番目のファイル6行目の </span><code>666</code><span> が</span></span><span><span>2番目のファイル5行目の </span><code>656</code><span> が</span></span><span><span>それぞれ変わっていることを表しているよ</span></span></div></article><hr /><article class="code"><pre><code class="console">9a9
+&gt; <wbr>000
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>a</code><span> は append ね</span></span><span><span>1番目のファイルには無いけど</span></span><span><span>2番目のファイルに</span></span><span><span>行が追加されているんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><span>1番目のファイルの9行目の位置に</span></span><span><span>2番目のファイルの9行目の </span><code>000</code><span> が</span></span><span><span>追加されていることを表しているよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>読み方さえ分かれば</span></span><span><span>テキストだけでシンプルに</span></span><span><span>差分を表現してくれていると</span></span><span><span>わかるね！</span></span></div></article><article class="header1"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>diff</code><span> で</span></span><span><span>二つのファイルの差分を</span></span><span><span>確認できると学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>最初にみどりが困っていたように</span></span><span><span>2つファイルの違いを調べる用途なら</span></span><span><span>大抵どんなことにも使えるよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>よく使われる場面は</span></span><span><span>設定変更の確認だよ</span></span><span><span>オリジナルの設定から</span></span><span><span>どんな変更をしたかを</span></span><span><span>調べるのに便利なんだ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章43話</div><div><a href="2/43/">evalコマンド</a></div></div><div><div>今</div><div>2章44話 差分</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章45話</div><div><a href="2/45/">パッチ</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

@@ -1,0 +1,92 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章15話 ALSA</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,ALSA,alsamixer,alsactl,speaker-test">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/14/" />
+<link rel="next" href="5/16/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章14話</div>
+<div><a href="5/14/">tmuxコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章15話 ALSA</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章16話</div>
+<div><a href="5/16/">サウンド再生</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ALSA</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Linux でサウンドファイルの</span></span>
+<span><span>再生ってできないのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんできるよ！</span></span>
+<span><span>今回は<wbr>「ALSA</span></span>
+<span><span>(Advanced Linux Sound Architecture)」<wbr></span></span>
+<span><span>を説明するよ</span></span>
+</div>
+</article>
+<article class="header2"><span>基本</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ALSA は</span></span>
+<span><span>Linux でサウンドを扱うための</span></span>
+<span><span>基本的な仕組みを提供している</span></span>
+<span><span>ソフトウェアだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>サウンド再生の基礎なんだね</span></span>
+<span><span>ALSA にはどんな設定を</span></span>
+<span><span>しないといけないのかな？</span></span>
+</div>
+</article>
+<article class="header2"><code>alsamixer</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>alsamixer</code><span> は</span></span>
+<span><span>ミキサー設定をするよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">alsamixer <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>料理じゃなくて音楽で使う</span></span><span><span>ミキサーのことだよね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>オプションは不要なので</span></span><span><span>実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">alsamixer
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>音量コントロールっぽい</span></span><span><span>画面が出てきたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>まずはその中でも</span></span><span><span>メインの音量を確認してみよう</span></span><span><span>サウンドデバイスによって</span></span><span><span>名称は異なるけど</span></span><span><span>大抵は一番左側にある</span></span><span><span>スライダーがメイン音量だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>音量が 0 になっていて</span></span><span><span>下に </span><code>MM</code><span> って</span></span><span><span>表示されているね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>MM</code><span> は</span></span><span><span><wbr>「ミュート(mute)」<wbr>状態を</span></span><span><span>表しているよ</span></span><span><span>この場合 M キーを押して</span></span><span><span>ミュートを解除しよう</span></span><span><span>解除されると表示が</span></span><span><code>OO</code><span> に変わるはずだよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>よし！</span></span><span><span>これでミュートの</span></span><span><span>解除ができたよ！</span></span><span><span>次は音量をあげてみるね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>音量は</span></span><span><span><wbr>「↑キー」<wbr>で上げて</span></span><span><span><wbr>「↓キー」<wbr>で下げるよ</span></span><span><span>適切な音量に設定できたら</span></span><span><span><wbr>「ESC キー」<wbr>で終了しよう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>GUI アプリみたいな操作感で</span></span><span><span>分かりやすかったよ！</span></span></div></article><article class="header2"><code>alsactl</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>alsamixer</code><span> の設定は</span></span><span><span>デフォルトでは一時的なものなんだ</span></span><span><span>Linux を再起動すると</span></span><span><span>元に戻ってしまうことがあるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>毎回設定し直すのは</span></span><span><span>面倒だね…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>alsactl</code><span> は</span></span><span><span>ALSA 管理ツールだよ</span></span></div></article><article class="code"><pre><code class="bash">alsactl <wbr>[オプション]... <wbr>操作
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>alsactl</code><span> で</span></span><span><code>alsamixer</code><span> 設定の</span></span><span><span>保存や復元ができるんだ</span></span></div></article><article class="table"><table><thead><tr><th><span>コマンド</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>alsactl store</code></td><td><code>alsamixer</code><span> 設定を保存</span></td></tr><tr><td><code>alsactl restore</code></td><td><span>保存した </span><code>alsamixer</code><span> 設定を復元</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><span>シャットダウン直前に </span><code>alsactl store</code></span><span><span>起動直後に </span><code>alsactl restore</code></span><span><span>をすればいいんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><span>最近のディストリビューションでは</span></span><span><span>自動的に設定を保存・復元してくれる場合が多いよ</span></span><span><span>一度再起動して設定が保持されているか</span></span><span><span>確認してみよう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>私の環境では再起動後も</span></span><span><span>設定が保持されていたよ</span></span><span><span>親切設計だね！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>でも </span><code>alsactl</code><span> を</span></span><span><span>覚えておくのは大事だね</span></span></div></article><article class="header2"><code>speaker-test</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>speaker-test</code><span> は</span></span><span><span>スピーカー動作確認のための</span></span><span><span>サウンドを鳴らすよ</span></span></div></article><article class="code"><pre><code class="bash">speaker-test <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>speaker-test</code><span> は</span></span><span><span>ホワイトノイズを再生し続けるよ</span></span><span><span>スピーカーが動作していれば</span></span><span><span>この音が聞こえるはずだよ</span></span><span><span>オプションなしで実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">speaker-test
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「ザー」<wbr>ってノイズが聞こえる…</span></span><span><span>これはスピーカーがちゃんと</span></span><span><span>動作しているってことだよね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうみたいだね！</span></span><span><code>speaker-test</code><span> は</span></span><span><span>ずっと動き続けるよ</span></span><span><span>確認が終わったら</span></span><span><span>Ctrl + C で終了しよう</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は ALSA とその設定を行ったよ！</span></span><span><span>これでサウンド再生の</span></span><span><span>準備は整ったのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだね！</span></span><span><span>次はいよいよ</span></span><span><span>サウンドファイルの</span></span><span><span>再生に挑戦しよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章14話</div><div><a href="5/14/">tmuxコマンド</a></div></div><div><div>今</div><div>5章15話 ALSA</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章16話</div><div><a href="5/16/">サウンド再生</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

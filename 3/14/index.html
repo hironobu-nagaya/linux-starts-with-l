@@ -1,0 +1,97 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章14話 ヌルコマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,null command">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/13/" />
+<link rel="next" href="3/15/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章13話</div>
+<div><a href="3/13/">exitコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章14話 ヌルコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章15話</div>
+<div><a href="3/15/">引数処理</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ヌルコマンド </span><code>:</code></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は<wbr>「ヌルコマンド(null command)」<wbr> </span><code>:</code><span> を学ぼう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ひょっとして</span></span>
+<span><span><wbr>「何もしない」<wbr></span></span>
+<span><span>コマンドかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru-surprised.svg" alt="若木 しげる(驚き)" /></div>
+<div>
+<span><span>そのとおり！</span></span>
+<span><span>よくわかったね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><code>/dev/null</code><span> とかで</span></span>
+<span><span>気になって調べたんだ</span></span>
+<span><span>null は<wbr>「空っぽ」<wbr><wbr>「空虚」<wbr></span></span>
+<span><span>って意味でしょ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>でもなんで</span></span>
+<span><span><wbr>「何もしない」<wbr>コマンドが</span></span>
+<span><span>用意されているんだろうね？</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは</span></span>
+<span><span>使い方から</span></span>
+<span><span>見ていこう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">: <wbr>[引数]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>どんな引数を指定しても</span></span><span><span>何もせず成功して終了するよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>true</code><span> と</span></span><span><span>同じということ？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだね！</span></span><span><span>挙動は </span><code>true</code><span> と一緒だよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>true</code><span> は<wbr>「成功を返す」<wbr>に</span></span><span><span>重きをおいているけど</span></span><span><code>:</code><span> は<wbr>「何もしない」<wbr>に</span></span><span><span>重きをおいているんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>文脈で </span><code>true</code><span> と </span><code>:</code><span> を</span></span><span><span>使い分けるんだね！</span></span></div></article><article class="header2"><span>コマンドの記述が必要な場合</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>いくつかの記述には</span></span><span><span>必ずコマンドが必要になるよ</span></span><span><span>制御文 </span><code>if</code><span>, <wbr></span><code>for</code><span>, <wbr></span><code>while</code><span> での処理のほか</span></span><span><span>グルーピング </span><code>{ ... <wbr>}</code><span>, <wbr></span><code>( ... <wbr>)</code><span> などがあるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「必ず書かないといけないけど書く処理がない」<wbr></span></span><span><span>そういう時に </span><code>:</code><span> を書いておけばいいんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>たとえば以下は</span></span><span><span>成功するまで</span></span><span><span>コマンドを繰り返すよ</span></span></div></article><article class="code"><pre><code class="bash">while <wbr>! <wbr>コマンド
+do
+  <wbr>:
+done
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>!</code><span> で </span><code>コマンド</code><span> の</span></span><span><span>終了ステータスを</span></span><span><span>反転させているから</span></span><span><span><wbr>「 </span><code>コマンド</code><span> が失敗する限り</span></span><span><span>処理を繰り返し」<wbr>という処理ね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>do</code><span> ～ </span><code>done</code><span> の間に</span></span><span><span>必ず処理を書かないと</span></span><span><span>いけないから</span></span><span><span>そこで </span><code>:</code><span> を</span></span><span><span>書いているんだね！</span></span></div></article><article class="header2"><span>空ファイル作成</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>空ファイル作成を</span></span><span><span>以下のように</span></span><span><span>書くこともあるよ</span></span></div></article><article class="code"><pre><code class="bash">: <wbr>&gt; <wbr>ファイル
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>何もせず何も出力しないから</span></span><span><span>こうやって空ファイルを</span></span><span><span>作れるんだね</span></span><span><code>touch</code><span> と同じかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>実は </span><code>touch</code><span> の本当の役割は</span></span><span><span><wbr>「ファイルに記録されている</span></span><span><span>時刻を修正する」<wbr>なんだ</span></span><span><span>オプションを指定しないと</span></span><span><span><wbr>「最終アクセス時刻と</span></span><span><span>変更時刻を今に変更する」<wbr></span></span><span><span>という動きをするよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ファイルが存在していなければ</span></span><span><span>空ファイルを作って</span></span><span><span>時刻を設定してくれていたんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「触って(touch)」<wbr></span></span><span><span>アクセスしたのは今だよ！</span></span><span><span>っていう役割だったんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>なので存在しないファイルを</span></span><span><span>指定する場合は</span></span><span><code>touch</code><span> と同じだけど</span></span><span><span>存在しているファイルを</span></span><span><span>指定する場合は</span></span><span><span>挙動が違ってくるんだ</span></span></div></article><article class="table"><table><thead><tr><th><span>コマンド</span></th><th><span>ファイルの内容</span></th></tr></thead><tbody><tr><td><code>touch ファイル</code></td><td><span>変化なし</span></td></tr><tr><td><code>: &gt; ファイル</code></td><td><span>空になる</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>:</code><span> の代わりに</span></span><span><span>何も出力しないコマンドで</span></span><span><span>代用することもできるけど</span></span><span><code>:</code><span> が一番簡単な指定だよ</span></span></div></article><article class="header2"><span>コメント（非推奨）</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>:</code><span> の引数に</span></span><span><span>文章を書いて</span></span><span><span>コメントとして</span></span><span><span>使われることも</span></span><span><span>あるんだ</span></span></div></article><article class="code"><pre><code class="bash">: <wbr>コメント
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どんな引数でも</span></span><span><span>何もしないので</span></span><span><span>確かにコメントの</span></span><span><span>代わりに使えるかも</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>でも </span><code>:</code><span> も</span></span><span><span>コマンドである以上</span></span><span><span>わずかでも処理があるんだ</span></span><span><code>#</code><span> ではそのようなこともなく</span></span><span><span>コマンドの途中でも使えるよ</span></span><span><code>#</code><span> は </span><code>:</code><span> をコメントとして</span></span><span><span>使う場合の完全上位互換なんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>見かけても</span></span><span><span><wbr>「これはコメントなんだな」<wbr></span></span><span><span>と読むようにして</span></span><span><span>自分で書くコメントは</span></span><span><code>#</code><span> を使おう！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はヌルコマンド </span><code>:</code><span> を学んだよ！</span></span><span><span><wbr>「何もしない」<wbr>ことを</span></span><span><span>意思表示する所で使うんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>知らないとスクリプトの中に出てきた</span></span><span><code>:</code><span> に戸惑うことになるよ</span></span><span><span>ヌルコマンドがあることを覚えておこう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章13話</div><div><a href="3/13/">exitコマンド</a></div></div><div><div>今</div><div>3章14話 ヌルコマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章15話</div><div><a href="3/15/">引数処理</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

@@ -1,0 +1,102 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章16話 サウンド再生</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,aplay,mpg123,ogg123,timidity,wav,mp3,ogg,midi,spx">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/15/" />
+<link rel="next" href="5/17/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章15話</div>
+<div><a href="5/15/">ALSA</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章16話 サウンド再生</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章17話</div>
+<div><a href="5/17/">cron</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>サウンド再生</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>前回は ALSA を設定して</span></span>
+<span><span>Linux で音を再生できるようにしたね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回はいよいよ</span></span>
+<span><span>音源の再生に</span></span>
+<span><span>挑戦してみよう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>音楽ファイルには</span></span>
+<span><span>色々な形式があるけど</span></span>
+<span><span>それぞれの形式ごとに適した</span></span>
+<span><span>再生方法を紹介していくよ</span></span>
+</div>
+</article>
+<article class="header2"><span>WAV</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「WAV(waveform audio file format)」<wbr>は</span></span>
+<span><span>無圧縮サウンドファイル形式だよ</span></span>
+<span><span>サウンドが無劣化で保存されているんだ</span></span>
+<span><span>録音の生データなどは WAV だったりするよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>基本的なサウンドファイルって感じだよね</span></span>
+<span><span>何で再生するのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>aplay</code><span> は WAV 再生ツールだよ</span></span>
+<span><span>ALSA に含まれる標準ツールなんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">aplay <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあ再生してみるね！</span></span></div></article><article class="code"><pre><code class="bash">aplay <wbr>music.wav
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おおー！</span></span><span><span>ちゃんと音楽が</span></span><span><span>再生されたよ！</span></span></div></article><article class="header2"><span>MP3</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span><wbr>「MP3(MPEG-1 Audio Layer-3)」<wbr>は</span></span><span><span>圧縮サウンドファイル形式だよ</span></span><span><span>最も普及している形式なので</span></span><span><span>馴染み深いんじゃないかな？</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>私の持っている音楽ファイルは</span></span><span><span>ほとんどが MP3 なんだ！</span></span><span><span>これが再生できれば文句なしだよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>mpg123</code><span> は MP3 再生ツールだよ</span></span></div></article><article class="code"><pre><code class="bash">mpg123 <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>--no-control</code></td><td><span>コントロール機能を無効にする</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>さっそく再生してみるね！</span></span></div></article><article class="code"><pre><code class="bash">mpg123 <wbr>music.mp3
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>いいねいいね！</span></span><span><span>ちゃんと音楽が</span></span><span><span>再生されている！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今度はバックグラウンドで</span></span><span><span>再生させてみよう！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>mpg123</code><span> は</span></span><span><span>ターミナル操作を受け付ける</span></span><span><span><wbr>「コントロール機能」<wbr>が</span></span><span><span>有効になっているんだ</span></span><span><span>バックグラウンド実行すると</span></span><span><span>この機能が影響して止まっちゃうんだ</span></span><span><span>バックグラウンド実行する時は</span></span><span><span>オプションでコントロール機能を</span></span><span><span>無効化するといいよ</span></span></div></article><article class="code"><pre><code class="bash">mpg123 <wbr>--no-control <wbr>music.mp3 <wbr>&amp;
+</code></pre></article><article class="header2"><span>Ogg</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>Ogg は<wbr>「コンテナ形式」<wbr>という</span></span><span><span>様々なサウンドファイル形式を</span></span><span><span>内包できる入れ物なんだ</span></span><span><span>多くの場合で圧縮形式 Vorbis が</span></span><span><span>使われているよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ogg123</code><span> は</span></span><span><span>Ogg 再生ツールだよ</span></span></div></article><article class="code"><pre><code class="bash">ogg123 <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>ogg123</code><span> は </span><code>mpg123</code><span> に</span></span><span><span>あやかって命名したのかな？</span></span><span><span>再生してみるね</span></span></div></article><article class="code"><pre><code class="bash">ogg123 <wbr>music.ogg
+</code></pre></article><article class="header2"><span>MIDI</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span><wbr>「MIDI(Musical Instrument Digital Interface)」<wbr>は</span></span><span><span>楽譜のようなファイルだよ</span></span><span><span><wbr>「どの音をどのタイミングで鳴らすか」<wbr></span></span><span><span>だけが書かれているんだ</span></span><span><span>だから音楽ファイルの中でも</span></span><span><span>ファイルサイズがとても小さいんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>MIDI は音がチープな印象が</span></span><span><span>あるんだけど…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>MIDI の音源データは</span></span><span><span><wbr>「サウンドフォント</span></span><span><span>(sound font, <wbr>SF)」<wbr>というよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>再生される音は</span></span><span><span>サウンドフォントに左右されるんだ</span></span><span><span>最近のサウンドフォントは</span></span><span><span>良くできているので</span></span><span><span>一度聴いてみるといいよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>MIDI は再生ソフトとは別に</span></span><span><span>サウンドフォントも</span></span><span><span>用意しないといけないんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>timidity</code><span> は</span></span><span><span>MIDI 再生ツールだよ</span></span></div></article><article class="code"><pre><code class="bash">timidity <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>パッケージ管理システムでは</span></span><span><code>timidity</code><span> と一緒にサウンドフォントも</span></span><span><span>インストールしてくれる場合が多いよ</span></span><span><code>timidity</code><span> をインストールしたら</span></span><span><span>まずは再生を試してみよう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>再生してみるね！</span></span></div></article><article class="code"><pre><code class="bash">timidity <wbr>music.midi
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おおっ！</span></span><span><span>全然チープじゃない！</span></span><span><span>十分楽しめる音だよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>サウンドフォントは</span></span><span><span>沢山種類があるんだ</span></span><span><span>サウンドフォントを</span></span><span><span>入れ替えて聴くのも</span></span><span><span>楽しみ方の一つだよ</span></span></div></article><article class="header2"><span>Speex</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>Speex は<wbr>「人間の音声」<wbr>に特化した</span></span><span><span>圧縮サウンドフォーマットだよ</span></span><span><span><wbr>「人間の音声」<wbr>に</span></span><span><span>最適化した圧縮を行うことで</span></span><span><span>ファイルサイズの割には</span></span><span><span>音質の劣化が少ないんだ</span></span><span><span>その成り立ちから</span></span><span><span>人間の音声以外には向かない</span></span><span><span>特化型のフォーマットだね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>音声通話で使われている形式と</span></span><span><span>聞いたことがあるよ</span></span><span><span>音声主体の音源があるなら</span></span><span><span>Speex に変換して</span></span><span><span>保存するのもよさそうだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>Speex は Ogg コンテナに内包される</span></span><span><span>フォーマットでもあるんだ</span></span><span><span>だから再生は </span><code>ogg123</code><span> で大丈夫！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>音源を用意してみたので</span></span><span><span>再生してみよう！</span></span></div></article><article class="code"><pre><code class="bash">ogg123 <wbr>music.spx
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は各種形式の</span></span><span><span>サウンドファイルの</span></span><span><span>再生方法を学んだよ！</span></span><span><span>こうやって見てみると色々な</span></span><span><span>ファイルフォーマットがあるんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>どれも有名な再生ソフトだから</span></span><span><span>必要なものはすぐに</span></span><span><span>インストールして使えるはずだよ</span></span><span><span>必要な再生ソフトで音源を楽しんでね！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章15話</div><div><a href="5/15/">ALSA</a></div></div><div><div>今</div><div>5章16話 サウンド再生</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章17話</div><div><a href="5/17/">cron</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

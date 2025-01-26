@@ -1,0 +1,141 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章22話 アーカイブ</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,archive,tar">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/21/" />
+<link rel="next" href="5/23/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章21話</div>
+<div><a href="5/21/">メッセージ(実践)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章22話 アーカイブ</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章23話</div>
+<div><a href="5/23/">ビルド(手順)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>アーカイブ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>ファイルを圧縮するのに</span></span>
+<span><span>ZIP を扱うことがあるんだけど</span></span>
+<span><span>Linux でも似たようなものは</span></span>
+<span><span>あるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんあるよ！</span></span>
+<span><span>今回は<wbr>「アーカイブ(archive)」<wbr></span></span>
+<span><span>について学ぼう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>アーカイブ？</span></span>
+<span><span>圧縮と何が違うんだろう？</span></span>
+</div>
+</article>
+<article class="header2"><span>基本</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ZIP は複数のファイルを</span></span>
+<span><span>まとめて一つにして</span></span>
+<span><span>それを圧縮する仕組みだよね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+<span><span>1ファイルになって</span></span>
+<span><span>ファイルサイズも小さくなるから</span></span>
+<span><span>メール添付とかでよく使うよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>でも Linux では</span></span>
+<span><span><wbr>「複数のファイルを1つにまとめる」<wbr>と</span></span>
+<span><span><wbr>「圧縮する」<wbr>を別々の機能と考えるんだ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>機能</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>アーカイブ</span></td>
+<td><span>複数のファイルやディレクトリを1つのファイルにまとめること</span></td>
+</tr>
+<tr>
+<td><span>圧縮</span></td>
+<td><span>ファイルサイズを小さくすること</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>なるほど！</span></span>
+<span><span>ZIP は1つの作業に見えるけど</span></span>
+<span><span>Linux では2つの作業として</span></span>
+<span><span>分けているんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は Linux で標準的なアーカイブ</span></span>
+<span><span><wbr>「tar アーカイブ」<wbr>を扱っていこう！</span></span>
+</div>
+</article>
+<article class="header2"><span>アーカイブ作成</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>tar</code><span> は</span></span>
+<span><span><wbr>「tar アーカイブ」<wbr>を管理するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">tar <wbr>[オプション]... <wbr>[ファイル]...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>c</code></td><td><span>アーカイブを作成する(create)</span></td></tr><tr><td><code>f</code></td><td><span>作成するアーカイブを指定する(file)</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下の例を</span></span><span><span>実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">tar <wbr>cf <wbr>my-directory.tar <wbr>my-directory
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これは </span><code>my-directory</code><span> ディレクトリを</span></span><span><code>my-directory.tar</code><span> アーカイブに</span></span><span><span>まとめているんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだよ</span></span><span><span>ただしこの時点では</span></span><span><span>ファイルサイズは変わっていないよ</span></span><span><span>アーカイブは<wbr>「まとめる」<wbr>だけだからね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあ圧縮は</span></span><span><span>どうするのかな？</span></span></div></article><article class="header2"><span>圧縮オプション</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>圧縮は </span><code>tar</code><span> に</span></span><span><span>オプションを追加するよ</span></span></div></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>圧縮形式</span></th><th><span>拡張子</span></th><th><span>特徴</span></th></tr></thead><tbody><tr><td><code>z</code></td><td><span>GZIP</span></td><td><code>.gz</code></td><td><span>そこそこの圧縮率で処理速度が速い</span></td></tr><tr><td><code>j</code></td><td><span>BZIP2</span></td><td><code>.bz2</code></td><td><span>圧縮率と処理速度のバランスが良い</span></td></tr><tr><td><code>J</code></td><td><span>XZ</span></td><td><code>.xz</code></td><td><span>高圧縮率だが処理速度はやや遅い</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これらの圧縮オプションを</span></span><span><span>使った例を見てみよう</span></span></div></article><article class="table"><table><thead><tr><th><span>圧縮形式</span></th><th><span>コマンド</span></th></tr></thead><tbody><tr><td><span>GZIP</span></td><td><code>tar cfz my-directory.tar.gz my-directory</code></td></tr><tr><td><span>BZIP2</span></td><td><code>tar cfj my-directory.tar.bz2 my-directory</code></td></tr><tr><td><span>XZ</span></td><td><code>tar cfJ my-directory.tar.xz my-directory</code></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>拡張子が</span></span><span><code>.tar</code><span> と </span><code>.gz</code><span> が合わさって</span></span><span><code>.tar.gz</code><span> のようになっているね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このような拡張子を</span></span><span><span>二重拡張子というんだ</span></span><span><span><wbr>「tar アーカイブ」<wbr>は</span></span><span><span>二重拡張子が一般的だよ</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>二重拡張子って</span></span><span><span>付けたことがないなぁ</span></span><span><span>ちょっと新鮮で面白いね！</span></span></div></article><article class="header2"><span>アーカイブ展開</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>アーカイブの展開には</span></span><span><span>以下のオプションを</span></span><span><span>指定するよ</span></span></div></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>x</code></td><td><span>アーカイブを展開する(extract)</span></td></tr><tr><td><code>f</code></td><td><span>展開するアーカイブを指定する(file)</span></td></tr></tbody></table></article><article class="code"><pre><code class="bash">tar <wbr>xf <wbr>my-directory.tar.gz
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>圧縮オプションは</span></span><span><span>付けなくても</span></span><span><span>いいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>拡張子から圧縮形式を</span></span><span><span>自動で判別してくれるんだ</span></span><span><span>だから圧縮オプションは</span></span><span><span>指定しなくても問題ないよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>拡張子を見て自動で</span></span><span><span>判断してくれるなんて</span></span><span><span>親切だね！</span></span></div></article><article class="header2"><span>tarball</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>こうやって </span><code>tar</code><span> で</span></span><span><span>アーカイブし圧縮したファイルを</span></span><span><span><wbr>「ターボール(tarball)」<wbr>と言うんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>良く扱うから</span></span><span><span>通称がついているんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>Linux のソフトウェアやソースコードは</span></span><span><span>tarball 形式で配布されることが多いんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>通常の圧縮や展開の用途だけでなく</span></span><span><span>Linux を扱う上で</span></span><span><span>大切なスキルなんだね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はアーカイブについて学んだよ！</span></span><span><code>tar</code><span> で作成や展開を行うんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>Windows や macOS にも tarball を</span></span><span><span>解凍できるソフトウェアがあるので</span></span><span><span>Linux から他の OS へ</span></span><span><span>ファイルを送るのにも使えるよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章21話</div><div><a href="5/21/">メッセージ(実践)</a></div></div><div><div>今</div><div>5章22話 アーカイブ</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章23話</div><div><a href="5/23/">ビルド(手順)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

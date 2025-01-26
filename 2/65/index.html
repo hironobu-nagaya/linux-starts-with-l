@@ -1,0 +1,80 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章65話 プロセス関連コマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,killall,pkill,pidof,pgrep">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/64/" />
+<link rel="next" href="2/66/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章64話</div>
+<div><a href="2/64/">ログイン関連コマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章65話 プロセス関連コマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章66話</div>
+<div><a href="2/66/">システム関連コマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>プロセス関連コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>色々なコマンドを</span></span>
+<span><span>教えてもらっているけど</span></span>
+<span><span>さすがにそろそろ</span></span>
+<span><span>出尽くしたんじゃないかな？！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>プロセスという</span></span>
+<span><span>大事なことが抜けているね</span></span>
+<span><span>今回はプロセスに関する</span></span>
+<span><span>コマンドを見ていこう！</span></span>
+</div>
+</article>
+<article class="header2"><code>killall</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>killall</code><span> は</span></span>
+<span><span>指定されたプロセス名を持つ</span></span>
+<span><span>全てのプロセスに</span></span>
+<span><span>シグナルを送るよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">killall <wbr>[オプション]... <wbr>プロセス名...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>PID を調べるのに</span></span><span><span>ひと手間なので</span></span><span><span>プロセス名で</span></span><span><span>指定できるのは</span></span><span><span>うれしいね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下は</span></span><span><span>全ての </span><code>sleep</code><span> プロセスに</span></span><span><span>SIGTERM を送信するよ</span></span></div></article><article class="code"><pre><code class="bash">killall <wbr>sleep
+</code></pre></article><article class="header2"><code>pkill</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>pkill</code><span> は</span></span><span><span>正規表現で指定された</span></span><span><span>プロセス名に</span></span><span><span>シグナルを送るよ</span></span></div></article><article class="code"><pre><code class="bash">pkill <wbr>[オプション]... <wbr>正規表現
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-f</code><span>, <wbr></span><code>--full</code></td><td><span>プロセス名ではなくコマンドラインに正規表現を使う</span></td></tr><tr><td><code>-U UID,...</code><span>, <wbr></span><code>--uid UID,...</code></td><td><span>指定された UID を持つプロセスのみ</span></td></tr><tr><td><code>-G GID,...</code><span>, <wbr></span><code>--group GID,...</code></td><td><span>指定された GID を持つプロセスのみ</span></td></tr><tr><td><code>-P PPID,...</code><span>, <wbr></span><code>--parent PPID,...</code></td><td><span>指定された PPID を持つプロセスのみ</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>プロセス名より詳しい条件で</span></span><span><span>指定したい場合に便利だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下は</span></span><span><span>3桁以上の秒数が</span></span><span><span>指定されている</span></span><span><code>sleep</code><span> プロセスに</span></span><span><span>SIGTERM を送信するよ</span></span></div></article><article class="code"><pre><code class="bash">pkill <wbr>-f <wbr>'sleep <wbr>[1-9][0-9]{2,}'
+</code></pre></article><article class="header2"><code>pidof</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>pidof</code><span> は</span></span><span><span>プロセス名から</span></span><span><span>PID を探してくれるよ</span></span></div></article><article class="code"><pre><code class="bash">pidof <wbr>[オプション]... <wbr>プロセス名...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>プロセス停止は</span></span><span><code>killall</code><span> でいいけど</span></span><span><span>その他のプロセス操作で</span></span><span><span>PID が必要な場合に</span></span><span><span>使えそうだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下は全ての</span></span><span><code>sleep</code><span> プロセスの</span></span><span><span>NICE値を5増加させるよ</span></span></div></article><article class="code"><pre><code class="bash">renice <wbr>+5 <wbr>$(pidof <wbr>sleep)
+</code></pre></article><article class="header2"><code>pgrep</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>pgrep</code><span> は</span></span><span><span>プロセス名の正規表現から</span></span><span><span>PID を探してくれるんだ</span></span></div></article><article class="code"><pre><code class="bash">pgrep <wbr>[オプション]... <wbr>正規表現
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-f</code><span>, <wbr></span><code>--full</code></td><td><span>プロセス名ではなくコマンドラインに正規表現を使う</span></td></tr><tr><td><code>-U UID,...</code><span>, <wbr></span><code>--uid UID,...</code></td><td><span>指定された UID を持つプロセスのみ</span></td></tr><tr><td><code>-G GID,...</code><span>, <wbr></span><code>--group GID,...</code></td><td><span>指定された GID を持つプロセスのみ</span></td></tr><tr><td><code>-P PPID,...</code><span>, <wbr></span><code>--parent PPID,...</code></td><td><span>指定された PPID を持つプロセスのみ</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>指定自体は</span></span><span><code>pkill</code><span> と</span></span><span><span>似ているね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下は</span></span><span><span>3桁以上の秒数が</span></span><span><span>指定されている</span></span><span><code>sleep</code><span> のNICE値を</span></span><span><span>5増加させるよ</span></span></div></article><article class="code"><pre><code class="bash">renice <wbr>+5 <wbr>$(pgrep <wbr>-f <wbr>'sleep <wbr>[1-9][0-9]{2,}')
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はプロセスを扱うコマンド</span></span><span><code>killall</code><span>, <wbr></span><code>pkill</code><span>,</span></span><span><code>pidof</code><span>, <wbr></span><code>pgrep</code></span><span><span>を学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>基本的なプロセス管理は</span></span><span><code>ps</code><span> や </span><code>kill</code><span> でできるけど</span></span><span><span>これらを知っていると</span></span><span><span>より柔軟な操作を</span></span><span><span>可能にするよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章64話</div><div><a href="2/64/">ログイン関連コマンド</a></div></div><div><div>今</div><div>2章65話 プロセス関連コマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章66話</div><div><a href="2/66/">システム関連コマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

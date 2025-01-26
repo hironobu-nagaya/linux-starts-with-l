@@ -1,0 +1,403 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章1話 Linux</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,kernel,distribution">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="1/3/" />
+<link rel="next" href="2/2/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>1章3話</div>
+<div><a href="1/3/">はじまり</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章1話 Linux</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章2話</div>
+<div><a href="2/2/">ログイン</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>Linux</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Linux って</span></span>
+<span><span>どういう意味なのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div>
+<div>
+<span><span>言葉の意味に</span></span>
+<span><span>関心を持つのはよいことだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は Linux という言葉について</span></span>
+<span><span>学んでいこう！</span></span>
+</div>
+</article>
+<article class="header2"><span>狭義の Linux</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>昔の裏方の代表的な OS といえば</span></span>
+<span><span><wbr>「UNIX(ユニックス)」<wbr>だったんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>UNIX と Linux って</span></span>
+<span><span>名前が似ているね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>うん、<wbr>そうなんだよ</span></span>
+<span><span><wbr>「リーナス(Linus)」<wbr>さんという技術者が</span></span>
+<span><span>UNIX の仕組みを模して作ったんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>リーナスさんが作ったから</span></span>
+<span><span>Linux なんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そう、<wbr>名前の由来は</span></span>
+<span><span>制作者さんだったんだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>彼が作ったのは</span></span>
+<span><span><wbr>「</span><a href="https://kernel.org" target="_blank" rel="noopener noreferrer">カーネル(kernel)</a><span>」<wbr>という</span></span>
+<span><span>OS の心臓部なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>当時の UNIX は商用 OS で</span></span>
+<span><span>ライセンス料が必要だったんだ</span></span>
+<span><span>そんな中で Linux は</span></span>
+<span><span>オープンソースで公開されたんだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>オープンソースって</span></span>
+<span><span>誰でも自由に使ったり</span></span>
+<span><span>改良できる仕組みだよね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのとおりだよ</span></span>
+<span><span>技術者たちは Linux を使い</span></span>
+<span><span>改良や拡張をしていったんだ</span></span>
+<span><span>そして Linux はあっという間に</span></span>
+<span><span>広がっていったんだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>Linux が</span></span>
+<span><span>無料で使えるのは</span></span>
+<span><span>オープンソースの</span></span>
+<span><span>おかげなんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>厳密には Linux は</span></span>
+<span><span>この<wbr>「カーネル」<wbr>を指すんだ</span></span>
+<span><span>この意味を<wbr>「狭義の Linux」<wbr>と</span></span>
+<span><span>呼ぶことにしよう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><strong><wbr>「狭義の Linux = カーネル」<wbr></strong></span>
+<span><span>って覚えておくよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>広義の Linux</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>でもカーネルだけでは</span></span>
+<span><span>OS として使えないんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>OS の心臓部なのに？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>カーネルは OS の</span></span>
+<span><span>基礎しか扱ってくれないんだ</span></span>
+<span><span>例えば CPU やメモリの</span></span>
+<span><span>管理などだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>OS として使うには</span></span>
+<span><span>様々なソフトウェアも</span></span>
+<span><span>一緒に必要なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>たとえばどんな</span></span>
+<span><span>ソフトウェアかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>画面を表示するソフトウェア</span></span>
+<span><span>ユーザからの入力を受け取るソフトウェア</span></span>
+<span><span>ネットにつなぐソフトウェアなどだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>それらが一緒になって</span></span>
+<span><span>OS として動くんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>カーネルとソフトウェアをまとめて</span></span>
+<span><span>OS として動くようにしたのを</span></span>
+<span><span><wbr>「ディストリビューション</span></span>
+<span><span>(distribution)」<wbr>と呼ぶよ</span></span>
+<span><span>この意味を<wbr>「広義の Linux」<wbr>と</span></span>
+<span><span>呼ぶことにしよう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><strong><wbr>「広義の Linux = ディストリビューション」<wbr></strong><span>ね！</span></span>
+<span><span>こっちも覚えておく！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>単に Linux と呼ぶとき</span></span>
+<span><span>たいていは<wbr>「広義の Linux」<wbr>の</span></span>
+<span><span>意味で使われているよ</span></span>
+</div>
+</article>
+<article class="header2"><span>ディストリビューション</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>どんなディストリビューションが</span></span>
+<span><span>おすすめかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最初は初心者に優しくユーザ数の多い</span></span>
+<span><span>ディストリビューションを選ぶといいよ</span></span>
+<span><span>以下はどうだろう？</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>ディストリビューション</span></th>
+<th><span>特徴</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.debian.or.jp" target="_blank" rel="noopener noreferrer">Debian</a></td>
+<td><span>歴史が長く、<wbr>安定性・信頼性が高い</span></td>
+</tr>
+<tr>
+<td><a href="https://ubuntulinux.jp" target="_blank" rel="noopener noreferrer">Ubuntu</a></td>
+<td><span>Debian ベースで初心者に優しい</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>商用 Linux で大きなシェアを占めているのは</span></span>
+<span><a href="https://redhat.com/ja/technologies/linux-platforms/enterprise-linux" target="_blank" rel="noopener noreferrer">Red Hat Enterprise Linux</a><span>(RHEL) だよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Linux を業務目的で学びたいのなら</span></span>
+<span><span>Red Hat Enterprise Linux に</span></span>
+<span><span>含まれているソフトウェアを</span></span>
+<span><span>全てオープンソースに置き換えた</span></span>
+<span><span>互換ディストリビューションが</span></span>
+<span><span>無料で利用可能なので</span></span>
+<span><span>それを使って学ぶのもいいと思うよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>ディストリビューション</span></th>
+<th><span>特徴</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.centos.org" target="_blank" rel="noopener noreferrer">CentOS</a></td>
+<td><span>歴史が長い RHEL 互換 Linux</span></td>
+</tr>
+<tr>
+<td><a href="https://fedoraproject.org/ja/" target="_blank" rel="noopener noreferrer">Fedora</a></td>
+<td><span>新しい機能を積極的に取り入れる</span></td>
+</tr>
+<tr>
+<td><a href="https://rockylinux.org/ja-JP" target="_blank" rel="noopener noreferrer">Rocky Linux</a></td>
+<td><span>CentOS から分離</span></td>
+</tr>
+<tr>
+<td><a href="https://almalinux.org/ja/" target="_blank" rel="noopener noreferrer">AlmaLinux</a></td>
+<td><span>CentOS の置き換えを目指している</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ディストリビューション選びで</span></span>
+<span><span>何が変わってくるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ディストリビューションごとに</span></span>
+<span><span>理念や方向性が違うんだ</span></span>
+<span><span>自分にあったものを探すのも</span></span>
+<span><span>Linux の楽しみの一つだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>自由に選べる OS かぁ</span></span>
+<span><span>相性の良い Linux を</span></span>
+<span><span>見つけられると良いなぁ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>以降、<wbr>Debian をベースとした</span></span>
+<span><span>ディストリビューションを<wbr>「Debian 系」<wbr></span></span>
+<span><span>RHEL 互換のディストリビューションを</span></span>
+<span><span><wbr>「Red Hat 系」<wbr>と呼ぶよ</span></span>
+<span><span>あくまでこの記事内での呼称で</span></span>
+<span><span>公式の呼び名ではないことは</span></span>
+<span><span>気をつけてね</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は Linux という</span></span>
+<span><span>言葉を学んだよ！</span></span>
+<span><span>厳密には Linux は</span></span>
+<span><span>カーネルを指すんだけど</span></span>
+<span><span>普段はディストリビューションの</span></span>
+<span><span>意味で使われるよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次回からは実際に</span></span>
+<span><span>Linux に触っていこう！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>1章3話</div>
+<div><a href="1/3/">はじまり</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章1話 Linux</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章2話</div>
+<div><a href="2/2/">ログイン</a></div>
+</div>
+</div>
+</footer>
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

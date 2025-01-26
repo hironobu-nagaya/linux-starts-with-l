@@ -1,0 +1,77 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章9話 SSH接続先設定</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,SSH,authorized_keys">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/8/" />
+<link rel="next" href="5/10/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章8話</div>
+<div><a href="5/8/">SSH鍵生成(macOS,Linux)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章9話 SSH接続先設定</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章10話</div>
+<div><a href="5/10/">SSH公開鍵認証(Windows)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>SSH接続先設定</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>前回は SSH 鍵を</span></span>
+<span><span>作成したね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は接続先の Linux 上で</span></span>
+<span><span>必要な設定を行おう！</span></span>
+</div>
+</article>
+<article class="header2"><code>.ssh</code><span> ディレクトリ</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>SSH 設定は</span></span>
+<span><code>~/.ssh</code><span> ディレクトリに</span></span>
+<span><span>保存されるよ</span></span>
+<span><span>まずはこのディレクトリが</span></span>
+<span><span>あるかどうかを確認しよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">ls <wbr>-ld <wbr>~/.ssh
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="bash">drwx------. <wbr>2 <wbr>midori <wbr>midori <wbr>71 <wbr>Dec  <wbr>1 <wbr>14:53 <wbr>/home/midori/.ssh
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ちゃんとあるみたいだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もし存在していなければ</span></span><span><span>作ってあげよう</span></span></div></article><article class="code"><pre><code class="bash">mkdir <wbr>~/.ssh
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうしたらパーミッションを確認しよう</span></span><span><span>自身しかアクセスできないように</span></span><span><span>なっていればいいよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>rwx------</code><span> だね！</span></span><span><span>所有グループや</span></span><span><span>他のユーザには</span></span><span><span>何も権限が無いよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もしそうでないなら </span><code>chmod</code><span> で</span></span><span><span>パーミッションを設定しよう！</span></span></div></article><article class="code"><pre><code class="bash">chmod <wbr>700 <wbr>~/.ssh
+</code></pre></article><article class="header2"><code>authorized_keys</code><span> ファイル</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>~/.ssh/authorized_keys</code><span> ファイルの各行には</span></span><span><span>接続で使用する公開鍵が</span></span><span><span>登録されているんだ</span></span><span><span>このファイルを</span></span><span><span>確認してみよう！</span></span></div></article><article class="code"><pre><code class="bash">ls <wbr>-l <wbr>~/.ssh/authorized_keys
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="console">-rw------- <wbr>1 <wbr>midori <wbr>midori <wbr>1742 <wbr>Nov <wbr>24 <wbr>11:02 <wbr>/home/midori/.ssh/authorized_keys
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ちゃんとあるね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もし存在していなければ</span></span><span><span>作ってあげよう！</span></span></div></article><article class="code"><pre><code class="bash">touch <wbr>~/.ssh/authorized_keys
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このファイルもパーミッションが</span></span><span><span>厳密に設定されている必要があるよ</span></span><span><span>所有ユーザに<wbr>「読み書き」<wbr>権限だけが</span></span><span><span>設定されていないといけないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>rx-------</code><span> だから</span></span><span><span>大丈夫だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もしそうでないなら </span><code>chmod</code><span> で</span></span><span><span>パーミッションを設定しよう！</span></span></div></article><article class="code"><pre><code class="bash">chmod <wbr>600 <wbr>~/.ssh/authorized_keys
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうしたら</span></span><span><code>~/.ssh/authorized_keys</code><span> に</span></span><span><span><wbr>「公開鍵」<wbr>を書き込もう</span></span><span><code>vim</code><span> で編集してもいいし</span></span><span><span>出力リダイレクト </span><code>&gt;&gt;</code><span> で</span></span><span><span>追記でもいいよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>公開鍵の内容って長くて複雑だよね</span></span><span><span>マウスを使った貼り付けを使うのがいいね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これで接続先の</span></span><span><span>準備は完了だよ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は SSH での公開鍵認証の</span></span><span><span>接続先での設定を行ったよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>前準備が色々必要だったけど</span></span><span><span>次回はいよいよ接続するよ！</span></span><span><span>楽しみにしていてね！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章8話</div><div><a href="5/8/">SSH鍵生成(macOS,Linux)</a></div></div><div><div>今</div><div>5章9話 SSH接続先設定</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章10話</div><div><a href="5/10/">SSH公開鍵認証(Windows)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

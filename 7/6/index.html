@@ -1,0 +1,131 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 7章6話 ブートローダ更新</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,Raspberry Pi,boot loader,rpi-eeprom-update">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="7/5/" />
+<link rel="next" href="7/7/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>7章5話</div>
+<div><a href="7/5/">ローカライズ</a></div>
+</div>
+<div>
+<div>今</div>
+<div>7章6話 ブートローダ更新</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>7章7話</div>
+<div><a href="7/7/">パッケージ自動更新</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ブートローダ更新</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span><wbr>「ブートローダ(boot loader)」<wbr>を更新すると</span></span>
+<span><span>動作が安定したり</span></span>
+<span><span>新しい機能を使えるように</span></span>
+<span><span>なる場合があるみたい</span></span>
+<span><span><wbr>「ブートローダ」<wbr>って</span></span>
+<span><span>何なのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ブートローダは</span></span>
+<span><span>起動時に OS を呼び出すソフトウェアだよ</span></span>
+<span><span>Raspberry Pi の電源が入ると</span></span>
+<span><span>最初に動くソフトウェアなんだ</span></span>
+<span><span>microSD カードや USB ドライブ</span></span>
+<span><span>ネットワークなどから</span></span>
+<span><span>OS を探して読み込んでくれるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>何だか更新は危ない印象だなぁ</span></span>
+<span><span>下手に触ると起動しなくなっちゃいそう…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Raspberry Pi には</span></span>
+<span><span>ブートローダの安全な更新を行う</span></span>
+<span><span>専用ツールが用意されているんだ</span></span>
+<span><span>今回はブートローダの</span></span>
+<span><span>更新について話そう！</span></span>
+</div>
+</article>
+<article class="header2"><code>rpi-eeprom-update</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>rpi-eeprom-update</code><span> は</span></span>
+<span><span>Raspberry Pi の</span></span>
+<span><span>ブートローダ更新ツールだよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">rpi-eeprom-update <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>rpi-eeprom-update</code><span> は</span></span><span><code>rpi-eeprom</code><span> パッケージに含まれているよ</span></span><span><span>もしコマンドが見つからなければ</span></span><span><span>インストールしよう！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>apt <wbr>install <wbr>-y <wbr>rpi-eeprom
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>rpi-eeprom-update</code><span> を</span></span><span><span>使う準備は OK だよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>まずは </span><code>rpi-eeprom-update</code><span> を実行しよう</span></span><span><span>アップデートがあるかどうかを</span></span><span><span>確認できるんだ</span></span></div></article><article class="code"><pre><code class="bash">rpi-eeprom-update
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="bash">*** <wbr>UPDATE <wbr>AVAILABLE <wbr>***
+BOOTLOADER: <wbr>update <wbr>available
+   <wbr>CURRENT: <wbr>Wed  <wbr>5 <wbr>Jun <wbr>15:41:49 <wbr>UTC <wbr>2024 <wbr>(1717602109)
+    <wbr>LATEST: <wbr>Mon <wbr>23 <wbr>Sep <wbr>13:02:56 <wbr>UTC <wbr>2024 <wbr>(1727096576)
+   <wbr>RELEASE: <wbr>default <wbr>(/lib/firmware/raspberrypi/bootloader-2712/default)
+            <wbr>Use <wbr>raspi-config <wbr>to <wbr>change <wbr>the <wbr>release.
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>あっ！</span></span><span><span><wbr>「アップデート利用可能(UPDATE AVAILABLE)」<wbr>と</span></span><span><span>目立つ表記があるよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それなら更新があるね</span></span><span><span>ブートローダの更新は</span></span><span><span>以下のようにするよ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>rpi-eeprom-update <wbr>-a
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>注意があるよ</span></span><span><span>ブートローダを更新中は</span></span><span><span>電源を切らないようにね</span></span><span><span>ブートローダが正しく動かず</span></span><span><span>起動できなくなってしまう</span></span><span><span>場合があるんだ</span></span></div></article><article class="code"><pre><code class="console">*** <wbr>PREPARING <wbr>EEPROM <wbr>UPDATES <wbr>***
+
+BOOTLOADER: <wbr>update <wbr>available
+   <wbr>CURRENT: <wbr>Wed  <wbr>5 <wbr>Jun <wbr>15:41:49 <wbr>UTC <wbr>2024 <wbr>(1717602109)
+    <wbr>LATEST: <wbr>Mon <wbr>23 <wbr>Sep <wbr>13:02:56 <wbr>UTC <wbr>2024 <wbr>(1727096576)
+   <wbr>RELEASE: <wbr>default <wbr>(/lib/firmware/raspberrypi/bootloader-2712/default)
+            <wbr>Use <wbr>raspi-config <wbr>to <wbr>change <wbr>the <wbr>release.
+   <wbr>CURRENT: <wbr>Wed  <wbr>5 <wbr>Jun <wbr>15:41:49 <wbr>UTC <wbr>2024 <wbr>(1717602109)
+    <wbr>UPDATE: <wbr>Mon <wbr>23 <wbr>Sep <wbr>13:02:56 <wbr>UTC <wbr>2024 <wbr>(1727096576)
+    <wbr>BOOTFS: <wbr>/boot/firmware
+'/tmp/tmp.dPExKx88EG' <wbr>-&gt; <wbr>'/boot/firmware/pieeprom.upd'
+
+UPDATING <wbr>bootloader. <wbr>This <wbr>could <wbr>take <wbr>up <wbr>to <wbr>a <wbr>minute. <wbr>Please <wbr>wait
+
+*** <wbr>Do <wbr>not <wbr>disconnect <wbr>the <wbr>power <wbr>until <wbr>the <wbr>update <wbr>is <wbr>complete <wbr>***
+
+If <wbr>a <wbr>problem <wbr>occurs <wbr>then <wbr>the <wbr>Raspberry <wbr>Pi <wbr>Imager <wbr>may <wbr>be <wbr>used <wbr>to <wbr>create
+a <wbr>bootloader <wbr>rescue <wbr>SD <wbr>card <wbr>image <wbr>which <wbr>restores <wbr>the <wbr>default <wbr>bootloader <wbr>image.
+
+flashrom <wbr>-p <wbr>linux_spi:dev=/dev/spidev10.0,spispeed=16000 <wbr>-w <wbr>/boot/firmware/pieeprom.upd
+UPDATE <wbr>SUCCESSFUL
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ちょっと緊張したけど…</span></span><span><span>無事更新が終わったみたい</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ブートローダは起動時に動く</span></span><span><span>ソフトウェアなんだよね？</span></span><span><span>更新後は再起動すればいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり</span></span><span><span>再起動すれば新しい</span></span><span><span>ブートローダが使われるよ！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>reboot
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>再起動したら再び</span></span><span><code>rpi-eeprom-update</code><span> を実行して</span></span><span><span>ブートローダを確認してみよう</span></span></div></article><article class="code"><pre><code class="bash">rpi-eeprom-update
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どうなったかな？</span></span></div></article><article class="code"><pre><code class="console">BOOTLOADER: <wbr>up <wbr>to <wbr>date
+   <wbr>CURRENT: <wbr>Mon <wbr>23 <wbr>Sep <wbr>13:02:56 <wbr>UTC <wbr>2024 <wbr>(1727096576)
+    <wbr>LATEST: <wbr>Mon <wbr>23 <wbr>Sep <wbr>13:02:56 <wbr>UTC <wbr>2024 <wbr>(1727096576)
+   <wbr>RELEASE: <wbr>default <wbr>(/lib/firmware/raspberrypi/bootloader-2712/default)
+            <wbr>Use <wbr>raspi-config <wbr>to <wbr>change <wbr>the <wbr>release.
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「UPDATE AVAILABLE」<wbr>の</span></span><span><span>表示がなくなったよ</span></span><span><span><wbr>「最新(up to date)」<wbr></span></span><span><span>とも表示があるね</span></span><span><span>確認できるのも安心だね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はブートローダの</span></span><span><span>更新を行ったよ！</span></span><span><code>rpi-eeprom-update</code><span> を使うんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ブートローダは Raspberry Pi の性能を</span></span><span><span>引き出す大事なプログラムなんだ</span></span><span><span>時々アップデートを確認して</span></span><span><span>新しい機能や安定性を手に入れよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>7章5話</div><div><a href="7/5/">ローカライズ</a></div></div><div><div>今</div><div>7章6話 ブートローダ更新</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>7章7話</div><div><a href="7/7/">パッケージ自動更新</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

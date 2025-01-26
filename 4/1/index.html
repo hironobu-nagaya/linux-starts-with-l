@@ -1,0 +1,396 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 4章1話 スーパユーザ</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,super user,root">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/30/" />
+<link rel="next" href="4/2/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章30話</div>
+<div><a href="3/30/">expectコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>4章1話 スーパユーザ</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>4章2話</div>
+<div><a href="4/2/">suコマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>スーパユーザ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>私が自由にできるディレクトリって</span></span>
+<span><span>ホームディレクトリか</span></span>
+<span><code>/tmp</code><span> ぐらいだよね？</span></span>
+<span><span>ほとんどのディレクトリは制限があって</span></span>
+<span><span>そこにあるファイルは変更できないんだ</span></span>
+<span><span>これらはお兄ちゃんだけしか</span></span>
+<span><span>扱えないのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>権限があればみどりにも扱えるよ！</span></span>
+<span><span>そろそろみどりにも管理者権限を</span></span>
+<span><span>使わせてあげる頃合いかもね</span></span>
+<span><span>今回は<wbr>「スーパーユーザ(super user)」<wbr></span></span>
+<span><span>について学ぼう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>おおっ！</span></span>
+<span><span>次の新しいことを</span></span>
+<span><span>学べるんだ！</span></span>
+</div>
+</article>
+<article class="header2"><code>root</code><span> ユーザ</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>スーパーユーザは</span></span>
+<span><span>特別な権限を持った</span></span>
+<span><span>管理者ユーザなんだ</span></span>
+<span><span>ユーザ名は伝統的に</span></span>
+<span><code>root</code><span> となっているよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><code>/root</code><span> は</span></span>
+<span><span>管理者のホームディレクトリだったよね</span></span>
+<span><span>名前が </span><code>/root</code><span> なのは</span></span>
+<span><span>ユーザ名が </span><code>root</code><span> だからだったんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>そのスーパユーザだけの</span></span>
+<span><span>特別な権限って</span></span>
+<span><span>どんなのがあるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Linux システムの</span></span>
+<span><span>ほどんどの権限が</span></span>
+<span><span>与えられているんだ</span></span>
+<span><span>代表的なものを見てみよう</span></span>
+</div>
+</article>
+<article class="header2"><span>パーミッションを無視する</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>スーパユーザの一番目立つ特権は</span></span>
+<span><strong>パーミッションを無視できる</strong><span>んだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>えっ！</span></span>
+<span><span>どんなファイルも</span></span>
+<span><span>見たり書き換えたり</span></span>
+<span><span>できるということ？！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのとおりだよ</span></span>
+<span><span>例えば一般ユーザが</span></span>
+<span><span>システム上の全ファイルを</span></span>
+<span><span>削除しようとしても</span></span>
+<span><span>自分の所有している</span></span>
+<span><span>ファイルぐらいしか</span></span>
+<span><span>削除できないけど</span></span>
+<span><span>スーパユーザなら</span></span>
+<span><span>本当に全ファイルを</span></span>
+<span><span>削除できちゃうんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>えっ！</span></span>
+<span><span>それってちょっと怖いね…</span></span>
+</div>
+</article>
+<article class="header2"><span>所有権を変更する</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>スーパユーザは</span></span>
+<span><span>必要があれば</span></span>
+<span><span>ファイルの所有権を</span></span>
+<span><span>変更できるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>ファイルの持ち主を</span></span>
+<span><span>勝手に変えられるということ？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうだよ</span></span>
+<span><span>でもできるからと</span></span>
+<span><span>濫用してはいけないよ</span></span>
+<span><span>本当にこの操作が必要な場合に</span></span>
+<span><span>所有権を変更して</span></span>
+<span><span>システム全体の</span></span>
+<span><span>ファイルを管理するんだ</span></span>
+</div>
+</article>
+<article class="header2"><span>電源を管理する</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Linux のシャットダウンや再起動など</span></span>
+<span><span>電源管理もスーパユーザしかできないよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>そうなんだ！</span></span>
+<span><span>Windows や macOS では</span></span>
+<span><span>操作しているユーザが</span></span>
+<span><span>電源管理できて当たり前だと</span></span>
+<span><span>思っていたけど…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Linux は多数のユーザが</span></span>
+<span><span>ログインして使う前提の OS なんだ</span></span>
+<span><span>誰でも電源を切ったりできると</span></span>
+<span><span>他の利用中のユーザが困るんだ</span></span>
+<span><span>なので電源管理は</span></span>
+<span><span>スーパユーザだけの役割なんだよ</span></span>
+</div>
+</article>
+<article class="header2"><span>ウェルノウンポートを開く</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>よく使われる</span></span>
+<span><span><wbr>「ポート番号(port number)」<wbr></span></span>
+<span><span>の管理もスーパユーザの仕事だよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ポート番号って？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ネットワーク上のデータが</span></span>
+<span><span>何に使われるかを</span></span>
+<span><span>判別するための</span></span>
+<span><span>荷札のような番号だよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>代表的なものに以下があるんだ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>ポート番号</span></th>
+<th><span>プロトコル</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>20</span></td>
+<td><span>FTP</span></td>
+<td><span>ファイル転送(データ)</span></td>
+</tr>
+<tr>
+<td><span>21</span></td>
+<td><span>FTP</span></td>
+<td><span>ファイル転送(操作)</span></td>
+</tr>
+<tr>
+<td><span>22</span></td>
+<td><span>SSH</span></td>
+<td><span>リモート接続</span></td>
+</tr>
+<tr>
+<td><span>25</span></td>
+<td><span>SMTP</span></td>
+<td><span>メール送信</span></td>
+</tr>
+<tr>
+<td><span>67</span></td>
+<td><span>DHCP</span></td>
+<td><span>IPアドレス設定(サーバへの通信)</span></td>
+</tr>
+<tr>
+<td><span>68</span></td>
+<td><span>DHCP</span></td>
+<td><span>IPアドレス設定(クライアントへの通信)</span></td>
+</tr>
+<tr>
+<td><span>80</span></td>
+<td><span>HTTP</span></td>
+<td><span>ブラウジング(暗号化なし)</span></td>
+</tr>
+<tr>
+<td><span>110</span></td>
+<td><span>POP3</span></td>
+<td><span>メール受信</span></td>
+</tr>
+<tr>
+<td><span>123</span></td>
+<td><span>NTP</span></td>
+<td><span>時刻合わせ</span></td>
+</tr>
+<tr>
+<td><span>143</span></td>
+<td><span>IMAP</span></td>
+<td><span>メール受信</span></td>
+</tr>
+<tr>
+<td><span>443</span></td>
+<td><span>HTTPS</span></td>
+<td><span>ブラウジング(暗号化あり)</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>ネットワークに色々なデータが</span></span>
+<span><span>流れているものを</span></span>
+<span><span>区別する番号なんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>1023</code><span> 以下のポート番号を</span></span>
+<span><span><wbr>「ウェルノウンポート</span></span>
+<span><span>(well known ports)」<wbr></span></span>
+<span><span>と呼ぶよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>このウェルノウンポートの</span></span>
+<span><span>使用を開始できるのは</span></span>
+<span><span>スーパユーザだけなんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>えっ！</span></span>
+<span><span>代表的なポート番号で</span></span>
+<span><span>紹介してもらったのは</span></span>
+<span><span>全部ウェルノウンポートだよ？</span></span>
+<span><span>ほとんどのネットワークの用途は</span></span>
+<span><span>スーパユーザじゃないと</span></span>
+<span><span>始められないの？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうなんだよ</span></span>
+<span><span>一般ユーザがウェルノウンポートを使う</span></span>
+<span><span>プログラムを起動しようとして</span></span>
+<span><span>拒否されるトラブルは</span></span>
+<span><span>Linux を学びたての人が</span></span>
+<span><span>よく遭遇するできごとなんだ</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回はスーパユーザについて学んだよ！</span></span>
+<span><span>伝統的に </span><code>root</code><span> ユーザと呼ばれていて</span></span>
+<span><span>ほとんどの操作が制限なくできるんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>管理者操作は一時的に</span></span>
+<span><span>スーパユーザになって行うよ</span></span>
+<span><span>方法は次回以降で説明するよ！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章30話</div>
+<div><a href="3/30/">expectコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>4章1話 スーパユーザ</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>4章2話</div>
+<div><a href="4/2/">suコマンド</a></div>
+</div>
+</div>
+</footer>
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

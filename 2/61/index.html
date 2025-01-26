@@ -1,0 +1,121 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章61話 バイナリ関連コマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,file,strip,strings,ldd,od">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/60/" />
+<link rel="next" href="2/62/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章60話</div>
+<div><a href="2/60/">パス関連コマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章61話 バイナリ関連コマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章62話</div>
+<div><a href="2/62/">日時関連コマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>バイナリ関連コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>色々なコマンドを覚えて</span></span>
+<span><span>操作の幅を広げたいんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回はバイナリに関する</span></span>
+<span><span>コマンドを見ていこう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「バイナリ(binary)」<wbr>は</span></span>
+<span><span>コンピュータが直接</span></span>
+<span><span>処理するためのデータだよ</span></span>
+<span><span>人間が読むためのテキストでは</span></span>
+<span><span>書かれていないんだ</span></span>
+<span><span>だから専用のコマンドで</span></span>
+<span><span>扱う必要があるよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><code>/bin</code><span> などに置かれている</span></span>
+<span><span>コマンドのファイルは</span></span>
+<span><span>バイナリだったね！</span></span>
+</div>
+</article>
+<article class="header2"><code>file</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>file</code><span> は</span></span>
+<span><span>ファイル形式を</span></span>
+<span><span>表示するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">file <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>もしかして</span></span><span><span>テキストファイルにも</span></span><span><span>使えるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>うん、<wbr>使えるよ！</span></span><span><span>HTML などの種別も</span></span><span><span>判別してくれるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では </span><code>ls</code><span> の</span></span><span><span>ファイル形式を</span></span><span><span>見てみよう</span></span></div></article><article class="code"><pre><code class="bash">file <wbr>/bin/ls
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ちょっと</span></span><span><span>ワクワクするね！</span></span></div></article><article class="code"><pre><code class="console">/bin/ls: <wbr>ELF <wbr>64-bit <wbr>LSB <wbr>pie <wbr>executable, <wbr>x86-64, <wbr>version <wbr>1 <wbr>(SYSV), <wbr>dynamically <wbr>linked, <wbr>interpreter <wbr>/lib64/ld-linux-x86-64.so.2, <wbr>BuildID[sha1]=3ccc0d8aa8dc371f9c762c6e76823aa5b9d4041b, <wbr>for <wbr>GNU/Linux <wbr>3.2.0, <wbr>stripped
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この<wbr>「ELF</span></span><span><span>(Executable and Linkable Format)」<wbr></span></span><span><span>というのが</span></span><span><span>Linux のバイナリ実行ファイル形式だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>Windows の EXE</span></span><span><span>みたいなものなのね！</span></span></div></article><article class="header2"><code>strip</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次は </span><code>strip</code><span> だよ</span></span><span><span>バイナリ実行ファイルから</span></span><span><span>デバッグ情報などを削除して</span></span><span><span>ファイルサイズを</span></span><span><span>大幅に減らしてくれるんだ</span></span></div></article><article class="code"><pre><code class="bash">strip <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>デバッグ情報って</span></span><span><span>普通の人は使わないと思うけど</span></span><span><span>削除しても問題ないのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>基本的には</span></span><span><span>大丈夫だよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>配布されているパッケージは</span></span><span><span>ほとんどがストリップ済みなんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>さっきの </span><code>file</code><span> の</span></span><span><span>出力の最後をみてごらん</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「ストリップ済み(</span><code>stripped</code><span>)」<wbr></span></span><span><span>ってあるね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>strip</code><span> を使う機会は少ないけど</span></span><span><span><wbr>「ストリップ」<wbr>という概念は</span></span><span><span>時々出てくるよ</span></span></div></article><article class="header2"><code>strings</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>strings</code><span> は</span></span><span><span>バイナリの中から</span></span><span><span>テキストを探して</span></span><span><span>抜き出すよ</span></span></div></article><article class="code"><pre><code class="bash">strings <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ls</code><span> に対して</span></span><span><span>実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">strings <wbr>/bin/ls
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>ls</code><span> の中に</span></span><span><span>普通のテキストが</span></span><span><span>混じっているの？</span></span></div></article><article class="code"><pre><code class="console">/lib64/ld-linux-x86-64.so.2
+v,nv
+_ITM_deregisterTMCloneTable
+__gmon_start__
+...
+.data
+.bss
+.gnu_debuglink
+.gnu_debugdata
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おわっ！</span></span><span><span>たくさんの行が</span></span><span><span>出力されたよ！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>でも…</span></span><span><span>その中に<wbr>「help」<wbr>とか</span></span><span><span>見覚えのある</span></span><span><span>単語もあるね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>バイナリ実行ファイルの中には</span></span><span><span>エラーやヘルプのメッセージが</span></span><span><span>含まれていることが多いんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>出力が多いので</span></span><span><code>less</code><span> でページ送りしながら見たり</span></span><span><code>grep</code><span> で探したい文字列だけ</span></span><span><span>抜き出すといいよ</span></span></div></article><article class="code"><pre><code class="bash">strings <wbr>/bin/ls <wbr>| <wbr>less
+</code></pre></article><article class="code"><pre><code class="bash">strings <wbr>/bin/ls <wbr>| <wbr>grep <wbr>'help'
+</code></pre></article><article class="header2"><code>ldd</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ldd</code><span> は</span></span><span><span>実行ファイルが参照している</span></span><span><span>ライブラリを表示してくれるんだ</span></span></div></article><article class="code"><pre><code class="bash">ldd <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「ライブラリ」<wbr>は</span></span><span><span>コマンドの共通部品</span></span><span><span>だったよね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ls</code><span> を対象に</span></span><span><span>調べてみよう！</span></span></div></article><article class="code"><pre><code class="bash">ldd <wbr>/bin/ls
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どんなライブラリを</span></span><span><span>参照しているのかな？</span></span></div></article><article class="code"><pre><code class="console">        <wbr>linux-vdso.so.1 <wbr>(0x00007fff41b49000)
+        <wbr>libselinux.so.1 <wbr>=&gt; <wbr>/lib64/libselinux.so.1 <wbr>(0x00007fb3e6187000)
+        <wbr>libcap.so.2 <wbr>=&gt; <wbr>/lib64/libcap.so.2 <wbr>(0x00007fb3e617d000)
+        <wbr>libc.so.6 <wbr>=&gt; <wbr>/lib64/libc.so.6 <wbr>(0x00007fb3e5e00000)
+        <wbr>libpcre2-8.so.0 <wbr>=&gt; <wbr>/lib64/libpcre2-8.so.0 <wbr>(0x00007fb3e60e1000)
+        <wbr>/lib64/ld-linux-x86-64.so.2 <wbr>(0x00007fb3e61e1000)
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>各行が必要としているライブラリだよ</span></span><span><span>もしこれらのライブラリが見つからないと</span></span><span><code>ls</code><span> は動かないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>コマンドが動かないときの</span></span><span><span>原因調査に使えそうだね！</span></span></div></article><article class="header2"><code>od</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>od</code><span> は</span></span><span><span>ファイルの中身を</span></span><span><span>八進数や十六進数の</span></span><span><span>数値で表示するよ</span></span></div></article><article class="code"><pre><code class="bash">od <wbr>[オプション]... <wbr>[ファイル]...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-x</code></td><td><span>十六進数2バイト表示</span></td></tr><tr><td><code>-o</code></td><td><span>八進数2バイト表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>バイナリは</span></span><span><span>生のデータだから</span></span><span><span>数字として見るんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ls</code><span> を </span><code>od</code><span> で</span></span><span><span>覗いてみよう！</span></span><span><span>表示が膨大なので</span></span><span><code>head</code><span> と一緒に使うね</span></span></div></article><article class="code"><pre><code class="bash">od <wbr>/bin/ls <wbr>| <wbr>head
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どれどれ？</span></span></div></article><article class="code"><pre><code class="console">0000000 <wbr>042577 <wbr>043114 <wbr>000402 <wbr>000001 <wbr>000000 <wbr>000000 <wbr>000000 <wbr>000000
+0000020 <wbr>000003 <wbr>000076 <wbr>000001 <wbr>000000 <wbr>065420 <wbr>000000 <wbr>000000 <wbr>000000
+...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>数字だらけで</span></span><span><span>よく分からないね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ls</code><span> の中身を</span></span><span><span>八進数で表示しているんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>数字を理解できる必要は無いよ</span></span><span><span><wbr>「</span><code>od</code><span> でバイナリの中身が読める」<wbr></span></span><span><span>とだけ覚えておこう！</span></span></div></article><article class="header2"><code>dd</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>dd</code><span> は</span></span><span><span>入力元から出力先へ</span></span><span><span>データを書き出すよ</span></span></div></article><article class="code"><pre><code class="bash">dd <wbr>[操作]...
+</code></pre></article><article class="table"><table><thead><tr><th><span>操作</span></th><th><span>説明</span></th></tr></thead><tbody><tr><td><code>bs=バイト数</code></td><td><span>入出力ブロックサイズを </span><code>バイト数</code><span> にする(デフォルトは </span><code>512</code><span>)</span></td></tr><tr><td><code>ibs=バイト数</code></td><td><span>入力ブロックサイズを </span><code>バイト数</code><span> にする(デフォルトは </span><code>512</code><span>)</span></td></tr><tr><td><code>obs=バイト数</code></td><td><span>出力ブロックサイズを </span><code>バイト数</code><span> にする(デフォルトは </span><code>512</code><span>)</span></td></tr><tr><td><code>count=個数</code></td><td><span>ブロックを </span><code>個数</code><span> だけ処理する</span></td></tr><tr><td><code>skip=個数</code></td><td><span>最初のブロックを </span><code>個数</code><span> だけスキップする</span></td></tr><tr><td><code>if=ファイル</code></td><td><span>入力を </span><code>ファイル</code><span> から読み込む(デフォルトは </span><code>標準入力</code><span>)</span></td></tr><tr><td><code>of=ファイル</code></td><td><span>出力を </span><code>ファイル</code><span> へ書き出す(デフォルトは </span><code>標準出力</code><span>)</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>主にバイナリデータの</span></span><span><span>コピーなどで使われるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ちょっと</span></span><span><span>どう使っていいのか</span></span><span><span>わからないコマンドだよ…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>確かにわかりづらいよね</span></span><span><span>いくつか例を紹介するので</span></span><span><span>それらを見てみよう！</span></span></div></article><hr /><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下のコマンドは</span></span><span><span>1024 バイトの</span></span><span><span>ランダムな内容を持つ</span></span><span><code>data</code><span> ファイルを</span></span><span><span>作成するよ</span></span></div></article><article class="code"><pre><code class="bash">dd <wbr>bs=1024 <wbr>count=1 <wbr>&lt; <wbr>/dev/random <wbr>&gt; <wbr>data
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>1024 バイトを</span></span><span><span>1ブロックとして</span></span><span><span>1回だけ処理するんだね</span></span><span><span>入力は </span><code>/dev/random</code><span> で</span></span><span><span>ランダムな内容を読み込み</span></span><span><span>それを </span><code>data</code><span> ファイルに</span></span><span><span>書き出しているんだ</span></span><span><span>ダミーファイル作成などで</span></span><span><span>使えそうだね！</span></span></div></article><hr /><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次のコマンドは</span></span><span><span>ストレージ </span><code>/dev/sda</code><span> の内容全てを</span></span><span><span>二進数の </span><code>0</code><span>(ゼロ) で上書きするよ</span></span></div></article><article class="code"><pre><code class="bash">dd <wbr>&lt; <wbr>/dev/zero <wbr>&gt; <wbr>/dev/sda
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>/dev/zero</code><span> は</span></span><span><span>二進数の </span><code>0</code><span>(ゼロ) を</span></span><span><span>出力し続けるファイルだよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>それを</span></span><span><span>ストレージ </span><code>/dev/sda</code><span> に</span></span><span><span>書き出しているんだね</span></span><span><span>ストレージの内容を</span></span><span><span>全消去しているのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><span>ストレージ上の全データを</span></span><span><code>0</code><span>(ゼロ) で上書きして</span></span><span><span>まっさらに消去するときに</span></span><span><span>使われるコマンドだよ</span></span></div></article><hr /><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このコマンドは</span></span><span><span>ストレージ </span><code>/dev/sda</code><span> の</span></span><span><span>先頭 512 バイトのデータを</span></span><span><code>sda-mbr</code><span> ファイルに書き出すよ</span></span></div></article><article class="code"><pre><code class="bash">dd <wbr>bs=512 <wbr>count=1 <wbr>&lt; <wbr>/dev/sda <wbr>&gt; <wbr>sda-mbr
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ストレージ先頭</span></span><span><span>512 バイトは</span></span><span><span>ストレージ内の構成が</span></span><span><span>書かれている場合が</span></span><span><span>ほとんどだよ</span></span><span><span>このデータの</span></span><span><span>バックアップを</span></span><span><span>作成しているんだ</span></span></div></article><hr /><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>dd</code><span> は</span></span><span><span>特殊なコピー用途で</span></span><span><span>使うんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>他にも入出力の間で</span></span><span><span>ちょっとした変換を</span></span><span><span>挟むこともできるけど</span></span><span><span>ここでは省略するね</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はバイナリ関連コマンド</span></span><span><code>file</code><span>, <wbr></span><code>strip</code><span>, <wbr></span><code>strings</code><span>,</span></span><span><code>ldd</code><span>, <wbr></span><code>od</code><span>, <wbr></span><code>dd</code><span> を</span></span><span><span>学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>バイナリを直接扱う機会は</span></span><span><span>あまり多くないので</span></span><span><span>最初はこのぐらいの</span></span><span><span>コマンドを知っていれば</span></span><span><span>十分だよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章60話</div><div><a href="2/60/">パス関連コマンド</a></div></div><div><div>今</div><div>2章61話 バイナリ関連コマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章62話</div><div><a href="2/62/">日時関連コマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

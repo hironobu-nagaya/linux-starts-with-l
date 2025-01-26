@@ -1,0 +1,189 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章13話 FHS(その3)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,FHS,directory,dev,proc,sys,uptime">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/12/" />
+<link rel="next" href="2/14/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章12話</div>
+<div><a href="2/12/">FHS(その2)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章13話 FHS(その3)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章14話</div>
+<div><a href="2/14/">FHS(その4)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>FHS(その3)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回はコマンドに関係している</span></span>
+<span><code>/bin</code><span>, <wbr></span><code>/sbin</code><span>, <wbr></span><code>/lib</code><span> を扱ったね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は<wbr>「仮想ファイル</span></span>
+<span><span>(virtual file)」<wbr>を扱っている</span></span>
+<span><span>ディレクトリを覗いてみよう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>仮想ファイル？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>本当は存在していないけど</span></span>
+<span><span>あたかも存在しているように見せかけて</span></span>
+<span><span>ファイルとして扱えるように</span></span>
+<span><span>しているものなんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>不思議な感じの</span></span>
+<span><span>ファイルだね</span></span>
+</div>
+</article>
+<article class="header2"><code>/dev</code><span> ディレクトリ</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最初は </span><code>/dev</code><span> から見よう</span></span>
+<span><span>device の略なんだよ</span></span>
+<span><span>装置や概念を扱っている場所なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>抽象的で良く</span></span>
+<span><span>わからないなぁ…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>例えば </span><code>/dev/random</code><span> は</span></span>
+<span><span>ランダムを扱うファイルだよ</span></span>
+<span><span>ここから読み込みを行うと</span></span>
+<span><span>ランダムな値を取り出せるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>内容が常にランダム…</span></span>
+<span><span>確かに普通のファイルでは</span></span>
+<span><span>表現できないね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>他にも </span><code>/dev/null</code><span> は</span></span>
+<span><span>常に中身が空っぽの</span></span>
+<span><span>ファイルなんだ</span></span>
+<span><span>どんな書き込みをしても</span></span>
+<span><span>中身は空っぽのままだよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div>
+<div>
+<span><span>面白いファイルが</span></span>
+<span><span>いっぱいあるんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今の時点では使う機会はないけど</span></span>
+<span><span>後で面白い使い方ができるものが</span></span>
+<span><span>置かれている場所なんだ</span></span>
+</div>
+</article>
+<article class="header2"><code>/proc</code><span>, <wbr></span><code>/sys</code><span> ディレクトリ</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次は </span><code>/proc</code><span> と </span><code>/sys</code><span> を紹介するね</span></span>
+<span><span>それぞれ process と system の略なんだ</span></span>
+<span><span>Linux の内部情報をファイルで表現しているよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>どんなことが</span></span>
+<span><span>できるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ファイルの中身を表示して情報を見たり</span></span>
+<span><span>書き換えて設定を変更したりできるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>私が扱うことは</span></span>
+<span><span>なさそうかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ここのファイルを参照している</span></span>
+<span><span>コマンドが色々あるよ</span></span>
+<span><span>コマンド経由で間接的に</span></span>
+<span><span>使っているかもね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>例えば </span><code>uptime</code><span> は</span></span>
+<span><span>システム起動時間を表示するよ</span></span>
+<span><span>これは </span><code>/proc/uptime</code><span> を</span></span>
+<span><span>参照してるんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">uptime
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へぇ…</span></span><span><span>実行してみるね！</span></span></div></article><article class="code"><pre><code class="console"> <wbr>18:08:07 <wbr>up <wbr>15 <wbr>days,  <wbr>5:17,  <wbr>1 <wbr>user,  <wbr>load <wbr>average: <wbr>2.72, <wbr>2.49, <wbr>2.82
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>15日も動き続けていたんだ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は仮想ファイルを扱っている</span></span><span><code>/dev</code><span>, <wbr></span><code>/proc</code><span>, <wbr></span><code>/sys</code><span> を覚えたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>Linux の考え方に</span></span><span><span><wbr>「なんでもファイルで表現する」<wbr>があるんだ</span></span><span><span>情報をファイルで表現して</span></span><span><span>ファイル操作コマンドから</span></span><span><span>扱えるようにしてくれているんだよ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章12話</div><div><a href="2/12/">FHS(その2)</a></div></div><div><div>今</div><div>2章13話 FHS(その3)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章14話</div><div><a href="2/14/">FHS(その4)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

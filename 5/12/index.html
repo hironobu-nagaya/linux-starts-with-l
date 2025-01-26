@@ -1,0 +1,317 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章12話 SCP(Windows)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,SCP,Windows,WinSCP">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/11/" />
+<link rel="next" href="5/13/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章11話</div>
+<div><a href="5/11/">SSH公開鍵認証(macOS,Linux)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章12話 SCP(Windows)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章13話</div>
+<div><a href="5/13/">SCP(macOS,Linux)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>SCP(Windows)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Windows から Linux に</span></span>
+<span><span>ファイルを送りたいんだけど</span></span>
+<span><span>できるかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんできるよ！</span></span>
+<span><span><wbr>「SCP(secure copy)」<wbr>という</span></span>
+<span><span>仕組みを使うんだ</span></span>
+<span><span>今回は SCP を扱える</span></span>
+<span><span>Windows 用ソフトウェアを</span></span>
+<span><span>紹介するよ</span></span>
+</div>
+</article>
+<article class="header2"><span>WinSCP</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Windows の場合</span></span>
+<span><a href="https://winscp.net/eng/docs/lang:jp" target="_blank" rel="noopener noreferrer">WinSCP</a><span> がおすすめだよ</span></span>
+<span><a href="winscp.net/eng/download.php" target="_blank" rel="noopener noreferrer">公式ページ</a><span>からダウンロードしよう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+<span><span>ダウンロードしたよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>WinSCP は</span></span>
+<span><span>日本語に対応しているよ</span></span>
+<span><span>インストール時の</span></span>
+<span><span><wbr>「セットアップの言語選択」<wbr>で</span></span>
+<span><span><wbr>「日本語」<wbr>を選択しよう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>おお！</span></span>
+<span><span>それは嬉しいね！</span></span>
+</div>
+</article>
+<article class="header2"><span>起動</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>インストールが終わったよ！</span></span>
+<span><span>問題なく起動できたよ！</span></span>
+</div>
+</article>
+<article class="image"><img src="img/winscp-1.png" alt="WinSCP(起動直後)"/></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>画面上部にタブが並んでいるよね</span></span>
+<span><span>ここの<wbr>「新しいタブ」<wbr>を選択しよう</span></span>
+</div>
+</article>
+<article class="header2"><span>接続</span></article>
+<article class="image"><img src="img/winscp-2.png" alt="WinSCP(接続先選択)"/></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>新しいウィンドウが出てきたよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ここで新しい接続先を</span></span>
+<span><span>設定するんだ</span></span>
+<span><span>基本は PuTTY と同じだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「新しいサイト」<wbr>を選択して</span></span>
+<span><span><wbr>「設定(D)...」<wbr>ボタンを押そう！</span></span>
+</div>
+</article>
+<article class="image"><img src="img/winscp-3.png" alt="WinSCP(詳細設定)"/></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>設定画面が</span></span>
+<span><span>出てきたね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>以下を設定しよう</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>設定場所</span></th>
+<th><span>設定項目</span></th>
+<th><span>設定値</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>SSH &gt; 認証</span></td>
+<td><span>秘密鍵</span></td>
+<td><span>使用する秘密鍵ファイル</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>必須ではないけど</span></span>
+<span><span>以下も一緒に指定しておくと</span></span>
+<span><span>いいよ！</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>設定場所</span></th>
+<th><span>設定項目</span></th>
+<th><span>設定値</span></th>
+<th><span>説明</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>環境 &gt; ディレクトリ</span></td>
+<td><span>最後に使用したディレクトリを記憶する</span></td>
+<td><span>任意</span></td>
+<td><span>チェックすると接続時最後に使用したディレクトリへ移動</span></td>
+</tr>
+<tr>
+<td><span>接続</span></td>
+<td><span>接続の保持</span></td>
+<td><span><wbr>「オフ」<wbr>以外</span></td>
+<td><span>定期的に接続が生きているか確認</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>設定が終わったら</span></span>
+<span><span>ウィンドウ下部の</span></span>
+<span><span><wbr>「OK」<wbr>ボタンを押して</span></span>
+<span><span>設定画面を閉じよう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+<span><span>設定が終わったよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうしたら</span></span>
+<span><span>接続先の設定だよ</span></span>
+</div>
+</article>
+<article class="ordered-list">
+<ol>
+<li><span><wbr>「転送プロトコル」<wbr>が<wbr>「SFTP」<wbr>となっていることを確認</span></li>
+<li><span><wbr>「ホスト名」<wbr>入力欄に接続先のIPアドレス（またはドメイン）を入力</span></li>
+<li><span><wbr>「ポート番号」<wbr>入力欄が<wbr>「22」<wbr>であることを確認</span></li>
+<li><span><wbr>「ユーザ名」<wbr>入力欄に接続するユーザ名を入力</span></li>
+<li><span><wbr>「パスワード」<wbr>入力欄が空欄であることを確認</span></li>
+<li><span><wbr>「保存」<wbr>ボタンを押下</span></li>
+<li><span><wbr>「セッションの保存名」<wbr>ウィンドウが開くので<wbr>「セッションの保存名」<wbr>にこの設定の名前を入力</span></li>
+<li><span><wbr>「OK」<wbr>ボタンを押下</span></li>
+</ol>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>接続先一覧に</span></span>
+<span><span>保存した設定名が追</span></span>
+<span><span>加されたね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>その設定名を</span></span>
+<span><span>ダブルクリックするか</span></span>
+<span><span>設定名を選択した状態で</span></span>
+<span><span>下部の<wbr>「ログイン」<wbr>ボタンで</span></span>
+<span><span>接続を開始するよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>ファイル送受信</span></article>
+<article class="image"><img src="img/winscp-4.png" alt="WinSCP(接続直後)"/></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>右側が接続先の</span></span>
+<span><span>内容に変わったね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>左側がWindows PC の内容で</span></span>
+<span><span>右側が接続先の内容だよ</span></span>
+<span><span>表示されているファイルを右クリックして</span></span>
+<span><span><wbr>「アップロード」<wbr>や<wbr>「ダウンロード」<wbr>ができたり</span></span>
+<span><span>直接ファイルをドラッグ＆ドロップできるんだ</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は Windows と Linux での</span></span>
+<span><span>ファイル送受信を学んだよ！</span></span>
+<span><span>Windows の場合</span></span>
+<span><span><wbr>「WinSCP」<wbr>が便利なんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>テキストの送受信はマウス操作で</span></span>
+<span><span>簡単にできるけど</span></span>
+<span><span>ファイルは難しいからね</span></span>
+<span><span>こういったソフトを利用して</span></span>
+<span><span>ファイルを送受信しよう！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章11話</div>
+<div><a href="5/11/">SSH公開鍵認証(macOS,Linux)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章12話 SCP(Windows)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章13話</div>
+<div><a href="5/13/">SCP(macOS,Linux)</a></div>
+</div>
+</div>
+</footer>
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

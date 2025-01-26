@@ -1,0 +1,91 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章13話 exitコマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/12/" />
+<link rel="next" href="3/14/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章12話</div>
+<div><a href="3/12/">制御文とリダイレクト</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章13話 exitコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章14話</div>
+<div><a href="3/14/">ヌルコマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>exit</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>シェルスクリプトは</span></span>
+<span><span>書いてあることが</span></span>
+<span><span>全部処理されるまで</span></span>
+<span><span>終われないのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そんなことはないよ</span></span>
+<span><span>今回は処理を</span></span>
+<span><span>途中で止める</span></span>
+<span><code>exit</code><span> を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><span>基本</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>exit</code><span> は</span></span>
+<span><span>現在のシェルを</span></span>
+<span><span>終了させるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">exit <wbr>[終了ステータス]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>終了ステータス</code><span> は</span></span><span><span>省略できるんだね？</span></span><span><span>省略したらどうなるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それは直前に実行していた</span></span><span><span>コマンドの終了ステータスが</span></span><span><span>シェルの終了ステータスになるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>シェルスクリプト内では</span></span><span><span>スクリプトを解釈している</span></span><span><span>シェルを終わらせるんだよね？</span></span><span><span>普段操作しているシェルでも</span></span><span><span>実行できるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>うん、<wbr>できるよ</span></span><span><span>この場合は操作している</span></span><span><span>シェルが終了するから</span></span><span><code>logout</code><span> と</span></span><span><span>ほぼ同じ動作になるよ</span></span></div></article><article class="header2"><span>実践</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>スクリプトを途中で</span></span><span><span>止めるような場面って</span></span><span><span>どういうのがあるかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>前提条件を満たしていなければ</span></span><span><span>処理をせず停止する場合などがあるよ</span></span><span><span>以下の例はどうだろう？</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+if <wbr>[ <wbr>&quot;$(whoami)&quot; <wbr>!= <wbr>&quot;midori&quot; <wbr>]
+then
+  <wbr>echo <wbr>&quot;midori <wbr>ユーザで実行して下さい！&quot; <wbr>&gt;&amp;2
+  <wbr>exit <wbr>1
+fi
+
+<span class="silver"># <wbr>midori <wbr>ユーザだけの処理</span>
+...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>whoami</code><span> は</span></span><span><span>ユーザ名を取得だよね！</span></span><span><span>実行したユーザが</span></span><span><code>midori</code><span> じゃなかったら</span></span><span><span>エラーメッセージを出して</span></span><span><code>exit</code><span> で停止してくれるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>test</code><span> の評価を変えれば</span></span><span><span><wbr>「指定されたファイルが存在していれば」<wbr></span></span><span><span><wbr>「書き込み権限がなければ」<wbr>など</span></span><span><span>色々な条件を判断できるよ！</span></span></div></article><article class="header2"><span>サブシェルでの </span><code>exit</code></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>グルーピング </span><code>( ... <wbr>)</code><span> 内で</span></span><span><code>exit</code><span> を実行すると</span></span><span><span>サブシェルが終了するよ</span></span><span><span>元のシェルは終了しないので</span></span><span><span>挙動の違いに気をつけよう！</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+(
+  <wbr>echo <wbr>&quot;この処理は実行される&quot;
+  <wbr>exit <wbr><span class="silver"># <wbr>ここでサブシェルが終了する</span>
+  <wbr>echo <wbr>&quot;この処理は実行されない&quot;
+)
+
+echo <wbr>&quot;この処理は実行される&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>シェルの中でシェルを</span></span><span><span>立ち上げているんだものね</span></span><span><span>こういう場合の </span><code>exit</code><span> は</span></span><span><span>気をつけるよ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>exit</code><span> を学んだよ！</span></span><span><span>シェルを途中で</span></span><span><span>終了させることができるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シェルスクリプトで</span></span><span><span>これ以上処理を</span></span><span><span>続けたくない場合</span></span><span><code>exit</code><span> で途中で終了しよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章12話</div><div><a href="3/12/">制御文とリダイレクト</a></div></div><div><div>今</div><div>3章13話 exitコマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章14話</div><div><a href="3/14/">ヌルコマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

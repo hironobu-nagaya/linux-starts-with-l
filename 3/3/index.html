@@ -1,0 +1,135 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章3話 readコマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,read">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/2/" />
+<link rel="next" href="3/4/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章2話</div>
+<div><a href="3/2/">コメント</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章3話 readコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章4話</div>
+<div><a href="3/4/">if文(使い方)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>read</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>コマンドも</span></span>
+<span><span><wbr>「対話的(interactive)」<wbr></span></span>
+<span><span><wbr>「非対話的(non-interactive)」<wbr></span></span>
+<span><span>という呼び方をするよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ！</span></span>
+<span><span>どんな場合かな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>実行中にユーザへ</span></span>
+<span><span>何も問い合わせないのを</span></span>
+<span><span><wbr>「非対話的」<wbr>と呼ぶよ</span></span>
+<span><span>大多数のコマンドは</span></span>
+<span><span><wbr>「非対話的」<wbr>だね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>確かにそうだね</span></span>
+<span><span>普通はコマンドを実行したら</span></span>
+<span><span>すぐプロンプトが返るよね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>一方、<wbr>実行中にユーザの入力を</span></span>
+<span><span>求めるようなものを</span></span>
+<span><span><wbr>「対話的」<wbr>と呼ぶんだ</span></span>
+<span><code>passwd</code><span> のような</span></span>
+<span><span>コマンドだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>そう考えると</span></span>
+<span><span><wbr>「対話的」<wbr>や</span></span>
+<span><span><wbr>「非対話的」<wbr>な</span></span>
+<span><span>コマンドがあるね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>もしかして</span></span>
+<span><span>シェルスクリプトも</span></span>
+<span><span><wbr>「対話的」<wbr>にできるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんできるよ！</span></span>
+<span><span>今回は<wbr>「対話的」<wbr>を実現する</span></span>
+<span><code>read</code><span> を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>read</code><span> は入力を受け取り</span></span>
+<span><span>変数に代入するよ</span></span>
+<span><span>変数は複数指定できるけど</span></span>
+<span><span>通常は1つと覚えておこう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">read <wbr>[オプション]... <wbr>[変数名]...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-s</code></td><td><span>入力内容を隠す(パスワード入力時の挙動)</span></td></tr></tbody></table></article><article class="header2"><span>実践</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>挨拶をしてくれる</span></span><span><code>greet</code><span> スクリプトを作ろう！</span></span><span><span>まずはエディタでファイルを開いてね</span></span></div></article><article class="code"><pre><code class="bash">vim <wbr>greet
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>準備 OK だよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>内容は以下のようにしてね</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+echo <wbr>-n <wbr>&quot;あなたの名前を教えて下さい: <wbr>&quot;
+reod <wbr>NAME
+echo <wbr>&quot;こんにちは、$NAMEさん！&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>シンプルだね！</span></span><span><span>何をしてくれるのか</span></span><span><span>想像がつくよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>greet</code><span> スクリプトに</span></span><span><span>実行権限を付けてあげよう</span></span></div></article><article class="code"><pre><code class="bash">chmod <wbr>a+x <wbr>greet
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>さっそく実行してもいい？</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>もちろん！</span></span></div></article><article class="code"><pre><code class="bash">./greet
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>えいっ！</span></span></div></article><article class="code"><pre><code class="console">あなたの名前を教えて下さい: <wbr><span class="cursor">▌</span>
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>私の名前は</span></span><span><span><wbr>「みどり」<wbr>です！</span></span></div></article><article class="code"><pre><code class="console">あなたの名前を教えて下さい: <wbr>みどり<span class="cursor">▌</span>
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>入力が終わったので</span></span><span><span>Enter だね！</span></span></div></article><article class="code"><pre><code class="console">あなたの名前を教えて下さい: <wbr>みどり
+こんにちは、みどりさん！
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おおお！</span></span><span><span>単純だけど温かみを</span></span><span><span>感じるスクリプトだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>read</code><span> は入力を待ち受けるだけで</span></span><span><span><wbr>「待ち受けメッセージ」<wbr>は表示しないよ</span></span><span><span>スクリプトを実行した人は</span></span><span><span>そのままでは入力待ちに気づかないので</span></span><span><span>入力を待っていることを示すメッセージを</span></span><span><code>echo</code><span> で表示してあげると親切だよ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は入力を受け取り</span></span><span><span>変数に代入してくれる</span></span><span><code>read</code><span> を学んだよ！</span></span><span><span>これを使えば<wbr>「対話的」<wbr>な</span></span><span><span>スクリプトが書けるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>黙って処理を続ける場合が多いけど</span></span><span><span>ユーザに聞くのが親切な場合もあるよ</span></span><span><span>そのようなときは </span><code>read</code><span> で</span></span><span><span>入力を受け付けて処理しよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章2話</div><div><a href="3/2/">コメント</a></div></div><div><div>今</div><div>3章3話 readコマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章4話</div><div><a href="3/4/">if文(使い方)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

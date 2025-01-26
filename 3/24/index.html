@@ -1,0 +1,101 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章24話 setコマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,set">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/23/" />
+<link rel="next" href="3/25/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章23話</div>
+<div><a href="3/23/">ドットコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章24話 setコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章25話</div>
+<div><a href="3/25/">一時ファイル作成</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>set</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>シェルスクリプト途中の</span></span>
+<span><span>コマンドが失敗したら</span></span>
+<span><span>後続のコマンドも同様に</span></span>
+<span><span>失敗しちゃったんだ</span></span>
+<span><span>まるで失敗のドミノ倒しだよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>こういうのって</span></span>
+<span><span>なんとかならないかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろん対処できるよ！</span></span>
+<span><span>今回はシェルオプションを学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><code>-e</code><span> オプション</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>set</code><span> は</span></span>
+<span><span>シェルにオプション変更を伝えるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">set <wbr>-オプション
+set <wbr>+オプション
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>へぇ…</span></span><span><span>シェルにもオプションがあったんだ！</span></span><span><span>しかも動作している途中で</span></span><span><span>オプションを切り替えられるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>bash</code><span> の </span><code>-e</code><span> オプションは</span></span><span><span>コマンドが失敗したら</span></span><span><span>スクリプト実行をそこで停止するよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ただしコマンドの成否を</span></span><span><span>評価に使っている部分の</span></span><span><span>失敗は例外だよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>AND 演算子 </span><code>&amp;&amp;</code><span> や</span></span><span><span>OR 演算子 </span><code>||</code></span><span><code>if</code><span>文や</span><code>while</code><span>文の</span></span><span><span>ような場合だね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>まさに私が欲しかった機能だよ！</span></span><span><span>どうやって指定するのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>set</code><span> に </span><code>-e</code><span> オプションを</span></span><span><span>指定してあげればいいよ</span></span><span><span>シェルスクリプトでは</span></span><span><span>冒頭に書くことが多いね</span></span></div></article><article class="code"><pre><code class="bash">set <wbr>-e
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>失敗する可能性のあるコマンドを</span></span><span><span>一時的に許容してあげたい場合は</span></span><span><span>どうすればいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>オプションの</span></span><span><code>-</code><span> を </span><code>+</code><span> にすると</span></span><span><span>そのオプションを</span></span><span><span>解除する意味になるんだ</span></span><span><span>そのようなコマンドの直前で</span></span><span><code>set +e</code><span> とするといいよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これらを組み合わせて</span></span><span><span>このように書くよ</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+<span class="silver"># <wbr>通常は失敗したら停止</span>
+set <wbr>-e
+
+...
+
+<span class="silver"># <wbr>ここだけ失敗を許したい</span>
+set <wbr>+e
+失敗の可能性があるコマンド
+set <wbr>-e
+
+...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>-</code><span> で指定</span></span><span><code>+</code><span> で解除…</span></span><span><span>ちょっと混乱しそう</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>通常のコマンドと同じように</span></span><span><span>まずは </span><code>-</code><span> を<wbr>「オプション指定」<wbr>と覚え</span></span><span><span>次に </span><code>+</code><span> は </span><code>-</code><span> の反対と覚えると</span></span><span><span>混乱しないと思うよ</span></span></div></article><article class="header2"><code>-v</code><span>, <wbr></span><code>-x</code><span> オプション</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シェルスクリプトに便利な</span></span><span><span>シェルのオプションは</span></span><span><code>-e</code><span> 以外にもあるよ！</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>えっ！</span></span><span><span>興味ある！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>内容が複雑になったとき</span></span><span><span>処理を頭の中だけで</span></span><span><span>追うのは大変だよね</span></span><span><span>以下のオプションを指定すると</span></span><span><span>シェルスクリプト実行時に</span></span><span><span>その実行内容が表示されるんだ</span></span></div></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-v</code></td><td><span>実行内容を表示</span></td></tr><tr><td><code>-x</code></td><td><span>実行内容の途中経過を表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>詳しく見たい所の</span></span><span><span>始まりに </span><code>set -vx</code></span><span><span>終わりに </span><code>set +vx</code><span> を</span></span><span><span>指定してあげると</span></span><span><span>内容を理解しやすくなるよ</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+...
+
+set <wbr>-vx
+詳しく見たい処理
+set <wbr>+vx
+
+...
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>set</code><span> で</span></span><span><span>シェルのオプションを</span></span><span><span>変更できることを学んだよ</span></span><span><code>bash</code><span> のオプションのうち</span></span><span><code>-e</code><span>, <wbr></span><code>-v</code><span>, <wbr></span><code>-x</code><span> オプションを</span></span><span><span>覚えたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>他にも様々な</span></span><span><span>オプションがあるので</span></span><span><span>興味があれば</span></span><span><code>man bash</code><span> を</span></span><span><span>読んでみよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章23話</div><div><a href="3/23/">ドットコマンド</a></div></div><div><div>今</div><div>3章24話 setコマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章25話</div><div><a href="3/25/">一時ファイル作成</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

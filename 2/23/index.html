@@ -1,0 +1,93 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章23話 隠しファイル</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,hidden file,ls">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/22/" />
+<link rel="next" href="2/24/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章22話</div>
+<div><a href="2/22/">オプション</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章23話 隠しファイル</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章24話</div>
+<div><a href="2/24/">マニュアル</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>隠しファイル</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>前回 </span><code>ls</code><span> の </span><code>-a</code><span> オプションが出てきたけど</span></span>
+<span><span>これはどんなオプションなのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は </span><code>ls</code><span> の </span><code>-a</code><span> オプションに関係ある</span></span>
+<span><span><wbr>「隠しファイル(hidden file)」<wbr>を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><span>隠しファイル作成</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>名前が<wbr>「ドット(</span><code>.</code><span>)」<wbr>から</span></span>
+<span><span>始まるファイルを</span></span>
+<span><span><wbr>「隠しファイル」<wbr>というよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>名前の先頭がドットかどうか</span></span>
+<span><span>だけで決まるんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それでは隠しファイルを作ろう！</span></span>
+<span><code>touch</code><span> で<wbr>「ドット(</span><code>.</code><span>)」<wbr>から</span></span>
+<span><span>始まる名前のファイルを作ってね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>じゃあ…</span></span>
+<span><code>.himitsu</code><span> にするね！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">touch <wbr>.himitsu
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>作成したら</span></span><span><code>ls</code><span> で確認してみてね</span></span></div></article><article class="code"><pre><code class="bash">ls
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>あれ…？</span></span><span><code>.himitsu</code><span> ファイルがないよ？</span></span></div></article><article class="header2"><span>隠しファイル確認</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ls</code><span> を普通に呼び出しただけでは</span></span><span><span>隠しファイルは表示されないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ファイルを確認できないって</span></span><span><span>結構困るんだけど…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そこで </span><code>-a</code><span> オプションを使うよ</span></span><span><span>ロングオプションでは </span><code>--all</code><span> だよ</span></span><span><span>これは隠しファイルを含めた</span></span><span><span>全てのファイルを表示してくれるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあ </span><code>ls -a</code><span> を実行すれば</span></span><span><span>隠しファイルを見れるんだね！</span></span></div></article><article class="code"><pre><code class="bash">ls <wbr>-a
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これでどうだろう？</span></span></div></article><article class="code"><pre><code class="console">.  <wbr>..  <wbr>.himitsu
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><code>.</code><span> や </span><code>..</code><span> も含まれちゃっているけど…</span></span><span><code>.himitsu</code><span> ファイルを表示できたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>こうやって隠しファイルを確認するよ</span></span><span><code>ls</code><span> の </span><code>-a</code><span> オプションも覚えておこう！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>隠しファイルは名前から勘違いされやすいけど</span></span><span><span><wbr>「ファイルを隠すための仕組み」<wbr>ではないんだよ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>えっ！</span></span><span><span>そうなの？！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>個人の設定ファイルなど</span></span><span><span>普段は気にしなくても良いファイルを</span></span><span><span>一覧から除外するためにあるんだ</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>隠しているんじゃなくて</span></span><span><span>隠れてくれているんだね！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章22話</div><div><a href="2/22/">オプション</a></div></div><div><div>今</div><div>2章23話 隠しファイル</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章24話</div><div><a href="2/24/">マニュアル</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

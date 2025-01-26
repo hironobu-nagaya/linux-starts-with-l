@@ -1,0 +1,104 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 6章13話 smartmontools</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,daemon,S.M.A.R.T,smartmontools,smartctl">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="6/12/" />
+<link rel="next" href="6/14/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>6章12話</div>
+<div><a href="6/12/">sysstat</a></div>
+</div>
+<div>
+<div>今</div>
+<div>6章13話 smartmontools</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>6章14話</div>
+<div><a href="6/14/">Samba</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>smartmontools</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>この前 HDD が故障したんだ！</span></span>
+<span><span>バックアップは取っていたけど</span></span>
+<span><span>突然の故障って怖いよね…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>SSD や HDD は</span></span>
+<span><span>自己診断機能を持っているんだ</span></span>
+<span><span>これで故障の予兆を</span></span>
+<span><span>知れる場合があるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ！</span></span>
+<span><span>サーバの安全稼働のためにも</span></span>
+<span><span>ぜひ知りたいよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>その機能を<wbr>「S.M.A.R.T</span></span>
+<span><span>(Self-Monitoring, <wbr>Analysis and Reporting Technology)」<wbr></span></span>
+<span><span>と呼ぶんだ</span></span>
+<span><span>ディスクの健康状態の指標を自動収集し</span></span>
+<span><span>故障の予兆があれば知らせてくれるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は S.M.A.R.T を扱う</span></span>
+<span><a href="https://www.smartmontools.org" target="_blank" rel="noopener noreferrer">smartmontools</a><span> を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><span>インストール</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは </span><code>smartmontools</code><span> を</span></span>
+<span><span>インストールしよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>apt <wbr>install <wbr>-y <wbr>smartmontools
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>パッケージ名さえわかれば</span></span><span><span>簡単にインストールできて楽だね！</span></span></div></article><article class="header2"><span>設定</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>設定は </span><code>/etc/smartmontools</code><span> 配下にあるよ</span></span><span><span>でも基本的な使い方では</span></span><span><span>変更することが無いから</span></span><span><span>気にしなくても大丈夫</span></span><span><span>設定ファイルがあるということだけ</span></span><span><span>覚えておこう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>デフォルトでよしなに</span></span><span><span>動いてくれる設定に</span></span><span><span>なっているんだね！</span></span></div></article><article class="header2"><span>起動</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では </span><code>smartmontools</code><span> を動かし</span></span><span><span>自動起動を設定しよう</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>enable <wbr>--now <wbr>smartmontools
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>起動したらちゃんと</span></span><span><span>動作しているか確認しよう</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>status <wbr>smartmontools
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>ちゃんと動いたよ！</span></span></div></article><article class="header2"><span>確認</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>smartmontools</code><span> では</span></span><span><code>smartd</code><span> デーモンが</span></span><span><span>S.M.A.R.T 情報を監視しているよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>smartctl</code><span> は </span><code>smartd</code><span> 管理ツールだよ</span></span><span><code>smartctl</code><span> 経由で S.M.A.R.T 情報を扱えるよ</span></span></div></article><article class="code"><pre><code class="bash">smartctl <wbr>[オプション]... <wbr>デバイス
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>systemctl</code><span> と </span><code>systemd</code><span> の</span></span><span><span>関係に似ているね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>まずは S.M.A.R.T 機能を持っている</span></span><span><span>ストレージ一覧を確認しよう！</span></span></div></article><article class="code"><pre><code class="bash">smartctl <wbr>--scan
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>たいていの SSD や HDD には</span></span><span><span>S.M.A.R.T があるんだよね？</span></span><span><span>最低一つは見つかると思うんだけど…</span></span></div></article><article class="code"><pre><code class="console">/dev/sda <wbr>-d <wbr>scsi <wbr># <wbr>/dev/sda, <wbr>SCSI <wbr>device
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>/dev/sda</code><span> が S.M.A.R.T に</span></span><span><span>対応しているんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今回は簡易診断機能を使ってみよう！</span></span><span><code>/dev/sda</code><span> を確認するなら</span></span><span><span>以下のように実行するよ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>smartctl <wbr>--health <wbr>/dev/sda
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ストレージの健康診断みたいなものだね</span></span><span><span>単発ではなく定期的に実行したいね</span></span></div></article><article class="code"><pre><code class="console">=== <wbr>START <wbr>OF <wbr>READ <wbr>SMART <wbr>DATA <wbr>SECTION <wbr>===
+SMART <wbr>overall-health <wbr>self-assessment <wbr>test <wbr>result: <wbr>PASSED
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>結果は </span><code>PASSED</code><span> だったよ！</span></span><span><span>簡易診断だけど</span></span><span><span><wbr>「問題なし」<wbr>と出ると</span></span><span><span>ちょっと安心だね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もし結果が</span></span><span><code>FAILED</code><span> だったら</span></span><span><span>そのストレージに</span></span><span><span>問題がある可能性が高いんだ</span></span><span><span>すみやかにバックアップを取り</span></span><span><span>ストレージの入れ替えを</span></span><span><span>おすすめするよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>FAILED</code><span> の</span></span><span><span>原因を調べるには</span></span><span><span>どうすればいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下で</span></span><span><span>S.M.A.R.T が集めた</span></span><span><span>情報を確認できるよ！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>-a <wbr>/dev/sda
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>smartmontools</code><span> の</span></span><span><span>使い方を学んだよ！</span></span><span><span>S.M.A.R.T を </span><code>smartd</code><span> が監視して</span></span><span><code>smartctl</code><span> 経由で管理するんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今回は簡易診断だけの紹介だよ</span></span><span><span>他にも時間が掛かるが</span></span><span><span>詳細な診断ができたり</span></span><span><span>故障の兆候を発見したら</span></span><span><span>メールを送るなどもできるんだ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>6章12話</div><div><a href="6/12/">sysstat</a></div></div><div><div>今</div><div>6章13話 smartmontools</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>6章14話</div><div><a href="6/14/">Samba</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

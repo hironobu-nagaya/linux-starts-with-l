@@ -1,0 +1,125 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 7章10話 UASP無効化</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,Raspberry Pi,USB 3.0,UASP,lsusb">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="7/9/" />
+<link rel="next" href="8/1/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>7章9話</div>
+<div><a href="7/9/">ウォッチドッグ</a></div>
+</div>
+<div>
+<div>今</div>
+<div>7章10話 UASP無効化</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>8章1話</div>
+<div><a href="8/1/">これから</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>UASP無効化</span></article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>USB 3.0 に接続した</span></span>
+<span><span>USB メモリの読み込みが</span></span>
+<span><span>なんだかおかしいんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ちょっと読み込んだと思ったら</span></span>
+<span><span>待たされたりして</span></span>
+<span><span>何だか安定して</span></span>
+<span><span>動いていないようなんだよ…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>これは Raspberry Pi ユーザの間で</span></span>
+<span><span>有名な問題なんだ</span></span>
+<span><span>今回はこの対処法を紹介するね！</span></span>
+</div>
+</article>
+<article class="header2"><span>原因</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ストレージを USB 3.0 に接続すると</span></span>
+<span><span><wbr>「UASP(USB Attached SCSI Protocol)」<wbr>という</span></span>
+<span><span>高速通信を実現する仕組みが使われるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>でも Raspberry Pi の USB コントローラと</span></span>
+<span><span>一部の USB ストレージの互換性が不完全で</span></span>
+<span><span>通信が不安定になる場合があるんだよ</span></span>
+<span><span>特に大容量データ転送時に</span></span>
+<span><span>顕著になることが多いんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>高速化の仕組みなのに安定しなくて</span></span>
+<span><span>読み込みが遅くなると本末転倒だよ</span></span>
+<span><span>どうにかならないものなのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>UASP を無効にして対処できるよ</span></span>
+<span><span>今回はこの方法で対応するね</span></span>
+</div>
+</article>
+<article class="header2"><span>USB ID 確認</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>lsusb</code><span> は</span></span>
+<span><span>USB デバイス情報を</span></span>
+<span><span>表示するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">lsusb <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>まずは USB デバイスを特定する</span></span><span><span><wbr>「USB ID」<wbr>という値を確認しよう</span></span><span><span>問題の USB ストレージを接続し</span></span><span><code>lsusb</code><span> を実行してね</span></span></div></article><article class="code"><pre><code class="bash">lsusb
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へぇ！</span></span><span><span>実行してみるね！</span></span></div></article><article class="code"><pre><code class="console">...
+Bus <wbr>001 <wbr>Device <wbr>004: <wbr>ID <wbr>1234:5678 <wbr>Example <wbr>USB <wbr>Flash <wbr>Drive
+...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>各行が USB デバイスの情報だよ</span></span><span><span>自分の USB メモリの</span></span><span><span>メーカ名などを手がかりにして</span></span><span><code>ID</code><span> の後ろにある</span></span><span><code>xxxx:xxxx</code><span> という</span></span><span><span>番号をメモしよう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>私の場合 </span><code>1234:5678</code><span> が</span></span><span><span>USB ID だね！</span></span><span><span>メモに控えておいたよ！</span></span></div></article><article class="header2"><span>無効化</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今度はこの USB デバイスで</span></span><span><span>UASP を無効にするよう設定しよう</span></span><span><span>設定ファイル </span><code>/boot/firmware/cmdline.txt</code><span> に</span></span><span><span>以下の記述を記述するよ</span></span></div></article><article class="code"><pre><code class="cmdline.txt">usb-storage.quirks=1234:5678:u
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>最初に </span><code>USB_ID</code><span> 変数に</span></span><span><span>目的の USB ID </span><code>1234:5678</code><span> を設定しよう</span></span><span><span>値は実際の内容に置き換えてね</span></span></div></article><article class="code"><pre><code class="bash">USB_ID=1234:5678
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>設定したよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この変数を使って</span></span><span><code>sed</code><span> で設定を追記しよう！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>sed <wbr>-i.dist <wbr>\
+  <wbr>&quot;s/$/ <wbr>usb-storage.quirks=$USB_ID:u/&quot; <wbr>\
+  <wbr>/boot/firmware/cmdline.txt
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>できたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では設定がちゃんと</span></span><span><span>記述されているか</span></span><span><span>確認しよう</span></span></div></article><article class="code"><pre><code class="bash">cat <wbr>/boot/firmware/cmdline.txt
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>設定末尾に以下のような</span></span><span><span>記述があるはずだよ</span></span><span><span>これは USB ID が </span><code>xxxx:xxxx</code><span> の</span></span><span><span>USB デバイスでは</span></span><span><span>UASP を使わない</span></span><span><span>という指定だよ</span></span></div></article><article class="code"><pre><code class="cmdline.txt">usb-storage.quirks=xxxx:xxxx:u
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>usb-storage.quirks=1234:5678:u</code></span><span><span>という記述があるね</span></span><span><span>設定は大丈夫みたい！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>設定ができたら再起動しよう！</span></span><span><span>これで指定された USB デバイスで</span></span><span><span>UASP が使われなくなるんだ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>reboot
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おお！</span></span><span><span>再起動後は安定して</span></span><span><span>USB メモリを読み込めるように</span></span><span><span>なったよ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は USB 3.0 の</span></span><span><span>読み込みが不安定になる問題を</span></span><span><span>UASP を無効にして解決したよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>UASP が使われない場合</span></span><span><span><wbr>「BOT (Bulk-Only Transport)」<wbr></span></span><span><span>が使われるんだ</span></span><span><span>BOT は UASP のような最適化が行われず</span></span><span><span>アクセス速度は少し落ちるよ</span></span><span><span>それでも USB 3.0 は USB 2.0 より</span></span><span><span>十分高速に利用可能だよ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>7章9話</div><div><a href="7/9/">ウォッチドッグ</a></div></div><div><div>今</div><div>7章10話 UASP無効化</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>8章1話</div><div><a href="8/1/">これから</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

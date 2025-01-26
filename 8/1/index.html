@@ -1,0 +1,854 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 8章1話 これから</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="7/10/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>7章10話</div>
+<div><a href="7/10/">UASP無効化</a></div>
+</div>
+<div>
+<div>今</div>
+<div>8章1話 これから</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>これから</span></article>
+<article class="talk">
+<div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>また Linux で</span></span>
+<span><span>ゲームサーバを動かすね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div>
+<div>
+<span><span>もう普通の OS のように</span></span>
+<span><span>Linux を使えるようになったね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div>
+<div>
+<span><span>最初はゲームを遊びたかっただけだけど</span></span>
+<span><span>使っているうちに面白い OS だとわかったし</span></span>
+<span><span>サーバやネットワークの仕組みを学ぶのにも</span></span>
+<span><span>良い題材だということがわかったよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>でも Linux って</span></span>
+<span><span>これだけじゃないよね？</span></span>
+<span><span>これまで紹介されていなかった</span></span>
+<span><span>使い方とか分野があれば</span></span>
+<span><span>教えてほしいなぁ</span></span>
+</div>
+</article>
+<article class="header2"><span>GUI</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは GUI だね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>GUI はアイコンなどで</span></span>
+<span><span>何をするプログラムかわかるし</span></span>
+<span><span>マウス操作は詳しく知らなくても</span></span>
+<span><span>直感的にすぐ操作できるよね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ゲーム用途以外なら</span></span>
+<span><span>Windows や macOS などの商用 OS と</span></span>
+<span><span>ほぼ変わりないことができるんだ</span></span>
+<span><span>最後の壁だったゲーム用途も</span></span>
+<span><span>最近では Linux でも同様に遊べるよう</span></span>
+<span><span>色々な企業や開発者が尽力しているよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>以下のような代表的な</span></span>
+<span><span>ソフトウェアが利用可能なんだ！</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>分野</span></th>
+<th><span>ソフトウェア</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>ブラウザ</span></td>
+<td><a href="https://www.chromium.org/" target="_blank" rel="noopener noreferrer">Chromium</a><span>, <wbr></span><a href="https://www.mozilla.org/ja/firefox/" target="_blank" rel="noopener noreferrer">FireFox</a><span>, <wbr></span><a href="https://www.seamonkey-project.org" target="_blank" rel="noopener noreferrer">SeaMonkey</a></td>
+</tr>
+<tr>
+<td><span>メール</span></td>
+<td><a href="https://www.thunderbird.net/ja/" target="_blank" rel="noopener noreferrer">ThunderBird</a></td>
+</tr>
+<tr>
+<td><span>オフィススイート</span></td>
+<td><a href="https://www.openoffice.org/ja/" target="_blank" rel="noopener noreferrer">OpenOffice.org</a><span>, <wbr></span><a href="https://ja.libreoffice.org/" target="_blank" rel="noopener noreferrer">LibreOffice</a></td>
+</tr>
+<tr>
+<td><span>ドローイングソフト</span></td>
+<td><a href="https://www.gimp.org" target="_blank" rel="noopener noreferrer">GIMP</a><span>, <wbr></span><a href="https://inkscape.org/ja/" target="_blank" rel="noopener noreferrer">Inkscape</a></td>
+</tr>
+<tr>
+<td><span>音楽・動画再生</span></td>
+<td><a href="https://www.ffmpeg.org/" target="_blank" rel="noopener noreferrer">FFmpeg</a><span>, <wbr></span><a href="https://www.videolan.org/vlc/index.ja.html" target="_blank" rel="noopener noreferrer">VLC</a></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>GUI は多くのリソースを使うよ</span></span>
+<span><span>サーバなどの用途によっては</span></span>
+<span><span>CUI だけで使う場合も多いんだ</span></span>
+</div>
+</article>
+<article class="header2"><span>ツール</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>代表的なツールやコマンドを紹介したけど</span></span>
+<span><span>紹介できていないものもたくさんあるんだ</span></span>
+<span><span>以下にここで扱うには複雑過ぎたり</span></span>
+<span><span>特定のディストリビューション専門の</span></span>
+<span><span>ツールやコマンドを挙げるね</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>名称</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nftables</code><span>, <wbr></span><code>iptables</code></td>
+<td><span>パケットフィルタリング</span></td>
+</tr>
+<tr>
+<td><code>ufw</code></td>
+<td><span>パケットフィルタリング(Debian 系)</span></td>
+</tr>
+<tr>
+<td><code>firewalld</code><span>,</span><code>firewall-cmd</code></td>
+<td><span>パケットフィルタリング(Red Hat 系)</span></td>
+</tr>
+<tr>
+<td><code>tcpdump</code></td>
+<td><span>パケットキャプチャ</span></td>
+</tr>
+<tr>
+<td><code>dig</code></td>
+<td><span>ドメイン情報取得</span></td>
+</tr>
+<tr>
+<td><code>nmap</code></td>
+<td><span>ネットワーク分析</span></td>
+</tr>
+<tr>
+<td><code>wireshark</code></td>
+<td><span>ネットワーク分析</span></td>
+</tr>
+<tr>
+<td><code>tripwire</code></td>
+<td><span>ファイル改ざん検知</span></td>
+</tr>
+<tr>
+<td><code>grub</code></td>
+<td><span>ブートローダ</span></td>
+</tr>
+<tr>
+<td><code>mdadm</code></td>
+<td><span>ソフトウェアRAID</span></td>
+</tr>
+<tr>
+<td><code>lvm</code></td>
+<td><span>LVM(logical volume management)</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃんから</span></span>
+<span><span>基本的な扱い方は</span></span>
+<span><span>学んだんだもの！</span></span>
+<span><span>学ぶ必要が出てきたら</span></span>
+<span><span>時間は掛かるけど</span></span>
+<span><span>調べながら習得するよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>コンピュータ言語</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「コンピュータ言語</span></span>
+<span><span>(computer language)」<wbr>も</span></span>
+<span><span>触れてこなかったものの</span></span>
+<span><span>ひとつだよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>それはどういう</span></span>
+<span><span>ものなの？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>コンピュータは曖昧なものを</span></span>
+<span><span>処理するのが苦手なんだ</span></span>
+<span><span>人間の言葉には曖昧な表現が</span></span>
+<span><span>多く含まれているよ</span></span>
+<span><span>それが微妙な表現の違いを</span></span>
+<span><span>表すのに便利なんだけど</span></span>
+<span><span>コンピュータには</span></span>
+<span><span>解釈が難しいんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>一方、<wbr>コンピュータの言葉は</span></span>
+<span><code>0</code><span> か </span><code>1</code><span> の二進数なんだ</span></span>
+<span><span>例えば </span><code>0001</code><span> が加算</span></span>
+<span><code>0010</code><span> が減算のような感じだよ</span></span>
+<span><span>数値が少しでも違うと</span></span>
+<span><span>全く別の処理になるので</span></span>
+<span><span>連想が働きづらく</span></span>
+<span><span>人間はコンピュータの</span></span>
+<span><span>言葉を扱いづらいんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そこで人間からも</span></span>
+<span><span>コンピュータからも</span></span>
+<span><span>まあまあ理解しやすい</span></span>
+<span><span>共通の言葉として</span></span>
+<span><span>作られたのが</span></span>
+<span><span><wbr>「コンピュータ言語」<wbr>なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>多くのコンピュータ言語は</span></span>
+<span><span>人間が使う英単語を</span></span>
+<span><span>曖昧な表現が無い構造で</span></span>
+<span><span>表現しているよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>つまりコンピュータ言語を学べば</span></span>
+<span><span>コンピュータにやってほしいことを</span></span>
+<span><span>直接伝えられるようになるんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>広く知られている</span></span>
+<span><span>コンピュータ言語には</span></span>
+<span><span>以下のようなものがあるよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>言語</span></th>
+<th><span>方式</span></th>
+<th><span>特徴</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.python.org/" target="_blank" rel="noopener noreferrer">Python</a></td>
+<td><span>インタプリタ</span></td>
+<td><span>標準的に導入されている場合が多い、<wbr>機械学習や深層学習に強い</span></td>
+</tr>
+<tr>
+<td><a href="https://www.java.com/ja/" target="_blank" rel="noopener noreferrer">Java</a></td>
+<td><span>コンパイラ</span></td>
+<td><span>ほとんどの OS やアーキテクチャで実行ファイルを作り直さず実行できる</span></td>
+</tr>
+<tr>
+<td><a href="https://www.ruby-lang.org/ja/" target="_blank" rel="noopener noreferrer">Ruby</a></td>
+<td><span>インタプリタ</span></td>
+<td><span>書きやすい</span></td>
+</tr>
+<tr>
+<td><a href="https://www.php.net/" target="_blank" rel="noopener noreferrer">PHP</a></td>
+<td><span>インタプリタ</span></td>
+<td><span>Webアプリケーションに強い</span></td>
+</tr>
+<tr>
+<td><a href="https://www.perl.org/" target="_blank" rel="noopener noreferrer">Perl</a></td>
+<td><span>インタプリタ</span></td>
+<td><span>ほとんどの Linux に標準的に導入されている、<wbr>正規表現に強い</span></td>
+</tr>
+<tr>
+<td><span>C, <wbr>C++</span></td>
+<td><span>コンパイラ</span></td>
+<td><span>この言語で作成されたパッケージが多くを占める</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span><wbr>「インタプリタ」<wbr>と</span></span>
+<span><span><wbr>「コンパイラ」<wbr>の</span></span>
+<span><span>違いは何なのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>コンピュータ言語で書かれた文章を</span></span>
+<span><span><wbr>「ソースコード(source code)」<wbr>と呼ぶよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「インタプリタ(interpreter)」<wbr>は</span></span>
+<span><span>ソースコードの解釈を</span></span>
+<span><span>コンピュータに伝えるのに対して</span></span>
+<span><span><wbr>「コンパイラ(compiler)」<wbr>は</span></span>
+<span><span>ソースコードから</span></span>
+<span><span>コンピュータがそのまま実行できる</span></span>
+<span><span>バイナリ実行ファイルを作るんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>コンパイラ方式の方が</span></span>
+<span><span>プログラム実行速度が速いけど</span></span>
+<span><span>ソースコードを修正したら</span></span>
+<span><span>実行ファイルを作り直す</span></span>
+<span><span>手間があるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>新しい言語を覚えるって</span></span>
+<span><span>大変な感じがするよ</span></span>
+<span><span>シェルスクリプトで</span></span>
+<span><span>やりたい処理は大体書けるので</span></span>
+<span><span>それでいいんじゃないかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>シェルスクリプトではスクリプト内で</span></span>
+<span><span>コマンドが実行された数だけ</span></span>
+<span><span>プロセスが立ち上がっては消えていくよ</span></span>
+<span><span>プロセス生成は高コストな処理のため</span></span>
+<span><span>シェルスクリプトは実行速度が遅く</span></span>
+<span><span>処理効率が悪いんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>また多くの言語では</span></span>
+<span><span>コードの量が膨大になっても</span></span>
+<span><span>それらを分類・整理して</span></span>
+<span><span>開発者が把握できる仕組みが</span></span>
+<span><span>シェルスクリプトよりも整っているんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>シェルスクリプトの</span></span>
+<span><span>実行速度が気になり始めたり</span></span>
+<span><span>規模が大きくなったりしてきたら</span></span>
+<span><span>言語を学ぶ良い機会かも</span></span>
+<span><span>しれないね</span></span>
+</div>
+</article>
+<article class="header2"><span>バージョン管理システム</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>何かを編集しているときに</span></span>
+<span><span>変更で動かなくなるのが怖くて</span></span>
+<span><span>過去のバージョンを</span></span>
+<span><span>コピーして残していないかな？</span></span>
+<span><span><wbr>「バージョン管理システム</span></span>
+<span><span>(version control system, <wbr>VCS)」<wbr>は</span></span>
+<span><span>このような問題を解決するツールなんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span><wbr>「新しいフォルダ(2)」<wbr></span></span>
+<span><span><wbr>「新しいフォルダ(2)(最新)」<wbr></span></span>
+<span><span><wbr>「新しいフォルダ(現時点最新)」<wbr></span></span>
+<span><span>…とか身に覚えがあるよ</span></span>
+<span><span>こういった状態を</span></span>
+<span><span>解決してくれるのね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最近は </span><a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">Git</a><span> が主流だよ</span></span>
+<span><span>主にソースコード管理に使われているけど</span></span>
+<span><span>バージョン管理をする目的なら</span></span>
+<span><span>どんなものにも適用できるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>また Git のホスティングサービス </span><a href="https://github.co.jp/" target="_blank" rel="noopener noreferrer">GitHub</a><span> は</span></span>
+<span><span>公開リポジトリであれば無料で使えるんだ</span></span>
+<span><span>ここでソースコードなどを</span></span>
+<span><span>公開している開発者も多くいるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>このページも</span></span>
+<span><a href="https://github.com/hironobu-nagaya/linux-starts-with-l" target="_blank" rel="noopener noreferrer">GitHub で公開</a><span> されて</span></span>
+<span><span>いるのね！</span></span>
+</div>
+</article>
+<article class="header2"><span>デーモン</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>代表的な各デーモンを軽く紹介したけど</span></span>
+<span><span>どれも最も基本的な使い方ばかりなんだ</span></span>
+<span><span>本格的に使うなら</span></span>
+<span><span>ちゃんと勉強する必要があるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>特にセキュリティ周りとかは</span></span>
+<span><span>しっかりしておかないと</span></span>
+<span><span><wbr>「生兵法は大怪我のもと」<wbr></span></span>
+<span><span>になりそうだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ここで紹介していない</span></span>
+<span><span>デーモンもたくさんあるんだ</span></span>
+<span><span>代表的なのは<wbr>「RDBMS</span></span>
+<span><span>(relational database management system)」<wbr></span></span>
+<span><span>だよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>RDBMS は</span></span>
+<span><span>データを保存するシステムで</span></span>
+<span><span>コンピュータ言語と一緒に</span></span>
+<span><span>使われることが多いんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>データの保存って</span></span>
+<span><span>ファイルに保存じゃ</span></span>
+<span><span>ダメなのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>簡単な用途ならファイル保存で十分な場合もあるよ</span></span>
+<span><span>RDBMS は同時にデータ操作された場合の対処や</span></span>
+<span><span>何万何億件の中から必要なデータを素早く探すなど</span></span>
+<span><span>データ管理に特化した機能を提供してくれるんだ</span></span>
+<span><span>業務システムなどでは RDBMS などが使われるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>そんなにすごい</span></span>
+<span><span>仕組みがあったんだ……</span></span>
+<span><span>しかもオープンソースのものは</span></span>
+<span><span>無料で使えちゃうんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>代表的な RDBMS には</span></span>
+<span><span>以下のようなものがあるよ</span></span>
+</div>
+</article>
+<article class="unordered-list">
+<ul>
+<li><a href="https://www.postgresql.org/" target="_blank" rel="noopener noreferrer">PostgreSQL</a></li>
+<li><a href="https://www.mysql.com/jp/" target="_blank" rel="noopener noreferrer">MySQL</a></li>
+<li><a href="https://mariadb.org/" target="_blank" rel="noopener noreferrer">MariaDB</a></li>
+<li><a href="https://www.sqlite.org/" target="_blank" rel="noopener noreferrer">SQLite</a></li>
+<li><a href="https://www.h2database.com/" target="_blank" rel="noopener noreferrer">H2</a></li>
+</ul>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>他にも紹介しきれていない</span></span>
+<span><span>代表的なデーモンやシステム</span></span>
+<span><span>サービスなどを挙げておくね</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>名称</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.mongodb.com/ja-jp" target="_blank" rel="noopener noreferrer">MongoDB</a></td>
+<td><span>ドキュメント指向データベースシステム</span></td>
+</tr>
+<tr>
+<td><a href="https://neo4j.com/" target="_blank" rel="noopener noreferrer">Neo4j</a></td>
+<td><span>グラフ指向データベースシステム</span></td>
+</tr>
+<tr>
+<td><a href="https://www.elastic.co/jp/elasticsearch" target="_blank" rel="noopener noreferrer">Elasticsearch</a></td>
+<td><span>全文検索</span></td>
+</tr>
+<tr>
+<td><a href="https://www.fluentd.org/" target="_blank" rel="noopener noreferrer">Fluentd</a></td>
+<td><span>ログ収集・解析</span></td>
+</tr>
+<tr>
+<td><a href="https://grafana.com//ja/" target="_blank" rel="noopener noreferrer">Grafana</a></td>
+<td><span>ログ可視化</span></td>
+</tr>
+<tr>
+<td><a href="https://wordpress.com/ja/" target="_blank" rel="noopener noreferrer">WordPress</a></td>
+<td><span>サイト作成</span></td>
+</tr>
+<tr>
+<td><a href="https://redmine.jp/" target="_blank" rel="noopener noreferrer">Redmine</a></td>
+<td><span>プロジェクト管理</span></td>
+</tr>
+<tr>
+<td><a href="https://www.mediawiki.org/wiki/MediaWiki/ja?uselang=ja" target="_blank" rel="noopener noreferrer">MediaWiki</a></td>
+<td><span>Wiki サーバ</span></td>
+</tr>
+<tr>
+<td><a href="https://www.openldap.org" target="_blank" rel="noopener noreferrer">OpenLDAP</a></td>
+<td><span>LDAP サーバ</span></td>
+</tr>
+<tr>
+<td><a href="https://www.isc.org/bind/" target="_blank" rel="noopener noreferrer">BIND</a></td>
+<td><span>DNS サーバ</span></td>
+</tr>
+<tr>
+<td><a href="http://www.proftpd.org/" target="_blank" rel="noopener noreferrer">ProFTPD</a></td>
+<td><span>FTP サーバ</span></td>
+</tr>
+<tr>
+<td><a href="https://security.appspot.com/vsftpd.html" target="_blank" rel="noopener noreferrer">vsftpd</a></td>
+<td><span>FTP サーバ</span></td>
+</tr>
+<tr>
+<td><a href="https://www.exim.org" target="_blank" rel="noopener noreferrer">Exim</a></td>
+<td><span>SMTP サーバ(MTA)</span></td>
+</tr>
+<tr>
+<td><a href="https://www.dovecot.org/" target="_blank" rel="noopener noreferrer">Dovecot</a></td>
+<td><span>IMAP/POP3 サーバ</span></td>
+</tr>
+<tr>
+<td><a href="https://www.cups.org/" target="_blank" rel="noopener noreferrer">CUPS</a></td>
+<td><span>プリンタサーバ</span></td>
+</tr>
+<tr>
+<td><a href="https://tomcat.apache.org" target="_blank" rel="noopener noreferrer">Tomcat</a></td>
+<td><span>アプリケーションサーバ(Java)</span></td>
+</tr>
+<tr>
+<td><a href="https://rsync.samba.org/" target="_blank" rel="noopener noreferrer">rsync</a></td>
+<td><span>ファイル同期</span></td>
+</tr>
+<tr>
+<td><span>NFS</span></td>
+<td><span>ネットワーク越しのマウント</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="header2"><span>仮想化</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「仮想化(virtualization)」<wbr>は</span></span>
+<span><span>ハードウェアを</span></span>
+<span><span>ソフトウェアで</span></span>
+<span><span>再現することだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>仮想化をすると</span></span>
+<span><span>どうなるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>コンピュータやリソースを</span></span>
+<span><span>簡単に作成したり破棄できるんだ</span></span>
+<span><span><wbr>「もっと性能が良いコンピュータを作り直そう」<wbr>とか</span></span>
+<span><span><wbr>「負荷が高いからもう一台コンピュータを追加」<wbr></span></span>
+<span><span>といったことが</span></span>
+<span><span>簡単にできるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ハードウェアで同じことをやろうとすると</span></span>
+<span><span>買い替えとかしないといけなくなるものね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのような仮想化を行う仮想化ツールには</span></span>
+<span><a href="https://www.virtualbox.org" target="_blank" rel="noopener noreferrer">VirtualBox</a><span> などがあるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最近では1つのプログラムを専用に動かす仮想環境</span></span>
+<span><span><wbr>「コンテナ(container)」<wbr>が良く使われるよ</span></span>
+<span><span>これは </span><a href="https://www.docker.com/ja-jp/" target="_blank" rel="noopener noreferrer">Docker</a><span> で一気に広まったね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>また複数のコンテナを協調させて動かす</span></span>
+<span><span><wbr>「コンテナオーケストレーションツール</span></span>
+<span><span>(container orchestration tool)」<wbr></span></span>
+<span><span>が使われるよ</span></span>
+<span><a href="https://kubernetes.io/ja/" target="_blank" rel="noopener noreferrer">Kubernetes</a><span> が有名なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Linux 環境も簡単に作って壊してを繰り返せるとなると</span></span>
+<span><span>手作業でセットアップはしたくないよね</span></span>
+<span><span>そういった作業を自動化する</span></span>
+<span><span><wbr>「構成管理ツール</span></span>
+<span><span>(configuration management tool)」<wbr></span></span>
+<span><span>があるんだ</span></span>
+<span><a href="https://www.ansible.com/" target="_blank" rel="noopener noreferrer">Ansible</a><span>, <wbr></span><a href="https://www.chef.io/" target="_blank" rel="noopener noreferrer">Chef</a><span>, <wbr></span><a href="https://www.puppet.com/" target="_blank" rel="noopener noreferrer">Puppet</a><span> などがあるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>仮想化だけで</span></span>
+<span><span>すごい大きな</span></span>
+<span><span>分野なんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>仮想化はリソース</span></span>
+<span><span>特にメモリを</span></span>
+<span><span>たくさん消費するよ</span></span>
+<span><span>仮想化で色々したいなら</span></span>
+<span><span>性能の良いマシンを用意しよう！</span></span>
+</div>
+</article>
+<article class="header2"><span>クラウド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「クラウド(cloud)」<wbr>は</span></span>
+<span><span>仮想化されたリソースを</span></span>
+<span><span>貸してくれるサービスだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span><wbr>「仮想のコンピュータ1台貸して下さい」<wbr></span></span>
+<span><span>と申し込めば借りれる</span></span>
+<span><span>ということなの？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうだよ</span></span>
+<span><span>ほんの数分で使える状態になるし</span></span>
+<span><span>通常はリソースを使った分だけの</span></span>
+<span><span>利用料を支払えばいいんだ</span></span>
+<span><span>コンピュータ以外にも</span></span>
+<span><span>ネットワークやストレージなども</span></span>
+<span><span>借りられるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>それは便利だね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>有名なクラウドサービスに</span></span>
+<span><span>以下があるよ</span></span>
+</div>
+</article>
+<article class="unordered-list">
+<ul>
+<li><a href="https://aws.amazon.co.jp/jp/" target="_blank" rel="noopener noreferrer">AWS(Amazon Web Service)</a></li>
+<li><a href="https://cloud.google.com/?hl=ja" target="_blank" rel="noopener noreferrer">Google Cloud</a></li>
+<li><a href="https://azure.microsoft.com/ja-jp" target="_blank" rel="noopener noreferrer">Microsoft Azure</a></li>
+<li><a href="https://www.oracle.com/jp/cloud/" target="_blank" rel="noopener noreferrer">Oracle Cloud Infrastructure</a></li>
+<li><a href="https://www.digitalocean.com/" target="_blank" rel="noopener noreferrer">DigitalOcean</a></li>
+<li><a href="https://jp.heroku.com/" target="_blank" rel="noopener noreferrer">Heroku</a></li>
+</ul>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は今まで教えてもらったことの</span></span>
+<span><span>さらに先には何があるかを</span></span>
+<span><span>教えてもらったよ！</span></span>
+<span><span>まだまだ色々なことが</span></span>
+<span><span>たくさんあるんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>このあたりから</span></span>
+<span><span>だんだん専門的になっていくよ</span></span>
+<span><span>ちゃんとした書籍を買って</span></span>
+<span><span>勉強するのをおすすめするよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>それから…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>色々教えてくれて</span></span>
+<span><span>ありがとう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div>
+<div>
+<span><span>いえいえ！</span></span>
+<span><span>どういたしまして！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>7章10話</div>
+<div><a href="7/10/">UASP無効化</a></div>
+</div>
+<div>
+<div>今</div>
+<div>8章1話 これから</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+</div>
+</div>
+</footer>
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

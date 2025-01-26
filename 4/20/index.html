@@ -1,0 +1,191 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 4章20話 fstabファイル</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,super user,root,fstab,mount,systemd,systemctl">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="4/19/" />
+<link rel="next" href="4/21/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>4章19話</div>
+<div><a href="4/19/">hostsファイル</a></div>
+</div>
+<div>
+<div>今</div>
+<div>4章20話 fstabファイル</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>4章21話</div>
+<div><a href="4/21/">motdファイル</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>fstab</code><span> ファイル</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は </span><code>/etc/fstab</code><span> を</span></span>
+<span><span>見てみよう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>このファイルは</span></span>
+<span><span>何の設定なんだろうね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>マウント設定が記述されているんだ</span></span>
+<span><span>システムが起動した時のマウントは</span></span>
+<span><span>この内容に従っているよ</span></span>
+</div>
+</article>
+<article class="header2"><span>書式</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>/etc/fstab</code><span> は</span></span>
+<span><span>以下の書式で</span></span>
+<span><span>記述されているよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>フィールド</span></th>
+<th><span>名称</span></th>
+<th><span>説明</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>1</span></td>
+<td><span>file system</span></td>
+<td><span>ストレージのデバイスファイル</span></td>
+</tr>
+<tr>
+<td><span>2</span></td>
+<td><span>dir</span></td>
+<td><span>マウントポイント</span></td>
+</tr>
+<tr>
+<td><span>3</span></td>
+<td><span>type</span></td>
+<td><span>ファイルシステム種別</span></td>
+</tr>
+<tr>
+<td><span>4</span></td>
+<td><span>options</span></td>
+<td><span>マウントオプション</span></td>
+</tr>
+<tr>
+<td><span>5</span></td>
+<td><span>dump</span></td>
+<td><code>dump</code><span> でバックアップを取るか(後述)</span></td>
+</tr>
+<tr>
+<td><span>6</span></td>
+<td><span>pass</span></td>
+<td><span>起動時にファイルシステムのチェックをするか(後述)</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>dump の値</span></th>
+<th><span>意味</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>0</span></td>
+<td><code>dump</code><span> でバックアップを取らない</span></td>
+</tr>
+<tr>
+<td><span>1</span></td>
+<td><code>dump</code><span> でバックアップを取る</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>pass の値</span></th>
+<th><span>意味</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>0</span></td>
+<td><span>起動時にファイルシステムをチェックしない</span></td>
+</tr>
+<tr>
+<td><span>1</span></td>
+<td><span>起動時にファイルシステムをチェックする(マウントポイントが </span><code>/</code><span> の場合)</span></td>
+</tr>
+<tr>
+<td><span>2</span></td>
+<td><span>起動時にファイルシステムをチェックする(マウントポイントが </span><code>/</code><span> 以外の場合)</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><code>dump</code><span> って</span></span>
+<span><span>どんなコマンドなのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ファイルをメディアに</span></span>
+<span><span>バックアップするよ</span></span>
+<span><span>バックアップメディアに</span></span>
+<span><span>磁気テープが使われていた時代の</span></span>
+<span><span>バックアップ方法なので</span></span>
+<span><span>通常は </span><code>0</code><span> で大丈夫だよ</span></span>
+</div>
+</article>
+<article class="header2"><code>mount</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>mount</code><span> は </span><code>/etc/fstab</code><span> を見ているよ</span></span>
+<span><span>もし </span><code>/etc/fstab</code><span> に設定があれば</span></span>
+<span><span>以下のように指定を簡略化できるんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">mount <wbr>デバイスファイル
+mount <wbr>マウントポイント
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>一方しか指定しなくても</span></span><span><code>/etc/fstab</code><span> から</span></span><span><span>もう片方の指定が</span></span><span><span>わかるものね！</span></span></div></article><article class="header2"><code>systemd</code><span> を使っている場合</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>systemd</code><span> は</span></span><span><span>マウント設定も</span></span><span><span>管理しているんだ</span></span><span><code>/etc/fstab</code><span> を編集したら</span></span><span><span>設定の再読み込みが</span></span><span><span>必要になるよ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>--daemon-reload
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>/etc/fstab</code><span> 設定ファイル</span></span><span><span>について学んだよ！</span></span><span><span>マウントの設定が</span></span><span><span>書かれているんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>USB メモリのような</span></span><span><span>一時的なマウント設定ではなく</span></span><span><span>SSD や HDD などの</span></span><span><span>永続的なマウント設定を記述するよ</span></span><span><span>新しいストレージを用意したら</span></span><span><span>自動でマウントされるよう</span></span><span><code>/etc/fstab</code><span> で設定しよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>4章19話</div><div><a href="4/19/">hostsファイル</a></div></div><div><div>今</div><div>4章20話 fstabファイル</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>4章21話</div><div><a href="4/21/">motdファイル</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

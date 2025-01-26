@@ -1,0 +1,84 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章24話 マニュアル</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,man,manpage">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/23/" />
+<link rel="next" href="2/25/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章23話</div>
+<div><a href="2/23/">隠しファイル</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章24話 マニュアル</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章25話</div>
+<div><a href="2/25/">パーミッション</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>マニュアル</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>私っていつもお兄ちゃんに</span></span>
+<span><span>教わってばかりだよね…</span></span>
+<span><span>自分で調べる方法ってないかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それならマニュアルを読もう！</span></span>
+<span><span>そのためのコマンドが</span></span>
+<span><span>用意されているよ！</span></span>
+</div>
+</article>
+<article class="header2"><code>man</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>man</code><span> はマニュアルを見るよ</span></span>
+<span><span>manual の略なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>覚えれば自分で学習して</span></span>
+<span><span>行けるようになるんだね！</span></span>
+<span><span>どうやって使うのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>ls</code><span> のマニュアルを見てみよう</span></span>
+<span><span>以下のように実行するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">man <wbr>ls
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>…おおっ</span></span><span><span>画面が変わった！</span></span><span><span>内容は </span><code>ls</code><span> の説明だね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>man</code><span> は </span><code>less</code><span> を使って</span></span><span><span>マニュアルを表示しているんだ</span></span><span><span>だから</span><code>less</code><span> で覚えた操作で</span></span><span><span>ページ送りしならが閲覧できるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>本当だ！</span></span><span><code>j</code><span> で下に進んだり</span></span><span><code>k</code><span> で上に戻ったりできるね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それと </span><code>q</code><span> で終了だね</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>うわぁ…</span></span><span><code>ls</code><span> ってこんなにたくさん</span></span><span><span>オプションがあったんだ</span></span><span><span>全部覚えるのは大変そう…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>最初から全てを</span></span><span><span>覚えようとしなくても</span></span><span><span>いいんだよ</span></span><span><span>必要となった時に</span></span><span><span>少しずつ覚えれば十分だし</span></span><span><span>よく使うものだけ</span></span><span><span>覚えればいいんだ</span></span></div></article><article class="header2"><span>manpage</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>みどりが見ているマニュアルは</span></span><span><span><wbr>「マンページ（manpage）」<wbr></span></span><span><span>とよばれるよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ウェブ検索では</span></span><span><span><wbr>「manpage ls」<wbr>のように</span></span><span><span>キーワードを指定すると</span></span><span><span>見つかりやすいんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><span>ウェブ検索も結構頼るから</span></span><span><span>この調べ方も一緒に覚えておくよ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>man</code><span> で</span></span><span><span>マニュアルを見れることを学んだよ！</span></span><span><span>コマンドやオプションを</span></span><span><span>全部覚えなくちゃと思っていたけど</span></span><span><code>man</code><span> からいつでも調べられるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>良く使うオプションは</span></span><span><span>覚えた方がいいけど</span></span><span><span>そうでないものは</span></span><span><span><wbr>「</span><code>man</code><span> で調べればいいや」<wbr></span></span><span><span>ぐらいの心持ちで</span></span><span><span>気楽に学んでいこう！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以降、<wbr>コマンドの説明は</span></span><span><span>manpage の<wbr>「書式(SYNOPSIS)」<wbr>に</span></span><span><span>沿った形で表記していくよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章23話</div><div><a href="2/23/">隠しファイル</a></div></div><div><div>今</div><div>2章24話 マニュアル</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章25話</div><div><a href="2/25/">パーミッション</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

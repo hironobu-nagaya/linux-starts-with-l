@@ -1,0 +1,86 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章52話 testコマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,test">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/51/" />
+<link rel="next" href="2/53/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章51話</div>
+<div><a href="2/51/">終了ステータス</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章52話 testコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章53話</div>
+<div><a href="2/53/">AND演算子とOR演算子</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>test</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>前回学んだ終了ステータスの</span></span>
+<span><span>使い方が気になるよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>終了ステータスの使い方は</span></span>
+<span><span>もう少し待ってね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>その前に今回は</span></span>
+<span><span>終了ステータスと</span></span>
+<span><span>密接な関わりを持つ</span></span>
+<span><code>test</code><span> を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>test</code><span> は</span></span>
+<span><span>指定した条件を調べて</span></span>
+<span><span>結果を終了ステータスで返すよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">test <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>-d</code><span> オプションは</span></span><span><span><wbr>「ディレクトリが存在しているか」<wbr></span></span><span><span>をチェックするよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下のコマンドを</span></span><span><span>実行してみよう</span></span></div></article><article class="code"><pre><code class="bash">test <wbr>-d <wbr>/home/midori
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>実行したけど</span></span><span><span>何も表示されないね…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>結果は画面出力ではなく</span></span><span><span>終了ステータスで返されているんだ</span></span><span><span>終了ステータスを確認してみよう！</span></span></div></article><article class="code"><pre><code class="bash">echo <wbr>$?
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>終了ステータスは</span></span><span><code>?</code><span> 変数に格納されるんだよね！</span></span></div></article><article class="code"><pre><code class="console">0
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>0</code><span> が表示されたよ！</span></span><span><span>ということは成功だね！</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>これで</span></span><span><span><wbr>「</span><code>/home/midori</code><span> ディレクトリが存在している」<wbr></span></span><span><span>ことがわかるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうことだね！</span></span><span><code>test</code><span> は条件が満たされていれば </span><code>0</code></span><span><span>そうでなければ </span><code>1</code><span> を返すよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今度は </span><code>-f</code><span> オプションを使ってみよう</span></span><span><span>これは<wbr>「通常ファイルが存在しているか」<wbr>を</span></span><span><span>チェックするオプションだよ</span></span><span><span>同じように以下を実行してみよう</span></span></div></article><article class="code"><pre><code class="bash">test <wbr>-f <wbr>/home/midori
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>実行したよ！</span></span></div></article><article class="code"><pre><code class="bash">echo <wbr>$?
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>結果は終了ステータスで</span></span><span><span>返って来ているんだよね！</span></span></div></article><article class="code"><pre><code class="console">1
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今度は </span><code>1</code><span> が表示された！</span></span><span><code>/home/midori</code><span> はディレクトリだから</span></span><span><span>通常のファイルじゃないってことだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうことだね</span></span><span><code>test</code><span> はこうやって</span></span><span><span>条件を調べるのに</span></span><span><span>使われるんだ</span></span></div></article><article class="header2"><code>[</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>test</code><span> は</span></span><span><span>よく使われるコマンドなんだ</span></span><span><span>そのため簡単に使える別名</span></span><span><code>[</code><span> が用意されているよ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>コマンドに</span></span><span><span>別名があるの？</span></span><span><span>それは初耳！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>さっきの </span><code>test -d /home/midori</code><span> を</span></span><span><code>[</code><span> を使って書き換えてみよう</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ただし </span><code>[</code><span> を使う場合は</span></span><span><span>引数の最後を </span><code>]</code><span> にして</span></span><span><span>閉じるというルールがあるんだ</span></span><span><span>だからこのように書くよ</span></span></div></article><article class="code"><pre><code class="bash">[ <wbr>-d <wbr>/home/midori <wbr>]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なんだか</span></span><span><span><wbr>「ひとまとまりの条件」<wbr></span></span><span><span>というのがわかりやすいね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>じゃあ終了ステータスを</span></span><span><span>確認してみようか</span></span></div></article><article class="code"><pre><code class="bash">echo <wbr>$?
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>test</code><span> と </span><code>[</code><span> は</span></span><span><span>同じものだから</span></span><span><span>結果は </span><code>0</code><span> だと思うなぁ</span></span></div></article><article class="code"><pre><code class="console">0
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>ちゃんと </span><code>test</code><span> と</span></span><span><span>同じ結果だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>たいていの場面で</span></span><span><code>test</code><span> よりも</span></span><span><code>[</code><span> が使われるよ</span></span><span><span>この書き方に慣れておこう！</span></span></div></article><article class="header2"><span>オプション</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>test</code><span> でよく使う</span></span><span><span>指定をまとめたよ！</span></span></div></article><article class="table"><table><thead><tr><th><span>コマンド</span></th><th><span>説明</span></th></tr></thead><tbody><tr><td><code>[ -d PATH ]</code></td><td><span>パス </span><code>PATH</code><span> がディレクトリであれば成功</span></td></tr><tr><td><code>[ -f PATH ]</code></td><td><span>パス </span><code>PATH</code><span> が通常ファイルであれば成功</span></td></tr><tr><td><code>[ -e PATH ]</code></td><td><span>パス </span><code>PATH</code><span> が存在していれば成功</span></td></tr><tr><td><code>[ X -eq Y ]</code></td><td><span>数値 </span><code>X</code><span> と </span><code>Y</code><span> が等しければ成功</span></td></tr><tr><td><code>[ X -ne Y ]</code></td><td><span>数値 </span><code>X</code><span> と </span><code>Y</code><span> が異なれば成功</span></td></tr><tr><td><code>[ X -gt Y ]</code></td><td><span>数値 </span><code>X</code><span> が </span><code>Y</code><span> より大きければ成功</span></td></tr><tr><td><code>[ X -ge Y ]</code></td><td><span>数値 </span><code>X</code><span> が </span><code>Y</code><span> より大きいか等しければ成功</span></td></tr><tr><td><code>[ X -lt Y ]</code></td><td><span>数値 </span><code>X</code><span> が </span><code>Y</code><span> より小さければ成功</span></td></tr><tr><td><code>[ X -le Y ]</code></td><td><span>数値 </span><code>X</code><span> が </span><code>Y</code><span> より小さいか等しければ成功</span></td></tr><tr><td><code>[ -n TEXT ]</code></td><td><span>文字列 </span><code>TEXT</code><span> の長さが1以上なら成功</span></td></tr><tr><td><code>[ -z TEXT ]</code></td><td><span>文字列 </span><code>TEXT</code><span> の長さが0なら成功</span></td></tr><tr><td><code>[ TEXT1 == TEXT2 ]</code></td><td><span>文字列 </span><code>TEXT1</code><span> と </span><code>TEXT2</code><span> が等しければ成功</span></td></tr><tr><td><code>[ TEXT1 != TEXT2 ]</code></td><td><span>文字列 </span><code>TEXT1</code><span> と </span><code>TEXT2</code><span> が異なれば成功</span></td></tr><tr><td><code>[ ! 条件 ]</code></td><td><code>条件</code><span> が失敗なら成功</span></td></tr><tr><td><code>[ 条件1 -a 条件2 ]</code></td><td><code>条件1</code><span> と </span><code>条件2</code><span> が両方成功なら成功</span></td></tr><tr><td><code>[ 条件1 -o 条件2 ]</code></td><td><code>条件1</code><span> と </span><code>条件2</code><span> のどちらかが成功なら成功</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>うわぁ！</span></span><span><span>いっぱいある！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>本当はもっとあるけど</span></span><span><span>必要になったら少しづつ</span></span><span><span>覚えればいいよ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>test</code><span> と</span></span><span><span>その別名 </span><code>[</code><span> を覚えたよ！</span></span><span><span>色々な条件を判定して</span></span><span><span>終了ステータスで</span></span><span><span>結果を教えてくれるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>test</code><span> でチェックした条件は</span></span><span><span>この後で教える方法で使えるよ！</span></span><span><span>その基礎になるから</span></span><span><span>しっかりおさえておこう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章51話</div><div><a href="2/51/">終了ステータス</a></div></div><div><div>今</div><div>2章52話 testコマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章53話</div><div><a href="2/53/">AND演算子とOR演算子</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

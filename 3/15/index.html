@@ -1,0 +1,148 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章15話 引数処理</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,positional parameters,shift">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/14/" />
+<link rel="next" href="3/16/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章14話</div>
+<div><a href="3/14/">ヌルコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章15話 引数処理</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章16話</div>
+<div><a href="3/16/">オプション処理</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>引数処理</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>コマンドは引数を</span></span>
+<span><span>受けられるよね？</span></span>
+<span><span>シェルスクリプトでも</span></span>
+<span><span>できないかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんできるよ！</span></span>
+<span><span>は引数の扱いを</span></span>
+<span><span>学んでいこう！</span></span>
+</div>
+</article>
+<article class="header2"><span>引数を表す特殊変数</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>引数を扱うには</span></span>
+<span><span><wbr>「引数を表す特殊変数」<wbr>を使うんだ</span></span>
+<span><span>以下のようなものがあるよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>変数</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$0</code></td>
+<td><span>スクリプト名（コマンド名）</span></td>
+</tr>
+<tr>
+<td><code>$1</code><span> ～ </span><code>$9</code></td>
+<td><code>n</code><span> 番目の引数</span></td>
+</tr>
+<tr>
+<td><code>$@</code></td>
+<td><span>引数全体（ダブルクォートで囲うと &quot;$1&quot; &quot;$2&quot; … と展開される）</span></td>
+</tr>
+<tr>
+<td><code>$*</code></td>
+<td><span>引数全体（ダブルクォートで囲うと &quot;$1 $2 …&quot; と展開される）</span></td>
+</tr>
+<tr>
+<td><code>$#</code></td>
+<td><span>引数の個数</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>特に </span><code>$1</code><span> ～ </span><code>$9</code><span> は</span></span>
+<span><span><wbr>「位置引数</span></span>
+<span><span>(positional parameters)」<wbr></span></span>
+<span><span>とも呼ばれるよ</span></span>
+<span><span>一緒に覚えておこう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>実例が気になるなぁ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>以下は</span></span>
+<span><span>シェルスクリプトを</span></span>
+<span><span>実行したときの</span></span>
+<span><span>コマンドラインの要素を</span></span>
+<span><span>全て表示してくれるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">#!/bin/bash
+
+echo <wbr>&quot;スクリプト名: <wbr>$0&quot;
+echo <wbr>&quot;引数の個数: <wbr>$#&quot;
+
+for <wbr>ARG <wbr>in <wbr>&quot;$@&quot;
+do
+  <wbr>echo <wbr>&quot;引数: <wbr>$ARG&quot;
+done
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これを実行すれば</span></span><span><span>引数の扱いが</span></span><span><span>わかりやすいね！</span></span></div></article><article class="header2"><code>shift</code><span> コマンド</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>位置引数 </span><code>$1</code><span> ～ </span><code>$9</code><span> が</span></span><span><span>引数の値になるんだよね</span></span><span><span>引数が10個以上になったら</span></span><span><span>どうなるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのままだと</span></span><span><span>10番目以降の引数は</span></span><span><span>位置引数 </span><code>$1</code><span> ～ </span><code>$9</code><span> では扱えないよ</span></span><span><span>そういう時は</span></span><span><span>引数の位置をずらす</span></span><span><code>shift</code><span> を使うんだ</span></span></div></article><article class="code"><pre><code class="bash">shift <wbr>[N]
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは引数の値を</span></span><span><code>N</code><span> 個ずらしてくれるんだ</span></span><span><code>N</code><span> の指定がなければ </span><code>1</code><span> になるよ</span></span><span><code>1</code><span> ずらす場合は</span></span><span><span>以下のようになるんだ</span></span></div></article><article class="unordered-list"><ul><li><code>$2</code><span> の値が </span><code>$1</code><span> へ</span></li><li><code>$3</code><span> の値が </span><code>$2</code><span> へ</span></li><li><span>…10番目以降も同様にずらされる</span></li></ul></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>このように</span></span><span><span>引数をずらして使えば</span></span><span><span>10個目以降の引数を</span></span><span><span>扱えるようになるんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下はさっきの例を</span></span><span><code>shift</code><span> を使って</span></span><span><span>書き直したものだよ</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+echo <wbr>&quot;スクリプト名: <wbr>$0&quot;
+echo <wbr>&quot;引数の個数: <wbr>$#&quot;
+
+while <wbr>[ <wbr>&quot;$#&quot; <wbr>-gt <wbr>0 <wbr>]
+do
+  <wbr>echo <wbr>&quot;引数: <wbr>$1&quot;
+  <wbr>shift
+done
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span><wbr>「先頭の引数 </span><code>$1</code><span> を表示」<wbr>と</span></span><span><code>shift</code><span> で要素をずらすを繰り返して</span></span><span><span>引数が無くなったら終了なんだね</span></span><span><span>かしこい！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>shift</code><span> には一つ注意があるよ</span></span><span><span>ずらすと先頭にあった要素の値は</span></span><span><span>失われてしまうんだ</span></span><span><span>必要なら </span><code>shift</code><span> 実行前に</span></span><span><span>値を別の変数に</span></span><span><span>保存しておくといいよ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はシェルスクリプトの</span></span><span><span>引数の扱い方を学んだよ！</span></span><span><span>引数を表す特殊変数と</span></span><span><code>shift</code><span> が使えるよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>引数を処理できるようになると</span></span><span><span>スクリプトの汎用性が</span></span><span><span>ぐっと上がるよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章14話</div><div><a href="3/14/">ヌルコマンド</a></div></div><div><div>今</div><div>3章15話 引数処理</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章16話</div><div><a href="3/16/">オプション処理</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

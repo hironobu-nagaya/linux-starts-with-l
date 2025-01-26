@@ -1,0 +1,84 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章20話 パラメータ展開(基本)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,parameter expansion">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/19/" />
+<link rel="next" href="3/21/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章19話</div>
+<div><a href="3/19/">envコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章20話 パラメータ展開(基本)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章21話</div>
+<div><a href="3/21/">パラメータ展開(拡張)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>パラメータ展開(基本)</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は変数の高度な使い方</span></span>
+<span><span><wbr>「パラメータ展開</span></span>
+<span><span>(parameter expansion)」<wbr></span></span>
+<span><span>を学ぶよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>これまでだけでも</span></span>
+<span><span>結構高度だと思っていたけど</span></span>
+<span><span>まだまだ上があるんだね…</span></span>
+</div>
+</article>
+<article class="header2"><code>${変数名:=文字列}</code></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最初は<wbr>「デフォルト値の代入」<wbr>だよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">${変数名=文字列}
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは </span><code>変数名</code><span> の変数が未定義のとき</span></span><span><span>変数に </span><code>文字列</code><span> を代入して宣言した上で</span></span><span><span>その変数の値を展開してくれるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>また </span><code>=</code><span> の代わりに </span><code>:=</code><span> とすると</span></span><span><code>変数名</code><span> の変数が</span></span><span><span><wbr>「未定義」<wbr>か<wbr>「値が空」<wbr>のときに</span></span><span><span>同様の処理をしてくれるよ</span></span></div></article><article class="code"><pre><code class="bash">${変数名:=文字列}
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span><wbr>「コロン(</span><code>:</code><span>)」<wbr>をつける場合が</span></span><span><span>ほとんどなのでこちらで覚えよう</span></span><span><span>後で紹介するパラメータ展開でも同様だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>すごそうだけど…</span></span><span><span>どうやって使えば</span></span><span><span>いいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このような例は</span></span><span><span>どうだろう？</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+echo <wbr>-n <wbr>&quot;名前を入力して下さい: <wbr>&quot;
+read <wbr>NAME
+echo <wbr>&quot;こんにちは、${NAME:=名無しの権兵衛}さん！&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><code>read</code><span> の入力に</span></span><span><span>そのまま Enter だけ押したら</span></span><span><code>NAME</code><span> 変数の値は空になるね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>そして表示のときに</span></span><span><code>NAME</code><span> が空だったら</span></span><span><span>値に<wbr>「名無しの権兵衛」<wbr>を代入して</span></span><span><span><wbr>「こんにちは、<wbr>名無しの権兵衛さん！」<wbr></span></span><span><span>と表示してくれるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>そういうことだよ</span></span><span><span>便利でしょ？</span></span></div></article><article class="header2"><code>${変数名:-文字列}</code></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次は<wbr>「デフォルト値の表示」<wbr>だよ</span></span></div></article><article class="code"><pre><code class="bash">${変数名:-文字列}
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは </span><code>変数名</code><span> の変数が</span></span><span><span><wbr>「未定義」<wbr>か<wbr>「値が空」<wbr>のときに</span></span><span><code>文字列</code><span> を表示してくれるんだ</span></span><span><span>そうでない場合は</span></span><span><code>変数名</code><span> の値を表示するよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは </span><code>=</code><span> のときのように</span></span><span><span>変数への代入はしないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>わざわざ代入を避けるのは</span></span><span><span>どんなときなのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>読み取り専用変数などに使われるよ</span></span><span><span>位置変数 </span><code>$1</code><span> などでよく使われるね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>使っている例を</span></span><span><span>見せて欲しいなぁ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>こういうので</span></span><span><span>どうだろう？</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+引数が必要なコマンド <wbr>&quot;${1:-default}&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>シェルスクリプトに</span></span><span><span>引数が与えられなかったら</span></span><span><span>シェルスクリプト内の</span></span><span><code>引数が必要なコマンド</code><span> の引数に</span></span><span><code>default</code><span> を指定するんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>-</code><span> はマイナス記号として読むより</span></span><span><code>=</code><span> から横棒が一本少なくなって</span></span><span><span>代入ができなくなくなって</span></span><span><span>弱くなったと読むと覚えやすいよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span></div></article><article class="header2"><code>${変数名:+文字列}</code></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次は<wbr>「値の代用」<wbr>だよ！</span></span></div></article><article class="code"><pre><code class="bash">${変数名:+文字列}
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは </span><code>変数名</code><span> の変数が</span></span><span><span><wbr>「未定義」<wbr>か<wbr>「値が空」<wbr>でないときに</span></span><span><code>変数名</code><span> の値の代わりに</span></span><span><code>文字列</code><span> を表示してくれるんだ</span></span><span><span>そうでなければ通常どおり</span></span><span><code>変数名</code><span> の値(空)を表示するよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>値があるのに</span></span><span><span>別の値を使いたいとき…</span></span><span><span>うーん</span></span><span><span>思いつかないや…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>こんな例は</span></span><span><span>どうだろう？</span></span></div></article><article class="code"><pre><code class="bash">export <wbr>PATH=&quot;$PATH${PATH:+:}$HOME/bin&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>PATH</code><span> 変数の値は</span></span><span><span>コマンドを探すパスを</span></span><span><span><wbr>「コロン(</span><code>:</code><span>)」<wbr>で</span></span><span><span>区切ったものだよね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下を </span><code>PATH</code><span> 変数の値が</span></span><span><span>空になっていた場合にも</span></span><span><span>対応できるよう</span></span><span><span>拡張したものなんだ</span></span></div></article><article class="code"><pre><code class="bash">export <wbr>PATH=&quot;$PATH:$HOME/bin&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><span>もし </span><code>PATH</code><span> の値が空だったら</span></span><span><code>export PATH=&quot;$HOME/bin&quot;</code></span><span><span>もし </span><code>PATH</code><span> の値が空でなかったら</span></span><span><code>export PATH=&quot;$PATH:$HOME/bin&quot;</code></span><span><span>そういうふうに</span></span><span><span>展開してくれるんだね！</span></span></div></article><article class="header2"><code>${変数名:?文字列}</code></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>最後は<wbr>「定義のチェック」<wbr>だよ</span></span></div></article><article class="code"><pre><code class="bash">${変数名:?文字列}
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは </span><code>変数名</code><span> の変数が</span></span><span><span><wbr>「未定義」<wbr>か<wbr>「値が空」<wbr>のときに</span></span><span><span>シェルスクリプトを停止して</span></span><span><code>文字列</code><span> を標準エラー出力に</span></span><span><span>出力するんだ</span></span><span><span>そうでなければ通常通り</span></span><span><span>変数の値を展開するよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これはわかりやすい！</span></span><span><span>値がちゃんと</span></span><span><span>指定されていないと</span></span><span><span>困る場合の確認に</span></span><span><span>使うんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>そのとおり！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>でも変数を使う所でしか</span></span><span><span>記述できないのは不便だなぁ</span></span><span><span>複数の変数があったら</span></span><span><span>確認があちこちに</span></span><span><span>散らばっちゃうよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>なのでヌルコマンド </span><code>:</code><span> と</span></span><span><span>一緒に使われるよ</span></span><span><span>スクリプト冒頭などで</span></span><span><span>以下のように記述されるんだ</span></span></div></article><article class="code"><pre><code class="bash">: <wbr>${X:?Xの値が設定されていません}
+: <wbr>${Y:?Yの値が設定されていません}
+: <wbr>${Z:?Zの値が設定されていません}
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おおっ！</span></span><span><span>そんなふうに</span></span><span><span>使えるんだ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はパラメータ展開を学んだよ！</span></span><span><span>以下のような記述があるんだ！</span></span></div></article><article class="table"><table><thead><tr><th><span>記述</span></th><th><span>挙動</span></th></tr></thead><tbody><tr><td><code>${変数名:=文字列}</code></td><td><code>変数名</code><span> が未定義か値が空なら </span><code>変数名</code><span> に </span><code>文字列</code><span> を代入し表示</span></td></tr><tr><td><code>${変数名:-文字列}</code></td><td><code>変数名</code><span> が未定義か値が空なら </span><code>文字列</code><span> を表示、<wbr>そうでないなら </span><code>変数名</code><span> の値を表示</span></td></tr><tr><td><code>${変数名:+文字列}</code></td><td><code>変数名</code><span> が未定義か値が空なら </span><code>変数名</code><span> の値(空)を表示、<wbr>そうでないなら </span><code>文字列</code><span> を表示</span></td></tr><tr><td><code>${変数名:?文字列}</code></td><td><code>変数名</code><span> が未定義か値が空ならスクリプトを停止して  </span><code>文字列</code><span> をエラー表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>変数をより柔軟に扱える</span></span><span><span>便利な記法だよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章19話</div><div><a href="3/19/">envコマンド</a></div></div><div><div>今</div><div>3章20話 パラメータ展開(基本)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章21話</div><div><a href="3/21/">パラメータ展開(拡張)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

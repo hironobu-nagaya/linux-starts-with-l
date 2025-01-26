@@ -1,0 +1,77 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章22話 シェル関数</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,shell function,return,local">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/21/" />
+<link rel="next" href="3/23/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章21話</div>
+<div><a href="3/21/">パラメータ展開(拡張)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章22話 シェル関数</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章23話</div>
+<div><a href="3/23/">ドットコマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>シェル関数</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>自作スクリプトの内容が</span></span>
+<span><span>どんどん大きくなって</span></span>
+<span><span>読むのも大変になってきたよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それは大変だね</span></span>
+<span><span>今回はまとまった機能を分割する</span></span>
+<span><span><wbr>「シェル関数(shell function)」<wbr>を学ぼう！</span></span>
+<span><span>以降、<wbr>単に<wbr>「関数(function)」<wbr>と呼ぶよ</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>関数は以下のように定義するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">function <wbr>関数名() <wbr>{
+  <wbr>処理
+}
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>function</code><span> は省略可能なんだ</span></span><span><span>だからこのように書いても同じだよ</span></span></div></article><article class="code"><pre><code class="bash">関数名() <wbr>{
+  <wbr>処理
+}
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>定義した関数はコマンドと</span></span><span><span>同じように呼び出せるよ</span></span></div></article><article class="code"><pre><code class="bash">関数名
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>処理のまとまりに</span></span><span><span>意味のある名前を付けて</span></span><span><span>呼び出せるのね</span></span><span><span>これだけでも</span></span><span><span>スクリプトの中身を</span></span><span><span>整理できそうだよ</span></span></div></article><article class="header2"><span>終了ステータス</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>関数も終了ステータスを返すよ</span></span><span><span>関数内で最後に実行された</span></span><span><span>コマンドの終了ステータスが</span></span><span><span>関数の終了ステータスになるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>終了ステータスの</span></span><span><span>制御は難しそうだね…</span></span><span><code>exit</code><span> のように</span></span><span><span>終わりたいタイミングで</span></span><span><span>関数を終わらせて</span></span><span><span>終了ステータスを</span></span><span><span>返せないものかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>return</code><span> は</span></span><span><span>関数を終了して</span></span><span><span>終了ステータスを返すよ！</span></span></div></article><article class="code"><pre><code class="bash">return <wbr>[終了ステータス]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>exit</code><span> は</span></span><span><span>シェルを終了するけど</span></span><span><code>return</code><span> は</span></span><span><span>関数を終了させるんだね！</span></span></div></article><article class="header2"><span>引数</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>関数内では</span></span><span><span>引数を表す特殊変数には</span></span><span><span>関数が呼ばれたときの</span></span><span><span>引数の値が入っているよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>関数でも引数を</span></span><span><span>扱えるんだね</span></span><span><span>ほとんどコマンドと</span></span><span><span>変わらないよ！</span></span></div></article><article class="header2"><code>local</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>local</code><span> は</span></span><span><span>シェル関数内のみ有効な</span></span><span><span>変数を宣言するよ</span></span><span><span>その役割から</span></span><span><span>関数の中でしか</span></span><span><span>使えないよ</span></span></div></article><article class="code"><pre><code class="bash">local <wbr>[オプション]... <wbr>[変数名[=値]]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>変数の範囲が</span></span><span><span>わかりやすくなるね！</span></span></div></article><article class="header2"><span>注意点</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シェルスクリプトは</span></span><span><span>上から下へ書かれた順に</span></span><span><span>実行されて行くんだ</span></span><span><span>なので関数定義の前に</span></span><span><span>関数呼び出しをすると</span></span><span><span><wbr>「そんなコマンドはない！」<wbr></span></span><span><span>と怒られるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>関数定義は</span></span><span><span>早いうちに</span></span><span><span>しておいた方が</span></span><span><span>良さそうだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>関数定義は</span></span><span><span>シェルスクリプト冒頭に</span></span><span><span>書くのがおすすめだよ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は関数の使い方を学んだよ！</span></span><span><span>まとまった処理に名前を付けて</span></span><span><span>コマンドのように呼び出せるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>関数はシェルスクリプト内でよく使われるけど</span></span><span><span>通常のシェル上でも定義できるよ</span></span><span><span>あたかもそういうコマンドがあるかのように</span></span><span><span>実行できるようになって便利なんだ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章21話</div><div><a href="3/21/">パラメータ展開(拡張)</a></div></div><div><div>今</div><div>3章22話 シェル関数</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章23話</div><div><a href="3/23/">ドットコマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

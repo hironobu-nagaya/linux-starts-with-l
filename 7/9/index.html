@@ -1,0 +1,170 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 7章9話 ウォッチドッグ</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,Raspberry Pi,watchdog">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="7/8/" />
+<link rel="next" href="7/10/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>7章8話</div>
+<div><a href="7/8/">Raspberry Pi独自機能</a></div>
+</div>
+<div>
+<div>今</div>
+<div>7章9話 ウォッチドッグ</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>7章10話</div>
+<div><a href="7/10/">UASP無効化</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ウォッチドッグ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Raspbrerry Pi が</span></span>
+<span><span>応答しないと思ったら</span></span>
+<span><span>ハングアップしていたんだ！</span></span>
+<span><span>こういう場合に自動で再起動して</span></span>
+<span><span>くれたりすると助かるんだけど…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>実はそういう機能があるんだ！</span></span>
+<span><span><wbr>「ウォッチドッグ(watchdog)」<wbr></span></span>
+<span><span>と呼ばれるよ</span></span>
+<span><span>Raspberry Pi には</span></span>
+<span><span>この機能があるから</span></span>
+<span><span>設定すれば利用できるよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span><wbr>「番犬」<wbr>という意味だよね！</span></span>
+<span><span>とても頼りになりそう！</span></span>
+</div>
+</article>
+<article class="header2"><span>仕組み</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>でも…</span></span>
+<span><span>ハングアップしているのに</span></span>
+<span><span>どうしてその状態から</span></span>
+<span><span>再起動できるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ウォッチドッグは</span></span>
+<span><span><wbr>「ハードウェア」<wbr>で</span></span>
+<span><span>実装されているんだ</span></span>
+<span><span>チップなどに内蔵されていて</span></span>
+<span><span>OS から独立しているよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>なるほど！</span></span>
+<span><span>それなら OS がハングアップしても</span></span>
+<span><span>ウォッチドッグは動き続けられるね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ウォッチドッグは中で</span></span>
+<span><span>タイマーが動いているんだ</span></span>
+<span><span>タイマーが一定時間を過ぎると</span></span>
+<span><span>ハードウェアを再起動するように</span></span>
+<span><span>なっているよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>それなら一定時間が来たら</span></span>
+<span><span>いつも再起動しちゃうよ？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そこで OS はウォッチドッグへ</span></span>
+<span><span>定期的にタイマーをリセットする</span></span>
+<span><span>信号を送っているんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>なるほど！</span></span>
+<span><span>OS がハングアップしちゃうと</span></span>
+<span><span>信号が送られなくなって</span></span>
+<span><span>再起動するという仕組みなんだね！</span></span>
+</div>
+</article>
+<article class="header2"><span>有効化</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずはウォッチドッグの</span></span>
+<span><span>機能を有効にしよう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Raspberry Pi の機能を</span></span>
+<span><span>管理している設定ファイルは</span></span>
+<span><code>/boot/firmware/config.txt</code><span> だよ</span></span>
+<span><span>そこの </span><code>[all]</code><span> セクションに</span></span>
+<span><span>以下の内容を記述しよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="plaintext">dtparam=watchdog=on
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは以下のコマンドで</span></span><span><span>実行できるよ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>sed <wbr>-i.dist <wbr>\
+    <wbr>'/^\[all\]'/a <wbr>dtparam=watchdog=on' <wbr>\
+    <wbr>/boot/firmware/config.txt
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>実行したよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では内容を</span></span><span><span>確認してみよう！</span></span></div></article><article class="code"><pre><code class="bash">cat <wbr>/boot/firmware/config.txt
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>お兄ちゃんのコマンドを</span></span><span><span>信頼しているけど</span></span><span><span>確認は大事だよね！</span></span></div></article><article class="code"><pre><code class="console">...
+[all]
+dtparam=watchdog=on
+...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>ちゃんと記述があるよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ウォッチドッグ有効化には</span></span><span><span>再起動が必要なんだ</span></span><span><span>まだ設定することが残っているから</span></span><span><span>その設定を終えてから再起動するね</span></span></div></article><article class="header2"><span>設定</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ウォッチドッグの設定ファイルは</span></span><span><code>/etc/systemd/system.conf</code><span> だよ</span></span><span><span>中身を見てみよう！</span></span></div></article><article class="code"><pre><code class="bash">cat <wbr>/etc/systemd/system.conf
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>Watchdog</code><span> という</span></span><span><span>言葉が入っている</span></span><span><span>設定がいくつかあるね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>RuntimeWatchdogSec</code><span> という項目が</span></span><span><span><wbr>「ウォッチドッグへ信号を送信する間隔（秒）」<wbr></span></span><span><span>を表しているよ</span></span><span><span>Raspberry Pi のウォッチドッグは</span></span><span><span>15 秒で再起動するから</span></span><span><span>それよりも小さな値を</span></span><span><span>設定する必要があるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ここでは </span><code>RuntimeWatchdogSec</code><span> の</span></span><span><span>コメントアウト </span><code>#</code><span> を外して</span></span><span><span>値を </span><code>off</code><span> から </span><code>10</code><span> に変更しよう</span></span></div></article><article class="situation"><span>変更前</span></article><article class="code"><pre><code class="plaintext"><span class="silver">#RuntimeWatchdogSec=off</span>
+</code></pre></article><article class="situation"><span>変更後</span></article><article class="code"><pre><code class="plaintext">RuntimeWatchdogSec=10
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この変更は</span></span><span><span>以下のコマンドで</span></span><span><span>実現可能だよ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>sed <wbr>-i.dist <wbr>\
+    <wbr>'s/^#\(RuntimeWatchdogSec\)=.*/\1=10/' <wbr>\
+    <wbr>/etc/systemd/system.conf
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>こっちも実行したよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ちゃんとそのような</span></span><span><span>設定があるか</span></span><span><span>確認してみよう！</span></span></div></article><article class="code"><pre><code class="bash">grep <wbr>'^RuntimeWatchdogSec=' <wbr>/etc/systemd/system.conf
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>grep</code><span> で</span></span><span><span>指定された設定を</span></span><span><span>検索するんだね！</span></span></div></article><article class="code"><pre><code class="console">RuntimeWatchdogSec=10
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>ちゃんと設定があったよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>後は再起動すれば</span></span><span><span>ウォッチドッグが</span></span><span><span>動き始めるよ！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>reboot
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はウォッチドッグの</span></span><span><span>仕組みと設定を学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>特にヘッドレス運用している場合は</span></span><span><span>ハングアップに気づくのが</span></span><span><span>遅れがちになるよ</span></span><span><span>その対策になる機能なので</span></span><span><span>有効に活用しよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>7章8話</div><div><a href="7/8/">Raspberry Pi独自機能</a></div></div><div><div>今</div><div>7章9話 ウォッチドッグ</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>7章10話</div><div><a href="7/10/">UASP無効化</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

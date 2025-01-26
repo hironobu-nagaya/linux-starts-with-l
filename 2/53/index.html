@@ -1,0 +1,80 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章53話 AND演算子とOR演算子</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,and operator,or operator">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/52/" />
+<link rel="next" href="2/54/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章52話</div>
+<div><a href="2/52/">testコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章53話 AND演算子とOR演算子</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章54話</div>
+<div><a href="2/54/">正規表現</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>AND 演算子と OR 演算子</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>今回は終了ステータスを</span></span>
+<span><span>有効に使う方法を</span></span>
+<span><span>教えてくれるんだよね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうだよ！</span></span>
+<span><span>今回は AND 演算子 </span><code>&amp;&amp;</code><span> と</span></span>
+<span><span>OR 演算子 </span><code>||</code><span> を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><span>AND 演算子 </span><code>&amp;&amp;</code></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは AND 演算子 </span><code>&amp;&amp;</code><span> からだよ</span></span>
+<span><span>このように書くんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">コマンド1 <wbr>&amp;&amp; <wbr>コマンド2
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは</span></span><span><span><wbr>「</span><code>コマンド1</code><span> が成功したら</span></span><span><code>コマンド2</code><span> を実行する」<wbr></span></span><span><span>という意味になるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へー！</span></span><span><code>コマンド1</code><span> は</span></span><span><span>まさに前回の</span></span><span><code>test</code><span> が使えるね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><code>nproc</code><span> を使って</span></span><span><span>数値の大小で処理を</span></span><span><span>分けてみよう！</span></span></div></article><article class="code"><pre><code class="bash">nproc
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>nproc</code><span> は CPU のコア数を</span></span><span><span>表示してくれるんだったよね！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>実行結果は</span></span><span><span>こうだったよ</span></span></div></article><article class="code"><pre><code class="console">4
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それでは AND 演算子を</span></span><span><span>使った例を見てみよう</span></span></div></article><article class="code"><pre><code class="bash">[ <wbr>&quot;$(nproc)&quot; <wbr>-ge <wbr>4 <wbr>] <wbr>&amp;&amp; <wbr>echo <wbr>&quot;この <wbr>Linux <wbr>システムはすごい！ <wbr>CPU <wbr>のコアが <wbr>$(nproc) <wbr>個もあるよ！&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ええっと…</span></span><span><code>$(nproc)</code><span> は</span></span><span><span>CPU のコア数に</span></span><span><span>置き換わるんだよね</span></span><span><span>それが4以上だったら</span></span><span><span>成功になるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうそう</span></span><span><span>その解釈で合っているよ</span></span><span><span>それが成功を返したら</span></span><span><span>次の </span><code>echo ...</code><span> が</span></span><span><span>実行されるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあ実行してみるね！</span></span></div></article><article class="code"><pre><code class="console">この <wbr>Linux <wbr>システムはすごい！ <wbr>CPU <wbr>のコアが <wbr>4 <wbr>個もあるよ！
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おお！</span></span><span><span>期待どおりに動いたね！</span></span><span><span>しかもコマンド展開のおかげで</span></span><span><span>コア数も自動で挿入されるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>いい感じだね！</span></span></div></article><article class="header2"><span>OR 演算子 </span><code>||</code></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次は OR 演算子 </span><code>||</code><span> だね</span></span><span><span>これはこのように書くよ</span></span></div></article><article class="code"><pre><code class="bash">コマンド1 <wbr>|| <wbr>コマンド2
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは</span></span><span><span><wbr>「</span><code>コマンド1</code><span> が失敗したら</span></span><span><code>コマンド2</code><span> を実行する」<wbr></span></span><span><span>という意味になるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>AND 演算子 </span><code>&amp;&amp;</code><span> の逆だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>早速 OR 演算子を</span></span><span><span>試してみよう！</span></span></div></article><article class="code"><pre><code class="bash">[ <wbr>&quot;$(nproc)&quot; <wbr>-ge <wbr>4 <wbr>] <wbr>|| <wbr>echo <wbr>&quot;この <wbr>Linux <wbr>システムは頑張り屋！ <wbr>$(nproc) <wbr>個のコアを上手く使い回しているよ！&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあ実行するね！</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>…あれ？</span></span><span><span>今度は何も</span></span><span><span>表示されないね？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>[ $(nproc) -ge 4 ]</code><span> が</span></span><span><span>成功したからだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この場合 </span><code>||</code><span> の</span></span><span><span>後ろのコマンドは</span></span><span><span>実行されないんだ</span></span></div></article><article class="header2"><span>AND 演算子と OR 演算子の組み合わせ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うーん…</span></span><span><span>何も表示されないのは</span></span><span><span>ちょっとさみしいな…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>&amp;&amp;</code><span> と </span><code>||</code><span> は</span></span><span><span>組み合わせられるんだ</span></span><span><span>以下のように書くよ！</span></span></div></article><article class="code"><pre><code class="bash">コマンド1 <wbr>&amp;&amp; <wbr>コマンド2 <wbr>|| <wbr>コマンド3
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このようにすると</span></span><span><code>コマンド1</code><span> が成功したら </span><code>コマンド2</code><span> を</span></span><span><code>コマンド1</code><span> が失敗したら </span><code>コマンド3</code><span> を</span></span><span><span>実行してくれるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>コマンド1</code><span> が</span></span><span><span>成功でも失敗でも</span></span><span><span>なんらかのコマンドが</span></span><span><span>実行されるんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それでは CPU のコア数がどんな場合でも</span></span><span><span>メッセージを表示するようにしてみよう！</span></span></div></article><article class="code"><pre><code class="bash">[ <wbr>&quot;$(nproc)&quot; <wbr>-ge <wbr>8 <wbr>] <wbr>\
+  <wbr>&amp;&amp; <wbr>echo <wbr>&quot;この <wbr>Linux <wbr>システムはすごい！ <wbr>CPU <wbr>のコアが <wbr>$(nproc) <wbr>個もあるよ！&quot; <wbr>\
+  <wbr>|| <wbr>echo <wbr>&quot;この <wbr>Linux <wbr>システムは頑張り屋！ <wbr>$(nproc) <wbr>個のコアを上手く使い回しているよ！&quot;
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今度は条件が失敗するように</span></span><span><span>比較する数字を</span></span><span><code>4</code><span> から </span><code>8</code><span> に増やしたよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>長くなるから</span></span><span><span><wbr>「バックスラッシュ(</span><code>\</code><span>)」<wbr>で</span></span><span><span>コマンドラインを複数行に分けて</span></span><span><span>見やすくしているんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうことだね</span></span><span><span>では実行してみようか</span></span></div></article><article class="code"><pre><code class="bash">この <wbr>Linux <wbr>システムは頑張り屋！4 <wbr>個のコアを上手く使い回しているよ！
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>おお！</span></span><span><span>今度は OR 演算子の方の</span></span><span><span>メッセージが表示されたね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は AND 演算子 </span><code>&amp;&amp;</code><span> と</span></span><span><span>OR 演算子 </span><code>||</code><span> を学んだよ！</span></span><span><span>これで条件によって</span></span><span><span>処理を分けることができるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>また </span><code>&amp;&amp;</code><span> と </span><code>||</code><span> を組み合わせられよ</span></span><span><span>最終的に必ずどちらかの</span></span><span><span>処理が実行されるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これらを使えば状況によって</span></span><span><span>処理を柔軟に分けることができるよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章52話</div><div><a href="2/52/">testコマンド</a></div></div><div><div>今</div><div>2章53話 AND演算子とOR演算子</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章54話</div><div><a href="2/54/">正規表現</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

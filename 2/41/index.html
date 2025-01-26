@@ -1,0 +1,88 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章41話 コマンド置換</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,command substitution,nproc">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/40/" />
+<link rel="next" href="2/42/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章40話</div>
+<div><a href="2/40/">シェル変数</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章41話 コマンド置換</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章42話</div>
+<div><a href="2/42/">算術式展開</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>コマンド置換</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>コマンドの出力を</span></span>
+<span><span>変数の値にしたいんだけど</span></span>
+<span><span>できそうでできないんだ…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それは</span></span>
+<span><span><wbr>「コマンド置換</span></span>
+<span><span>(command substitution)」<wbr></span></span>
+<span><span>の出番だね</span></span>
+<span><span>コマンド出力を</span></span>
+<span><span>文字列にしてくれるんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>さっそく試してみようよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>バッククォートでのコマンド置換</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>nproc</code><span> は</span></span>
+<span><span>CPU のコア数を</span></span>
+<span><span>表示するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">nproc <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>重要なオプションはないので</span></span><span><span>そのまま実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">nproc
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="console">4
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>このシステムには</span></span><span><span>CPU のコアが</span></span><span><span>4つあるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この結果を</span></span><span><code>CORES</code><span> 変数に</span></span><span><span>保存してみよう！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>こう書けば</span></span><span><span>いいんだよね？</span></span></div></article><article class="code"><pre><code class="bash">CORES=4
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>確かにコアの数は保存できたけど…</span></span><span><span>これだと毎回 </span><code>nproc</code><span> で調べて</span></span><span><span>値を指定しなきゃいけないよね</span></span><span><span>私のやりたかったことには</span></span><span><span>届いていない感じかな</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そこで便利なのが</span></span><span><span>コマンド置換だよ</span></span><span><span>以下のようにコマンドを</span></span><span><span><wbr>「バッククォート(</span><code>`</code><span>)」<wbr>で囲むと</span></span><span><span>コマンドの出力が</span></span><span><span>そのまま文字列となって</span></span><span><span>変数の値として使えるんだ</span></span></div></article><article class="code"><pre><code class="bash">CORES=&quot;`nproc`&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これで本当に</span></span><span><code>CORES</code><span> の値が</span></span><span><code>4</code><span> になったのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それは以下のコマンドで</span></span><span><span>確認してみよう！</span></span></div></article><article class="code"><pre><code class="bash">echo <wbr>&quot;$CORES&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>なるほど…</span></span><span><code>echo</code><span> で</span></span><span><span>変数の値を表示して</span></span><span><span>確認できるのね！</span></span></div></article><article class="code"><pre><code class="console">4
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>本当だ！</span></span><span><span>ちゃんと </span><code>4</code><span> と</span></span><span><span>表示されたよ！</span></span></div></article><article class="header2"><code>$( ... <wbr>)</code><span> でのコマンド置換</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>バッククォートは</span></span><span><span>古い書き方なんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>最近のシェルでは</span></span><span><span>代わりに </span><code>$(コマンド)</code><span> と書くよ</span></span></div></article><article class="code"><pre><code class="bash">CORES=&quot;$(nproc)&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>こっちの書き方だと</span></span><span><span>コマンド置換の</span></span><span><span>始まりと終わりが</span></span><span><span>分かりやすいね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>他にもクォートの入れ子も</span></span><span><span>柔軟に解釈してくれるんだ</span></span></div></article><article class="code"><pre><code class="bash">MESSAGE=&quot;$(echo <wbr>&quot;hello, <wbr>$USER&quot;)&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ただダブルクォートの出現順で</span></span><span><span>判断するのではなく</span></span><span><code>&quot;$( ... <wbr>)&quot;</code><span> の中に</span></span><span><code>&quot;hello, <wbr>...&quot;</code><span> があると</span></span><span><span>賢く判断してくれるんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>なので可能なら</span></span><span><code>$( ... <wbr>)</code><span> で</span></span><span><span>コマンド置換を</span></span><span><span>書くようにしよう！</span></span></div></article><article class="header2"><span>ダブルクォートで囲む</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>お兄ちゃんは</span></span><span><span>シェル変数やコマンド置換を</span></span><span><span>いつも<wbr>「ダブルクォート(</span><code>&quot;</code><span>)」<wbr>で</span></span><span><span>囲んでいるよね？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>よく気が付いたね！</span></span><span><span>意識的にそうしているんだよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>そうすることで</span></span><span><span>何かいいことが</span></span><span><span>あるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span><wbr>「ダブルクォート(</span><code>&quot;</code><span>)」<wbr>で囲むと</span></span><span><span>それが1つのまとまりであることが</span></span><span><span>保証されるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>例えば </span><code>&quot;$(コマンド)&quot;</code><span> としたときに</span></span><span><span>コマンドが何も出力しなくても空文字になるし</span></span><span><code>rmdir &quot;$DIR&quot;</code><span> を実行したときに</span></span><span><code>DIR</code><span> 変数の値が </span><code>Program Files</code><span> と</span></span><span><span>スペースが含まれていても問題ないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「転ばぬ先の杖」<wbr>みたいだね！</span></span><span><span>私も真似して書いてみるよ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「コマンド置換」<wbr>で</span></span><span><span>コマンドの出力を文字列として</span></span><span><span>扱う方法を学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>コマンド置換は高度な操作でよく使われるよ</span></span><span><code>$( ... <wbr>)</code><span> でコマンドを文字列に置き換えよう</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章40話</div><div><a href="2/40/">シェル変数</a></div></div><div><div>今</div><div>2章41話 コマンド置換</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章42話</div><div><a href="2/42/">算術式展開</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

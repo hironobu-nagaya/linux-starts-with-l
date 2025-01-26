@@ -1,0 +1,106 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章26話 シグナル処理</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,signal,trap">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/25/" />
+<link rel="next" href="3/27/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章25話</div>
+<div><a href="3/25/">一時ファイル作成</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章26話 シグナル処理</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章27話</div>
+<div><a href="3/27/">ジョブ管理</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>シグナル処理</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>一時ファイルを作るスクリプトを</span></span>
+<span><span>Ctrl + C で止めると</span></span>
+<span><span>一時ファイルが残っちゃうよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>スクリプトの最後の後処理で</span></span>
+<span><span>一時ファイルを削除しているので</span></span>
+<span><span>途中で止めたら残るのは</span></span>
+<span><span>仕方ないとは思うけど…</span></span>
+<span><span>なんとかならないかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「Ctrl + C」<wbr>は</span></span>
+<span><span><wbr>「SIGINT(</span><code>2</code><span>)」<wbr>を</span></span>
+<span><span>送信だったね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回はシグナルを</span></span>
+<span><span>処理する方法を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><code>trap</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>trap</code><span> は</span></span>
+<span><span>シグナルの処理を</span></span>
+<span><span>定義するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">trap <wbr>['コマンド'] <wbr>シグナル番号...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シェルが指定された</span></span><span><code>シグナル番号</code><span> を受け取ったら</span></span><span><code>コマンド</code><span> を実行してくれるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>trap</code><span> の </span><code>シグナル番号</code><span> に</span></span><span><code>2</code><span> を指定すれば</span></span><span><span>Ctrl + C で止められたときの</span></span><span><span>処理を指定できるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>trap</code><span> では</span></span><span><span>特別なシグナル番号 </span><code>0</code><span> を指定できるんだ</span></span><span><span>これは<wbr>「スクリプトが終了したとき」<wbr>に発せられるよ</span></span><span><span>スクリプトの後処理などに使われるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>0</code><span> 番はよく使いそうだね</span></span><span><span>他に気をつける</span></span><span><span>シグナルはあるかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>強制終了を表す</span></span><span><span><wbr>「SIGKILL(</span><code>9</code><span>)」<wbr>は</span></span><span><span>処理できないんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>trap</code><span> で </span><code>9</code><span> 番を指定しても</span></span><span><code>コマンド</code><span> は実行されず</span></span><span><span>スクリプトは即時終了になるよ</span></span></div></article><article class="header2"><span>シグナルのリセット</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>一度 </span><code>trap</code><span> を設定すると</span></span><span><span>解除できないのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>コマンドを省略すると</span></span><span><code>trap</code><span> をの設定を</span></span><span><span>解除するんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下はシグナル番号 </span><code>2</code><span> の</span></span><span><code>tarp</code><span> の設定を解除するよ</span></span></div></article><article class="code"><pre><code class="bash">trap <wbr>2
+</code></pre></article><article class="header2"><span>シグナルの無視</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>指定するコマンドを</span></span><span><span>空文字にすると</span></span><span><span>そのシグナルに対して</span></span><span><span><wbr>「何もしない」<wbr>という</span></span><span><span>指定ができるよ</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>つまり指定されたシグナルを</span></span><span><span>無視する動作になるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下は SIGHUP(</span><code>1</code><span>) を</span></span><span><span>無視する設定だよ</span></span></div></article><article class="code"><pre><code class="bash">trap <wbr>'' <wbr>1
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>nohup</code><span> と同じ挙動になるんだね！</span></span><span><span>シグナルの<wbr>「リセット」<wbr>と<wbr>「無視」<wbr>は</span></span><span><span>指定が似ているから</span></span><span><span>気をつけなきゃ…</span></span></div></article><article class="header2"><span>実践</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ではシグナルが送信されても</span></span><span><span>一時ファイルが</span></span><span><span>後片付けされるような</span></span><span><span>スクリプトを書いてみよう！</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+<span class="silver"># <wbr>シグナル処理定義</span>
+function <wbr>cleanup() <wbr>{
+  <wbr>[ <wbr>-e <wbr>&quot;$TEMP_FILE&quot; <wbr>] <wbr>&amp;&amp; <wbr>rm <wbr>-rf <wbr>&quot;$TEMP_FILE&quot;
+  <wbr>exit <wbr>&quot;$1&quot;
+}
+
+<span class="silver"># <wbr>シグナル処理設定</span>
+trap <wbr>'cleanup <wbr>0' <wbr>0
+trap <wbr>'cleanup <wbr>1' <wbr>1 <wbr>2 <wbr>3 <wbr>15
+
+<span class="silver"># <wbr>一時ファイル作成</span>
+TEMP_FILE=&quot;$(mktemp <wbr>&quot;/tmp/${0##*/}.XXXXXXXX&quot;)&quot;
+
+<span class="silver"># <wbr>一時ファイルを使う処理</span>
+...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このスクリプトでは</span></span><span><span>シグナルを以下のように処理しているよ</span></span></div></article><article class="table"><table><thead><tr><th><span>シグナル名</span></th><th><span>シグナル番号</span></th><th><span>意味</span></th><th><span>終了ステータス</span></th></tr></thead><tbody><tr><td><span>-</span></td><td><span>0</span></td><td><span>シェルスクリプト終了</span></td><td><span>0</span></td></tr><tr><td><span>SIGHUP</span></td><td><span>1</span></td><td><span>端末の接続切れを通知</span></td><td><span>1</span></td></tr><tr><td><span>SIGINT</span></td><td><span>2</span></td><td><span>キーボード割り込み(Ctrl + C)</span></td><td><span>1</span></td></tr><tr><td><span>SIGQUIT</span></td><td><span>3</span></td><td><span>キーボード中止(Ctrl + /)</span></td><td><span>1</span></td></tr><tr><td><span>SIGTERM</span></td><td><span>15</span></td><td><span>終了</span></td><td><span>1</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これまで一番最後にあった</span></span><span><span>一時ファイルの後処理は</span></span><span><span>書かなくてもいいんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シェルスクリプト終了時に</span></span><span><code>0</code><span> 番のシグナルが送られるからね</span></span><span><code>trap</code><span> で </span><code>0</code><span> 番を</span></span><span><span>処理すると決めておくと</span></span><span><span>書かなくても良くなるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>記述が少なくても</span></span><span><span>わざわざ </span><code>cleanup</code><span> 関数を</span></span><span><span>定義しているみたいだけど</span></span><span><span>どうしてだろう？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>trap</code><span> で指定する </span><code>コマンド</code><span> は</span></span><span><span>1行である必要があるんだ</span></span><span><span>この </span><code>コマンド</code><span> を</span></span><span><span>関数にしてあげることで</span></span><span><span>複数行の処理を書けるようになるんだ</span></span><span><code>trap</code><span> でよく使われる書き方だよ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はシェルスクリプトで</span></span><span><span>シグナルを扱う方法を学んだよ！</span></span><span><code>trap</code><span> を使って定義してあげるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>trap</code><span> が実行されてから</span></span><span><span>シグナルを扱えるようになるんだ</span></span><span><span>なのでなるべくスクリプトの冒頭で</span></span><span><code>trap</code><span> を実行してあげるようにしよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章25話</div><div><a href="3/25/">一時ファイル作成</a></div></div><div><div>今</div><div>3章26話 シグナル処理</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章27話</div><div><a href="3/27/">ジョブ管理</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

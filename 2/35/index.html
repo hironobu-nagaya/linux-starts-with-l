@@ -1,0 +1,77 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章35話 ファイル検索</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,file search,find,locate,updatedb,xargs">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/34/" />
+<link rel="next" href="2/36/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章34話</div>
+<div><a href="2/34/">パイプ</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章35話 ファイル検索</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章36話</div>
+<div><a href="2/36/">バックグラウンド実行</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ファイル検索</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>特定のファイルが</span></span>
+<span><span>どこにあるかを調べられるかな？</span></span>
+<span><span>全部のファイルのパスを覚えられないので</span></span>
+<span><span>検索機能が欲しくなってきたよ…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんできるよ！</span></span>
+<span><span>今回はファイル検索コマンドを</span></span>
+<span><span>見ていこう！</span></span>
+</div>
+</article>
+<article class="header2"><code>find</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>find</code><span> は</span></span>
+<span><span>ファイル検索コマンドだよ</span></span>
+<span><span>以下のように実行するんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">find <wbr>起点パス <wbr>検索オプション...
+</code></pre></article><article class="table"><table><thead><tr><th><span>検索オプション</span></th><th><span>意味</span></th></tr></thead><tbody><tr><td><span>-name ファイル名</span></td><td><span>指定されたファイル名を検索。<wbr>メタ文字というワイルドカードと似た指定ができる</span></td></tr><tr><td><span>-type ファイル種別</span></td><td><span>指定したファイル種別のファイルを検索（後述）</span></td></tr><tr><td><span>-user ユーザ名</span></td><td><span>指定された所有ユーザのファイルを検索</span></td></tr><tr><td><span>-group グループ名</span></td><td><span>指定された所有グループのファイルを検索</span></td></tr><tr><td><span>-size サイズ</span></td><td><span>ファイルサイズが指定以上のファイルを検索</span></td></tr></tbody></table></article><article class="table"><table><thead><tr><th><span>ファイル種別</span></th><th><span>意味</span></th></tr></thead><tbody><tr><td><span>f</span></td><td><span>通常ファイル</span></td></tr><tr><td><span>d</span></td><td><span>ディレクトリ</span></td></tr><tr><td><span>l</span></td><td><span>シンボリックリンク</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ちょっと扱いが</span></span><span><span>難しそうだね…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>細かく条件を</span></span><span><span>指定できるのが</span></span><span><code>find</code><span> の特徴だけど</span></span><span><span>初めてだと敷居が高く</span></span><span><span>感じてしまうよね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>いくつか</span></span><span><span>例を出すから</span></span><span><span>見てごらん</span></span></div></article><article class="table"><table><thead><tr><th><code>find</code><span> コマンド</span></th><th><span>動作</span></th></tr></thead><tbody><tr><td><code>find /home -type f -name &quot;diary&quot;</code></td><td><span>/home を起点に、<wbr>diary という名前の通常ファイルを検索</span></td></tr><tr><td><code>find /usr/share -type f -name &quot;*.txt&quot;</code></td><td><span>/usr/share を起点に、<wbr>ファイル名が .txt で終わる通常ファイルを検索</span></td></tr><tr><td><code>find /tmp -user midori -group midori</code></td><td><span>/tmp を起点に、<wbr>所有者が midori で所有グループが midori のファイルを検索</span></td></tr><tr><td><code>find . <wbr>-size 100M</code></td><td><span>ワーキングディレクトリを起点に、<wbr>サイズが 100MB 以上のファイルを検索</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>へぇ…</span></span><span><span>柔軟にファイルを</span></span><span><span>探せるのね！</span></span></div></article><article class="header2"><code>locate</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>locate</code><span> もファイル検索コマンドだよ</span></span><span><span>こちらはあらかじめ検索用データを作っておき</span></span><span><span>そこからファイルを探すような動きをするんだ</span></span></div></article><article class="code"><pre><code class="bash">locate <wbr>[オプション]... <wbr>パターン...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>find</code><span> と</span></span><span><span>どう違ってくるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>locate</code><span> は </span><code>find</code><span> より</span></span><span><span>高速な検索ができるけど</span></span><span><span>指定されたパターンが</span></span><span><span>パスに含まれているかどうかの</span></span><span><span>簡単な条件でしか</span></span><span><span>検索しかできないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ファイル名で探すことが多いので</span></span><span><span>簡素でも十分役に立ちそう！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>また検索用データ作成後の変更は</span></span><span><span>検索に反映されないという問題もあるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>具体的には新しく作ったファイルが見つからなかったり</span></span><span><span>削除済みのファイルが結果に表示されたりしてしまうよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>それはちょっと困るね…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>updatedb</code><span> は</span></span><span><code>locate</code><span> の検索用データを作るよ</span></span></div></article><article class="code"><pre><code class="bash">updatedb <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>updatedb</code><span> は1日1回などの</span></span><span><span>タイミングで自動実行されるけど</span></span><span><span>手動実行しても問題ないんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>sudo</code><span> は</span></span><span><span>管理者権限でコマンドを実行するんだ</span></span><span><span>検索用データは全ユーザ共通で使うので</span></span><span><span>このデータの管理は管理者が行うよ</span></span><span><span>手動実行する場合は以下のようにしよう！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>updatedb
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>updatedb</code><span> 実行直後に</span></span><span><code>locate</code><span> を実行すると</span></span><span><span>検索用データの情報が</span></span><span><span>古い問題を回避できるね！</span></span></div></article><article class="header2"><code>xargs</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>xargs</code><span> は</span></span><span><span>標準入力から受け取った内容を</span></span><span><span>コマンドの引数にしてくれるんだ</span></span></div></article><article class="code"><pre><code class="bash">xargs <wbr>[オプション]... <wbr>[コマンド]
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下のように検索コマンドと</span></span><span><span>一緒に使われることが多いよ</span></span></div></article><article class="code"><pre><code class="bash">find <wbr>... <wbr>| <wbr>xargs <wbr>コマンド
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どのように使えば</span></span><span><span>いいんだろう？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>例えば、<wbr>以下は </span><code>/tmp</code><span> にある</span></span><span><span>所有者が </span><code>midori</code><span> のファイルを</span></span><span><span>削除するよ</span></span></div></article><article class="code"><pre><code class="bash">find <wbr>/tmp <wbr>-type <wbr>-f <wbr>-user <wbr>midori <wbr>| <wbr>xargs <wbr>rm
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>find</code><span> の結果を</span></span><span><code>xargs</code><span> に渡すと</span></span><span><code>rm</code><span> の引数にして</span></span><span><span>実行してくれるんだね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はファイル検索コマンド</span></span><span><code>find</code><span> と </span><code>locate</code><span> を学んだよ！</span></span><span><span>また </span><code>xargs</code><span> と組み合わせて</span></span><span><span>見つかったファイルを</span></span><span><span>処理する方法も知ったよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>find</code><span> と </span><code>locate</code><span> には</span></span><span><span>それぞれ特徴があるから</span></span><span><span>かしこく使い分けよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章34話</div><div><a href="2/34/">パイプ</a></div></div><div><div>今</div><div>2章35話 ファイル検索</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章36話</div><div><a href="2/36/">バックグラウンド実行</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

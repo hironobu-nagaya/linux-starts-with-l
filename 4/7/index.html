@@ -1,0 +1,79 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 4章7話 ユーザ管理</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,super user,root,useradd,passwd,usermod,userdel">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="4/6/" />
+<link rel="next" href="4/8/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>4章6話</div>
+<div><a href="4/6/">パッケージ管理</a></div>
+</div>
+<div>
+<div>今</div>
+<div>4章7話 ユーザ管理</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>4章8話</div>
+<div><a href="4/8/">グループ管理</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ユーザ管理</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>私が Linux を始めたとき</span></span>
+<span><span>アカウントを用意して</span></span>
+<span><span>くれていたよね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>アカウント管理も</span></span>
+<span><span>スーパーユーザの</span></span>
+<span><span>仕事のような気がする！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのとおり！</span></span>
+<span><span>今回はユーザを</span></span>
+<span><span>作る方法を覚えよう！</span></span>
+</div>
+</article>
+<article class="header2"><code>useradd</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>useradd</code><span> は</span></span>
+<span><span>ユーザを追加するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">useradd <wbr>[オプション]... <wbr>ユーザ名
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-m</code></td><td><span>ホームディレクトリがなければ作成</span></td></tr><tr><td><code>-d ホームディレクトリ</code></td><td><span>ホームディレクトリを設定(デフォルトは </span><code>/home/ユーザ名</code><span>)</span></td></tr><tr><td><code>-c コメント</code></td><td><span>コメントを設定(通常はメールアドレスやフルネーム)</span></td></tr><tr><td><code>-s シェル</code></td><td><span>シェルを設定</span></td></tr><tr><td><code>-r</code></td><td><span>システム用ユーザ作成</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>midori</code><span> ユーザを作成したときには</span></span><span><span>以下のようにコマンドを実行したよ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>useradd <wbr>-m <wbr>-c <wbr>&quot;Midori <wbr>Wakagi&quot; <wbr>-s <wbr>/bin/bash <wbr>midori
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ほとんどの場合で</span></span><span><span>ユーザ作成時に</span></span><span><span>ホームディレクトリも</span></span><span><span>一緒に作成するよ</span></span><span><span>意図的にそうするのでない限り</span></span><span><code>-m</code><span> オプションを</span></span><span><span>付けているか</span></span><span><span>実行前に確認しよう！</span></span></div></article><article class="header2"><code>passwd</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>midori</code><span> ユーザを作成した後は</span></span><span><span>以下のように </span><code>passwd</code><span> を</span></span><span><span>実行していたよ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>passwd <wbr>midori
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>passwd</code><span> の引数に</span></span><span><span>ユーザ名を指定すると</span></span><span><span>そのユーザのパスワードを</span></span><span><span>変更できるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>自分のパスワードを変更は</span></span><span><span>どのユーザでもできるけど</span></span><span><span>他人のパスワード変更は</span></span><span><span>スーパユーザの役割だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>こうやって最初に</span></span><span><span>私のパスワードに </span><code>midori</code><span> を</span></span><span><span>設定してくれていたんだよね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうことだね</span></span><span><span>パスワードを設定しないと</span></span><span><span>パスワード認証が使えないんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>あの時は簡便のために</span></span><span><span>簡単なパスワードにしていたけど</span></span><span><span>通常は初期パスワードでも</span></span><span><span>推測しにくいものにするよ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はユーザ作成を学んだよ！</span></span><span><span>ユーザの追加は</span></span><span><code>useradd</code><span> で行い</span></span><span><span>パスワード設定は</span></span><span><code>passwd</code><span> で行うんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>他にもユーザ情報を</span></span><span><span>変更する </span><code>usermod</code><span> や</span></span><span><span>削除する </span><code>userdel</code><span> があるんだ</span></span><span><span>これらのコマンドで</span></span><span><span>ユーザアカウントを管理できるよ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>4章6話</div><div><a href="4/6/">パッケージ管理</a></div></div><div><div>今</div><div>4章7話 ユーザ管理</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>4章8話</div><div><a href="4/8/">グループ管理</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

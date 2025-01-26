@@ -1,0 +1,87 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章1話 シェルスクリプト</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,interactive,non-interactive,shebang">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/68/" />
+<link rel="next" href="3/2/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章68話</div>
+<div><a href="2/68/">その他のコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章1話 シェルスクリプト</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章2話</div>
+<div><a href="3/2/">コメント</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>シェルスクリプト</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>この前作った</span></span>
+<span><span><wbr>「おみくじ」<wbr>なんだけど</span></span>
+<span><span>時々使いたくなるんだよね！</span></span>
+<span><span>これをコマンドみたいに</span></span>
+<span><span>簡単に実行できないかな？</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">cat <wbr>&lt;&lt; <wbr>EOF <wbr>| <wbr>shuf <wbr>| <wbr>head <wbr>-n <wbr>1
+大吉
+中吉
+中吉
+小吉
+小吉
+小吉
+吉
+吉
+吉
+吉
+EOF
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>できるよ！</span></span><span><span>今回は<wbr>「シェルスクリプト(shell script)」<wbr>を学ぼう！</span></span><span><span>以降、<wbr>単に<wbr>「スクリプト(script)」<wbr>と呼ぶよ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おおっ！</span></span><span><span>なんだか凄そうな名前だね！</span></span></div></article><article class="header2"><span><wbr>「対話的」<wbr>と<wbr>「非対話的」<wbr></span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>最初に<wbr>「対話的(interactive)」<wbr>と</span></span><span><span><wbr>「非対話的(non-interactive)」<wbr>を覚えよう！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「対話的」<wbr>って…</span></span><span><span>なんだろう？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今までみどりがやってきたように</span></span><span><span>シェルにコマンドを打ち込むと</span></span><span><span>シェルが実行してプロンプトを返してくれる</span></span><span><span>これを<wbr>「対話的」<wbr>と言うんだよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><span>確かにシェルと</span></span><span><span><wbr>「対話」<wbr>しているような</span></span><span><span>感じだったよね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>一方<wbr>「非対話的」<wbr>と言う操作もあるんだ</span></span><span><span>これは事前にやりたいことを</span></span><span><span>テキストファイルにまとめて</span></span><span><span>それをシェルに解釈してもらうやり方だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>コマンドを1つずつ</span></span><span><span>入力するのではなくて</span></span><span><span>あらかじめやって欲しいことをまとめて書いて</span></span><span><span>それをシェルに全部お願いするような感じ？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうそう！</span></span><span><span>例えるならレストランで注文票を渡して</span></span><span><span>料理ができるまで待っているようなものだね</span></span><span><span>その注文票にあたるのが</span></span><span><span><wbr>「シェルスクリプト」<wbr>なんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>だから<wbr>「スクリプト(script)」<wbr></span></span><span><span>つまり<wbr>「台本」<wbr><wbr>「手順書」<wbr>などの</span></span><span><span>意味なんだね！</span></span></div></article><article class="header2"><span>シェルスクリプト作成</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>早速おみくじを</span></span><span><span>シェルスクリプトにしてみよう！</span></span><span><span>まずは </span><code>omikuji</code><span> ファイルを編集しよう</span></span></div></article><article class="code"><pre><code class="bash">vim <wbr>omikuji
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>このファイルに</span></span><span><span>スクリプトを書くんだね</span></span><span><span>内容はどうすればよいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>内容は以下のとおりだよ</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+cat <wbr>&lt;&lt; <wbr>EOF <wbr>| <wbr>shuf <wbr>| <wbr>head <wbr>-n <wbr>1
+大吉
+中吉
+中吉
+小吉
+小吉
+小吉
+吉
+吉
+吉
+吉
+EOF
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>1行目以外は</span></span><span><span>以前書いたものと同じだね！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>この最初の1行目に</span></span><span><span>見慣れない記述があるけど…</span></span><span><span>これは何なのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは<wbr>「シェバン(shebang)」<wbr>という記述だよ</span></span><span><span>1行目の </span><code>#!</code><span> の後に続く実行ファイルで</span></span><span><span>2行目以降の内容を実行するように</span></span><span><span>指定しているんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>1行目は</span></span><span><span><wbr>「このプログラムで実行して下さい」<wbr></span></span><span><span>と教える目印なんだ！</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>シェル </span><code>/bin/bash</code><span> に</span></span><span><span>解釈してもらうから</span></span><span><span><wbr>「シェルスクリプト」<wbr>なんだね！</span></span></div></article><article class="header2"><span>シェルスクリプトを実行可能にする</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次にこの </span><code>omikuji</code><span> ファイルを</span></span><span><span>実行可能にするよ</span></span><span><span>パーミッションの実行権限の</span></span><span><span>ことを覚えているかな？</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん、<wbr>覚えているよ！</span></span><span><span>こうすればいいんだよね？</span></span></div></article><article class="code"><pre><code class="bash">chmod <wbr>a+x <wbr>omikuji
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><span>実行後は </span><code>ls -l</code><span> で確認しよう！</span></span></div></article><article class="code"><pre><code class="bash">ls <wbr>-l
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>実行権限(</span><code>x</code><span>)が</span></span><span><span>付いていればいいんだね！</span></span></div></article><article class="code"><pre><code class="bash">-rwxr-xr-x <wbr>1 <wbr>midori <wbr>midori <wbr>104 <wbr>Jan  <wbr>3 <wbr>19:10 <wbr>omikuji
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>パーミッションは</span></span><span><code>rwxr-xr-x</code><span> だから…</span></span><span><span>ちゃんと実行権限が付いているね！</span></span></div></article><article class="header2"><span>シェルスクリプトを実行する</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>よし！</span></span><span><span>早速実行しよう！</span></span></div></article><article class="code"><pre><code class="bash">omikuji
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>日頃の行いが良いから</span></span><span><span><wbr>「大吉」<wbr>かな？</span></span></div></article><article class="code"><pre><code class="console">/bin/bash: <wbr>omikuji: <wbr>command <wbr>not <wbr>found
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>…あれ？</span></span><span><span><wbr>「コマンドが見つからない」<wbr></span></span><span><span>って意味だよね？</span></span><span><span>ちゃんと実行可能にしたのに？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは </span><code>PATH</code><span> 変数の問題だね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>PATH</code><span> 変数の値は</span></span><span><span>コマンドを探す場所を</span></span><span><span><wbr>「コロン(</span><code>:</code><span>)」<wbr>区切りで</span></span><span><span>指定したものだよね？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだよ</span></span><span><span>コマンドは </span><code>PATH</code><span> 変数の値で</span></span><span><span>決められた場所から探すんだ</span></span><span><span>指定の場所に無いと</span></span><span><span>コマンドとしては実行されないよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあこれから</span></span><span><span>どうすればいいんだろう？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>PATH</code><span> 変数に含まれない</span></span><span><span>ディレクトリにある</span></span><span><span>スクリプトでも実行できるよ</span></span><span><span>スクリプトのパスを指定するんだ</span></span><span><span>以下のようにしてみよう</span></span></div></article><article class="code"><pre><code class="bash">./omikuji
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ええっと…</span></span><span><code>.</code><span> は<wbr>「ワーキングディレクトリ」<wbr></span></span><span><span>すなわち今私がいる</span></span><span><span>ディレクトリだよね？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうそう！</span></span><span><code>./omikuji</code><span> は</span></span><span><span><wbr>「現在のディレクトリにある omikuji」<wbr></span></span><span><span>を実行するという意味になるんだ</span></span><span><span>これでスクリプトを</span></span><span><span>パスで指定したことになるよ！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><span>じゃあやってみるね！</span></span></div></article><article class="code"><pre><code class="console">大吉
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>おおっ！</span></span><span><span>動いた動いた！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>いいね！</span></span><span><span>これでおみくじスクリプトが完成したね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はシェルスクリプトを</span></span><span><span>書いて実行したよ！</span></span></div></article><article class="ordered-list"><ol><li><span>スクリプトの1行目にシェバン、<wbr>2行目以降にコマンドを書く</span></li><li><span>スクリプトに実行権限を与える</span></li><li><code>./スクリプト</code><span> でスクリプトを実行する</span></li></ol></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>お気に入りの操作は</span></span><span><span>シェルスクリプトにしよう！</span></span><span><span>ファイルだから無くなることはないよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章68話</div><div><a href="2/68/">その他のコマンド</a></div></div><div><div>今</div><div>3章1話 シェルスクリプト</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章2話</div><div><a href="3/2/">コメント</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

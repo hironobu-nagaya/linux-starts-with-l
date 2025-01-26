@@ -1,0 +1,76 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 4章3話 sudoコマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,super user,root,sudo">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="4/2/" />
+<link rel="next" href="4/4/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>4章2話</div>
+<div><a href="4/2/">suコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>4章3話 sudoコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>4章4話</div>
+<div><a href="4/4/">sudoとリダイレクト</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>sudo</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><code>su</code><span> でスーパユーザに</span></span>
+<span><span>なれるのはわかったけど</span></span>
+<span><span><wbr>「ユーザを切り替える」<wbr>って</span></span>
+<span><span>大げさな感じがするよ</span></span>
+<span><span>もっと簡単に管理者操作が</span></span>
+<span><span>できないのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんできるよ！</span></span>
+<span><span>今回は </span><code>sudo</code><span> を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>sudo</code><span> は</span></span>
+<span><span>指定されたユーザの権限で</span></span>
+<span><span>コマンドを実行するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>[-u <wbr>ユーザ名] <wbr>コマンド
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ユーザを指定する場合は</span></span><span><code>-u</code><span> オプションを使うけど</span></span><span><span>指定されない場合は</span></span><span><span>スーパユーザとなるんだ</span></span><span><span>大抵はスーパユーザとして</span></span><span><span>実行する場合がほとんどなので</span></span><span><code>sudo コマンド</code><span> と覚えておこう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>コマンドの実行者だけを</span></span><span><span>切り替えてくれるんだね</span></span><span><span>これなら </span><code>midori</code><span> ユーザのまま</span></span><span><span>操作できるよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのことを試すために</span></span><span><code>whoami</code><span> を実行してみよう</span></span></div></article><article class="code"><pre><code class="bash">whoami
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>whoami</code><span> は</span></span><span><span>ユーザ名を表示してくれる</span></span><span><span>コマンドだったよね</span></span></div></article><article class="code"><pre><code class="console">midori
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>うん！</span></span><span><span>私は </span><code>midori</code><span> ユーザだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今度は </span><code>sudo</code><span> を使って</span></span><span><span>実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>whoami
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>スーパユーザとして</span></span><span><code>whoami</code><span> を実行してくれるから…</span></span></div></article><article class="code"><pre><code class="console">root
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>シェルのプロンプトは </span><code>$</code><span> のままだけど</span></span><span><span>実行結果は </span><code>root</code><span> ユーザだね！</span></span></div></article><article class="header2"><span>設定</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>sudo</code><span> は誰にでも許可を</span></span><span><span>しているわけじゃないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>他人の権限を使うんだもの</span></span><span><span>それはそうだよね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>sudo</code><span> の設定ファイルは</span></span><span><code>/etc/sudoers</code><span> だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ここの設定を変更して</span></span><span><span>私に </span><code>sudo</code><span> を</span></span><span><span>使わせてくれたんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>設定ファイルで設定ができるけど</span></span><span><span>多くのディストリビューションでは</span></span><span><code>sudo</code><span> を使えるグループが用意されているんだ</span></span><span><span>そのグループにユーザが所属することで</span></span><span><code>sudo</code><span> を使えるようにしているのが大半だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へぇ…</span></span><span><span>どんなグループなのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>伝統的には </span><code>wheel</code><span> グループと呼ばれるよ</span></span><span><span>でも新しいディストリビューションでは</span></span><span><code>sudo</code><span> グループなどの名前を</span></span><span><span>使っていることもあるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>wheel</code><span> や </span><code>sudo</code><span> グループに所属していたら</span></span><span><code>sudo</code><span> を使える見込みが高いのね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は別ユーザとして</span></span><span><span>コマンドを実行する</span></span><span><code>sudo</code><span> を学んだよ！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>また設定ファイル </span><code>/etc/sudoers</code><span> を編集したり</span></span><span><code>wheel</code><span> や </span><code>sudo</code><span> グループに所属することで</span></span><span><code>sudo</code><span> を使えるユーザを</span></span><span><span>管理していることを知ったよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>sudo</code><span> は気軽に打ててしまうけど</span></span><span><span>スーパユーザとして</span></span><span><span>操作しているのを忘れないでね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>便利だからと何でも</span></span><span><code>sudo</code><span> を付けるのは悪い癖だよ</span></span><span><span>必要な時だけ </span><code>sudo</code><span> を付けよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>4章2話</div><div><a href="4/2/">suコマンド</a></div></div><div><div>今</div><div>4章3話 sudoコマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>4章4話</div><div><a href="4/4/">sudoとリダイレクト</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

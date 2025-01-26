@@ -1,0 +1,157 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章38話 プロセス操作</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,signal,kill,nohup">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/37/" />
+<link rel="next" href="2/39/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章37話</div>
+<div><a href="2/37/">プロセス</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章38話 プロセス操作</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章39話</div>
+<div><a href="2/39/">プロセス優先度</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>プロセス操作</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回はプロセスを</span></span>
+<span><span>教えてもらったね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回はそのプロセスの</span></span>
+<span><span>管理方法を学んでいこう！</span></span>
+</div>
+</article>
+<article class="header2"><span>シグナル</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>プロセスは</span></span>
+<span><span><wbr>「シグナル(signal)」<wbr>という</span></span>
+<span><span>信号を送って管理するんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>信号でプロセスに</span></span>
+<span><span><wbr>「こうして欲しい」<wbr>って</span></span>
+<span><span>伝えるんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>よく使うシグナルには</span></span>
+<span><span>こんな種類があるよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>シグナル名</span></th>
+<th><span>シグナル番号</span></th>
+<th><span>意味</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>SIGTERM</span></td>
+<td><span>15</span></td>
+<td><span>終了</span></td>
+</tr>
+<tr>
+<td><span>SIGKILL</span></td>
+<td><span>9</span></td>
+<td><span>強制終了</span></td>
+</tr>
+<tr>
+<td><span>SIGHUP</span></td>
+<td><span>1</span></td>
+<td><span>端末の接続切れを通知</span></td>
+</tr>
+<tr>
+<td><span>SIGINT</span></td>
+<td><span>2</span></td>
+<td><span>キーボード割り込み(Ctrl + C)</span></td>
+</tr>
+<tr>
+<td><span>SIGQUIT</span></td>
+<td><span>3</span></td>
+<td><span>キーボード中止(Ctrl + /)</span></td>
+</tr>
+<tr>
+<td><span>SIGTSTP</span></td>
+<td><span>20</span></td>
+<td><span>一時停止(Ctrl + Z)</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>へぇ！</span></span>
+<span><span><wbr>「Ctrl + C」<wbr>って</span></span>
+<span><span>実はシグナルを</span></span>
+<span><span>送っていたんだ！</span></span>
+</div>
+</article>
+<article class="header2"><code>kill</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>kill</code><span> は</span></span>
+<span><span>プロセスにシグナルを</span></span>
+<span><span>送信するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">kill <wbr>[オプション]... <wbr>PID...
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span><wbr>「kill(殺す)」<wbr>って名前…</span></span><span><span>ちょっと怖いね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>プロセスを止める用途が</span></span><span><span>ほとんどなので</span></span><span><span>この名前なんだろうね</span></span><span><span>確かに物騒な名前だけど</span></span><span><span>ただプロセスにシグナルを</span></span><span><span>送信しているだけなんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では</span></span><span><span>実際に </span><code>kill</code><span> を</span></span><span><span>使ってみよう！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>まずは動いている</span></span><span><span>プロセスを用意するよ</span></span><span><span>以下のコマンドを実行しよう</span></span></div></article><article class="code"><pre><code class="bash">sleep <wbr>1000 <wbr>&amp;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>&amp;</code><span> はバックグラウンドで</span></span><span><span>コマンドで動かすんだよね</span></span><span><span>実行したよ！</span></span></div></article><article class="code"><pre><code class="console">[1] <wbr>5717
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ジョブ番号と…</span></span><span><span>他に数字が出てきたね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この数字<wbr>「5717」<wbr>が</span></span><span><span>プロセスの PID だよ</span></span><span><code>ps</code><span> で確認してみよう！</span></span></div></article><article class="code"><pre><code class="bash">ps
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="console"> <wbr>PID <wbr>TTY                <wbr>TIME <wbr>CMD
+5173 <wbr>09:28 <wbr>pts/0    <wbr>00:00:00 <wbr>-bash
+5717 <wbr>13:00 <wbr>pts/0    <wbr>00:00:00 <wbr>sleep
+5720 <wbr>13:02 <wbr>pts/0    <wbr>00:00:00 <wbr>ps
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>確かに </span><code>sleep</code><span> の</span></span><span><span>PID が </span><code>5717</code><span> だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では </span><code>kill</code><span> を実行して</span></span><span><code>sleep</code><span> プロセスに止まるよう</span></span><span><span>シグナルを送ろう！</span></span></div></article><article class="code"><pre><code class="bash">kill <wbr>5717
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>えいっ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では終了したかどうか</span></span><span><code>ps</code><span> で確認してみよう</span></span></div></article><article class="code"><pre><code class="bash">ps
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>プロセスが止まるということは</span></span><span><code>ps</code><span> の一覧表示から</span></span><span><code>sleep</code><span> のプロセスが</span></span><span><span>無くなるんだよね？</span></span></div></article><article class="code"><pre><code class="console"> <wbr>PID <wbr>TTY                <wbr>TIME <wbr>CMD
+5173 <wbr>09:28 <wbr>pts/0    <wbr>00:00:00 <wbr>-bash
+5723 <wbr>13:05 <wbr>pts/0    <wbr>00:00:00 <wbr>ps
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>sleep</code><span> の表示が消えているね</span></span><span><span>プロセスが終了したんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>kill</code><span> で送信する</span></span><span><span>シグナルは指定できるよ</span></span><span><span>指定がなければ終了を指示する</span></span><span><span><wbr>「SIGTERM」<wbr>が送信されるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>例えば強制終了用の</span></span><span><span>以下のようにするよ</span></span></div></article><article class="table"><table><thead><tr><th><span>シグナル指定方法</span></th><th><code>kill</code><span> コマンド</span></th></tr></thead><tbody><tr><td><span>シグナル番号</span></td><td><code>kill -9 5717</code></td></tr><tr><td><span>シグナル名</span></td><td><code>kill -SIGKILL 5717</code></td></tr><tr><td><span>短縮シグナル名</span></td><td><code>kill -KILL 5717</code></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>シグナル一覧の確認は</span></span><span><span>どうすればいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>kill</code><span> の</span></span><span><code> -l</code><span> オプションで</span></span><span><span>確認できるよ！</span></span></div></article><article class="code"><pre><code class="bash">kill <wbr>-l
+</code></pre></article><article class="header2"><span>ジョブ番号の指定</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>PID を扱うコマンドの多くは</span></span><span><span>PID の代わりに</span></span><span><span>ジョブ番号を指定できるんだ</span></span><span><span>PID の代わりに </span><code>%ジョブ番号</code><span> と</span></span><span><span>記述するだけだよ</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>へぇ…</span></span><span><span>柔軟なんだね！</span></span></div></article><article class="header2"><code>nohup</code><span> コマンド</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>そういえば前回に出ていた</span></span><span><span>プロセスの親子関係の話が</span></span><span><span>出てこなかったね？</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>ちゃんと覚えていて</span></span><span><span>くれたんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>親プロセスを終了すると</span></span><span><span>その子プロセスに</span></span><span><span>SIGHUP が送られるんだ</span></span><span><span>だから親プロセスが終了すると</span></span><span><span>子プロセスも一緒に</span></span><span><span>終了しちゃうことが多いんだよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>基本的に親プロセスを止めれば</span></span><span><span>子プロセスも止まってくれるんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>複数のプロセスを</span></span><span><span>まとめて止めたいときに</span></span><span><span>この親子関係が</span></span><span><span>便利な場合があるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>でも…</span></span><span><span>シェルから動かしたコマンドは</span></span><span><span>そのシェルの子プロセスだよね？</span></span><span><span>シェルが終わると</span></span><span><span>それらのコマンドも</span></span><span><span>一緒に終わっちゃわないかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>基本的にはそうなるよ</span></span><span><span>リモート接続から</span></span><span><span>コマンドを実行していたけど</span></span><span><span>接続が切れると</span></span><span><span>コマンドが終わってしまうのは</span></span><span><span>こういうわけなんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ネットワークが安定していないと</span></span><span><span>コマンドがいつ終了しちゃうか</span></span><span><span>ヒヤヒヤするね…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうときに便利なのが </span><code>nohup</code><span> だよ</span></span><span><code>nohup</code><span> から実行されたコマンドは</span></span><span><span>SIGHUP を受け取らなくなるんだ</span></span></div></article><article class="code"><pre><code class="bash">nohup <wbr>コマンド
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>リモート操作をするときは</span></span><span><code>nohup</code><span> があることを</span></span><span><span>覚えておくね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はプロセスの管理方法を学んだよ！</span></span><span><code>kill</code><span> で暴走したプログラムを止めたり</span></span><span><code>nohup</code><span> で長期間動かすタスクを</span></span><span><span>安心して放置できるようにするんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>プロセス管理の知識は</span></span><span><span>Linux を扱う上で重要だよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章37話</div><div><a href="2/37/">プロセス</a></div></div><div><div>今</div><div>2章38話 プロセス操作</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章39話</div><div><a href="2/39/">プロセス優先度</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

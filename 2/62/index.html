@@ -1,0 +1,90 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章62話 日時関連コマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,cal,date">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/61/" />
+<link rel="next" href="2/63/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章61話</div>
+<div><a href="2/61/">バイナリ関連コマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章62話 日時関連コマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章63話</div>
+<div><a href="2/63/">数学関連コマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>日時関連コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>Windows や macOS では</span></span>
+<span><span>当たり前にやっていたけど</span></span>
+<span><span>Linux でこれまでに</span></span>
+<span><span>やっていないものと言えば…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は日時に関する</span></span>
+<span><span>コマンドを見ていこう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>なるほど！</span></span>
+<span><span>カレンダーや時刻は</span></span>
+<span><span>扱っていなかったね！</span></span>
+</div>
+</article>
+<article class="header2"><code>cal</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>cal</code><span> は</span></span>
+<span><span>カレンダーを表示するよ</span></span>
+<span><span>calendar の略なんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">cal <wbr>[オプション]... <wbr>[日時指定]
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>日時を指定しなければ</span></span><span><span>本日のカレンダーを表示するよ</span></span><span><span>引数なしで実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">cal
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>いつも確認するわけじゃないけど</span></span><span><span>確認できないと不便だよね！</span></span></div></article><article class="code"><pre><code class="bash calendar">    <wbr>December <wbr>2024   <wbr>
+Su <wbr>Mo <wbr>Tu <wbr>We <wbr>Th <wbr>Fr <wbr>Sa
+ <wbr>1  <wbr>2  <wbr>3  <wbr>4  <wbr>5 <wbr><span class="revert"> <wbr>6</span>  <wbr>7
+ <wbr>8  <wbr>9 <wbr>10 <wbr>11 <wbr>12 <wbr>13 <wbr>14
+15 <wbr>16 <wbr>17 <wbr>18 <wbr>19 <wbr>20 <wbr>21
+22 <wbr>23 <wbr>24 <wbr>25 <wbr>26 <wbr>27 <wbr>28
+29 <wbr>30 <wbr>31            <wbr>
+                    <wbr>
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>まさにカレンダー！</span></span><span><span>シンプルでわかりやすい表示だね！</span></span></div></article><article class="header2"><code>date</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>date</code><span> は</span></span><span><span>日時を表示するよ！</span></span></div></article><article class="code"><pre><code class="bash">date <wbr>[オプション]... <wbr>[+書式]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>日付も確認できるのなら</span></span><span><span>時間も確認したいよね！</span></span></div></article><article class="code"><pre><code class="bash date">Thu <wbr>Dec <wbr>26 <wbr>17:42:52 <wbr>JST <wbr>2024
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど…</span></span><span><span>こちらもシンプルで</span></span><span><span>わかりやすいね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>date</code><span> では出力の書式を指定できるんだ</span></span><span><span>書式の詳細は </span><code>man</code><span> で確認できるよ</span></span></div></article><article class="code"><pre><code class="bash">man <wbr>date
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>書式を指定できると</span></span><span><span>どんなことができるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ファイル名に日付を</span></span><span><span>含めたい場合などに便利なんだ</span></span><span><span>例えば以下のような感じだよ</span></span></div></article><article class="code"><pre><code class="bash">touch <wbr>&quot;backup-$(date <wbr>+%Y%m%d)&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おおっ！</span></span><span><code>backup-<span id="date-suffix">20241226</span></code><span> というファイルができたよ！</span></span><span><span>末尾に本日(<span id="today">2024年12月26日</span>)を表す数字が付くんだね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は日時に関するコマンド</span></span><span><code>cal</code><span> と </span><code>date</code><span> を学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>特に </span><code>date</code><span> の書式指定は</span></span><span><span>紹介した例のように</span></span><span><span>日付文字列の生成に便利なんだ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章61話</div><div><a href="2/61/">バイナリ関連コマンド</a></div></div><div><div>今</div><div>2章62話 日時関連コマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章63話</div><div><a href="2/63/">数学関連コマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script><script src="js/date-commands.js"></script></body></html>

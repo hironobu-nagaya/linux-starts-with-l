@@ -1,0 +1,93 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章18話 ファイル閲覧</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,cat,head,tail,less">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/17/" />
+<link rel="next" href="2/19/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+<link rel="stylesheet" href="css/view-content.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章17話</div>
+<div><a href="2/17/">ディレクトリ操作</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章18話 ファイル閲覧</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章19話</div>
+<div><a href="2/19/">端末操作</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ファイル閲覧</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>今度はファイルの中身が</span></span>
+<span><span>気になってきたよ</span></span>
+<span><span>中身を見るには</span></span>
+<span><span>どうすればいいのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回はファイル閲覧を解説するね</span></span>
+<span><span>色々な方法があるので</span></span>
+<span><span>順に見ていこう！</span></span>
+</div>
+</article>
+<article class="header2"><code>cat</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>cat</code><span> は</span></span>
+<span><span>ファイルの内容を表示するんだ</span></span>
+<span><span><wbr>「concatenate（結合する）」<wbr></span></span>
+<span><span>の略なんだけど</span></span>
+<span><span><wbr>「ファイルの中身を表示するコマンド」<wbr></span></span>
+<span><span>と覚えておこう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それでは </span><code>cat</code><span> で</span></span>
+<span><code>/etc/hostname</code><span> の中身を</span></span>
+<span><span>表示してみよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">cat <wbr>/etc/hostname
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>そのファイルの</span></span><span><span>中身は何なのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span><wbr>「ホスト名(host name)」<wbr></span></span><span><span>が書かれているよ</span></span><span><span>コンピュータの名前のことなんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>コンピュータにも</span></span><span><span>名前があるんだね</span></span><span><span>確かに内容が気になるから</span></span><span><code>cat</code><span> で確認するよ！</span></span></div></article><article class="code"><pre><code class="console">carter
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>このコンピュータの名前は</span></span><span><span>carter さんなんだね！</span></span></div></article><article class="header2"><code>head</code><span>, <wbr></span><code>tail</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次は </span><code>/proc/cpuinfo</code><span> を覗いてみよう</span></span><span><span>CPU に関する情報が載っているんだ</span></span></div></article><article class="code"><pre><code class="bash">cat <wbr>/proc/cpuinfo
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>同じように実行するね！</span></span></div></article><article class="code"><pre><code class="console">processor	: <wbr>0
+vendor_id	: <wbr>GenuineIntel
+cpu <wbr>family	: <wbr>6
+...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うーん…</span></span><span><span>表示はされたんだけど</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>情報が多すぎて最初のほうが</span></span><span><span>画面の外に行っちゃった！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>こういうときは</span></span><span><span>必要な部分だけ表示する</span></span><span><span>コマンドを使うといいよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>head</code><span> はファイルの先頭の数行だけ</span></span><span><code>tail</code><span> はファイルの末尾の数行だけを</span></span><span><span>表示するコマンドなんだ</span></span></div></article><article class="code"><pre><code class="bash">head <wbr>ファイル
+</code></pre></article><article class="code"><pre><code class="bash">tail <wbr>ファイル
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これなら必要な部分だけを見られるね！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>重要な情報は先頭に</span></span><span><span>まとまっていることが多いから</span></span><span><span>そういうものは </span><code>head</code><span> が良さそうだね！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ファイル末尾に情報が追記されていくものは</span></span><span><code>tail</code><span> で最新の情報を確認できるね！</span></span></div></article><article class="header2"><code>less</code><span> コマンド</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>でも長いファイルの</span></span><span><span>中間部分を見たい場合は</span></span><span><span>どうすればいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そんなときは</span></span><span><code>less</code><span> が便利だよ</span></span><span><span>ファイルの内容を</span></span><span><span>ページ送りしながら</span></span><span><span>見れるんだ</span></span></div></article><article class="code"><pre><code class="bash">less <wbr>ファイル
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では </span><code>less</code><span> で</span></span><span><code>/proc/cpuinfo</code><span> を閲覧しよう</span></span></div></article><article class="code"><pre><code class="bash">less <wbr>/proc/cpuinfo
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>わっ！</span></span><span><span>画面が切り替わった！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ここではいつものシェルではなく</span></span><span><code>less</code><span> が操作を受けているんだ</span></span><span><span>まずは基本的な操作を覚えよう</span></span></div></article><article class="table"><table><thead><tr><th><span>キー入力</span></th><th><span>動作</span></th></tr></thead><tbody><tr><td><code>j</code></td><td><span>下にスクロール</span></td></tr><tr><td><code>k</code></td><td><span>上にスクロール</span></td></tr><tr><td><code>q</code></td><td><span>終了</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おー！</span></span><span><span>よくわからない項目も多いけど</span></span><span><span>CPU の情報をゆっくり見れるね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はファイルの中身を</span></span><span><span>確認するコマンドを学んだよ！</span></span><span><code>cat</code><span>, <wbr></span><code>tail</code><span>, <wbr></span><code>head</code><span>, <wbr></span><code>less</code></span><span><span>いろいろあるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これらのコマンドで</span></span><span><span>いろいろな情報が手に入るよ！</span></span><span><span>Linux を使いこなすには</span></span><span><span>必要な操作なんだ</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>なんだかちょっとずつ自信がついてきた！</span></span><span><span>もっといろんなファイルで</span></span><span><span>これらのコマンドを試してみたいな！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章17話</div><div><a href="2/17/">ディレクトリ操作</a></div></div><div><div>今</div><div>2章18話 ファイル閲覧</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章19話</div><div><a href="2/19/">端末操作</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

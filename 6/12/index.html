@@ -1,0 +1,91 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 6章12話 sysstat</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,resource,sysstat">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="6/11/" />
+<link rel="next" href="6/13/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>6章11話</div>
+<div><a href="6/11/">systemd-timesyncd</a></div>
+</div>
+<div>
+<div>今</div>
+<div>6章12話 sysstat</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>6章13話</div>
+<div><a href="6/13/">smartmontools</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>sysstat</code></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>リソース状況を見るには</span></span>
+<span><span>コマンドを打たないと</span></span>
+<span><span>いけないのかな？</span></span>
+<span><span>真夜中の状況や</span></span>
+<span><span>1日の変動などを</span></span>
+<span><span>見るには不便だよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>リソース監視ツールと</span></span>
+<span><span>いうものがあるよ！</span></span>
+<span><span>今回は古くから使われている</span></span>
+<span><span>リソース監視ツール</span></span>
+<span><code>sysstat</code><span> を使おう</span></span>
+</div>
+</article>
+<article class="header2"><span>インストール</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは</span></span>
+<span><code>sysstat</code><span> パッケージを</span></span>
+<span><span>インストールしよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>apt <wbr>install <wbr>-y <wbr>sysstat
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>パッケージ管理システムのおかげですごい楽だよ！</span></span></div></article><article class="header2"><span>設定</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>設定ファイルは </span><code>/etc</code><span> 配下に</span></span><span><code>sysstat</code><span> という名前で置かれているよ</span></span><span><span>ディストリビューションによってパスが異なるので</span></span><span><span>見つからなかったら </span><code>find</code><span> を使おう！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>find <wbr>/etc <wbr>-name <wbr>sysstat
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="console">/etc/default/sysstat
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>このファイルが設定ファイルなんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>一部のディストリビューションでは</span></span><span><code>ENABLED</code><span> という項目が </span><code>false</code><span> になっているんだ</span></span><span><span>この場合 </span><code>sysstat</code><span> を動作させてあげるには</span></span><span><span>値を </span><code>true</code><span> に変更してあげる必要があるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>お兄ちゃんのいうとおりだったよ</span></span><span><code>ENABLED</code><span> という項目があったよ</span></span></div></article><article class="code"><pre><code class="plaintext">ENABLED=&quot;false&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これをこう書き換えれば</span></span><span><span>いいんだよね？</span></span></div></article><article class="code"><pre><code class="plaintext">ENABLED=&quot;true&quot;
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>うん</span></span><span><span>それでいいよ！</span></span></div></article><article class="header2"><span>起動</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それでは </span><code>sysstat</code><span> を動かし</span></span><span><span>自動起動を有効にしよう</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>systemctl <wbr>enable <wbr>--now <wbr>sysstat
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>正常に動作しているかどうかは</span></span><span><span>以下で確認できるよ</span></span></div></article><article class="code"><pre><code class="bash">systemctl <wbr>status <wbr>sysstat
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>正しく動作しているはずなんだけど…</span></span><span><span>それらしいプロセスが見当たらないよ？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>sysstat</code><span> は </span><code>cron</code><span> ベースの仕組みで動いているんだ</span></span><span><span>なので常に </span><code>sysstat</code><span> のプロセスが動いていないんだよ</span></span><span><code>sysstat</code><span> では以下のプログラムが </span><code>cron</code><span> で動いているよ</span></span></div></article><article class="table"><table><thead><tr><th><span>プログラム</span></th><th><span>動作タイミング</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>sa1</code></td><td><span>10分おき</span></td><td><span>リソース状況収集</span></td></tr><tr><td><code>sa2</code></td><td><span>1日の最後</span></td><td><span>リソース統計出力</span></td></tr></tbody></table></article><article class="header2"><span>確認</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>sar</code><span> は</span></span><span><code>sysstat</code><span> が収集した</span></span><span><span>情報を表示するよ</span></span></div></article><article class="code"><pre><code class="bash">sar <wbr>[オプション]... <wbr>[日付 <wbr>[表示間隔]]
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>説明</span></th></tr></thead><tbody><tr><td><span>-u</span></td><td><span>CPU 状況を表示(デフォルト)</span></td></tr><tr><td><span>-r</span></td><td><span>メモリ状況を表示</span></td></tr><tr><td><span>-b</span></td><td><span>ストレージ I/O 状況を表示</span></td></tr><tr><td><span>-n DEV</span></td><td><span>ネットワーク状況を表示</span></td></tr><tr><td><span>-h, <wbr>--human</span></td><td><span>人間に読みやすい形式で表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>日付は </span><code>-1</code><span> を指定すると</span></span><span><span><wbr>「1日前」<wbr>のリソース状況を表示するよ</span></span><span><span>指定が無ければ本日を表示するんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ここではオプションなしで</span></span><span><span>実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">sar
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="console">Linux <wbr>6.6.51+rpt-rpi-2712 <wbr>(carter)      <wbr>13/01/25        <wbr>_aarch64_       <wbr>(4 <wbr>CPU)
+
+00:00:01        <wbr>CPU     <wbr>%user     <wbr>%nice   <wbr>%system   <wbr>%iowait    <wbr>%steal     <wbr>%idle
+00:10:01        <wbr>all      <wbr>0.01     <wbr>59.55      <wbr>0.02      <wbr>0.01      <wbr>0.00     <wbr>40.42
+00:20:04        <wbr>all      <wbr>0.01     <wbr>59.90      <wbr>0.01      <wbr>0.10      <wbr>0.00     <wbr>39.98
+00:30:00        <wbr>all      <wbr>0.00     <wbr>60.11      <wbr>0.01      <wbr>0.00      <wbr>0.00     <wbr>39.87
+00:40:00        <wbr>all      <wbr>0.01     <wbr>59.94      <wbr>0.01      <wbr>0.00      <wbr>0.00     <wbr>40.04
+...
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おお！</span></span><span><span>本日10分おきの</span></span><span><span>CPU リソース状況が表示されたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>デフォルトは CPU に関する情報だけど</span></span><span><span>オプションを指定すると</span></span><span><span>他のリソース状況も確認できるんだ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はリソース監視ツール</span></span><span><code>sysstat</code><span> を学んだよ！</span></span><span><span>定期的にシステム負荷情報を収集して</span></span><span><span>後から確認ができるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今回は基本的な使い方の紹介だけだよ</span></span><span><code>sar</code><span> をスクリプトに組み込んだり</span></span><span><span>データをグラフ化するツールと</span></span><span><span>組み合わせることもできるよ</span></span><span><span>リソース不足をいち早く知れるよう</span></span><span><span>リソース監視体制を</span></span><span><span>整えておくのがおすすめだよ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>6章11話</div><div><a href="6/11/">systemd-timesyncd</a></div></div><div><div>今</div><div>6章12話 sysstat</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>6章13話</div><div><a href="6/13/">smartmontools</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

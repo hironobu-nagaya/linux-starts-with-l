@@ -1,0 +1,92 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章4話 if文(使い方)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,if">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/3/" />
+<link rel="next" href="3/5/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章3話</div>
+<div><a href="3/3/">readコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章4話 if文(使い方)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章5話</div>
+<div><a href="3/5/">if文(実践)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>if</code><span>文(使い方)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>シェルスクリプトって</span></span>
+<span><span>コマンドを順に書いていけば</span></span>
+<span><span>そのとおりに実行してくれるんだよね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうなるよ</span></span>
+<span><span>でも状況に応じて処理の流れを</span></span>
+<span><span>変えることができるんだ</span></span>
+<span><span>今回はそれを学ぼう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ただ順番どおりに</span></span>
+<span><span>実行するだけじゃなくて</span></span>
+<span><span>必要があれば</span></span>
+<span><span>それを変えられるんだね！</span></span>
+</div>
+</article>
+<article class="header2"><span>基本構造</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは</span><code>if</code><span>文を学ぼう！</span></span>
+<span><span>コマンドの終了ステータスに応じて</span></span>
+<span><span>処理を分ける仕組みだよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">if <wbr>コマンド
+then
+  <wbr>処理
+fi
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは </span><code>コマンド</code><span> が</span></span><span><span>成功した場合</span></span><span><code>処理</code><span> を実行するよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>あれ？</span></span><span><span>これって AND 演算子 </span><code>&amp;&amp;</code><span> と同じだよね？</span></span><span><code>コマンド &amp;&amp; 処理</code><span> と書けば</span></span><span><span>短く書ける気がするんだけど…？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおりだね！</span></span><span><span>実際、<wbr>単純な条件分岐なら</span></span><span><code>&amp;&amp;</code><span> の方が簡潔なんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>でも</span><code>if</code><span>文は</span></span><span><span>より複雑な条件分岐が</span></span><span><span>できるんだ</span></span></div></article><article class="header2"><span>詳細構造</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次のように書くと</span></span><span><span>複数の条件を設定できるんだ</span></span></div></article><article class="code"><pre><code class="bash">if <wbr>コマンド1
+then
+  <wbr>処理1
+elif <wbr>コマンド2
+then
+  <wbr>処理2
+else
+  <wbr>処理3
+fi
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは次のように動作するよ</span></span></div></article><article class="ordered-list"><ol><li><code>コマンド1</code><span> が成功したら </span><code>処理1</code><span> を実行して終了</span></li><li><code>コマンド2</code><span> が成功したら </span><code>処理2</code><span> を実行して終了</span></li><li><span>どちらも失敗したら</span><code>処理3</code><span> を実行</span></li></ol></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><code>elif</code><span> や </span><code>else</code><span> を使えば</span></span><span><span>条件をどんどん</span></span><span><span>増やしていけるんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><span>さらに…</span></span></div></article><article class="unordered-list"><ul><li><code>elif</code><span> はいくつでも書ける</span></li><li><code>elif</code><span> や </span><code>else</code><span> は省略できる</span></li></ul></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下のような場合は</span></span><span><code>if</code><span>文が適しているよ</span></span></div></article><article class="unordered-list"><ul><li><span>条件分岐が複雑な場合</span></li><li><span>処理が複数行ある場合</span></li><li><span>ネスト構造を使う場合</span></li></ul></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「ネスト構造」<wbr>って？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>if</code><span>文の処理の中に</span></span><span><span>さらに</span><code>if</code><span>文があるような書き方だよ</span></span><span><span>それを<wbr>「入れ子」<wbr>や<wbr>「ネスト(nest)」<wbr>と呼ぶんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><span>単純な場合は </span><code>&amp;&amp;</code><span> でいいけど</span></span><span><span>複雑なら</span><code>if</code><span>文が便利ってことだね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>if</code><span> 文で条件によって</span></span><span><span>処理を分けられることを学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次回は </span><code>if</code><span> 文を使った</span></span><span><span>スクリプトを書いてみよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章3話</div><div><a href="3/3/">readコマンド</a></div></div><div><div>今</div><div>3章4話 if文(使い方)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章5話</div><div><a href="3/5/">if文(実践)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

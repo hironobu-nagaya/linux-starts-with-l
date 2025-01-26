@@ -1,0 +1,77 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章40話 シェル変数</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell variable">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/39/" />
+<link rel="next" href="2/41/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章39話</div>
+<div><a href="2/39/">プロセス優先度</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章40話 シェル変数</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章41話</div>
+<div><a href="2/41/">コマンド置換</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>シェル変数</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は</span></span>
+<span><span><wbr>「シェル変数(shell variable)」<wbr>を学ぼう</span></span>
+<span><span>データの<wbr>「入れ物」<wbr>みたいなものなんだ</span></span>
+<span><span>以降、<wbr>単に<wbr>「変数(variable)」<wbr>と呼ぶよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>データの入れ物？</span></span>
+<span><span>どうやって</span></span>
+<span><span>使うのかな？</span></span>
+</div>
+</article>
+<article class="header2"><span>シェル変数の定義</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは変数の定義からだよ</span></span>
+<span><span>以下のようにして定義するんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">変数名=値
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ただし </span><code>=</code><span> の両脇には</span></span><span><span>スペースを入れないでね</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>定義は簡単だね</span></span><span><span>迷うことはなさそう！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>では実際に試してみよう</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>TIMER</code><span> という変数に</span></span><span><span>タイマーの秒数を</span></span><span><span>保持させよう</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>30秒タイマーにしたければ</span></span><span><span>以下のようにするよ</span></span></div></article><article class="code"><pre><code class="bash">TIMER=30
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>わかった！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>…打ち込んだけど</span></span><span><span>特に何も起こらないね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>変数を設定しても</span></span><span><span>何も表示されないんだ</span></span><span><span>だけどシェルは変数の値を</span></span><span><span>覚えてくれているよ</span></span></div></article><article class="header2"><span>シェル変数の参照</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今度は変数の値を</span></span><span><span>呼び出してみよう</span></span><span><span>以下のように記述するよ</span></span></div></article><article class="code"><pre><code class="bash">$変数名
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これで変数の値を</span></span><span><span>取り出せるのね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それを確かめるために</span></span><span><span>以下のコマンドを</span></span><span><span>打ち込んでみよう</span></span></div></article><article class="code"><pre><code class="bash">sleep <wbr>$TIMER; <wbr>tput <wbr>bel
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「セミコロン(</span><code>;</code><span>)」<wbr>は…</span></span><span><span>1行で複数のコマンドを</span></span><span><span>書く書き方だったよね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そして </span><code>tput bel</code><span> は</span></span><span><span><wbr>「ベルを鳴らす」<wbr>だね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>TIMER</code><span> 変数に入っていた </span><code>30</code><span> が使われて</span></span><span><code>sleep 30</code><span> を実行してくれるんだね</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>30秒待った後にベルが鳴る…</span></span><span><span>簡単な30秒タイマーとして</span></span><span><span>機能するね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>じゃあ今度は</span></span><span><code>TIMER</code><span> 変数の</span></span><span><span>値を変えてみよう</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>3分タイマーにしたければ</span></span><span><span>以下のようにしてみてね</span></span></div></article><article class="code"><pre><code class="bash">TIMER=180
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>3分は180秒だね！</span></span><span><span>設定したよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうしたら</span></span><span><span>同じコマンドを</span></span><span><span>再び実行してみよう</span></span></div></article><article class="code"><pre><code class="bash">sleep <wbr>$TIMER; <wbr>tput <wbr>bel
+</code></pre></article><article class="situation"><span>-- 3分後 --</span></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>本当だ！</span></span><span><span>3分待機してから</span></span><span><span>ベルが鳴った！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>実行するコマンドは同じなのに</span></span><span><code>TIMER</code><span> 変数の値を変えるだけで</span></span><span><span>動きが変わるんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>変数を使うと<wbr>「変化する値」<wbr>を</span></span><span><span>簡単に操作できるようになるんだ</span></span></div></article><article class="header2"><span>予め用意されている変数</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シェルには</span></span><span><span>初めから用意されている</span></span><span><span>変数もあるんだ</span></span><span><span>いくつか重要なものを紹介するね</span></span></div></article><article class="table"><table><thead><tr><th><span>変数名</span></th><th><span>変数の値</span></th></tr></thead><tbody><tr><td><code>PATH</code></td><td><span>コマンドを探すディレクトリのパス。<wbr>複数のパスをコロン区切りで指定している</span></td></tr><tr><td><code>HOME</code></td><td><span>ユーザのホームディレクトリのパス</span></td></tr><tr><td><code>PWD</code></td><td><span>ワーキングディレクトリのパス</span></td></tr><tr><td><code>USER</code></td><td><span>現在ログインしているユーザ名</span></td></tr><tr><td><code>SHELL</code></td><td><span>現在使っているシェルの実行ファイルのパス</span></td></tr><tr><td><code>IFS</code></td><td><span>シェルが区切り文字として使う文字</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>こういう変数は</span></span><span><span>勝手に定義されるんだね！</span></span></div></article><article class="header2"><span>変数名に使える文字</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>自分で宣言する変数の</span></span><span><span>変数名に使える文字には制限があるよ</span></span><span><span>英大文字小文字数字と</span></span><span><span>アンダースコア(</span><code>_</code><span>)が使えるんだ</span></span><span><span>ただし1文字目には英数字は使えないよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>制限はあるけど</span></span><span><span>自由な名前をつけるには</span></span><span><span>十分そうだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは変数の値を</span></span><span><span>文字の中に埋め込みたい場合に</span></span><span><span>困る場合があるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へぇ…</span></span><span><span>どういう場合かな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>例えば </span><code>ユーザ名_id_rsa</code><span> というファイル名を</span></span><span><span>扱いたい場合はどうすればいいと思う？</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>こうすれば</span></span><span><span>いいんじゃ</span></span><span><span>ないのかな？</span></span></div></article><article class="code"><pre><code class="bash">$USER_id_rsa
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>実はこの指定だと</span></span><span><span>意図どおりに動かないんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>$</code><span> 以降が全て変数で使える文字なので</span></span><span><span>これは </span><code>USER_id_rsa</code><span> 変数だと判断されるよ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>なるほど…</span></span><span><span>それは困っちゃうね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それを避けるために</span></span><span><span>以下のような記述でも</span></span><span><span>変数を呼び出せるんだ</span></span></div></article><article class="code"><pre><code class="bash">${変数名}
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>さっきの例だと</span></span><span><span>以下のようにすれば</span></span><span><span>意図どおりに動くよ</span></span></div></article><article class="code"><pre><code class="bash">${USER}_id_rsa
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>普段はそのままでいいけど</span></span><span><span>変数名の区切りで</span></span><span><span>困ることがあれば</span></span><span><code>${変数名}</code><span> と</span></span><span><span>すればいいのね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は<wbr>「シェル変数」<wbr>と</span></span><span><span>その使い方について学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シェル変数を使うことで</span></span><span><span>コマンドを柔軟にしたり</span></span><span><span>抽象的に扱えたりするんだ</span></span><span><span>高度な操作に必要な機能なので</span></span><span><span>使えるようにしておこう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章39話</div><div><a href="2/39/">プロセス優先度</a></div></div><div><div>今</div><div>2章40話 シェル変数</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章41話</div><div><a href="2/41/">コマンド置換</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

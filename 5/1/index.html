@@ -1,0 +1,228 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章1話 個人設定</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,.bash_profie,.bashrc,.bash_logout">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="4/23/" />
+<link rel="next" href="5/2/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>4章23話</div>
+<div><a href="4/23/">強制アクセス制御</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章1話 個人設定</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章2話</div>
+<div><a href="5/2/">エイリアス</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>個人設定</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Linux の基礎は</span></span>
+<span><span>とても勉強になるけど</span></span>
+<span><span>もう少し楽しみが欲しいよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>カスタマイズしたり</span></span>
+<span><span>音楽を聴いたり…</span></span>
+<span><span>そういった楽しみ方も</span></span>
+<span><span>教えて欲しいなぁ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうだね</span></span>
+<span><span>少し毛色を変えて</span></span>
+<span><span>そういった話をしていこう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最初は個人設定の</span></span>
+<span><span>カスタマイズからだよ</span></span>
+</div>
+</article>
+<article class="header2"><code>.bash_profile</code><span>, <wbr></span><code>.bashrc</code><span> ファイル</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>~/.bash_profie</code><span> と</span></span>
+<span><code>~/.bashrc</code><span> は</span></span>
+<span><span>初期化用スクリプトだよ</span></span>
+<span><span>それぞれ以下のタイミングで</span></span>
+<span><span>呼び出されるんだ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>設定ファイル</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.bash_profile</code></td>
+<td><span>ログインシェル起動時に実行される設定</span></td>
+</tr>
+<tr>
+<td><code>~/.bashrc</code></td>
+<td><span>非ログインシェル起動時に実行される設定</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span><wbr>「ログインシェル」<wbr>と</span></span>
+<span><span><wbr>「非ログインシェル」<wbr>って</span></span>
+<span><span>どう違うのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ログインシェルは</span></span>
+<span><span>システムにログインしたときに</span></span>
+<span><span>最初に起動されるシェルのことだよ</span></span>
+<span><span>ターミナルや </span><code>ssh</code><span> で</span></span>
+<span><span>ログインした場合などがあるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>非ログインシェルは</span></span>
+<span><span>既にログインした後に</span></span>
+<span><span>新たに起動するシェルになるよ</span></span>
+<span><span>例えばシェル上で</span></span>
+<span><code>bash</code><span> を実行したときなどがあるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ログイン初回と</span></span>
+<span><span>それ以外で違うんだね！</span></span>
+<span><span>どうやって使い分けたら</span></span>
+<span><span>いいのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>初回に1度だけ</span></span>
+<span><span>設定すれば良いものは</span></span>
+<span><code>.bash_profile</code><span> に</span></span>
+<span><span>記述するよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>一方、<wbr>シェル毎に毎回</span></span>
+<span><span>設定する必要のあるものは</span></span>
+<span><code>.bashrc</code><span> に書かれるんだ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>設定ファイル</span></th>
+<th><span>設定内容</span></th>
+<th><span>例</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.bash_profile</code></td>
+<td><span>環境変数の定義など</span></td>
+<td><code>export PATH=&quot;$PATH${PATH:+:}$HOME/bin&quot;</code></td>
+</tr>
+<tr>
+<td><code>~/.bashrc</code></td>
+<td><span>エイリアスやシェル関数の定義など</span></td>
+<td><code>alias ll='ls -l'</code></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>シェルが使えるようになるまでに</span></span>
+<span><span>事前にやってほしいことは</span></span>
+<span><span>ここに書けばいいんだね！</span></span>
+</div>
+</article>
+<article class="header2"><code>.bash_logout</code><span> ファイル</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次は </span><code>~/.bash_logout</code><span> だよ</span></span>
+<span><span>これはログアウト時に</span></span>
+<span><span>実行されるスクリプトになるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>初期化処理だけじゃなくて</span></span>
+<span><span>後処理も定義できるんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>でも実際は</span></span>
+<span><span>ログアウト時に</span></span>
+<span><span>必要な処理は</span></span>
+<span><span>あまりないんだ</span></span>
+<span><span>思い浮かばなければ</span></span>
+<span><span>無理に作る必要はないよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>作るとしたら</span></span>
+<span><span>以下のようなものはどうだろう？</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">find <wbr>/tmp <wbr>-user <wbr>&quot;$(id <wbr>-u)&quot; <wbr>-group <wbr>&quot;$(id <wbr>-g)&quot; <wbr>| <wbr>xargs <wbr>rm <wbr>-rf
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>/tmp</code><span> フォルダ内の</span></span><span><span>自分が所有している</span></span><span><span>一時ファイルを削除するのね</span></span><span><span>ログアウト時に</span></span><span><span>自動掃除してくれるのは</span></span><span><span>便利かも！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は初期化処理や</span></span><span><span>後処理の設定ファイルについて学んだよ！</span></span><span><span>以下のファイルにコマンドを書いておけば</span></span><span><span>決まったタイミングで実行されるんだ！</span></span></div></article><article class="table"><table><thead><tr><th><span>設定ファイル</span></th><th><span>実行タイミング</span></th></tr></thead><tbody><tr><td><code>~/.bash_profile</code></td><td><span>起動時(ログインシェル)</span></td></tr><tr><td><code>~/.bashrc</code></td><td><span>起動時(非ログインシェル)</span></td></tr><tr><td><code>~/.bash_logout</code></td><td><span>ログアウト時</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>毎回行っている操作があれば</span></span><span><span>これらの設定ファイルに</span></span><span><span>その操作を書いて自動化しよう</span></span><span><span>そうすれば打ち間違いや</span></span><span><span>操作忘れが無くて安心だね！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>4章23話</div><div><a href="4/23/">強制アクセス制御</a></div></div><div><div>今</div><div>5章1話 個人設定</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章2話</div><div><a href="5/2/">エイリアス</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

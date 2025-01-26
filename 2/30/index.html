@@ -1,0 +1,56 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章30話 クォート</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,back quote,double quote,single quote">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/29/" />
+<link rel="next" href="2/31/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章29話</div>
+<div><a href="2/29/">ブレース展開</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章30話 クォート</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章31話</div>
+<div><a href="2/31/">リダイレクト</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>クォート</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><code>Program Files</code><span> ディレクトリを</span></span>
+<span><span>消せないんだ！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">rmdir <wbr>Program <wbr>Files
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>実行すると</span></span><span><span><wbr>「</span><code>Program</code><span> というディレクトリは存在しない」<wbr></span></span><span><span><wbr>「</span><code>Files</code><span> というディレクトリは存在しない」<wbr></span></span><span><span>って2回怒られちゃうよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今回は文字の特殊な意味を打ち消す</span></span><span><span><wbr>「クォート(quote)」<wbr>を学ぼう！</span></span><span><span>名詞で<wbr>「クォーテーション</span></span><span><span>(quotation)」<wbr>とも呼ぶよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これで名前にスペースが含まれる</span></span><span><span>ファイルも扱えるんだね？</span></span></div></article><article class="header2"><span>バックスラッシュ </span><code>\</code></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>最初は<wbr>「バックスラッシュ(</span><code>\</code><span>)」<wbr>だよ</span></span><span><span>Windows では<wbr>「円マーク(</span><code>￥</code><span>)」<wbr>の半角記号になるよ</span></span><span><span>これは直後1文字の特殊な意味を</span></span><span><span>打ち消してくれるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>スペースは</span></span><span><span><wbr>「コマンドの要素の区切り」<wbr>という</span></span><span><span>特殊な意味を持っているんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>スペースの前にバックスラッシュを追加してみよう</span></span><span><span>そうするとスペースはその特殊な意味を失って</span></span><span><span><wbr>「これはただの文字です」<wbr>という扱いになるんだ</span></span></div></article><article class="code"><pre><code class="bash">rmdir <wbr>Program\ <wbr>Files
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おっ！</span></span><span><span>ちゃんと </span><code>Program Files</code><span> ディレクトリを消せたよ！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>スペースを含むファイル名は</span></span><span><span>扱いが難しくなるんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだね</span></span><span><span>なるべく避けた方がいいけど</span></span><span><span>スペースを含むファイル名は</span></span><span><span>少なからずあるものなんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>こういう時はクォートして</span></span><span><span>区切りの意味を失わせてあげよう</span></span></div></article><article class="header2"><span>ダブルクォート </span><code>&quot;</code></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>自分のファイルを調べていたら</span></span><span><span>スペースを何個も含む</span></span><span><span>ファイル名があったよ！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これって全てのスペースの前に</span></span><span><span>バックスラッシュを指定しないと</span></span><span><span>いけないんだよね？</span></span><span><span>ちょっと面倒かも…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それなら<wbr>「ダブルクォート(</span><code>&quot;</code><span>)」<wbr>で</span></span><span><span>ファイル名を囲んであげよう</span></span><span><span>その間にあるスペースは全て</span></span><span><span>普通の文字として扱われるよ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span><wbr>「</span><code>5, <wbr>6, <wbr>7, <wbr>8.mp3</code><span>」<wbr>というファイルなんだけど</span></span><span><span><wbr>「</span><code>5_6_7_8.mp3</code><span>」<wbr>に変更したいんだ</span></span><span><span>どうすればいいかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>名前を変えるのは </span><code>mv</code><span> だったよね</span></span><span><span>コマンドは </span><code>mv</code><span> を使うことにしよう！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そして </span><code>mv</code><span> の引数に</span></span><span><span>スペースが含まれていれば</span></span><span><span>それをダブルクォートで囲ってあげるんだ</span></span></div></article><article class="code"><pre><code class="bash">mv <wbr>&quot;5, <wbr>6, <wbr>7, <wbr>8.mp3&quot; <wbr>5_6_7_8.mp3
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>お兄ちゃん！</span></span><span><span>ちゃんと名前変更ができたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ダブルクォートは</span></span><span><span><wbr>「ゆるい」<wbr>クォートなんだ</span></span><span><span>スペースやワイルドカードなどの</span></span><span><span>意味を失わせるけど</span></span><span><span>他の大部分の特別な意味</span></span><span><span>後で紹介する変数や</span></span><span><span>コマンド展開などの</span></span><span><span>意味は失わせないんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>なのでスペースなどを</span></span><span><span>普通の文字として扱いつつ</span></span><span><span>便利な機能は使いたい</span></span><span><span>そんな欲張りなクォートが</span></span><span><span>ダブルクォートだよ</span></span></div></article><article class="header2"><span>シングルクォート </span><code>'</code></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ダブルクォートは<wbr>「ゆるい」<wbr></span></span><span><span>クォートと言っていたよね</span></span><span><span>じゃあ<wbr>「きつい」<wbr>クォートもあるんだ？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もちろんあるよ！</span></span><span><span>それが<wbr>「シングルクォート(</span><code>'</code><span>)」<wbr>なんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>使い方はダブルクォートと一緒だけど</span></span><span><span>シングルクォートとバックスラッシュ以外の</span></span><span><span>全ての文字の意味を失わせるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>シングルクォートで囲めば</span></span><span><span>大抵は<wbr>「囲んだ文字列そのもの」<wbr>の意味になるんだ！</span></span><span><span>特殊な記号を多く扱っている場合でも</span></span><span><span>そのままの文字列で扱って欲しい時に便利そうだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>後で紹介する<wbr>「正規表現」<wbr>は</span></span><span><span>そのような記号をたくさん使うんだ</span></span><span><span>正規表現はシングルクォートで</span></span><span><span>囲むことが多いよ</span></span></div></article><article class="header2"><span>空文字</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ダブルクォートやシングルクォートを使えば</span></span><span><span>0文字である<wbr>「空文字」<wbr>を表現できるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>空文字を扱えると</span></span><span><span>どんなことが</span></span><span><span>できるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>引数が必ず必要なコマンドがあったとしよう</span></span><span><span>これまでの考えでこのコマンドに</span></span><span><span>空文字を渡そうとするとこう書くよね</span></span></div></article><article class="code"><pre><code class="bash">コマンド <wbr>
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これは引数が無いのと</span></span><span><span>全く同じ書き方になっちゃうね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このような場合</span></span><span><span>以下のようにしてあげると</span></span><span><span>空文字を引数に指定できるんだ</span></span></div></article><article class="code"><pre><code class="bash">コマンド <wbr>&quot;&quot;
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は<wbr>「クォート」<wbr>を学んだよ！</span></span><span><span>特殊な意味になってしまう文字を</span></span><span><span>普通の文字として扱えるようにするんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>特にシングルクォートやダブルクォートで</span></span><span><span><wbr>「ひとまとまり」<wbr>とすることは</span></span><span><span>これからも良く登場するよ</span></span><span><span>必要な場合に使えるよう</span></span><span><span>これらのクォートに慣れておこう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章29話</div><div><a href="2/29/">ブレース展開</a></div></div><div><div>今</div><div>2章30話 クォート</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章31話</div><div><a href="2/31/">リダイレクト</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

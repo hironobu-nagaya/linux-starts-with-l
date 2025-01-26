@@ -1,0 +1,78 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章6話 case文(使い方)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,case">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/5/" />
+<link rel="next" href="3/7/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章5話</div>
+<div><a href="3/5/">if文(実践)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章6話 case文(使い方)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章7話</div>
+<div><a href="3/7/">case文(実践)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>case</code><span>文(使い方)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回は</span><code>if</code><span>文を学んだよ！</span></span>
+<span><span>条件によって</span></span>
+<span><span>処理を分けられるんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は条件分岐処理の仲間</span></span>
+<span><code>case</code><span>文を学んでいこう！</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>まずは</span><code>case</code><span>文の</span></span>
+<span><span>書き方を覚えよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">case <wbr>値 <wbr>in
+  <wbr>値1)
+    <wbr>処理1
+    <wbr>;;
+  <wbr>値2)
+    <wbr>処理2
+    <wbr>;;
+  <wbr>値3)
+    <wbr>処理3
+    <wbr>;;
+  <wbr>...
+esac
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>case</code><span> の後に続く </span><code>値</code><span> によって処理を分けるよ</span></span><span><code>値</code><span> が </span><code>値1</code><span> に一致したら </span><code>処理1</code><span> が実行</span></span><span><code>値</code><span> が </span><code>値2</code><span> に一致したら </span><code>処理2</code><span> が実行</span></span><span><span>…</span></span><span><span>というふうに処理が分岐するんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>この </span><code>;;</code><span> は</span></span><span><span>何のために</span></span><span><span>あるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは</span></span><span><span><wbr>「ここでこの処理の分岐が終わり」<wbr></span></span><span><span>という印なんだ</span></span><span><span>これが無いと次の分岐に</span></span><span><span>処理が続いてしまうよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>わざと書かないこともできるけど</span></span><span><span>最初のうちは必ず </span><code>;;</code><span> を</span></span><span><span>書くようにしよう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>わかった！</span></span><span><span>忘れないよう</span></span><span><span>気をつけるね！</span></span></div></article><article class="header2"><span>値の指定</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>case</code><span>文では</span></span><span><span>柔軟に条件を指定できるんだ</span></span><span><span>ワイルドカードが使えるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「</span><code>*</code><span> は任意の文字列」<wbr></span></span><span><span><wbr>「</span><code>?</code><span> は任意の1文字」<wbr></span></span><span><span>とかだよね？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><span>特に最後に </span><code>*)</code><span> を書くことで</span></span><span><span><wbr>「どの条件にも当てはまらなかった場合」<wbr></span></span><span><span>としてよく使われるよ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>へぇ！</span></span><span><span>条件の取りこぼしが</span></span><span><span>無くなるね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もう一つ便利なのは </span><code>|</code><span> だよ</span></span><span><span>これは </span><code>X|Y|Z)</code><span> と記述すれば</span></span><span><span><wbr>「</span><code>X</code><span> または </span><code>Y</code><span> または </span><code>Z</code><span> の場合」<wbr></span></span><span><span>というように複数の条件を</span></span><span><span>まとめて書けるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>柔軟に条件を</span></span><span><span>指定できるんだね</span></span><span><span>これなら複雑な分岐も</span></span><span><span>スッキリ書けそう！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>case</code><span>文は</span></span><span><span>書き方が直感的で</span></span><span><span>たくさんの条件を</span></span><span><span>使いたいときに便利なんだ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は</span><code>case</code><span>文の</span></span><span><span>書き方を学んだよ！</span></span><span><span>面白い書き方なので</span></span><span><span>早速</span><code>case</code><span>文を使って</span></span><span><span>何か書きたいなぁ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それは次回のお楽しみ！</span></span><span><span>次で一緒にスクリプトを</span></span><span><span>書いてみよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章5話</div><div><a href="3/5/">if文(実践)</a></div></div><div><div>今</div><div>3章6話 case文(使い方)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章7話</div><div><a href="3/7/">case文(実践)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

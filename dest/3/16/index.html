@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja"><head><title>Lから始まるLinux - 3章16話 オプション処理</title><base href="../.."><meta charset="utf-8"><meta name="author" content="Hironobu Nagaya"><meta name="robots" content="all"><meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,getopts"><meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です"><meta name="viewport" content="width=device-width, initial-scale=0.5" /><meta name="format-detection" content="telephone=no, email=no, address=no" /><link rel="prev" href="3/15/" /><link rel="next" href="3/17/" /><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/normalize.css" type="text/css"><link rel="stylesheet" href="css/common.css" type="text/css"><link rel="stylesheet" href="css/story.css" type="text/css"></head><body><header><h1>Lから始まるLinux</h1><div class="relation"><div><div>前</div><div>3章15話</div><div><a href="3/15/">引数処理</a></div></div><div><div>今</div><div>3章16話 オプション処理</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章17話</div><div><a href="3/17/">readonlyコマンド</a></div></div></div></header><main><section><article class="header1"><span>オプション処理</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>悩みながら</span></span><span><span>シェルスクリプトを</span></span><span><span>書いているみたいだね？</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん</span></span><span><span>オプションを扱えるように</span></span><span><span>できないかと思っているんだけど</span></span><span><span>これが難しくて…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>引数を扱えるなら</span></span><span><span>オプションも扱いたいと</span></span><span><span>考えるのはもっともだよね</span></span><span><span>実はオプションを楽に解釈する</span></span><span><span>仕組みが用意されているんだ！</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>えっ！</span></span><span><span>教えて欲しい！</span></span></div></article><article class="header2"><span>オプション解析スクリプト</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>getopts</code><span> は</span></span><span><span>オプション解析コマンドだよ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>専用のコマンドがあるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>getopts</code><span> は</span></span><span><span>色々な要素と組み合わせて</span></span><span><span>動く前提のコマンドなんだ</span></span><span><span>少し複雑なので</span></span><span><span>一緒にスクリプトを</span></span><span><span>読みながら理解しよう</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>オプションを解析する</span></span><span><code>check-opts</code><span> スクリプトを</span></span><span><span>作成しよう！</span></span></div></article><article class="code"><pre><code class="bash">vim <wbr>check-opts
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そこに以下の内容を書いてね</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+<span class="silver"># <wbr>初期状態</span>
+OPT_A=off
+OPT_B=off
+OPT_C=off
+OPT_C_VALUE=
+
+<span class="silver"># <wbr>オプションを処理</span>
+while <wbr>getopts <wbr>&quot;abc:&quot; <wbr>OPT
+do
+  <wbr>case <wbr>&quot;$OPT&quot; <wbr>in
+    <wbr>a) <wbr><span class="silver"># <wbr>a <wbr>オプション</span>
+      <wbr>OPT_A=on
+      <wbr>;;
+    <wbr>b) <wbr><span class="silver"># <wbr>b <wbr>オプション</span>
+      <wbr>OPT_B=on
+      <wbr>;;
+    <wbr>c) <wbr><span class="silver"># <wbr>c <wbr>オプション（引数付き）</span>
+      <wbr>OPT_C=on
+      <wbr>OPT_C_VALUE=&quot;$OPTARG&quot;
+      <wbr>;;
+    <wbr>*) <wbr><span class="silver"># <wbr>不正なオプション</span>
+      <wbr>echo <wbr>&quot;エラー: <wbr>無効なオプション <wbr>$OPT <wbr>が指定されました&quot; <wbr>&gt;&amp;2
+      <wbr>exit <wbr>1
+      <wbr>;;
+  <wbr>esac
+done
+
+<span class="silver"># <wbr>オプション処理結果を表示</span>
+echo <wbr>&quot;オプションa: <wbr>$OPT_A&quot;
+echo <wbr>&quot;オプションb: <wbr>$OPT_B&quot;
+echo <wbr>&quot;オプションc: <wbr>$OPT_C&quot;
+[ <wbr>&quot;$OPT_C&quot; <wbr>== <wbr>&quot;on&quot; <wbr>] <wbr>&amp;&amp; <wbr>echo <wbr>&quot;オプションc値: <wbr>$OPT_C_VALUE&quot;
+
+<span class="silver"># <wbr>引数を処理</span>
+shift <wbr>$((OPTIND <wbr>- <wbr>1))
+for <wbr>ARG <wbr>in <wbr>&quot;$@&quot;
+do
+  <wbr>echo <wbr>&quot;引数: <wbr>$ARG&quot;
+done
+echo <wbr>&quot;引数の個数: <wbr>$#&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ちょっと長かったけど書けたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうしたら</span></span><span><span>実行権限を与えて</span></span><span><span>実行できるようにしよう</span></span></div></article><article class="code"><pre><code class="bash">chmod <wbr>a+x <wbr>check-opts
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これで実行する準備はできたね！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>名前のとおり</span></span><span><span>オプションを確認するんだよね？</span></span><span><span>何を指定すればよいかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このスクリプトは</span></span><span><code>-a</code><span>, <wbr></span><code>-b</code><span>, <wbr></span><code>-c</code><span> オプションを認識するよ</span></span><span><code>-c</code><span> は、<wbr></span><code>head -n 1</code><span> のように</span></span><span><span><wbr>「オプション引数」<wbr>を受け取るんだ</span></span><span><span>オプションの指定が終わった後の要素は</span></span><span><span>引数と判断してくれるよ</span></span><span><span>書式は以下のような感じだね</span></span></div></article><article class="code"><pre><code class="manpage">./check-opts <wbr>[-a] <wbr>[-b] <wbr>[-c <wbr>値] <wbr>[引数]...
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>へぇ…</span></span><span><span>いくつか試してみるね！</span></span></div></article><article class="code"><pre><code class="console">./check-opts <wbr>-a
+オプションa: <wbr>on
+オプションb: <wbr>off
+オプションc: <wbr>off
+引数の個数: <wbr>0
+</code></pre></article><article class="code"><pre><code class="console">./check-opts <wbr>-ab
+オプションa: <wbr>on
+オプションb: <wbr>on
+オプションc: <wbr>off
+引数の個数: <wbr>0
+</code></pre></article><article class="code"><pre><code class="console">./check-opts <wbr>-c <wbr>X <wbr>aaa <wbr>bbb <wbr>ccc
+オプションa: <wbr>off
+オプションb: <wbr>off
+オプションc: <wbr>on
+オプションc値: <wbr>X
+引数: <wbr>aaa
+引数: <wbr>bbb
+引数: <wbr>ccc
+引数の個数: <wbr>3
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>すごい！</span></span><span><span>オプションと引数を</span></span><span><span>ちゃんと解析できてる！</span></span><span><span>ショートオプションの</span></span><span><span>同時指定もバッチリ！</span></span></div></article><article class="header2"><span>getopts コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>getopts</code><span> は</span></span><span><span>以下の書式で使うよ</span></span></div></article><article class="code"><pre><code class="bash">getopts <wbr>オプション文字列 <wbr>変数名
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>オプション文字列には</span></span><span><span>ショートオプションとして</span></span><span><span>認識する文字を並べるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>オプション文字の後に</span></span><span><code>:</code><span> を指定すると</span></span><span><span>そのオプションは</span></span><span><span>引数を取ると解釈されるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ここの指定は </span><code>abc:</code><span> だよね</span></span></div></article><article class="code"><pre><code class="bash">getopts <wbr>&quot;abc:&quot; <wbr>OPT
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>だから </span><code>-a</code><span>, <wbr></span><code>-b</code><span>, <wbr></span><code>-c</code><span> オプションを認識して</span></span><span><code>-c</code><span> オプションは</span></span><span><span>オプション引数を取るんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>続く変数名の変数に</span></span><span><span>解析したオプション文字が代入されるよ</span></span><span><span>これを</span><code>case</code><span>文で処理を分けてあげれば</span></span><span><span>オプションごとに処理を書ける</span></span><span><span>というわけなんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>オプションが指定されていれば</span></span><span><span>対応する変数の値を</span></span><span><code>off</code><span> から </span><code>on</code><span> にしているんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>オプション引数が指定されていた場合</span></span><span><code>OPTARG</code><span> 変数にその値が代入されるよ</span></span><span><span>この変数を参照することで</span></span><span><span>どんな値が指定されたかがわかるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>getopts</code><span> は</span></span><span><span>オプション解析を続けられるなら成功</span></span><span><span>そうでないなら失敗を返すんだ</span></span><span><span>だから </span><code>getopts</code><span> は</span></span><span><code>while</code><span>文と一緒に使われるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>while</code><span>文の後に</span></span><span><code>shift</code><span> を実行しているね？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>OPTIND</code><span> 変数には </span><code>getopts</code><span> が</span></span><span><span>現在解析している</span></span><span><span>引数の番号が入っているんだ</span></span><span><span>1 から始まり</span></span><span><span>次の要素の解析に移る時に</span></span><span><span>値が 1 増加するよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>だからwhile 文を終えたときの </span><code>OPTIND</code><span> 変数には</span></span><span><span>オプション解析が終わったときの引数の番号</span></span><span><span>つまり<wbr>「最後のオプション + 1」<wbr>番目の</span></span><span><span>引数の番号が入っていることになるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>そこで </span><code>shift $((OPTIND - 1))</code><span> を実行すると</span></span><span><span>解析済みのオプションを全て捨てて</span></span><span><span>残りは全て引数というというわけなんだね…</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>getopts</code><span> でオプションと引数を</span></span><span><span>解析できることを学んだよ！</span></span><span><span>ちょっと書き方が独特で</span></span><span><span>覚えることが多いね…</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>getopts</code><span> は今回書いたような</span></span><span><span>決まりきった使い方をするんだ</span></span><span><span>最初はこの </span><code>check-opts</code><span> スクリプトを雛形にして</span></span><span><span>自分のスクリプト用に</span></span><span><span>内容を書き換えてあげるといいよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章15話</div><div><a href="3/15/">引数処理</a></div></div><div><div>今</div><div>3章16話 オプション処理</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章17話</div><div><a href="3/17/">readonlyコマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

@@ -1,0 +1,380 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章49話 ハッシュ(基本)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/48/" />
+<link rel="next" href="2/50/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章48話</div>
+<div><a href="2/48/">同一ファイルへの入出力</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章49話 ハッシュ(基本)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章50話</div>
+<div><a href="2/50/">ハッシュ(使い方)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ハッシュ(基本)</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は</span></span>
+<span><span><wbr>「ハッシュ(hash)」<wbr>を</span></span>
+<span><span>学んでみよう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>それはどういう</span></span>
+<span><span>ものなのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ハッシュは</span></span>
+<span><span>元となるデータから</span></span>
+<span><span>決められた計算で</span></span>
+<span><span>求められた値の</span></span>
+<span><span>ことなんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ハッシュで</span></span>
+<span><span>生成される</span></span>
+<span><span>値の長さは</span></span>
+<span><span>多くの場合で</span></span>
+<span><span>比較的短めの</span></span>
+<span><span>固定長だよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>へぇ…</span></span>
+<span><span>定義自体は</span></span>
+<span><span>簡単そうだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ハッシュの値は</span></span>
+<span><span>様々な場面で</span></span>
+<span><span>使われているよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのため色々な</span></span>
+<span><span>呼び名があるんだ</span></span>
+<span><span><wbr>「ハッシュ(hash)」<wbr></span></span>
+<span><span><wbr>「ハッシュ値(hash value)」<wbr></span></span>
+<span><span><wbr>「チェックサム(checksum)」<wbr></span></span>
+<span><span><wbr>「指紋(fingerprint)」<wbr>は</span></span>
+<span><span>全てハッシュから生成された</span></span>
+<span><span>値のことを指す呼び名だよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ハッシュには</span></span>
+<span><span>色々な用途が</span></span>
+<span><span>あるんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ハッシュがあると</span></span>
+<span><span>どんなことが</span></span>
+<span><span>できるんだろう？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それを知るには</span></span>
+<span><span>ハッシュの性質を</span></span>
+<span><span>理解する必要があるよ</span></span>
+</div>
+</article>
+<article class="header2"><span>同じデータからは同じハッシュ値</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最も重要な性質は</span></span>
+<span><span><wbr>「同じデータからは</span></span>
+<span><span>同じハッシュ値が</span></span>
+<span><span>生成される」<wbr>だよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>同じデータから</span></span>
+<span><span>同じ手順で計算すると</span></span>
+<span><span>同じ値が出てくる…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>言葉にしてみると</span></span>
+<span><span>すごく当たり前な</span></span>
+<span><span>気がするね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのため</span></span>
+<span><span>データのハッシュ値を</span></span>
+<span><span>事前に記録しておけば</span></span>
+<span><span>ハッシュ値の変化から</span></span>
+<span><span>データの変化を</span></span>
+<span><span>検出できるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>データ全部を比較しなくても</span></span>
+<span><span>ハッシュ値を比べるだけで</span></span>
+<span><span>データの変化がわかるんだね！</span></span>
+</div>
+</article>
+<article class="header2"><span>一方向性</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次の性質は<wbr>「一方向性(one-way)」<wbr>だよ</span></span>
+<span><span>データからハッシュ値を計算できるけど</span></span>
+<span><span>ハッシュ値から元データを作り出せない</span></span>
+<span><span>という意味なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>生卵をゆで卵にできるけど</span></span>
+<span><span>ゆで卵を生卵にはできない</span></span>
+<span><span>のような感じね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>パスワードを扱う</span></span>
+<span><span>多くのシステムでは</span></span>
+<span><span>パスワードをそのまま保存せず</span></span>
+<span><span>パスワードのハッシュ値を</span></span>
+<span><span>保存しているよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>本来のパスワードのまま</span></span>
+<span><span>保存するのが良い気がするけど…</span></span>
+<span><span>どうしてひと手間かけて</span></span>
+<span><span>ハッシュ値にしてから</span></span>
+<span><span>保存するのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>保管されているデータが</span></span>
+<span><span>盗まれた場合を考えてみよう</span></span>
+<span><span>生のままのパスワードが</span></span>
+<span><span>保存されていたらと</span></span>
+<span><span>考えてみたらどうだろう？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>ゾッとするね！</span></span>
+<span><span>パスワードが</span></span>
+<span><span>全部ばれちゃう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>パスワードそのままではなく</span></span>
+<span><span>パスワードのハッシュ値が</span></span>
+<span><span>保存されていた場合</span></span>
+<span><span>仮に盗まれたとしても</span></span>
+<span><span>パスワードを復元して</span></span>
+<span><span>知ることはできないんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>なるほど…</span></span>
+<span><span>情報漏洩の防御に</span></span>
+<span><span>なるんだね！</span></span>
+</div>
+</article>
+<article class="header2"><span>衝突</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最後に<wbr>「衝突(collision)」<wbr>だよ</span></span>
+<span><span>入力するデータは無限にあるけど</span></span>
+<span><span>出力されるハッシュ値の範囲は</span></span>
+<span><span>基本的に有限なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>あれ？</span></span>
+<span><span>それだと全く別のデータだけど</span></span>
+<span><span>同じハッシュ値を生成するデータが</span></span>
+<span><span>複数存在するってことだよね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そういうことだね</span></span>
+<span><span>この<wbr>「違うデータが</span></span>
+<span><span>同じハッシュ値を生成する」<wbr></span></span>
+<span><span>現象を衝突と呼ぶよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>えぇ…</span></span>
+<span><span>これってとても</span></span>
+<span><span>まずいんじゃ</span></span>
+<span><span>ないかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>データに変化があっても</span></span>
+<span><span>ハッシュ値が偶然同じで</span></span>
+<span><span>変化を検出できなかったり</span></span>
+<span><span>違うパスワードでも</span></span>
+<span><span>ハッシュ値が同じだったら</span></span>
+<span><span>そのパスワードが</span></span>
+<span><span>通っちゃう可能性が</span></span>
+<span><span>あるんだよね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>うん</span></span>
+<span><span>まさに心配の通りなんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>なのでハッシュでは</span></span>
+<span><span>出力される値の範囲が</span></span>
+<span><span>十分に大きくなっていて</span></span>
+<span><span>ランダムな二つのデータが</span></span>
+<span><span>衝突する可能性は</span></span>
+<span><span>天文学的に十分低く</span></span>
+<span><span>実用の範囲ではまず</span></span>
+<span><span>衝突が起きないものに</span></span>
+<span><span>なっているんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>なので通常の用途では</span></span>
+<span><span>衝突の心配をしなくていいけど</span></span>
+<span><span>衝突という性質があることは</span></span>
+<span><span>ちゃんと理解しておこう！</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回はハッシュを学んだよ！</span></span>
+<span><span>データから計算で求められる値で</span></span>
+<span><span>以下のような性質があるんだ！</span></span>
+</div>
+</article>
+<article class="unordered-list">
+<ul>
+<li><span>同じデータからは同じハッシュ値が生成される</span></li>
+<li><span>一方向性</span></li>
+<li><span>衝突</span></li>
+</ul>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次回は</span></span>
+<span><span>ハッシュをどう使うか</span></span>
+<span><span>実践してみよう！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章48話</div>
+<div><a href="2/48/">同一ファイルへの入出力</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章49話 ハッシュ(基本)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章50話</div>
+<div><a href="2/50/">ハッシュ(使い方)</a></div>
+</div>
+</div>
+</footer>
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

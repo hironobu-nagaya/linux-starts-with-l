@@ -1,0 +1,78 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章27話 リンク</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,ln,readlink,unlink,symbolic link,hard link">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/26/" />
+<link rel="next" href="2/28/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章26話</div>
+<div><a href="2/26/">パーミッション操作</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章27話 リンク</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章28話</div>
+<div><a href="2/28/">ワイルドカード</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>リンク</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Windows の<wbr>「ショートカット」<wbr></span></span>
+<span><span>のようなものって作れるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろん作れるよ！</span></span>
+<span><span>今回は<wbr>「リンク(link)」<wbr>について学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><code>ln</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>ln</code><span> はリンクを作成するんだ</span></span>
+<span><span>link の略なんだよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">ln <wbr>[オプション]... <wbr>リンク先 <wbr>リンク
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-s</code><span>, <wbr></span><code>--symbolic</code></td><td><span>シンボリックリンクを作成</span></td></tr><tr><td><code>-f</code><span>, <wbr></span><code>--force</code></td><td><code>リンク</code><span> が存在していればそれを削除してからリンクを作成</span></td></tr><tr><td><code>-n</code><span>, <wbr></span><code>--no-dereference</code></td><td><code>リンク</code><span> が存在していればそれをシンボリックリンクとして扱わないようにしてリンクを作成</span></td></tr><tr><td><code>-v</code><span>, <wbr></span><code>--verbose</code></td><td><span>動作内容を表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>さっそく作ってみようよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>まずはリンク先のファイル</span></span><span><code>original</code><span> を作成しよう</span></span></div></article><article class="code"><pre><code class="bash">touch <wbr>original
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>作ったよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうしたら </span><code>ln</code><span> と </span><code>-s</code><span> オプションを</span></span><span><span>指定してリンクを作成しよう</span></span></div></article><article class="code"><pre><code class="bash">ln <wbr>-s <wbr>original <wbr>link
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>確認は </span><code>ls</code><span> だね</span></span></div></article><article class="code"><pre><code class="console">link  <wbr>original
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>original</code><span> と </span><code>link</code><span> の</span></span><span><span>2つのファイルがある！</span></span><span><span>リンクができたね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このリンクは</span></span><span><span><wbr>「シンボリックリンク(symbolic link)」<wbr></span></span><span><span>と呼ばれるよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シンボリックリンクは</span></span><span><span>リンク先の情報を保持していているよ</span></span><span><code>link</code><span> へのアクセスは</span></span><span><span>代わりに </span><code>original</code><span> への</span></span><span><span>アクセスになるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>まさに Windows の</span></span><span><span>ショートカットと同じだね！</span></span></div></article><article class="header2"><span>リンクの確認</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>リンクの詳細は</span></span><span><code>ls -l</code><span> で確認できるよ</span></span></div></article><article class="code"><pre><code class="bash">ls <wbr>-l <wbr>link
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へぇ…</span></span></div></article><article class="code"><pre><code class="console">lrwxrwxrwx <wbr>1 <wbr>midori <wbr>midori <wbr>8 <wbr>Jan  <wbr>1 <wbr>17:17 <wbr>link <wbr>-&gt; <wbr>original
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>link -&gt; original</code><span> と</span></span><span><span>リンク情報が表示されるんだね！</span></span></div></article><article class="header2"><code>readlink</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>readlink</code><span> は</span></span><span><span>シンボリックリンクの情報を読むよ</span></span><span><span>これでもリンクの情報が確認できるんだ</span></span></div></article><article class="code"><pre><code class="bash">readlink <wbr>[オプション]... <wbr>シンボリックリンク...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-f</code><span>, <wbr></span><code>--canonicalize</code></td><td><span>最終リンク先を表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>readlink</code><span> も</span></span><span><span>試してみよう！</span></span></div></article><article class="code"><pre><code class="bash">readlink <wbr>link
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>やってみるね！</span></span></div></article><article class="code"><pre><code class="console">original
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>リンク先の </span><code>original</code><span> が表示されたよ</span></span><span><span>これでもリンク先を確認できるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>リンク先がシンボリックリンク…と</span></span><span><span>リンクが連鎖している場合もあるんだ</span></span><span><span>こういうときは </span><code>-f</code><span> オプションを使うと</span></span><span><span>最終的なリンク先を表示してくれるよ</span></span></div></article><article class="code"><pre><code class="bash">readlink <wbr>-f <wbr>link
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>へぇ…</span></span><span><span>これは便利だね！</span></span></div></article><article class="header2"><span>ハードリンク</span></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>お兄ちゃん！</span></span><span><code>ln</code><span> で </span><code>-s</code><span> オプションを忘れちゃった！</span></span><span><span>そうしたらリンクじゃなくて</span></span><span><span>ファイルができちゃったんだけど！</span></span></div></article><article class="code"><pre><code class="bash">ln <wbr>original <wbr>link
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>ln</code><span> の </span><code>-s</code><span> オプションなしで</span></span><span><span>作成されたのもリンクなんだ</span></span><span><span>このリンクを<wbr>「ハードリンク(hard link)」<wbr>というよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>それはどういう</span></span><span><span>ものなのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ハードリンクは指定されたリンク先と</span></span><span><span>同じのデータを指しているんだ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>つまりストレージ上には</span></span><span><span>1個のデータしかないけど</span></span><span><span>そのデータを指し示すファイルは</span></span><span><span>2個あるということ？！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうことになるね</span></span><span><span>同じデータに対して</span></span><span><span>ハードリンクが何個あっても</span></span><span><span>使用する容量は1ファイル分だし</span></span><span><span>どのハードリンクを変更しても</span></span><span><span>他のハードリンクを開けば</span></span><span><span>変更が反映されているよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあ…</span></span><span><span>間違って作成したハードリンクは</span></span><span><span>削除しても問題ないんだ？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>うん、<wbr>大丈夫だよ！</span></span><span><span>普通にファイルを作った時も</span></span><span><span>それはハードリンクなんだ</span></span><span><span>ハードリンクが0個になったら</span></span><span><span>そのデータは使われないと</span></span><span><span>判断されるよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>使う機会は少ないけど</span></span><span><span>概念は覚えておこう！</span></span></div></article><article class="header2"><code>unlink</code><span> コマンド</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>リンクの削除は</span></span><span><code>rm</code><span> でいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>うん</span></span><span><span>普通は </span><code>rm</code><span> で</span></span><span><span>削除するね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>他にも </span><code>unlink</code><span> という</span></span><span><span>リンクを切るコマンドがあるんだ</span></span></div></article><article class="code"><pre><code class="bash">unlink <wbr>リンク
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>unlink</code><span> は </span><code>rm</code><span> と</span></span><span><span>同じように使えるけど</span></span><span><span><wbr>「リンクを切る」<wbr>という意図を</span></span><span><span>明確にしたい場合に</span></span><span><span>使うこともあるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「シンボリックリンクを切る」<wbr></span></span><span><span><wbr>「ハードリンクを切る」<wbr></span></span><span><span>どちらも対象のリンクを</span></span><span><span>消す動作になるものね</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は<wbr>「シンボリックリンク」<wbr></span></span><span><span><wbr>「ハードリンク」<wbr>というリンクの種類と</span></span><span><code>ln</code><span>, <wbr></span><code>readlink</code><span>, <wbr></span><code>unlink</code><span> といった</span></span><span><span>関連コマンドを扱ったね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>リンクはファイル名の差異を吸収したり</span></span><span><span>簡単にアクセスできる場所にリンクを作ったりと</span></span><span><span>システムの操作性や柔軟性を支えてくれているんだ</span></span><span><span>普段の作業やシステム操作で</span></span><span><span>使う機会が多いから活用してみてね！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章26話</div><div><a href="2/26/">パーミッション操作</a></div></div><div><div>今</div><div>2章27話 リンク</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章28話</div><div><a href="2/28/">ワイルドカード</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

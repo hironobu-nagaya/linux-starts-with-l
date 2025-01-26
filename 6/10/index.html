@@ -1,0 +1,71 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 6章10話 /runディレクトリ</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,directory,run,PID,socket,FIFO">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="6/9/" />
+<link rel="next" href="6/11/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>6章9話</div>
+<div><a href="6/9/">バイナリログ</a></div>
+</div>
+<div>
+<div>今</div>
+<div>6章10話 /runディレクトリ</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>6章11話</div>
+<div><a href="6/11/">systemd-timesyncd</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>/run</code><span> ディレクトリ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>そういえば </span><code>/run</code><span> には</span></span>
+<span><span>動作しているサーバプログラムの</span></span>
+<span><span>情報があるんだよね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうだね！</span></span>
+<span><span>今回は </span><code>/run</code><span> の</span></span>
+<span><span>中を覗いてみよう！</span></span>
+</div>
+</article>
+<article class="header2"><span>PID ファイル</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>拡張子 </span><code>.pid</code><span> の</span></span>
+<span><span>ファイルが多くて目立つね！</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="console">プログラム名.pid
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このファイルは</span></span><span><span>PID ファイルと呼ばれるよ</span></span><span><span>通常のテキストファイルで</span></span><span><span>内容にそのプログラムの</span></span><span><span>PID が書かれているんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どうやって使うものなのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>PID を簡単に取得するために</span></span><span><span>用意されているんだ</span></span><span><span>例えば以下のように使うよ</span></span></div></article><article class="code"><pre><code class="bash">kill <wbr>&quot;$(cat <wbr>/run/crond.pid)&quot;
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>crond.pid</code><span> の内容を表示して</span></span><span><code>crond</code><span> の PID を取り出して</span></span><span><span>使っているんだね！</span></span></div></article><article class="header2"><span>ソケットファイル</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>拡張子が </span><code>.sock</code><span> や </span><code>.socket</code><span> の</span></span><span><span>ファイルもあるみたいだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これらはソケットファイルと呼ばれるよ</span></span><span><span>このファイルを介して</span></span><span><span>プロセス同士が通信するんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>このファイルは今の段階では</span></span><span><span>役割だけ覚えておけば十分だよ！</span></span></div></article><article class="header2"><span>FIFO ファイル</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>上記以外にもまだファイルがあるみたいだね！</span></span><span><span>特に拡張子は付いていないけどなんだろう？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これらは</span></span><span><span><wbr>「FIFO (first-in first-out)ファイル」<wbr>の場合が多いよ</span></span><span><span><wbr>「名前付きパイプ(named pipe)」<wbr>とも呼ばれるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これも初めて聞くものだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>パイプをファイル経由で</span></span><span><span>使えるようにするものなんだ</span></span><span><span>このファイルから</span></span><span><span>入力リダイレクトして待機しておくと</span></span><span><span>このファイルへ書き込みがあったときに</span></span><span><span>その内容が読み込まれるというものだよ</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>へぇ…</span></span><span><span>面白い動きをするファイルだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>FIFO ファイルは自分で作成することもできるよ</span></span><span><span>使う機会はめったにないけど紹介しておくね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>mkfifo</code><span> は</span></span><span><span>FIFO ファイルを作成するんだ</span></span></div></article><article class="code"><pre><code class="bash">mkfifo <wbr>[オプション]... <wbr>ファイル...
+</code></pre></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>/run</code><span> にあるファイルを学んだよ！</span></span><span><span>サーバプログラムなど動き続けるプログラムが</span></span><span><span>以下のようなファイルを作ってくれているんだ</span></span></div></article><article class="table"><table><thead><tr><th><span>ファイル</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><span>PID ファイル</span></td><td><span>内容に PID が書かれているテキストファイル</span></td></tr><tr><td><span>ソケットファイル</span></td><td><span>プロセスがソケット通信を行うためのファイル</span></td></tr><tr><td><span>FIFO ファイル</span></td><td><span>名前付きパイプを扱うファイル</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>PID ファイルは</span></span><span><span>例で示したような使われ方をされるよ</span></span><span><span>他は<wbr>「このような役割なんだ」<wbr>と</span></span><span><span>理解しておけば今は十分だよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>6章9話</div><div><a href="6/9/">バイナリログ</a></div></div><div><div>今</div><div>6章10話 /runディレクトリ</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>6章11話</div><div><a href="6/11/">systemd-timesyncd</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

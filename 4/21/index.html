@@ -1,0 +1,116 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 4章21話 motdファイル</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,super user,root,motd">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="4/20/" />
+<link rel="next" href="4/22/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>4章20話</div>
+<div><a href="4/20/">fstabファイル</a></div>
+</div>
+<div>
+<div>今</div>
+<div>4章21話 motdファイル</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>4章22話</div>
+<div><a href="4/22/">PAM</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>motd</code><span>ファイル</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>ログイン時に表示される</span></span>
+<span><span>メッセージがあるよね？</span></span>
+<span><span>この管理もスーパユーザの</span></span>
+<span><span>仕事だと思うんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのとおりだよ</span></span>
+<span><span>このメッセージを</span></span>
+<span><span><wbr>「motd(message of the day)」<wbr>呼ぶんだ</span></span>
+<span><span>今回は motd について学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><code>/etc/motd</code><span> ファイル</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>motd は<wbr>「本日のお知らせ」<wbr>という意味だよ</span></span>
+<span><code>/etc/motd</code><span> に記載されている内容が</span></span>
+<span><span>ログイン時に表示されるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ログインしたユーザは</span></span>
+<span><span>必ず目にするから</span></span>
+<span><span>全体周知に便利そうだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのとおりだよ</span></span>
+<span><span>例えば以下のような内容が</span></span>
+<span><code>/etc/motd</code><span> に書かれるんだ</span></span>
+</div>
+</article>
+<article class="unordered-list">
+<ul>
+<li><span>サーバのメンテナンス情報</span></li>
+<li><span>システムポリシーや注意事項</span></li>
+<li><span>サーバやシステムに関する重要なお知らせ</span></li>
+</ul>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ちょっとメッセージを</span></span>
+<span><span>作ってみたいなぁ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それならまずは</span></span>
+<span><span>オリジナルの </span><code>/etc/motd</code><span> の</span></span>
+<span><span>バックアップを作成しよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sudo <wbr>mv <wbr>-v <wbr>/etc/motd{,.dist}
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>バックアップ作成は大事だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次にみどりが伝えたい内容が書かれた</span></span><span><span>新しい </span><code>/etc/motd</code><span> を作成しよう！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>vim <wbr>/etc/motd
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>こんな内容を</span></span><span><span>入れてみたよ！</span></span></div></article><article class="code"><pre><code class="plaintext">welcome <wbr>to <wbr>our <wbr>server!
+Please <wbr>remember <wbr>to <wbr>log <wbr>out <wbr>after <wbr>your <wbr>session.
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>いいね！</span></span><span><span>ログインし直して motd が</span></span><span><span>表示されるか確認してみよう！</span></span></div></article><article class="code"><pre><code class="plaintext">welcome <wbr>to <wbr>our <wbr>server!
+Please <wbr>remember <wbr>to <wbr>log <wbr>out <wbr>after <wbr>your <wbr>session.
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>おお！</span></span><span><span>新しく作った motd の</span></span><span><span>内容が表示されたよ！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>逆に </span><code>motd</code><span> を</span></span><span><span>非表示には</span></span><span><span>できないかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それなら </span><code>/etc/motd</code><span> を</span></span><span><span>空ファイルにすればいいよ</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>bash <wbr>-c <wbr>': <wbr>&gt; <wbr>/etc/motd'
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><span>空にすれば motd の</span></span><span><span>表示が無くなるんだね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は motd と</span></span><span><span>その内容の扱いを学んだよ！</span></span><span><span>ここに書かれている内容が</span></span><span><span>全ユーザのログイン時に</span></span><span><span>表示されるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>motd は運用管理や</span></span><span><span>ユーザ通知に</span></span><span><span>役立つ仕組みだよ</span></span><span><span>適切に使いこなせるように</span></span><span><span>しておこう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>4章20話</div><div><a href="4/20/">fstabファイル</a></div></div><div><div>今</div><div>4章21話 motdファイル</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>4章22話</div><div><a href="4/22/">PAM</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

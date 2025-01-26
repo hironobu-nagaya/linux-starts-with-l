@@ -1,0 +1,84 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章60話 パス関連コマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,basename,dirname,realpath,which">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/59/" />
+<link rel="next" href="2/61/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章59話</div>
+<div><a href="2/59/">テキスト関連コマンド(その2)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章60話 パス関連コマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章61話</div>
+<div><a href="2/61/">バイナリ関連コマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>パス関連コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>パスと変数は相性がいいよね！</span></span>
+<span><span>パスの指定はよく変わるので</span></span>
+<span><span>変数に代入して</span></span>
+<span><span>抽象的に扱うことが多いよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>パスに関する</span></span>
+<span><span>コマンドもたくさんあるよ</span></span>
+<span><span>よく使うものを紹介するね！</span></span>
+</div>
+</article>
+<article class="header2"><code>basename</code><span>, <wbr></span><code>dirname</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最初は</span></span>
+<span><code>basename</code><span> と</span></span>
+<span><code>dirname</code><span> だよ</span></span>
+<span><span>パスの一部分を</span></span>
+<span><span>切り出してくれるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">basename <wbr>[オプション]... <wbr>パス...
+</code></pre></article><article class="code"><pre><code class="bash">dirname <wbr>[オプション]... <wbr>パス...
+</code></pre></article><article class="table"><table><thead><tr><th><span>コマンド</span></th><th><span>切り出す部分</span></th><th><span>つまり？</span></th></tr></thead><tbody><tr><td><code>basename</code></td><td><span>パスの最後の要素</span></td><td><span>ファイル名やディレクトリ名</span></td></tr><tr><td><code>dirname</code></td><td><span>パスの最後</span><strong>以外</strong><span>の要素</span></td><td><span>親ディレクトリのパス</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ふむふむ…</span></span><span><span>ちょっと言葉だけど</span></span><span><span>わかりにくいかも</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>実際に試してみよう！</span></span><span><span>まずは </span><code>basename</code><span> からだよ</span></span></div></article><article class="code"><pre><code class="bash">basename <wbr>/home/midori/diary
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>/home/midori/diary</code><span> の</span></span><span><span>どの部分になるのかな？</span></span></div></article><article class="code"><pre><code class="console">diary
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど！</span></span><span><span><wbr>「パスの最後の要素」<wbr>って</span></span><span><span>こういう意味ね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次は </span><code>dirname</code><span> だよ</span></span></div></article><article class="code"><pre><code class="bash">dirname  <wbr>/home/midori/diary
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>パスの最後以外</span></span><span><span>ということは？</span></span></div></article><article class="code"><pre><code class="console">/home/midori
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>おお！</span></span><span><span>確かに親ディレクトリを</span></span><span><span>切り出しているね！</span></span></div></article><article class="header2"><code>realpath</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>realpath</code><span> は</span></span><span><span>パスを絶対パスに変換するよ！</span></span></div></article><article class="code"><pre><code class="bash">realpath <wbr>[オプション]... <wbr>パス...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>相対パスは自分の位置で</span></span><span><span>表記が変わっちゃうからね</span></span><span><span>絶対パスの方が扱いやすい場面は</span></span><span><span>結構あったよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下のコマンドは</span></span><span><span>どうなるかな？</span></span></div></article><article class="code"><pre><code class="bash">realpath <wbr>~/diary
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>きっと </span><code>/home/midori/diary</code><span> を</span></span><span><span>出力してくれるんだよね？</span></span></div></article><article class="code"><pre><code class="console">/home/midori/diary
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>えへへ！</span></span><span><span>もう<wbr>「絶対パス」<wbr><wbr>「相対パス」<wbr>は</span></span><span><span>手慣れたものだよ！</span></span></div></article><article class="header2"><code>which</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>which</code><span> は</span></span><span><span>コマンドのパスを</span></span><span><span>教えてくれるよ！</span></span></div></article><article class="code"><pre><code class="bash">which <wbr>[オプション]... <wbr>コマンド...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>面白そう！</span></span><span><span>ちょっと試してみたいなぁ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>じゃあ</span></span><span><code>ls</code><span> の場所を</span></span><span><span>調べてみようか</span></span></div></article><article class="code"><pre><code class="bash">which <wbr>ls
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>コマンドを置いてある場所は</span></span><span><span>以前教えてもらったよね！</span></span><span><span>想像は付くけど…</span></span></div></article><article class="code"><pre><code class="bash">/bin/ls
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>やっぱり</span></span><span><code>/bin</code><span> に</span></span><span><span>あるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>which</code><span> は</span></span><span><span>コマンドが見つかれば成功</span></span><span><span>見つからなければ失敗を返すんだ</span></span><span><span>これを利用してコマンドが</span></span><span><span>あるかどうかも判別できるよ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はパスに関するコマンド</span></span><span><code>basename</code><span>, <wbr></span><code>dirname</code><span>,</span></span><span><code>realpath</code><span>, <wbr></span><code>which</code></span><span><span>を学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>後で話す</span></span><span><span>パスをよく扱うよ</span></span><span><span>これらのコマンドも</span></span><span><span>使う機会が多いので</span></span><span><span>使い方に慣れておこう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章59話</div><div><a href="2/59/">テキスト関連コマンド(その2)</a></div></div><div><div>今</div><div>2章60話 パス関連コマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章61話</div><div><a href="2/61/">バイナリ関連コマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

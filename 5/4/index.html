@@ -1,0 +1,82 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章4話 dircolorsコマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,dircolors,ANSI escape sequences">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/3/" />
+<link rel="next" href="5/5/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章3話</div>
+<div><a href="5/3/">ロケール</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章4話 dircolorsコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章5話</div>
+<div><a href="5/5/">SSH</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>dircolors</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><code>ls</code><span> で表示される</span></span>
+<span><span>ファイル名などには</span></span>
+<span><span>色々な色が付いているよね</span></span>
+<span><span>あれって変えられるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>変えられるよ！</span></span>
+<span><span>今回は </span><code>dircolors</code><span> を扱おう！</span></span>
+</div>
+</article>
+<article class="header2"><span>基本</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>dircolors</code><span> は</span></span>
+<span><code>LS_COLORS</code><span> 環境変数を</span></span>
+<span><span>管理するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">dircolors <wbr>[オプション]... <wbr>[ファイル]
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-p</code><span>, <wbr></span><code>--print-database</code></td><td><span>デフォルト設定を表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>LS_COLORS</code><span> 環境変数は</span></span><span><code>ls</code><span> の出力の色に</span></span><span><span>関係あるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span></div></article><article class="header2"><span>設定ファイル作成</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>dircolors</code><span> の</span></span><span><code>-p</code><span> オプションを指定すると</span></span><span><span>設定ファイルの雛形を</span></span><span><span>出力してくれるよ</span></span><span><span>実行して内容を</span></span><span><span>見てみよう！</span></span></div></article><article class="code"><pre><code class="bash">dircolors <wbr>-p
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どれどれ？</span></span></div></article><article class="code"><pre><code class="console">...
+.oga <wbr>00;36
+.opus <wbr>00;36
+.spx <wbr>00;36
+.xspf <wbr>00;36
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>各行の属性や拡張子などで</span></span><span><span>色を指定しているんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この数字は</span></span><span><span><wbr>「ANSI エスケープシーケンス」<wbr></span></span><span><span>の数値だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>それなら</span></span><span><span>以前教えてもらったことを</span></span><span><span>参考にカスタマイズできるよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この設定を</span></span><span><code>~/.dircolors</code><span> ファイルに</span></span><span><span>書き出そう！</span></span></div></article><article class="code"><pre><code class="bash">dircolors <wbr>-p <wbr>&gt; <wbr>~/.dircolors
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>書き出したよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>あとはこのファイルの内容を</span></span><span><span>自分の好きなようにすれば</span></span><span><span>設定は完了だよ</span></span></div></article><article class="code"><pre><code class="bash">vim <wbr>~/.dircolors
+</code></pre></article><article class="header2"><span>設定ファイル読み込み</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>書いた設定を反映するには</span></span><span><span>どうすればいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>まずは挙動を理解するために</span></span><span><code>dircolors</code><span> の引数に</span></span><span><code>~/.dircolors</code><span> ファイルを</span></span><span><span>指定してみよう！</span></span></div></article><article class="code"><pre><code class="bash">dircolors <wbr>~/.dircolors
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どれどれ？</span></span></div></article><article class="code"><pre><code class="console">LS_COLORS='...';
+export <wbr>LS_COLORS
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これで出力されるのは</span></span><span><span>コマンドなんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうなんだ</span></span><span><span>だから </span><code>dircolors</code><span> を</span></span><span><span>コマンド展開 </span><code>$( ... <wbr>)</code><span> した内容を</span></span><span><code>eval</code><span> で評価すると</span></span><span><span>設定が反映されるよ</span></span></div></article><article class="code"><pre><code class="bash">eval <wbr>$(dircolors <wbr>~/.dircolors)
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これを </span><code>~/.bash_profile</code><span> に書けば</span></span><span><span>オリジナルの設定が</span></span><span><span>反映されるんだ！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>dircolors</code><span> を学んだよ！</span></span><span><code>ls</code><span> の出力のカラー表示を</span></span><span><span>設定できるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>デフォルトでも</span></span><span><span>見やすいようになっているけど</span></span><span><span>気になる表示色は</span></span><span><span>自分の好みに設定しよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章3話</div><div><a href="5/3/">ロケール</a></div></div><div><div>今</div><div>5章4話 dircolorsコマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章5話</div><div><a href="5/5/">SSH</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

@@ -1,0 +1,124 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章58話 テキスト関連コマンド(その1)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,sort,uniq,tac,rev">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/57/" />
+<link rel="next" href="2/59/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章57話</div>
+<div><a href="2/57/">awkコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章58話 テキスト関連コマンド(その1)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章59話</div>
+<div><a href="2/59/">テキスト関連コマンド(その2)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>テキスト関連コマンド(その1)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>コマンドを知れば知るほど</span></span>
+<span><span>操作の幅が広がるね！</span></span>
+<span><span>きっと私がまだ知らないコマンドも</span></span>
+<span><span>たくさんあるんだよね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>うん、<wbr>たくさんあるよ！</span></span>
+<span><span>今回はテキスト処理に関する</span></span>
+<span><span>コマンドを扱っていこう！</span></span>
+</div>
+</article>
+<article class="header2"><code>sort</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>sort</code><span> は</span></span>
+<span><span>各行を辞書順に並び替えるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">sort <wbr>[オプション]... <wbr>[ファイル]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下を実行してみよう</span></span></div></article><article class="code"><pre><code class="bash">sort <wbr>&lt;&lt; <wbr>EOF
+555
+222
+333
+111
+444
+333
+EOF
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>結果はこうだったよ！</span></span></div></article><article class="code"><pre><code class="console">111
+222
+333
+333
+444
+555
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>辞書順に並び替え…</span></span><span><span>これはわかりやすいね！</span></span></div></article><article class="header2"><code>uniq</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>uniq</code><span> は</span></span><span><span>連続した重複行を取り除くよ</span></span></div></article><article class="code"><pre><code class="bash">uniq <wbr>[オプション]... <wbr>[入力ファイル <wbr>[出力ファイル]]
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>連続していない重複行は</span></span><span><span>削除してくれないんだ</span></span><span><span>なので </span><code>sort</code><span> と組み合わせて</span></span><span><span>使われることが多いよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>先ほどの </span><code>sort</code><span> の例に</span></span><span><code>uniq</code><span> を加えてみよう！</span></span></div></article><article class="code"><pre><code class="bash">sort <wbr>&lt;&lt; <wbr>EOF <wbr>| <wbr>uniq
+111
+555
+333
+222
+444
+333
+EOF
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>出力は以下のようになったよ！</span></span></div></article><article class="code"><pre><code class="console">111
+222
+333
+444
+555
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>sort</code><span> の出力では</span></span><span><span>重複していた </span><code>333</code><span> が</span></span><span><span>1行しか出力されていないのが</span></span><span><span>わかるね！</span></span></div></article><article class="header2"><code>tac</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>tac</code><span> は</span></span><span><span>行の順序を逆さまにして表示するよ</span></span><span><code>cat</code><span> を逆さまにした名前なんだ</span></span></div></article><article class="code"><pre><code class="bash">tac <wbr>[オプション]... <wbr>[ファイル]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>tac</code><span> に</span></span><span><span>ヒアドキュメントの内容を</span></span><span><span>処理させてみよう！</span></span></div></article><article class="code"><pre><code class="bash">tac <wbr>&lt;&lt; <wbr>EOF
+123
+456
+789
+EOF
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>実行してみる！</span></span></div></article><article class="code"><pre><code class="console">789
+456
+123
+</code></pre></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>おお！</span></span><span><span>確かに行が</span></span><span><span>逆順になっている！</span></span></div></article><article class="header2"><code>rev</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>rev</code><span> は</span></span><span><span>各行の文字列を</span></span><span><span>逆順にして表示するよ</span></span><span><span>revert の略なんだ</span></span></div></article><article class="code"><pre><code class="bash">rev <wbr>[オプション] <wbr>[ファイル]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは例を見た方が</span></span><span><span>わかりやすいと思うよ</span></span></div></article><article class="code"><pre><code class="bash">rev <wbr>&lt;&lt; <wbr>EOF
+123
+456
+789
+EOF
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあ実行して</span></span><span><span>結果を見てみよう！</span></span></div></article><article class="code"><pre><code class="console">321
+654
+987
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>なるほど…</span></span><span><span>各行の内容が</span></span><span><span>逆になっているね！</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>これって </span><code>tac</code><span> と</span></span><span><span>組み合わせたら</span></span><span><span>完全に逆さまに</span></span><span><span>なるんじゃないかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>いい視点だね！</span></span><span><span>試してみよう</span></span></div></article><article class="code"><pre><code class="bash">rev <wbr>&lt;&lt; <wbr>EOF <wbr>| <wbr>tac
+123
+456
+789
+EOF
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>どうなってくれるかな…</span></span></div></article><article class="code"><pre><code class="console">987
+654
+321
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>ちゃんと期待どおり！</span></span><span><span>全てが逆さまの</span></span><span><span>表示になったね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はテキストを</span></span><span><span>処理するコマンド</span></span><span><code>sort</code><span>, <wbr></span><code>uniq</code><span>,</span></span><span><code>tac</code><span>, <wbr></span><code>rev</code></span><span><span>を学んだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これらのコマンドは</span></span><span><span>とてもシンプルだけど</span></span><span><span>組み合わせ次第で</span></span><span><span>色々なことができるんだ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章57話</div><div><a href="2/57/">awkコマンド</a></div></div><div><div>今</div><div>2章58話 テキスト関連コマンド(その1)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章59話</div><div><a href="2/59/">テキスト関連コマンド(その2)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

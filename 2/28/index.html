@@ -1,0 +1,127 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章28話 ワイルドカード</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,wildcard">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/27/" />
+<link rel="next" href="2/29/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章27話</div>
+<div><a href="2/27/">リンク</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章28話 ワイルドカード</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章29話</div>
+<div><a href="2/29/">ブレース展開</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>ワイルドカード</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>調子にのって </span><code>touch</code><span> で</span></span>
+<span><span>ファイルを作りすぎちゃった！</span></span>
+<span><span>これは削除するのが大変だなぁ…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それならファイル名を</span></span>
+<span><span>一つ一つ指定するのではなく</span></span>
+<span><span><wbr>「ワイルドカード(wildcard)」<wbr>で</span></span>
+<span><span>ファイルを指定しよう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ワイルドカード？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ファイル名を柔軟に</span></span>
+<span><span>指定できるようにする</span></span>
+<span><span>記号のことなんだ</span></span>
+</div>
+</article>
+<article class="header2"><span>基本的な使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ワイルドカードには</span></span>
+<span><span>以下のようなものがあるよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>ワイルドカード</span></th>
+<th><span>意味</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td><span>任意の文字列(空文字も含む)</span></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td><span>任意の一文字</span></td>
+</tr>
+<tr>
+<td><code>[...]</code></td>
+<td><code>...</code><span> の中の一文字</span></td>
+</tr>
+<tr>
+<td><code>[!...]</code></td>
+<td><code>...</code><span> 以外の一文字</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>へぇ！</span></span>
+<span><span>直接ファイル名を指定するのではなく</span></span>
+<span><span>曖昧な表現でファイル名を指定できるのね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>以下はホームディレクトリ直下の</span></span>
+<span><span>ファイルを全て削除するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">rm <wbr>~/*
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>これで作りすぎちゃったファイルを</span></span><span><span>簡単に削除できるね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>rm</code><span> のときも伝えたけど</span></span><span><span>ファイルの削除は慎重にね！</span></span></div></article><article class="header2"><span>隠しファイル</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>注意が一つあるよ</span></span><span><span>通常の使い方だと</span></span><span><span>ワイルドカードでは</span></span><span><span>隠しファイルを指定できないんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>隠しファイルは</span></span><span><span>普段気にしなくても良いように</span></span><span><span>隠れてくれているんだったよね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ワイルドカードを使うたびに</span></span><span><span>いつも隠しファイルのことを</span></span><span><span>気にしないといけないとなったら</span></span><span><span>確かに本末転倒だものね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>隠しファイルを指定したい場合</span></span><span><span>先頭が<wbr>「ドット(</span><code>.</code><span>)」<wbr>で</span></span><span><span>始まっていることを</span></span><span><span>明示的に指定する必要があるよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>試してみたいけど</span></span><span><code>rm</code><span> は困るよね？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それなら </span><code>ls</code><span> で試してみよう</span></span><span><span>こうすると </span><code>-a</code><span> オプションなしでも</span></span><span><span>隠しファイルを確認できるんだ</span></span></div></article><article class="code"><pre><code class="bash">ls <wbr>~/.*
+</code></pre></article><article class="header2"><span>発展的な使い方</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>[...]</code><span> や </span><code>[!...]</code><span> は</span></span><span><span><wbr>「文字の範囲」<wbr>でも</span></span><span><span>指定できるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>範囲はどうやって</span></span><span><span>指定するのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span><wbr>「</span><code>-</code><span>(ハイフン)」<wbr>で</span></span><span><span>範囲を指定するよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>たとえば </span><code>a-z</code><span> を指定すれば</span></span><span><code>a</code><span> から </span><code>z</code><span> までの文字</span></span><span><span>すなわち英小文字全て</span></span><span><span>というような指定も可能だよ</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>英数字全てなら</span></span><span><code>0-9</code><span> だよね！</span></span><span><span>これは便利そう！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はワイルドカードを</span></span><span><span>教えてもらったよ！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ファイル名を直接指定する場合</span></span><span><span>1文字でも間違ったら</span></span><span><span><wbr>「そんなファイルは無い」<wbr></span></span><span><span>と言われるけど</span></span><span><span>ワイルドカードを使えば</span></span><span><span>当てはまるファイル名を</span></span><span><span>自動で指定してくれるんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ワイルドカードを使うと</span></span><span><span>規則を見出す論理的思考が鍛えられるよ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>一番良く使うのは</span></span><span><span><wbr>「アスタリスク(</span><code>*</code><span>)」<wbr>なので</span></span><span><span>これから使っていこう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章27話</div><div><a href="2/27/">リンク</a></div></div><div><div>今</div><div>2章28話 ワイルドカード</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>2章29話</div><div><a href="2/29/">ブレース展開</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

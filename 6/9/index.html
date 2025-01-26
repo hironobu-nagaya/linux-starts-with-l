@@ -1,0 +1,116 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 6章9話 バイナリログ</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,log,last,lastlog,lastb,dmesg">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="6/8/" />
+<link rel="next" href="6/10/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>6章8話</div>
+<div><a href="6/8/">ログ</a></div>
+</div>
+<div>
+<div>今</div>
+<div>6章9話 バイナリログ</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>6章10話</div>
+<div><a href="6/10/">/runディレクトリ</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>バイナリログ</span></article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><code>less</code><span> でログを開いたら</span></span>
+<span><span><wbr>「バイナリだけど開いていい？」<wbr></span></span>
+<span><span>って確認されたんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>バイナリは人間でなく</span></span>
+<span><span>コンピュータが読むためのものだよね？</span></span>
+<span><span>このログは何のためのものなのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>いくつかのログは</span></span>
+<span><span>バイナリで出力されているんだ</span></span>
+<span><span>これらは専用コマンドから確認するよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div>
+<div>
+<span><span>今回はバイナリログの</span></span>
+<span><span>扱いについて学んでいこう！</span></span>
+</div>
+</article>
+<article class="header2"><code>last</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>last</code><span> は</span></span>
+<span><span>ログイン履歴を表示するよ</span></span>
+<span><span>ログファイルは </span><code>/var/log/lastw</code><span> なんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">last <wbr>[オプション]... <wbr>[ユーザ名]... <wbr>[端末名]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのまま </span><code>last</code><span> を</span></span><span><span>実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">last
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>実行するね！</span></span></div></article><article class="code"><pre><code class="console">midori   <wbr>pts/1        <wbr>192.168.0.201    <wbr>Fri <wbr>Dec <wbr>27 <wbr>12:32   <wbr>still <wbr>logged <wbr>in
+shigeru  <wbr>pts/0        <wbr>192.168.0.200    <wbr>Fri <wbr>Dec <wbr>27 <wbr>12:24   <wbr>still <wbr>logged <wbr>in
+...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ログイン履歴が</span></span><span><span>全部見れるんだ！</span></span><span><span>ちょっと出力が長いね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだね</span></span><span><code>less</code><span> で</span></span><span><span>見るのもいいよ</span></span></div></article><article class="code"><pre><code class="bash">last <wbr>| <wbr>less
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>最新のログは</span></span><span><span>末尾ではなく</span></span><span><span>先頭なんだね！</span></span><span><code>head</code><span> も良さそう！</span></span></div></article><article class="code"><pre><code class="bash">last <wbr>| <wbr>head
+</code></pre></article><article class="header2"><code>lastlog</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>lastlog</code><span> は</span></span><span><span>ユーザの最終ログイン日時を表示するよ</span></span><span><span>ログファイルは </span><code>/var/log/lastlog</code><span> なんだ</span></span></div></article><article class="code"><pre><code class="bash">lastlog <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これもオプションなしで</span></span><span><span>実行してみよう！</span></span></div></article><article class="code"><pre><code class="bash">lastlog
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="console">Username         <wbr>Port     <wbr>From                                       <wbr>Latest
+root                                                                <wbr>**Never <wbr>logged <wbr>in**
+...
+shigeru          <wbr>pts/0    <wbr>192.168.0.200                             <wbr>Fri <wbr>Dec <wbr>27 <wbr>12:24:54 <wbr>+0900 <wbr>2024
+midori           <wbr>pts/1    <wbr>192.168.0.201                             <wbr>Fri <wbr>Dec <wbr>27 <wbr>12:32:23 <wbr>+0900 <wbr>2024
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ユーザの数だけしか</span></span><span><span>行数がないから</span></span><span><span>短くて見やすいね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>最終ログイン時刻や</span></span><span><span>ログインの有無を</span></span><span><span>確認するのに便利だよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>su</code><span> とか </span><code>sudo</code><span> を使ったけど</span></span><span><code>root</code><span> ユーザは</span></span><span><span><wbr>「ログインしていない</span></span><span><span>(Never logged in)」<wbr></span></span><span><span>なんだね？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span><wbr>「ユーザ切り替え」<wbr>は</span></span><span><span><wbr>「ログイン」<wbr>でないからね</span></span><span><span>これらの操作は</span></span><span><code>lastlog</code><span> には</span></span><span><span>記録されないんだ</span></span></div></article><article class="header2"><code>lastb</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>lastb</code><span> は</span></span><span><span>ログイン失敗記録を表示するよ</span></span><span><span>ログファイルは </span><code>/var/log/lastb</code><span> なんだ</span></span></div></article><article class="code"><pre><code class="bash">lastb <wbr>[オプション]... <wbr>[ユーザ名]... <wbr>[端末名]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>セキュリティに関する内容なので</span></span><span><span>スーパユーザのみ閲覧できるんだ</span></span><span><code>sudo</code><span> と一緒に実行しよう！</span></span></div></article><article class="code"><pre><code class="bash">sudo <wbr>lastb
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これも実行するよ！</span></span></div></article><article class="code"><pre><code class="console">jxt      <wbr>ssh:notty    <wbr>144.144.144.144  <wbr>Sun <wbr>Dec  <wbr>1 <wbr>00:01 <wbr>- <wbr>00:01  <wbr>(00:00)
+freddy   <wbr>ssh:notty    <wbr>88.88.88.88      <wbr>Sun <wbr>Dec  <wbr>1 <wbr>00:00 <wbr>- <wbr>00:00  <wbr>(00:00)
+...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>わぁ！</span></span><span><span>すごいたくさん</span></span><span><span>失敗しているね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>外部からのリモート接続を</span></span><span><span>許可している場合は</span></span><span><span>多くの試行の失敗が記録されるよ</span></span><span><span>こういう場合は<wbr>「公開鍵認証」<wbr>など</span></span><span><span>安全な認証のみ許すようにして</span></span><span><span>不正アクセスの対策をしよう</span></span></div></article><article class="header2"><code>dmesg</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>dmesg</code><span> は</span></span><span><span>カーネルのログを閲覧するよ</span></span><span><span>ログはカーネルが</span></span><span><span>保持しているんだ</span></span></div></article><article class="code"><pre><code class="bash">dmesg <wbr>[オプション]...
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これもオプションなしで</span></span><span><span>実行してみよう</span></span></div></article><article class="code"><pre><code class="bash">dmesg
+</code></pre></article><article class="code"><pre><code class="console">[    <wbr>0.000000] <wbr>Booting <wbr>Linux <wbr>on <wbr>physical <wbr>CPU <wbr>0x0000000000 <wbr>[0x414fd0b1]
+[    <wbr>0.000000] <wbr>Linux <wbr>version <wbr>6.6.51+rpt-rpi-2712 <wbr>(serge@raspberrypi.com) <wbr>(gcc-12 <wbr>(Debian <wbr>12.2.0-14) <wbr>12.2.0, <wbr>GNU <wbr>ld <wbr>(GNU <wbr>Binutils <wbr>for <wbr>Debian) <wbr>2.40) <wbr>#1 <wbr>SMP <wbr>PREEMPT <wbr>Debian <wbr>1:6.6.51-1+rpt3 <wbr>(2024-10-08)
+[    <wbr>0.000000] <wbr>KASLR <wbr>enabled
+[    <wbr>0.000000] <wbr>random: <wbr>crng <wbr>init <wbr>done
+[    <wbr>0.000000] <wbr>Machine <wbr>model: <wbr>Raspberry <wbr>Pi <wbr>5 <wbr>Model <wbr>B <wbr>Rev <wbr>1.0
+[    <wbr>0.000000] <wbr>efi: <wbr>UEFI <wbr>not <wbr>found.
+[    <wbr>0.000000] <wbr>Reserved <wbr>memory: <wbr>created <wbr>CMA <wbr>memory <wbr>pool <wbr>at <wbr>0x0000000002000000, <wbr>size <wbr>64 <wbr>MiB
+[    <wbr>0.000000] <wbr>OF: <wbr>reserved <wbr>mem: <wbr>initialized <wbr>node <wbr>linux,cma, <wbr>compatible <wbr>id <wbr>shared-dma-pool
+[    <wbr>0.000000] <wbr>OF: <wbr>reserved <wbr>mem: <wbr>0x0000000002000000..0x0000000005ffffff <wbr>(65536 <wbr>KiB) <wbr>map <wbr>reusable <wbr>linux,cma
+[    <wbr>0.000000] <wbr>OF: <wbr>reserved <wbr>mem: <wbr>0x0000000000000000..0x000000000007ffff <wbr>(512 <wbr>KiB) <wbr>nomap <wbr>non-reusable <wbr>atf@0
+...
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>起動直後の</span></span><span><span>メッセージが大半だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだね</span></span><span><span><wbr>「起動時に特定の機能が有効になったか」<wbr>など</span></span><span><span>起動直後の動きの確認などに使われるよ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はバイナリ形式のログを</span></span><span><span>閲覧するコマンドを学んだよ！</span></span><span><code>last</code><span>, <wbr></span><code>lastlog</code><span>, <wbr></span><code>lastb</code><span>, <wbr></span><code>dmesg</code></span><span><span>などがあるんだ！</span></span></div></article><article class="table"><table><thead><tr><th><span>コマンド</span></th><th><span>ログファイル</span></th><th><span>内容</span></th></tr></thead><tbody><tr><td><code>last</code></td><td><code>/var/log/lastw</code></td><td><span>ログイン履歴</span></td></tr><tr><td><code>lastb</code></td><td><code>/var/log/lastb</code></td><td><span>ログイン失敗履歴</span></td></tr><tr><td><code>lastlog</code></td><td><code>/var/log/lastlog</code></td><td><span>最終ログイン日時</span></td></tr><tr><td><code>dmesg</code></td><td><span>(カーネルが保持)</span></td><td><span>カーネル動作</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>バイナリ形式のログにも</span></span><span><span>重要な情報が載っているんだ</span></span><span><span>テキストとバイナリの両方のログを</span></span><span><span>確認できるようにしておこう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>6章8話</div><div><a href="6/8/">ログ</a></div></div><div><div>今</div><div>6章9話 バイナリログ</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>6章10話</div><div><a href="6/10/">/runディレクトリ</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>
