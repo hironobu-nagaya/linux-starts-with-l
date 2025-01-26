@@ -1,0 +1,60 @@
+#!/bin/bash
+# Begin libexec/fix-markdown
+
+#---
+## Fix Markdown file contents
+## @Globals PROJECT_HOME_DIR project home directory
+#---
+function fix-markdown() {
+  local MARKDOWN_DIR="${MARKDOWN_DIR:="$PROJECT_HOME_DIR/src/markdown"}"
+  local SPEAKERS="${SPEAKERS:="$PROJECT_HOME_DIR/share/speakers"}"
+  local GREP="${GREP:=grep}"
+  local SED="${SED:=sed}"
+  local AWK="${AWK:=awk}"
+  local SPEAKER
+  local MARKDOWN
+  local PIDS
+  "$AWK" -F, 'NF >= 4 && $2 != 0 { print $3 }' "$SPEAKERS" |
+  while read SPEAKER
+  do
+    {
+      for MARKDOWN in "$MARKDOWN_DIR"/*-*-*.md
+      do
+        "$SED" -i "s/^$SPEAKER[:：] *$/$SPEAKER（通常）：/" "$MARKDOWN"
+      done
+    } &
+    PIDS="$PIDS${PIDS:+ }$!"
+  done
+  [ -z "$PIDS" ] || wait $PIDS
+
+  local PREV_CHAPTER
+  local PREV_STORY
+  local PREV_TITLE
+  local PREV_MARKDOWN
+  for MARKDOWN in "$MARKDOWN_DIR"/*-*-*.md
+  do
+    local CHAPTER="$("$AWK" -F- '{print $1}' <<< "${MARKDOWN##*/}" | "$SED" 's/^0*//')"
+    local STORY="$("$AWK" -F- '{print $2}' <<< "${MARKDOWN##*/}" | "$SED" 's/^0*//')"
+    local TITLE="$("$GREP" -m1 '^title=' "$MARKDOWN" | "$AWK" -F= '{ print $2 }')"
+    "$SED" -i \
+      -e "s/^chapter=.*/chapter=$CHAPTER/" \
+      -e "s/^story=.*/story=$STORY/" \
+      "$MARKDOWN"
+    [ -z "$PREV_MARKDOWN" ] || {
+      "$SED" -i \
+        -e "s%^prev=.*%prev=$PREV_CHAPTER/$PREV_STORY/%" \
+        -e "s%^prev-title=.*%prev-title=$PREV_TITLE%" \
+        "$MARKDOWN"
+      "$SED" -i \
+        -e "s%^next=.*%next=$CHAPTER/$STORY/%" \
+        -e "s%^next-title=.*%next-title=$TITLE%" \
+        "$PREV_MARKDOWN"
+    }
+    PREV_CHAPTER="$CHAPTER"
+    PREV_STORY="$STORY"
+    PREV_TITLE="$TITLE"
+    PREV_MARKDOWN="$MARKDOWN"
+  done
+}
+
+# End libexec/fix-markdown

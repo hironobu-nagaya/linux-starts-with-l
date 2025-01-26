@@ -1,0 +1,36 @@
+#!/bin/bash
+# Begin libexec/place-css
+
+#---
+## Place CSS files to destination directory
+## @Globals PROJECT_HOME_DIR project home directory
+#---
+function place-css() {
+  local GREP="${GREP:=grep}"
+  local SED="${SED:=sed}"
+  local AWK="${AWK:=awk}"
+  local SOURCE_DIR="${SOURCE_DIR:="$PROJECT_HOME_DIR/src"}"
+  local SOURCE_CSS_DIR="${SOURCE_CSS_DIR:="$SOURCE_DIR/css"}"
+  local DEST_DIR="${DEST_DIR:="$PROJECT_HOME_DIR/dest"}"
+  local DEST_CSS_DIR="${DEST_CSS_DIR:="$DEST_DIR/css"}"
+  local PIDS
+  [ -d "$DEST_CSS_DIR" ] || mkdir -p "$DEST_CSS_DIR"
+  "$AWK" '/^http.*\.css$/' "$PROJECT_HOME_DIR/share/downloads" |
+  while read URL
+  do
+    curl -Lso "$DEST_CSS_DIR/${URL##*/}" "$URL" &
+    PIDS="$PIDS${PIDS:+ }$!"
+  done
+
+  for CSS in "$SOURCE_CSS_DIR"/*.css
+  do
+    {
+      cp -a "$CSS" "$DEST_CSS_DIR/"
+      SED="$SED" "$PROJECT_HOME_DIR/bin/minify-css" "$DEST_CSS_DIR/${CSS##*/}"
+    } &
+    PIDS="$PIDS${PIDS:+ }$!"
+  done
+  [ -z "$PIDS" ] || wait $PIDS
+}
+
+# End libexec/place-css

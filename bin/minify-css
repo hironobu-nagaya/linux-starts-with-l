@@ -1,0 +1,37 @@
+#!/bin/bash
+# Begin bin/minify-css
+
+set -e
+
+if [ "$#" -ne 1 ]
+then
+  echo "${0##*/}: USAGE: ${0##*/} CSS"
+  exit 1
+fi >&2
+
+readonly SED="${SED:=sed}"
+
+{
+  rm "$1"
+  cat |
+  "$SED" -n '{
+    s/^[ \t]*//
+    s/[ \t]*$//
+    s/:[ \t]*/:/g
+    s/[ \t]*{/{/g
+    s%[ \t]*/\*.*\*/[ \t]*%%g
+    /^$/!p
+  }' | "$SED" -n '{
+    1 {
+      /@charset/b print
+    }
+    :minify
+    N
+    s/\n//
+    $!b minify
+    :print
+    /^$/!p
+  }' > "$1"
+} < "$1"
+
+# End bin/minify-css

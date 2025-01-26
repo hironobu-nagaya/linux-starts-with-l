@@ -1,0 +1,39 @@
+#!/bin/bash
+# Begin libexec/place-js
+
+#---
+## Place JavaScript files to destination directory
+## @Globals PROJECT_HOME_DIR project home directory
+#---
+function place-js() {
+  local GREP="${GREP:=grep}"
+  local SED="${SED:=sed}"
+  local AWK="${AWK:=awk}"
+  local SOURCE_DIR="${SOURCE_DIR:="$PROJECT_HOME_DIR/src"}"
+  local SOURCE_JS_DIR="${SOURCE_JS_DIR:="$SOURCE_DIR/js"}"
+  local DEST_DIR="${DEST_DIR:="$PROJECT_HOME_DIR/dest"}"
+  local DEST_JS_DIR="${DEST_JS_DIR:="$DEST_DIR/js"}"
+  local PIDS
+  [ -d "$DEST_JS_DIR" ] || mkdir -p "$DEST_JS_DIR"
+  "$AWK" '/^http.*\.js$/' "$PROJECT_HOME_DIR/share/downloads" |
+  while read URL
+  do
+    {
+      curl -Lso "$DEST_JS_DIR/${URL##*/}" "$URL"
+      "$GREP" -sq '^jquery-.*\.js$' <<< "${URL##*/}" && ln -sfn "${URL##*/}" "$DEST_JS_DIR/jquery.js"
+    } &
+    PIDS="$PIDS${PIDS:+ }$!"
+  done
+
+  for JS in "$SOURCE_JS_DIR"/*.js
+  do
+    {
+      cp -a "$JS" "$DEST_JS_DIR/"
+      SED="$SED" "$PROJECT_HOME_DIR/bin/minify-js" "$DEST_JS_DIR/${JS##*/}"
+    } &
+    PIDS="$PIDS${PIDS:+ }$!"
+  done
+  [ -z "$PIDS" ] || wait $PIDS
+}
+
+# End libexec/place-js

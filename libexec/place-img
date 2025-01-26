@@ -1,0 +1,37 @@
+#!/bin/bash
+# Begin libexec/place-img
+
+#---
+## Place image files to destination directory
+## @Globals PROJECT_HOME_DIR project home directory
+#---
+function place-img() {
+  local GREP="${GREP:=grep}"
+  local SED="${SED:=sed}"
+  local AWK="${AWK:=awk}"
+  local SOURCE_DIR="${SOURCE_DIR:="$PROJECT_HOME_DIR/src"}"
+  local SOURCE_IMG_DIR="${SOURCE_IMG_DIR:="$SOURCE_DIR/img"}"
+  local DEST_DIR="${DEST_DIR:="$PROJECT_HOME_DIR/dest"}"
+  local DEST_IMG_DIR="${DEST_IMG_DIR:="$DEST_DIR/img"}"
+  [ -d "$DEST_IMG_DIR" ] || mkdir -p "$DEST_IMG_DIR"
+  [ -f "$SOURCE_IMG_DIR/favicon.svg" ] && cp -a "$SOURCE_IMG_DIR/favicon.svg" "$DEST_DIR/favicon.svg"
+  cp -a "$SOURCE_IMG_DIR"/*.png "$SOURCE_IMG_DIR"/*.jpg "$DEST_IMG_DIR"
+  "$AWK" -F, 'NF >= 3 { print $1 "," $2 }' "$PROJECT_HOME_DIR/share/speakers" |
+  while read LINE
+  do
+    local SPEAKER="$(cut -d, -f1 <<< "$LINE")"
+    local HAS_EMOTION="$(cut -d, -f2 <<< "$LINE")"
+    local BASE_IMG_FILE="$SPEAKER.svg"
+    cp -a "$SOURCE_IMG_DIR/$BASE_IMG_FILE" "$DEST_IMG_DIR/$BASE_IMG_FILE"
+    [ "$HAS_EMOTION" -eq 0 ] ||
+    for EMOTION in $("$AWK" -F, 'NF >= 2 { print $1 }' "$PROJECT_HOME_DIR/share/emotions")
+    do
+      local IMG_FILE="$SPEAKER-$EMOTION.svg"
+      [ -e "$SOURCE_IMG_DIR/$IMG_FILE" ] &&
+        cp -a "$SOURCE_IMG_DIR/$IMG_FILE" "$DEST_IMG_DIR/$IMG_FILE" ||
+        ln -sfn "$BASE_IMG_FILE" "$DEST_IMG_DIR/$IMG_FILE"
+    done
+  done
+}
+
+# End libexec/place-img

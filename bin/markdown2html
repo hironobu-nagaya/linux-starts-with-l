@@ -1,0 +1,47 @@
+#!/bin/bash
+# Begin bin/markdown2html
+
+set -e
+
+PROJECT_HOME_DIR="${PROJECT_HOME_DIR:=$(
+  (
+    cd "$(realpath "${0%/*}/..")"
+    pwd
+  )
+)}"
+DEST_DIR="${DEST_DIR:=$PROJECT_HOME_DIR/dest}"
+CLEAR="${CLEAR:=1}"
+SKIP_FIX_MARKDOWN="${SKIP_FIX_MARKDOWN:=0}"
+GREP="${GREP:=grep}"
+SED="${SED:=sed}"
+AWK="${AWK:=awk}"
+[ "$SKIP_FIX_MARKDOWN" -ne 0 ] || {
+  . "$PROJECT_HOME_DIR/libexec/fix-markdown"
+  fix-markdown
+}
+
+[ "$CLEAR" -eq 0 -o ! -d "$DEST_DIR" ] || rm -rf "$DEST_DIR"/*
+[ -d "$DEST_DIR" ] || mkdir -p "$DEST_DIR" || {
+  echo "${0##*/}: cannot create directory '$DEST_DIR'"
+  exit 1
+} >&2
+
+PIDS=
+for TYPE in css img js
+do
+  . "$PROJECT_HOME_DIR/libexec/place-$TYPE"
+  "place-$TYPE" &
+  PIDS="$PIDS${PIDS:+ }$!"
+done
+
+. "$PROJECT_HOME_DIR/libexec/generate-html"
+GREP="$GREP" SED="$SED"  AWK="$AWK" generate-html &
+PIDS="$PIDS${PIDS:+ }$!"
+
+. "$PROJECT_HOME_DIR/libexec/generate-index"
+GREP="$GREP" SED="$SED"  AWK="$AWK" generate-index &
+PIDS="$PIDS${PIDS:+ }$!"
+
+wait $PIDS
+
+# End bin/markdown2html

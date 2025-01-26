@@ -1,0 +1,35 @@
+#!/bin/bash
+# Begin bin/minify-js
+
+set -e
+
+if [ "$#" -ne 1 ]
+then
+  echo "${0##*/}: USAGE: ${0##*/} JS"
+  exit 1
+fi >&2
+
+readonly SED="${SED:=sed}"
+
+{
+  rm "$1"
+  cat |
+  "$SED" -n '{
+    s/^[ \t]*//
+    s/[ \t]*$//
+    s%[ \t]*//.*$%%g
+    /^$/!p
+  }' | "$SED" -n '{
+    1 {
+      /use strict/b print
+    }
+    :minify
+    N
+    s/\n//
+    $!b minify
+    :print
+    /^$/!p
+  }' > "$1"
+} < "$1"
+
+# End bin/minify-js
