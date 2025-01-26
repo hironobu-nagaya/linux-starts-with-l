@@ -1,0 +1,111 @@
+#!/bin/bash
+# Begin libexec/generate-index
+
+#---
+## Generate index.html files and place to destination directory
+## @Globals PROJECT_HOME_DIR project home directory
+#---
+function generate-index() {
+  local MARKDOWN_DIR="${MARKDOWN_DIR:="$PROJECT_HOME_DIR/src/markdown"}"
+  local DEST_DIR="${DEST_DIR:="$PROJECT_HOME_DIR/dest"}"
+  local INDEXES="${INDEXES:="$PROJECT_HOME_DIR/share/indexes"}"
+  local INDEXES_CONTENT="$(awk '! /^ *$/ && ! /^#/' "$INDEXES")"
+  local MAIN_INDEX="$DEST_DIR/index.html"
+  [ -d "$DEST_DIR" ] || mkdir -p "$DEST_DIR"
+  cat > "$MAIN_INDEX" << \EOF
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lから始まるLinux - もくじ</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-language" content="ja">
+  <meta name="keywords" content="Lから始まるLinux,Linux starts with L,Linux">
+  <meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+  <link rel="icon" href="favicon.svg" />
+  <link rel="stylesheet" type="text/css" href="css/common.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<body>
+<header>
+  <h1>Lから始まるLinux</h1>
+</header>
+<main>
+EOF
+  local LAST_CHAPTER="$(wc -l <<< "$INDEXES_CONTENT" | awk '{ print $1 }')"
+  local CHAPTER=
+  for CHAPTER in $(seq "$LAST_CHAPTER")
+  do
+    local PREV_CHAPTER="$((CHAPTER - 1))"
+    local NEXT_CHAPTER="$((CHAPTER + 1))"
+    local CHAPTER_TITLE="$(awk "NR == $CHAPTER" <<< "$INDEXES_CONTENT")"
+    local PREV_CHAPTER_TITLE="$([ "$CHAPTER" -le 1 ] && echo "" || awk "NR == $((CHAPTER - 1))" <<< "$INDEXES_CONTENT")"
+    local NEXT_CHAPTER_TITLE="$([ "$CHAPTER" -ge "$LAST_CHAPTER" ] && echo "" || awk "NR == $((CHAPTER + 1))" <<< "$INDEXES_CONTENT")"
+    local SUB_INDEX="$DEST_DIR/$CHAPTER/index.html"
+    [ -d "$DEST_DIR/$CHAPTER" ] || mkdir -p "$DEST_DIR/$CHAPTER"
+    cat > "$SUB_INDEX" << EOF
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lから始まるLinux - 第$CHAPTER章 $CHAPTER_TITLE</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-language" content="ja">
+  <meta name="keywords" content="Lから始まるLinux,Linux starts with L,Linux">
+  <meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+  <base href="..">
+$([ "$CHAPTER" -gt 1 ] && echo "  <link rel=\"prev\" href=\"$PREV_CHAPTER/\" />")
+$([ "$CHAPTER" -lt "$LAST_CHAPTER" ] && echo "  <link rel=\"next\" href=\"$NEXT_CHAPTER/\" />")
+  <link rel="icon" href="favicon.svg" />
+  <link rel="stylesheet" type="text/css" href="css/common.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<body>
+<header>
+  <h1>Lから始まるLinux</h1>
+  <div class="relation">
+    <div>$([ "$CHAPTER" -gt 1 ] && echo "<div>前</div><div>第$PREV_CHAPTER章</div><div><a href=\"$PREV_CHAPTER/\">$PREV_CHAPTER_TITLE</a></div>")</div>
+    <div><div>今</div><div>第$CHAPTER章 $CHAPTER_TITLE</div><div><a href=".">もくじ</a></div></div>
+    <div>$([ "$CHAPTER" -lt "$LAST_CHAPTER" ] && echo "<div>次</div><div>第$NEXT_CHAPTER章</div><div><a href=\"$NEXT_CHAPTER/\">$NEXT_CHAPTER_TITLE</a></div>")</div>
+  </div>
+</header>
+<main>
+EOF
+    {
+      cat << EOF
+<section>
+<div>
+<h1>
+第$CHAPTER章 <a href="$CHAPTER/">$CHAPTER_TITLE</a>
+</h1>
+</div>
+EOF
+      local MARKDOWN
+      for MARKDOWN in "$MARKDOWN_DIR/"$(printf "%02d" "$CHAPTER")-*-*.md
+      do
+        local NAME="${MARKDOWN##*/}"
+        local CHAPTER="$(awk -F- '{print $1}' <<< "$NAME" | sed 's/^0*//')"
+        local STORY="$(awk -F- '{print $2}' <<< "$NAME" | sed 's/^0*//')"
+        local TITLE="$(grep -m1 "^title=" "$MARKDOWN" | sed 's%^title=%%')"
+        cat << EOF
+<div class="story">
+<div>$CHAPTER章$STORY話</div>
+<div><a href="$CHAPTER/$STORY/">$TITLE</a></div>
+</div>
+EOF
+      done
+      echo "</section>"
+  } | tee -a "$SUB_INDEX"
+    cat >> "$SUB_INDEX" << \EOF
+</main>
+</body>
+</html>
+EOF
+    CHAPTER="$((CHAPTER + 1))"
+done >> "$MAIN_INDEX"
+  cat >> "$MAIN_INDEX" << \EOF
+</main>
+</body>
+</html>
+EOF
+}
+
+# End libexec/generate-index

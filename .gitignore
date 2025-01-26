@@ -1,0 +1,6 @@
+# Begin .gitignore
+
+/dest/
+/dest/**
+
+# End .gitignore
