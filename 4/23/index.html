@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 4章23話 強制アクセス制御</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,super user,root,mandatory access control,mac,SELinux,AppArmor,TOMOYO Linux">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<link rel="prev" href="4/22/" />
+<link rel="next" href="5/1/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>4章22話</div>
+<div><a href="4/22/">PAM</a></div>
+</div>
+<div>
+<div>今</div>
+<div>4章23話 強制アクセス制御</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章1話</div>
+<div><a href="5/1/">個人設定</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>強制アクセス制御</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は<wbr>「強制アクセス制御(mandatory access control, <wbr>MAC)」<wbr>を話すよ</span></span>
+<span><span>パーミッションとは別種のアクセス制御なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>なんだかすごそうな名前だね！</span></span>
+</div>
+</article>
+<article class="header2"><span>概要</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Linux の基本的なアクセス制御は</span></span>
+<span><span><wbr>「パーミッション」<wbr>なんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>仕組みは簡単だけどちゃんと制御できているよね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>でも色々な使われ方をしているうちに</span></span>
+<span><span>パーミッションだけでは不十分な場合も出てきたんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>たとえばどんな感じかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>みどりのゲームサーバプログラムが</span></span>
+<span><span>悪意あるユーザに乗っ取られたとしよう</span></span>
+<span><span>その悪意あるユーザは一般ユーザ権限といえども</span></span>
+<span><span>そこからほとんどのコマンドを実行できてしまうんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ほとんどのコマンドは</span></span>
+<span><span>パーミッションで誰でも</span></span>
+<span><span>実行を許しているからね</span></span>
+<span><span>確かにそうなっちゃうね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そこでゲームサーバの実行ユーザに</span></span>
+<span><span>以下のような制限を設けられたとしよう</span></span>
+</div>
+</article>
+<article class="unordered-list">
+<ul>
+<li><span>ゲームサーバのコマンドだけ実行できる</span></li>
+<li><span>ゲームサーバに関係あるディレクトリ配下のみアクセスできる</span></li>
+<li><span>ゲームサーバが扱うファイルのみ読み書きできる</span></li>
+<li><span>ゲームサーバが使うポートのみ使用できる</span></li>
+</ul>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ゲームサーバ本来の動作以外は</span></span>
+<span><span>ほとんどできなくなっちゃうね！</span></span>
+<span><span>ゲームサーバプログラムを乗っ取られたとしても</span></span>
+<span><span>ゲームサーバ関連以外の操作は</span></span>
+<span><span>実質何もできなくしちゃうんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>このような<wbr>「できること」<wbr>を指定して</span></span>
+<span><span>許可や拒否を設定するアクセス制御を</span></span>
+<span><span><wbr>「強制アクセス制御」<wbr>とよぶよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>とても強力なアクセス制御なんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「強制アクセス制御」<wbr>との対比で</span></span>
+<span><span>パーミッションによるアクセス制御を</span></span>
+<span><span><wbr>「任意アクセス制御(discretionary access control)」<wbr>とよぶよ</span></span>
+</div>
+</article>
+<article class="header2"><span>実装</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「強制アクセス制御」<wbr>の実装には</span></span>
+<span><span>以下のようなものがあるよ</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>実装</span></th>
+<th><span>説明</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://selinuxproject.org/" target="_blank" rel="noopener noreferrer">SELinux</a></td>
+<td><span>細く設定できるが難しい</span></td>
+</tr>
+<tr>
+<td><a href="https://apparmor.net" target="_blank" rel="noopener noreferrer">AppArmor</a></td>
+<td><span>簡単に使えることを目指している</span></td>
+</tr>
+<tr>
+<td><a href="https://tomoyo.sourceforge.net/" target="_blank" rel="noopener noreferrer">TOMOYO Linux</a></td>
+<td><span>動作の学習から設定を作成する</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ディストリビューションの中に</span></span>
+<span><span>強制アクセス制御の実装が含まれている場合がほとんどなんだ</span></span>
+<span><span>なのでディストリビューションのデフォルトを使うのが無難だよ</span></span>
+<span><span>たいていは SELinux か AppArmor の</span></span>
+<span><span>どちらかになっているはずだよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>私の場合は AppArmor だったよ！</span></span>
+<span><span>どうやって設定すれば良いのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>強制アクセス制御の設定は複雑で難しいんだ</span></span>
+<span><span>なのでここでは紹介だけに留めておくね</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は強制アクセス制御について学んだよ！</span></span>
+<span><span>パーミッションではできなかった</span></span>
+<span><span>細かなアクセス制御を指定できるんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>強制アクセス制御は初心者向けの Linux 解説で</span></span>
+<span><span><wbr>「最初にオフにしましょう」<wbr>と</span></span>
+<span><span>書かれてしまうぐらい難しい話題なんだ</span></span>
+<span><span>でもちゃんと設定すれば</span></span>
+<span><span>強固なセキュリティを確保できる仕組みだよ！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>4章22話</div>
+<div><a href="4/22/">PAM</a></div>
+</div>
+<div>
+<div>今</div>
+<div>4章23話 強制アクセス制御</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章1話</div>
+<div><a href="5/1/">個人設定</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>
