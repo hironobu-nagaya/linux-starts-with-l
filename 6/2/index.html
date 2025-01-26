@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lから始まるLinux - 6章2話 CPU</title>
+<meta charset="UTF-8">
+<meta http-equiv="content-language" content="ja">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,CPU,top,uptime">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<base href="../..">
+<link rel="prev" href="6/1/" />
+<link rel="next" href="6/3/" />
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/story.css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>6章1話</div>
+<div><a href="6/1/">リソース</a></div>
+</div>
+<div>
+<div>今</div>
+<div>6章2話 CPU</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>6章3話</div>
+<div><a href="6/3/">メモリ</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>CPU</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回は代表的なリソース<wbr>「CPU」<wbr><wbr>「メモリ」<wbr><wbr>「ストレージ」<wbr>を学んだよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は<wbr>「CPU」<wbr>のリソース状況を確認する方法を覚えよう</span></span>
+</div>
+</article>
+<article class="header2"><code>top</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>top</code><span> はプロセスとそのリソース消費を一覧表示するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>top <wbr>[オプション]...
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>top</code><span> を実行してみよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>top
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>top <wbr>- <wbr>18:13:45 <wbr>up <wbr>15 <wbr>days,  <wbr>5:22,  <wbr>1 <wbr>user,  <wbr>load <wbr>average: <wbr>1.87, <wbr>3.21, <wbr>3.13
+Tasks: <wbr>150 <wbr>total,   <wbr>1 <wbr>running, <wbr>146 <wbr>sleeping,   <wbr>0 <wbr>stopped,   <wbr>3 <wbr>zombie
+%Cpu(s):  <wbr>0.0 <wbr>us, <wbr>33.3 <wbr>sy,  <wbr>0.0 <wbr>ni, <wbr>66.7 <wbr>id,  <wbr>0.0 <wbr>wa,  <wbr>0.0 <wbr>hi,  <wbr>0.0 <wbr>si,  <wbr>0.0 <wbr>st
+MiB <wbr>Mem <wbr>:   <wbr>8052.3 <wbr>total,   <wbr>5871.7 <wbr>free,    <wbr>896.5 <wbr>used,   <wbr>1388.0 <wbr>buff/cache
+MiB <wbr>Swap:    <wbr>200.0 <wbr>total,    <wbr>200.0 <wbr>free,      <wbr>0.0 <wbr>used.   <wbr>7155.8 <wbr>avail <wbr>Mem
+
+    <wbr>PID <wbr>USER      <wbr>PR  <wbr>NI    <wbr>VIRT    <wbr>RES    <wbr>SHR <wbr>S  <wbr>%CPU  <wbr>%MEM     <wbr>TIME+ <wbr>COMMAND
+      <wbr>1 <wbr>root      <wbr>20   <wbr>0  <wbr>170432  <wbr>12800   <wbr>8192 <wbr>S   <wbr>0.0   <wbr>0.2   <wbr>0:53.74 <wbr>systemd
+      <wbr>2 <wbr>root      <wbr>20   <wbr>0       <wbr>0      <wbr>0      <wbr>0 <wbr>S   <wbr>0.0   <wbr>0.0   <wbr>0:00.53 <wbr>kthreadd
+...
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>色々なキー入力を受け付けるけど</span></span>
+<span><span>最初は<wbr>「 </span><code>q</code><span> で終了」<wbr>だけ覚えておこう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div>
+<div>
+<span><span>おお！</span></span>
+<span><span>プロセスと CPU やメモリの使用状況が一覧表示されてる！</span></span>
+<span><span>Windows の<wbr>「タスクマネージャー」<wbr>みたいだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>個々のプロセスも重要だけど全体的な状況把握も大事だよ</span></span>
+<span><span>プロセス一覧の上にある<wbr>「ロードアベレージ(load average)」<wbr>を見てみよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code>load <wbr>average: <wbr>1.87, <wbr>3.21, <wbr>3.13
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>3つの数字が並んでいるね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ロードアベレージは<wbr>「実行待ちになっているプロセスの平均数」<wbr>だよ</span></span>
+<span><span><wbr>「直近1分」<wbr><wbr>「直近5分」<wbr><wbr>「直近15分」<wbr>の3つの値が表示されるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>この値で CPU が忙しいかがわかるんだね</span></span>
+<span><span>具体的にどうやって判断するの？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>値が CPU のコア数に近ければ負荷が高い状態</span></span>
+<span><span>コア数を超えているのなら処理が滞っている状態と判断できるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>CPU のコア数は </span><code>nproc</code><span> でわかるね！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>nproc
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>実行結果はこうだったよ！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>4
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><code>4</code><span> ということは<wbr>「</span><code>4</code><span> に近ければ近いほどは忙しく </span><code>4</code><span> を超えたらキャパオーバー」<wbr>なんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>このシステムではそういうことになるよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>システムによっては </span><code>top</code><span> の改良版 </span><code>htop</code><span> が使える場合があるよ</span></span>
+<span><span>カラー表示でより読みやすくなるよう工夫されているんだ</span></span>
+</div>
+</article>
+<article class="header2"><code>uptime</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>uptime</code><span> はシステム起動時間を表示するけど</span></span>
+<span><span>ロードアベレージも表示してくれるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>uptime <wbr>[オプション]...
+</code></pre></article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>オプション</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code><span>, <wbr></span><code>--pretty</code></td>
+<td><span>起動時間のみを見やすい形式で表示</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それでは実行してみよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>uptime
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+</div>
+</article>
+<article class="code"><pre><code> <wbr>18:08:07 <wbr>up <wbr>15 <wbr>days,  <wbr>5:17,  <wbr>1 <wbr>user,  <wbr>load <wbr>average: <wbr>2.72, <wbr>2.49, <wbr>2.82
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回実行したときは起動時間しか目に入らなかったけど</span></span>
+<span><span>ロードアベレージも表示してくれていたんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>ロードアベレージだけ確認したかったり</span></span>
+<span><span>スクリプトなどで加工するつもりなら</span></span>
+<span><code>uptime</code><span> は出力が少なくて扱いやすいね！</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は CPU リソース状況の確認方法を学んだよ！</span></span>
+<span><code>top</code><span>, <wbr></span><code>uptime</code><span> で確認できるんだ！</span></span>
+<span><span>ロードアベレージは CPU 負荷の指標だよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>CPU リソースが不足するとアプリケーションが遅くなったりシステムが不安定になったりするんだ</span></span>
+<span><span>このようになったら CPU リソースを消費しているプロセスを </span><code>kill</code><span> で止めたり </span><code>renice</code><span> で優先度を下げよう！</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>6章1話</div>
+<div><a href="6/1/">リソース</a></div>
+</div>
+<div>
+<div>今</div>
+<div>6章2話 CPU</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>6章3話</div>
+<div><a href="6/3/">メモリ</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>

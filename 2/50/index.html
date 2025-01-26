@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lから始まるLinux - 2章50話 awkコマンド</title>
+<meta charset="UTF-8">
+<meta http-equiv="content-language" content="ja">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,awk">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<base href="../..">
+<link rel="prev" href="2/49/" />
+<link rel="next" href="2/51/" />
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/story.css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章49話</div>
+<div><a href="2/49/">sedコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章50話 awkコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章51話</div>
+<div><a href="2/51/">テキスト関連コマンド(その1)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>awk</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>正規表現を使ったコマンドを学んでいるよ！</span></span>
+<span><span>これまでで </span><code>grep</code><span> と </span><code>sed</code><span> を学んだよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は </span><code>awk</code><span> を学んでいこう！</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>awk</code><span> は決まった構造を持った内容を処理するのが得意なコマンドだよ</span></span>
+<span><code>awk</code><span> は制作者3名の頭文字で特定の意味を持った単語ではないんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>awk <wbr>[オプション]... <wbr>操作 <wbr>ファイル
+</code></pre></article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>オプション</span></th>
+<th><span>役割</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-F 文字列</code></td>
+<td><span>指定された文字列をフィールド区切り文字にする</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>構造を持った内容…</span></span>
+<span><span>例えば今まで扱ったような </span><code>/etc/passwd</code><span> のようなものかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そうだね</span></span>
+<span><span>後で </span><code>/etc/passwd</code><span> を扱ってみよう！</span></span>
+</div>
+</article>
+<article class="header2"><span>レコードとフィールド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>読み込む内容の単位を<wbr>「レコード(record)」<wbr>と呼ぶんだ</span></span>
+<span><span>デフォルトでは1行が<wbr>「レコード」<wbr>となるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>基本的には1行ずつ読み込んでその内容を解析していくんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>レコードは<wbr>「フィールドセパレータ(field separator, <wbr>fs)」<wbr>という区切り文字で区切られていて</span></span>
+<span><span>その区切られた要素を<wbr>「フィールド」<wbr>と呼ぶよ</span></span>
+<span><span>デフォルトではスペースやタブなど空白文字がフィールドセパレータになっているんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span><wbr>「レコード」<wbr>が<wbr>「フィールド」<wbr>と呼ばれる要素で構成されていると解釈してくれるんだ</span></span>
+</div>
+</article>
+<article class="header2"><span>パターンとアクション</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>awk</code><span> の操作は<wbr>「パターン(pattern)」<wbr>と<wbr>「アクション(action)」<wbr>で指定するよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「パターン」<wbr>は、<wbr>処理対象のレコードの指定で</span></span>
+<span><span>指定が無ければ全ての行で処理をしてくれるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>指定すれば一部のレコードだけに処理を絞れるんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span><wbr>「アクション」<wbr>は処理内容で指定がなければレコードを表示してくれるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>パターンとアクションは以下のように記述するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>パターン <wbr>{アクション}
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>これが<wbr>「操作」<wbr>の部分と置き換わるんだね</span></span>
+<span><span>つまりこう書くことになるんだ…</span></span>
+</div>
+</article>
+<article class="code"><pre><code>awk <wbr>'パターン <wbr>{アクション}' <wbr>ファイル
+</code></pre></article>
+<article class="header2"><span>実例</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>定義ばかりで難しかったね</span></span>
+<span><span>ここからは実例を見ながら </span><code>awk</code><span> を見ていこう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>/etc/passwd</code><span> から </span><code>midori</code><span> ユーザの行を抜き出してみよう</span></span>
+</div>
+</article>
+<article class="code"><pre><code>awk <wbr>'/^midori:/' <wbr>/etc/passwd
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><code>/^midori:/</code><span> は </span><code>{ ... <wbr>}</code><span> で囲われていないからパターンになるのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そのとおり！</span></span>
+<span><code>/ <wbr>... <wbr>/</code><span> は正規表現の指定なんだ</span></span>
+<span><code>/^midori:/</code><span> で<wbr>「</span><code>midori:</code><span> で始まるレコードだけを処理」<wbr>という意味になるよ</span></span>
+<span><span>アクションを指定していない場合はレコードをそのまま表示するので </span><code>grep</code><span> と同じような動きになるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>midori:x:1001:1001:Midori <wbr>Wakagi:/home/midori:/bin/bash
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>でも </span><code>/etc/passwd</code><span> の区切り文字って </span><code>:</code><span> だよね</span></span>
+<span><span>ちゃんと指定してあげるのはどうすればよいのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>それは </span><code>-F</code><span> オプションを使用するよ</span></span>
+<span><code>-F</code><span> オプションで1文字を指定すると<wbr>「その文字」<wbr></span></span>
+<span><span>2文字以上を指定すると正規表現になるんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>区切りを正規表現で指定できる？</span></span>
+<span><span>それは柔軟にテキストを扱えそうだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>-F</code><span> オプションを使って</span></span>
+<span><span>同じ動作をする </span><code>awk</code><span> コマンドを書いてみよう</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>$0</code><span> がレコード全体</span></span>
+<span><code>$1</code><span> が1番目のフィールド</span></span>
+<span><code>$2</code><span> が2番目のフィールド</span></span>
+<span><span>…を意味するんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>awk <wbr>-F: <wbr>'$1 <wbr>== <wbr>&quot;midori&quot;' <wbr>/etc/passwd
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>1番目のフィールドが </span><code>midori</code><span> であるレコードを表示…</span></span>
+<span><span>実行して結果を確認してみるね！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>midori:x:1001:1001:Midori <wbr>Wakagi:/home/midori:/bin/bash
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今度は<wbr>「アクション」<wbr>を書いてみよう</span></span>
+<span><code>print</code><span> は引数の内容を表示してくれるんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>awk <wbr>-F: <wbr>'{ <wbr>print <wbr>$1 <wbr>}' <wbr>/etc/passwd
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今度は<wbr>「パターン」<wbr>が書かれていないね</span></span>
+<span><span>ということは全部の行が処理されるのかな</span></span>
+</div>
+</article>
+<article class="code"><pre><code>root
+bin
+...
+shigeru
+midori
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>あっ </span><code>sed</code><span> のときの例と同じになったね！</span></span>
+<span><span>全ての行から1番目のフィールドだけ抜き出して表示してくれたんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろん<wbr>「パターン」<wbr>と<wbr>「アクション」<wbr>を混ぜて使うこともできるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>awk <wbr>-F: <wbr>'$1 <wbr>== <wbr>&quot;midori&quot; <wbr>{print <wbr>$1}' <wbr>/etc/passwd
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span><wbr>「1番目のフィールドが </span><code>midori</code><span> であるレコードの1番目のフィールドを表示」<wbr>って意味ね！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>midori
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>$1</code><span> はユーザ名なので抜き出してもあまり面白くないけど</span></span>
+<span><code>$1</code><span> を別の数字に置き換えるなどの応用ができるよ</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は決まった構造を持った内容を処理するのが得意な </span><code>awk</code><span> を学んだよ！</span></span>
+<span><span>でも使いこなすのは大変そう…</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>実は </span><code>awk</code><span> はスクリプト言語でもあるんだ</span></span>
+<span><span>なのでプログラミングもできるんだよ</span></span>
+<span><code>grep</code><span> や </span><code>sed</code><span> の動きを再現できたようにたいていの処理は実現できるよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>Linux では GNU が作成した </span><code>awk</code><span> の改良版 </span><code>gawk</code><span> が一般的だよ</span></span>
+<span><span>純粋な </span><code>awk</code><span> の足りない機能を盛り込んでいるので</span></span>
+<span><code>awk</code><span> が使えるようになったら </span><code>gawk</code><span> も学ぶと引き出しが広がるよ</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章49話</div>
+<div><a href="2/49/">sedコマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章50話 awkコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>2章51話</div>
+<div><a href="2/51/">テキスト関連コマンド(その1)</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>

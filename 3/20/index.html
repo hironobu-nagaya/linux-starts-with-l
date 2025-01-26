@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lから始まるLinux - 3章20話 exportコマンド</title>
+<meta charset="UTF-8">
+<meta http-equiv="content-language" content="ja">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,export">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<base href="../..">
+<link rel="prev" href="3/19/" />
+<link rel="next" href="3/21/" />
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/story.css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章19話</div>
+<div><a href="3/19/">パラメータ展開(拡張)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章20話 exportコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章21話</div>
+<div><a href="3/21/">envコマンド</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>export</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>シェルで宣言した変数がシェルスクリプトで使えないんだ！</span></span>
+<span><code>PATH</code><span> 変数とかは使えるのにどうして？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>PATH</code><span> のような変数を<wbr>「環境変数(environment variable)」<wbr>と呼ぶよ</span></span>
+<span><span>変数と環境変数は役割は同じだけど影響範囲が違っているんだ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>環境変数を知れば </span><code>PATH</code><span> 変数のような使い方ができるんだね？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は環境変数の使い方を学ぼう！</span></span>
+</div>
+</article>
+<article class="header2"><span>使い方</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>export</code><span> は環境変数を宣言するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>export <wbr>[オプション]... <wbr>[変数名[=値]]...
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>変数は宣言されたシェルでのみ有効だけど</span></span>
+<span><span>環境変数は宣言されたシェルとその子プロセスで有効だよ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>シェルで<wbr>「変数」<wbr>を宣言したから</span></span>
+<span><span>シェルの子プロセスであるシェルスクリプトでは</span></span>
+<span><span>その変数が使えなかったんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>一方、<wbr>シェルで<wbr>「環境変数」<wbr>を宣言すれば</span></span>
+<span><span>そこで実行したコマンドやシェルスクリプトは</span></span>
+<span><span>その環境変数を読み取れるんだね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>そういうことだね！</span></span>
+</div>
+</article>
+<article class="header2"><span>実践</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>環境変数が設定されている前提で動くスクリプトはなんか嫌だなぁ…</span></span>
+<span><span>いざ使おうとするとどう使ってよいか迷うね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>みどりの感覚は正しいよ</span></span>
+<span><span>環境変数が無くても動くけど</span></span>
+<span><span>あるとそれに従うような内容が良いね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>以前作った </span><code>greet</code><span> スクリプトで環境変数を使うようにしてみたよ</span></span>
+<span><span>こんなのはどうだろう？</span></span>
+</div>
+</article>
+<article class="code"><pre><code>#!/bin/bash
+
+if <wbr>[ <wbr>&quot;$NAME&quot; <wbr>== <wbr>&quot;&quot; <wbr>]
+then
+  <wbr>echo <wbr>-n <wbr>&quot;名前を入力して下さい: <wbr>&quot;
+  <wbr>read <wbr>NAME
+fi
+echo <wbr>&quot;こんにちは、$NAMEさん！&quot;
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div>
+<div>
+<span><span>いい内容だね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>NAME</code><span> 環境変数が設定されていなければ名前の入力を求めて </span><code>NAME</code><span> 変数に代入して名前を表示し</span></span>
+<span><code>NAME</code><span> 環境変数が設定されていれば名前の入力を求めずその名前を表示するんだね</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div>
+<div>
+<span><span>えへへ…</span></span>
+<span><span>そういうことです</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>では変数と環境変数の違いを見るために</span></span>
+<span><span>最初は普通の変数を宣言して実行してみよう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>うん！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>NAME=みどり
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>この状態で greet スクリプトを実行するね！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>./greet
+</code></pre></article>
+<article class="code"><pre><code>名前を入力して下さい: <wbr><span class="cursor">▌</span>
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>名前の入力が求められたね</span></span>
+<span><code>NAME</code><span> 変数は </span><code>greet</code><span> スクリプトでは使われていないね</span></span>
+</div>
+</article>
+<article class="code"><pre><code>名前を入力して下さい: <wbr>みどり
+こんにちは、みどりさん！
+</code></pre></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次は </span><code>NAME</code><span> 変数を環境変数にしよう！</span></span>
+</div>
+</article>
+<article class="code"><pre><code>export <wbr>NAME
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今度は環境変数が設定されている状態で実行してみるね</span></span>
+</div>
+</article>
+<article class="code"><pre><code>./greet
+</code></pre></article>
+<article class="code"><pre><code>こんにちは、みどりさん！
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>予想どおり！</span></span>
+<span><span>名前をたずねられずに挨拶されたよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>確認</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>export</code><span> を引数なしで実行すると</span></span>
+<span><span>現在定義されている環境変数一覧を表示してくれるよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code>export
+</code></pre></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span><wbr>「環境変数」<wbr>だけを表示してくれるんだね！</span></span>
+<span><span>確認したい場合は引数なしで実行するよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>まとめ</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>今回は環境変数を学んだよ！</span></span>
+<span><code>export</code><span> で環境変数を定義できるよ！</span></span>
+</div>
+</article>
+<article class="table">
+<table>
+<thead>
+<tr>
+<th><span>呼び名</span></th>
+<th><span>使える範囲</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>変数</span></td>
+<td><span>宣言されたシェルのみ</span></td>
+</tr>
+<tr>
+<td><span>環境変数</span></td>
+<td><span>宣言されたシェルとその子プロセス</span></td>
+</tr>
+</tbody>
+</table>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>一部のコマンドは環境変数で動作を変えるものもあるよ</span></span>
+<span><span>manpage の末尾に書いてあることがあるので </span><code>man</code><span> で確認しよう</span></span>
+</div>
+</article>
+</section>
+</main>
+<footer>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章19話</div>
+<div><a href="3/19/">パラメータ展開(拡張)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章20話 exportコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章21話</div>
+<div><a href="3/21/">envコマンド</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>
