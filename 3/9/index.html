@@ -1,0 +1,83 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 3章9話 for文(実践)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,for">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="3/8/" />
+<link rel="next" href="3/10/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>3章8話</div>
+<div><a href="3/8/">for文(使い方)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>3章9話 for文(実践)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章10話</div>
+<div><a href="3/10/">while文(使い方)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><code>for</code><span>文(実践)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回は</span><code>for</code><span>文を教えてもらったよ！</span></span>
+<span><span>繰り返し処理に便利なんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は</span><code>for</code><span>文で</span></span>
+<span><span>シェルスクリプトを</span></span>
+<span><span>書いていこう！</span></span>
+</div>
+</article>
+<article class="header2"><span>実践</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回はカウントダウンをしてくれる</span></span>
+<span><code>countdown</code><span> スクリプトを作るよ</span></span>
+<span><span>まずはエディタを開いてね</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">vim <wbr>countdown
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>次に以下の内容を</span></span><span><span>書き込んで保存してね</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+echo <wbr>-n <wbr>&quot;カウントダウン開始値を入力して下さい: <wbr>&quot;
+read <wbr>FIRST
+
+for <wbr>COUNT <wbr>in <wbr>$(seq <wbr>&quot;$FIRST&quot; <wbr>-1 <wbr>1)
+do
+  <wbr>echo <wbr>&quot;$COUNT&quot;
+  <wbr>sleep <wbr>1
+done
+</code></pre></article><hr /><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>for</code><span>文の前の内容は</span></span><span><span>もう大丈夫かな？</span></span></div></article><article class="code"><pre><code class="bash">echo <wbr>-n <wbr>&quot;カウントダウン開始値を入力して下さい: <wbr>&quot;
+read <wbr>FIRST
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>大丈夫！</span></span><span><span>入力を促すメッセージを表示して</span></span><span><code>read</code><span> がキーボード入力を受け取り</span></span><span><span>その値を </span><code>FIRST</code><span> 変数に</span></span><span><span>代入してくれるんだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>read</code><span> の使い方は</span></span><span><span>もう大丈夫だね！</span></span></div></article><hr /><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>for</code><span>文の </span><code>in</code><span> の後は</span></span><span><span>何をしているんだろうね？</span></span></div></article><article class="code"><pre><code class="bash">$(seq <wbr>&quot;$FIRST&quot; <wbr>-1 <wbr>1)
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>seq</code><span> は数列生成コマンドだよ！</span></span><span><span><wbr>「</span><code>$FIRST</code><span> から始め、<wbr></span></span><span><code>-1</code><span> ずつ値を変えながら、<wbr></span></span><span><code>1</code><span> で終わる」<wbr></span></span><span><span>ような数列を生成してくれるよ</span></span><span><span>その数列の項の数だけ</span></span><span><code>for</code><span>文の処理を繰り返すんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><span>例えば </span><code>5</code><span> を入力したら</span></span><span><span>この部分は </span><code>5 4 3 2 1</code><span> と</span></span><span><span>展開されるわけだね！</span></span></div></article><hr /><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>最後に</span></span><span><span>繰り返し処理を</span></span><span><span>見ていこう！</span></span></div></article><article class="code"><pre><code class="bash">echo <wbr>&quot;$COUNT&quot;
+sleep <wbr>1
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これは以下の</span></span><span><span>繰り返しになるよね！</span></span></div></article><article class="ordered-list"><ol><li><code>COUNT</code><span> 変数の値を表示</span></li><li><span>1秒待つ</span></li></ol></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>COUNT</code><span> 変数の値は</span></span><span><code>seq</code><span> の働きで</span></span><span><code>$FIRST</code><span> から </span><code>1</code><span> まで</span></span><span><code>-1</code><span> ずつ変化していく</span></span><span><span>つまりカウントダウンの</span></span><span><span>処理になっているんだよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それが終わると</span></span><span><code>for</code><span>文が終わり</span></span><span><span>スクリプトが終了する</span></span><span><span>というわけだね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は</span><code>for</code><span>文を使った</span></span><span><span>シェルスクリプトを書いたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>for</code><span>文は </span><code>in</code><span> の後ろの値全てに対して</span></span><span><span>同じ処理を行いたいときに便利なんだ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章8話</div><div><a href="3/8/">for文(使い方)</a></div></div><div><div>今</div><div>3章9話 for文(実践)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章10話</div><div><a href="3/10/">while文(使い方)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja"><head><title>Lから始まるLinux - 3章7話 case文(実践)</title><base href="../.."><meta charset="utf-8"><meta name="author" content="Hironobu Nagaya"><meta name="robots" content="all"><meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,case"><meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です"><meta name="viewport" content="width=device-width, initial-scale=0.5" /><meta name="format-detection" content="telephone=no, email=no, address=no" /><link rel="prev" href="3/6/" /><link rel="next" href="3/8/" /><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/normalize.css" type="text/css"><link rel="stylesheet" href="css/common.css" type="text/css"><link rel="stylesheet" href="css/story.css" type="text/css"></head><body><header><h1>Lから始まるLinux</h1><div class="relation"><div><div>前</div><div>3章6話</div><div><a href="3/6/">case文(使い方)</a></div></div><div><div>今</div><div>3章7話 case文(実践)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章8話</div><div><a href="3/8/">for文(使い方)</a></div></div></div></header><main><section><article class="header1"><code>case</code><span>文(実践)</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>前回は</span><code>case</code><span>文の</span></span><span><span>使い方を学んだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>今回は</span><code>case</code><span>で</span></span><span><span>シェルスクリプトを</span></span><span><span>書いていこう！</span></span></div></article><article class="header2"><span>実践</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>おみくじの改良版</span></span><span><code>omikuji2</code><span> を作ろう！</span></span><span><span>エディタを開いて準備してね</span></span></div></article><article class="code"><pre><code class="bash">vim <wbr>omikuji2
+</code></pre></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>うん！</span></span><span><span>どんな内容か楽しみ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>内容は以下のとおりだよ！</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+OMIKUJI=&quot;$((RANDOM <wbr>% <wbr>10))&quot;
+
+case <wbr>&quot;$OMIKUJI&quot; <wbr>in
+ <wbr>0)
+   <wbr>echo <wbr>&quot;大吉&quot;
+   <wbr>;;
+ <wbr>1|2)
+   <wbr>echo <wbr>&quot;中吉&quot;
+   <wbr>;;
+ <wbr>3|4|5)
+   <wbr>echo <wbr>&quot;小吉&quot;
+   <wbr>;;
+ <wbr>*)
+   <wbr>echo <wbr>&quot;吉&quot;
+   <wbr>;;
+esac
+</code></pre></article><hr /><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>算術式展開 </span><code>$(( ... <wbr>))</code><span> で</span></span><span><code>RANDOM</code><span> 変数を使っているね</span></span><span><code>RANDOM</code><span> 変数をいきなり使っているけど</span></span><span><span>大丈夫なのかな？</span></span></div></article><article class="code"><pre><code class="bash">OMIKUJI=&quot;$((RANDOM <wbr>% <wbr>10))&quot;
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>RANDOM</code><span> 変数は</span></span><span><span>シェルが用意している特別な変数だよ</span></span><span><span>値を参照するたびに</span></span><span><span>0以上のランダムな数値を返すんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>じゃあここの算術式展開では</span></span><span><span>ランダムな数を 10 で割った</span></span><span><span>余りを求めているんだね！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>でも</span></span><span><span>どうして余りを使うんだろう？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>10 で割れば余りは</span></span><span><span>0 から 9 までの 10 通りになるんだ</span></span><span><code>RANDOM</code><span> 変数は大きな範囲の数を出すけど</span></span><span><span>剰余を使えば簡単に範囲を絞れるんだよ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>なるほど！</span></span><span><span>ランダムな値を</span></span><span><span>0 から 9 に絞っているのね！</span></span></div></article><hr /><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>いよいよ</span></span><span><code>case</code><span>文に入っていくよ</span></span></div></article><article class="code"><pre><code class="bash">case <wbr>&quot;$OMIKUJI&quot; <wbr>in
+ <wbr>0)
+   <wbr>echo <wbr>&quot;大吉&quot;
+   <wbr>;;
+ <wbr>1|2)
+   <wbr>echo <wbr>&quot;中吉&quot;
+   <wbr>;;
+ <wbr>3|4|5)
+   <wbr>echo <wbr>&quot;小吉&quot;
+   <wbr>;;
+ <wbr>*)
+   <wbr>echo <wbr>&quot;吉&quot;
+   <wbr>;;
+esac
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これは分かりやすいね！</span></span><span><code>OMIKUJI</code><span> 変数の値によって</span></span><span><span>条件が分かれていて</span></span><span><span>それぞれの処理で</span></span><span><span>おみくじの結果を</span></span><span><span>表示しているんだね</span></span></div></article><article class="table"><table><thead><tr><th><code>OMIKUJI</code><span> 変数の値</span></th><th><span>表示される内容</span></th></tr></thead><tbody><tr><td><code>0</code></td><td><span>大吉</span></td></tr><tr><td><code>1</code><span>, <wbr></span><code>2</code></td><td><span>中吉</span></td></tr><tr><td><code>3</code><span>, <wbr></span><code>4</code><span>, <wbr></span><code>5</code></td><td><span>小吉</span></td></tr><tr><td><span>上記以外(</span><code>6</code><span>, <wbr></span><code>7</code><span>, <wbr></span><code>8</code><span>, <wbr></span><code>9</code><span>)</span></td><td><span>吉</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><code>1|2)</code><span> と書けば<wbr>「1または2」<wbr>だし</span></span><span><code>*)</code><span> を使えば<wbr>「どの条件にも当てはまらなかった場合」<wbr>と</span></span><span><span>わかりやすく書けるんだ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は</span><code>case</code><span>文を使って</span></span><span><span>シェルスクリプトを書いたよ！</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>最初に書いたおみくじは</span></span><span><span>結果を 10 行生成して</span></span><span><span>9 行捨てていたけど</span></span><span><span>今回はスッキリしていて効率的だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>こんなふうにいくつか分岐があって</span></span><span><span>その中から一つ処理を選ぶという場合は</span></span><span><code>case</code><span>文が有効に使えるよ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章6話</div><div><a href="3/6/">case文(使い方)</a></div></div><div><div>今</div><div>3章7話 case文(実践)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章8話</div><div><a href="3/8/">for文(使い方)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

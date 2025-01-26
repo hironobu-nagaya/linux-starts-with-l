@@ -1,0 +1,77 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章21話 メッセージ(実践)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,write,wall,talk">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/20/" />
+<link rel="next" href="5/22/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章20話</div>
+<div><a href="5/20/">メッセージ(準備)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章21話 メッセージ(実践)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章22話</div>
+<div><a href="5/22/">アーカイブ</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>メッセージ(実践)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回は他のユーザと</span></span>
+<span><span>メッセージをやり取りする</span></span>
+<span><span>準備をしたね！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回は実際に</span></span>
+<span><span>メッセージを</span></span>
+<span><span>送ってみよう！</span></span>
+</div>
+</article>
+<article class="header2"><code>write</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>write</code><span> は</span></span>
+<span><span>相手にメッセージを送るよ</span></span>
+<span><span>一方通行の通信だけど</span></span>
+<span><span>相手も </span><code>write</code><span> を実行すれば</span></span>
+<span><span>双方向の会話になるんだ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">write <wbr>ユーザ名 <wbr>[端末名]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へぇ…</span></span><span><span>早速やってみようよ！</span></span></div></article><article class="code"><pre><code class="bash">write <wbr>shigeru
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>よし</span></span><span><span>了解だよ！</span></span></div></article><article class="code"><pre><code class="bash">write <wbr>midori
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>1行入力して Enter を押すと</span></span><span><span>その内容が相手の端末に</span></span><span><span>表示されるんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>そうなんだ！</span></span><span><span>さっそくいくつか</span></span><span><span>メッセージを送ってみるね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ちゃんとこちらの端末に</span></span><span><span>メッセージが表示されているよ</span></span><span><span>ではこちらからも返事を出すね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>おお！</span></span><span><span>ちゃんとチャットになってる！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>終了はどうしたら</span></span><span><span>いいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>終了するには</span></span><span><span>Ctrl + C で割り込みをするか</span></span><span><span>Ctrl + D で入力終了とすればいいんだ</span></span><span><span>こちらの </span><code>write</code><span> を終了するね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>あっ…</span></span><span><code>EOF</code><span> って表示されたよ</span></span><span><span>これで会話終了なんだね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>それじゃ</span></span><span><span>私も Ctrl + D っと！</span></span></div></article><article class="header2"><code>wall</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>write</code><span> を扱ったので</span></span><span><code>wall</code><span> も説明するね</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span><wbr>「壁(wall)」<wbr>？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>wall</code><span> は</span></span><span><span>write all の略なんだ</span></span><span><span>ややこしいよね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>wall</code><span> は</span></span><span><span>全ログインユーザに</span></span><span><span>メッセージを送るよ</span></span></div></article><article class="code"><pre><code class="bash">wall <wbr>[オプション]... <wbr>[メッセージ|ファイル]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>チャット用というより</span></span><span><span>全体周知用かな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだね</span></span><span><span>例えば </span><code>shutdown</code><span> のメッセージは</span></span><span><code>wall</code><span> 経由なんだ</span></span></div></article><article class="header2"><code>talk</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>talk</code><span> はチャットツールだよ</span></span><span><span>自分と相手で画面を二分割して</span></span><span><span>リアルタイムのチャットができるんだ</span></span></div></article><article class="code"><pre><code class="bash">talk <wbr>ユーザ名 <wbr>[端末名]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へぇ！</span></span><span><code>write</code><span> より</span></span><span><span>チャット向けだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>talk</code><span> には</span></span><span><span>通話を仲介するプログラム</span></span><span><code>talkd</code><span> が必要なんだ</span></span><span><span>最近は使われなくなっている機能なので</span></span><span><span>インストールされていない場合が多いよ</span></span><span><span>使ってみたければ</span></span><span><span>インストールしてみよう！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>talk</code><span> は </span><code>write</code><span> と</span></span><span><span>同じように実行するよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>これもやってみようよ！</span></span></div></article><article class="code"><pre><code class="bash">talk <wbr>shigeru
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>受信側の僕も同じように</span></span><span><code>talk</code><span> を実行すれば</span></span><span><span>通話が開始されるよ</span></span></div></article><article class="code"><pre><code class="bash">talk <wbr>midori
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>画面が二分割されて</span></span><span><span>自分の入力エリアと</span></span><span><span>お兄ちゃんの表示エリアに</span></span><span><span>分かれているんだね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>基本的な使い方は</span></span><span><code>write</code><span> と同じだけど</span></span><span><span>いくつかの追加操作があるんだ</span></span></div></article><article class="table"><table><thead><tr><th><span>入力</span></th><th><span>動作</span></th></tr></thead><tbody><tr><td><span>ESC + P</span></td><td><span>自分のウィンドウを上へスクロール</span></td></tr><tr><td><span>ESC + N</span></td><td><span>自分のウィンドウを下へスクロール</span></td></tr><tr><td><span>Ctrl + P</span></td><td><span>相手のウィンドウを上へスクロール</span></td></tr><tr><td><span>Ctrl + N</span></td><td><span>相手のウィンドウを下へスクロール</span></td></tr><tr><td><span>Ctrl + L</span></td><td><span>画面再描画</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>スクロール機能は便利だね！</span></span><span><span>長話になる時は便利そう</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>talk</code><span> の開始は</span></span><span><span>相手が待機している必要があるんだ</span></span><span><span>事前に相手に </span><code>talk</code><span> の約束などを</span></span><span><span>しておくといいよ</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>write</code><span> と </span><code>talk</code><span> で</span></span><span><span>他ユーザへのメッセージ送信を学んだよ！</span></span><span><span>チャット用ではないけど </span><code>wall</code><span> で</span></span><span><span>ログインユーザ全員に周知もできるんだ</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>write</code><span> や </span><code>wall</code><span> は</span></span><span><span>スーパーユーザからの</span></span><span><span>メッセージで使われることがあるよ</span></span><span><span>あまり使わなくなってはいるけど</span></span><span><span>Linux の歴史やシステムの仕組みを学ぶ</span></span><span><span>良いきっかけになると思うよ</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章20話</div><div><a href="5/20/">メッセージ(準備)</a></div></div><div><div>今</div><div>5章21話 メッセージ(実践)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章22話</div><div><a href="5/22/">アーカイブ</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

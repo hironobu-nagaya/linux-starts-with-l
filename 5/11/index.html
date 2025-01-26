@@ -1,0 +1,86 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 5章11話 SSH公開鍵認証(macOS,Linux)</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,SSH,public key authorization,macOS">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="5/10/" />
+<link rel="next" href="5/12/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>5章10話</div>
+<div><a href="5/10/">SSH公開鍵認証(Windows)</a></div>
+</div>
+<div>
+<div>今</div>
+<div>5章11話 SSH公開鍵認証(macOS,Linux)</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>5章12話</div>
+<div><a href="5/12/">SCP(Windows)</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>SSH公開鍵認証(macOS,Linux)</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>前回までで </span><code>ssh-keygen</code><span> で</span></span>
+<span><span>SSH 鍵を生成したよ！</span></span>
+<span><span>そして接続先に公開鍵の</span></span>
+<span><span>登録までを済ませたんだ！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>今回はいよいよ</span></span>
+<span><span>公開鍵認証で</span></span>
+<span><span>SSH 接続するよ！</span></span>
+</div>
+</article>
+<article class="header2"><span>SSH 設定ファイル作成</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>次は接続設定ファイル</span></span>
+<span><code>~/.ssh/config</code><span> を作成しよう</span></span>
+<span><span>以下のコマンドで</span></span>
+<span><span>エディタを開こう</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">vim <wbr>~/.ssh/config
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>新規にファイルを開いたよ</span></span><span><span>内容は何を書けばいいのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>以下のテンプレートにそって</span></span><span><span>自分の環境に合わせて記述しよう</span></span></div></article><article class="code"><pre><code class="plaintext">Host <wbr>接続名
+  <wbr>Hostname     <wbr>接続先IPアドレス
+  <wbr>User         <wbr>接続ユーザ名
+  <wbr>IdentityFile <wbr>使用する秘密鍵のパス
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>書いたよ！</span></span><span><span>これで接続の準備が</span></span><span><span>できたんだね</span></span></div></article><article class="code"><pre><code class="plaintext">Host <wbr>carter
+  <wbr>Hostname     <wbr>192.168.0.100
+  <wbr>User         <wbr>midori
+  <wbr>IdentityFile <wbr>~/.ssh/midori@carter_id_rsa
+</code></pre></article><article class="header2"><span>SSH 接続</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>設定が終わったら</span></span><span><code>ssh</code><span> を実行して</span></span><span><span>SSH 接続しよう</span></span></div></article><article class="code"><pre><code class="bash">ssh <wbr>接続名
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>私の場合は</span></span><span><span>こうすれば</span></span><span><span>いいんだね！</span></span></div></article><article class="code"><pre><code class="bash">ssh <wbr>carter
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そのとおり！</span></span><span><span>試してみて</span></span></div></article><article class="code"><pre><code class="console">The <wbr>authenticity <wbr>of <wbr>host <wbr>'carter(192.168.0.100)' <wbr>can't <wbr>be <wbr>established.
+ED25519 <wbr>key <wbr>fingerprint <wbr>is <wbr>SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
+This <wbr>key <wbr>is <wbr>not <wbr>known <wbr>by <wbr>any <wbr>other <wbr>names.
+Are <wbr>you <wbr>sure <wbr>you <wbr>want <wbr>to <wbr>continue <wbr>connecting <wbr>(yes/no/[fingerprint])?
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>SSH のときにも出てきた</span></span><span><span>初回接続の確認だね！</span></span><span><span>問題ないので</span></span><span><code>yes</code><span> と入力するよ！</span></span></div></article><article class="code"><pre><code class="console">$ <wbr><span class="cursor">▌</span>
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>よし！</span></span><span><span>接続ができたよ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>もし鍵にパスフレーズを</span></span><span><span>設定していた場合</span></span><span><span>パスフレーズをたずねられるよ</span></span><span><span>正しいパスフレーズを</span></span><span><span>入力してあげよう</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は macOS や Linux で</span></span><span><span>公開鍵認証を使った</span></span><span><span>SSH 接続を行ったよ！</span></span><span><span>パスフレーズを設定していなければ</span></span><span><span>接続から操作ができるまで</span></span><span><span>そのまま通っちゃうんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>現時点で公開鍵認証は</span></span><span><span>鍵がちゃんと管理されている限りは</span></span><span><span>まず突破は不可能な認証なんだ</span></span><span><span>安全にリモート接続するためにも</span></span><span><span>公開鍵認証をつかうことを</span></span><span><span>おすすめするよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>5章10話</div><div><a href="5/10/">SSH公開鍵認証(Windows)</a></div></div><div><div>今</div><div>5章11話 SSH公開鍵認証(macOS,Linux)</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>5章12話</div><div><a href="5/12/">SCP(Windows)</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

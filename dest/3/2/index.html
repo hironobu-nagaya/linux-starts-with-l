@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja"><head><title>Lから始まるLinux - 3章2話 コメント</title><base href="../.."><meta charset="utf-8"><meta name="author" content="Hironobu Nagaya"><meta name="robots" content="all"><meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,shell script,comment"><meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です"><meta name="viewport" content="width=device-width, initial-scale=0.5" /><meta name="format-detection" content="telephone=no, email=no, address=no" /><link rel="prev" href="3/1/" /><link rel="next" href="3/3/" /><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/normalize.css" type="text/css"><link rel="stylesheet" href="css/common.css" type="text/css"><link rel="stylesheet" href="css/story.css" type="text/css"></head><body><header><h1>Lから始まるLinux</h1><div class="relation"><div><div>前</div><div>3章1話</div><div><a href="3/1/">シェルスクリプト</a></div></div><div><div>今</div><div>3章2話 コメント</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章3話</div><div><a href="3/3/">readコマンド</a></div></div></div></header><main><section><article class="header1"><span>コメント</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>お兄ちゃん！</span></span><span><span>コマンドの内容を</span></span><span><span>パッと思い出せない時があるよ</span></span><span><span>メモみたいなものを残せないかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そういうこともできるよ！</span></span><span><span>今回は<wbr>「コメント(comment)」<wbr>を学ぼう</span></span></div></article><article class="header2"><span>書き方</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>シェルで </span><code>#</code><span> と書くと</span></span><span><span><wbr>「これ以降はコメント」<wbr></span></span><span><span>という意味になるよ</span></span></div></article><article class="code"><pre><code class="bash"><span class="silver"># <wbr>コメント</span>
+</code></pre></article><article class="code"><pre><code class="bash">コマンド <wbr><span class="silver"># <wbr>コメント</span>
+</code></pre></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>コメントで文章を書き残せるけど</span></span><span><span>コマンドの実行には全く影響しないんだ</span></span></div></article><article class="talk"><div><img src="img/midori-surprised.svg" alt="若木 みどり(驚き)" /></div><div><span><span>へぇ…</span></span><span><span>そういうふうに書くんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>また</span></span><span><span>何も書かれていない<wbr>「空行」<wbr>も</span></span><span><span>読みやすさに影響するよ</span></span><span><span>何も実行しないけど</span></span><span><span>必要があれば空行も入れてみよう</span></span></div></article><article class="header2"><span>実践</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>さっそく前回のスクリプトに</span></span><span><span>コメントを書き加えてみてもいい？</span></span></div></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>もちろん！</span></span><span><span>自由に書いてみて</span></span></div></article><article class="code"><pre><code class="bash">vim <wbr>omikuji
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>こんな感じでどうだろう？</span></span></div></article><article class="code"><pre><code class="bash">#!/bin/bash
+
+<span class="silver"># <wbr>【おみくじ】
+#
+# <wbr>[説明]
+# <wbr>ランダムなおみくじの結果を表示します
+#
+# <wbr>[解説]
+# <wbr>1. <wbr>おみくじの内容を複数行用意します
+# <wbr>cat <wbr>&lt;&lt; <wbr>EOF
+# <wbr>...
+# <wbr>EOF
+#
+# <wbr>2. <wbr>行をランダムに並び替えます
+# <wbr>shuf
+#
+# <wbr>3. <wbr>先頭の1行を表示します
+# <wbr>head <wbr>-n <wbr>-1</span>
+
+cat <wbr>&lt;&lt; <wbr>EOF <wbr>| <wbr>shuf <wbr>| <wbr>head <wbr>-n <wbr>1
+大吉
+中吉
+中吉
+小吉
+小吉
+小吉
+吉
+吉
+吉
+吉
+EOF
+</code></pre></article><article class="talk"><div><img src="img/shigeru-smile.svg" alt="若木 しげる(笑顔)" /></div><div><span><span>丁寧な説明だね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>細かく書き過ぎと</span></span><span><span>思われるかもしれないけど</span></span><span><span>別にいいんだよ</span></span><span><span>自分のレベルに合わせた内容で</span></span><span><span>コメントを書いていこう！</span></span></div></article><article class="talk"><div><img src="img/midori-smile.svg" alt="若木 みどり(笑顔)" /></div><div><span><span>えへへ！</span></span><span><span>ほめられると照れるなぁ…</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回はシェルのコメントを学んだよ！</span></span><span><code>#</code><span> 以降はコメントとなって実行に影響無いんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>#</code><span> をクォート(ダブルクォート含む)すれば</span></span><span><span>コメントの意味を失わさせれるよ</span></span><span><span>必要があればクォートしよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>3章1話</div><div><a href="3/1/">シェルスクリプト</a></div></div><div><div>今</div><div>3章2話 コメント</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章3話</div><div><a href="3/3/">readコマンド</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>

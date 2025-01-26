@@ -1,0 +1,78 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 2章68話 その他のコマンド</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="2/67/" />
+<link rel="next" href="3/1/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>2章67話</div>
+<div><a href="2/67/">ネットワーク関連コマンド</a></div>
+</div>
+<div>
+<div>今</div>
+<div>2章68話 その他のコマンド</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>3章1話</div>
+<div><a href="3/1/">シェルスクリプト</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>その他のコマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最後に</span></span>
+<span><span>きれいに分類できなかった</span></span>
+<span><span>コマンドたちを紹介するよ</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>どんなものが</span></span>
+<span><span>あるんだろうね？</span></span>
+</div>
+</article>
+<article class="header2"><code>time</code><span> コマンド</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><code>time</code><span> は</span></span>
+<span><span>コマンド実行時間を</span></span>
+<span><span>計測するよ</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">time <wbr>[コマンド]
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>へぇ…</span></span><span><span>ある程度時間のかかる</span></span><span><span>コマンドで試してみたいね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>それなら</span></span><span><code>updatedb</code><span> で</span></span><span><span>試してみよう！</span></span></div></article><article class="code"><pre><code class="bash">time <wbr>sudo <wbr>updatedb
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>locate</code><span> の検索用データを</span></span><span><span>作成するコマンドだね！</span></span></div></article><article class="code"><pre><code class="console">
+real    <wbr>0m9.740s
+user    <wbr>0m0.251s
+sys     <wbr>0m0.821s
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>10秒ぐらいで終わったよ</span></span><span><code>real</code><span> で示されている値が</span></span><span><span>実時間なんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そうだね</span></span><span><span>各項目は以下のような</span></span><span><span>意味を持っているよ</span></span></div></article><article class="table"><table><thead><tr><th><span>項目</span></th><th><span>説明</span></th></tr></thead><tbody><tr><td><code>real</code></td><td><span>実行から終了まで掛かった実時間</span></td></tr><tr><td><code>user</code></td><td><span>ユーザが使用した CPU 時間</span></td></tr><tr><td><code>sys</code></td><td><span>システムが使用した CPU 時間</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>CPU 時間と実時間が</span></span><span><span>大きく離れていて</span></span><span><span>CPU の処理であまり時間を</span></span><span><span>使っていないと分かるね</span></span><span><span>どうしてなんだろう？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>この差の大部分は</span></span><span><span>入出力などでの</span></span><span><span>待ち時間の場合が</span></span><span><span>ほとんどだよ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>ストレージからの</span></span><span><span>ファイル名などの</span></span><span><span>読み込み待ちに</span></span><span><span>時間の大部分を</span></span><span><span>使っていているだろうと</span></span><span><span>推測できるんだね！</span></span></div></article><article class="header2"><code>tree</code><span> コマンド</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>tree</code><span> は</span></span><span><span>ディレクトリ階層を</span></span><span><span>ツリー表示するよ</span></span></div></article><article class="code"><pre><code class="bash">tree <wbr>[オプション]... <wbr>[ディレクトリ]...
+</code></pre></article><article class="table"><table><thead><tr><th><span>オプション</span></th><th><span>役割</span></th></tr></thead><tbody><tr><td><code>-a</code></td><td><span>隠しファイルを表示</span></td></tr><tr><td><code>-d</code></td><td><span>ディレクトリだけ表示</span></td></tr><tr><td><code>-L 深さ</code></td><td><span>ディレクトリを最大 </span><code>深さ</code><span> までたどる</span></td></tr><tr><td><code>-P パターン</code></td><td><span>指定された</span><code>パターン</code><span>に一致するファイルのみ表示</span></td></tr><tr><td><code>-I パターン</code></td><td><span>指定された</span><code>パターン</code><span>に一致しないファイルのみ表示</span></td></tr><tr><td><code>-u</code></td><td><span>所有ユーザも表示</span></td></tr><tr><td><code>-g</code></td><td><span>所有グループも表示</span></td></tr><tr><td><code>-p</code></td><td><span>パーミッションも表示</span></td></tr><tr><td><code>-s</code></td><td><span>ファイルサイズも表示</span></td></tr><tr><td><code>-h</code></td><td><span>ファイルサイズも人間に読みやすい形式で表示</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>pstree</code><span> がプロセスを</span></span><span><span>ツリー表示するのに対し</span></span><span><code>tree</code><span> はディレクトリを</span></span><span><span>ツリー表示するんだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>ここでは </span><code>/home</code><span> の</span></span><span><span>ディレクトリ構造を</span></span><span><span>見てみよう！</span></span></div></article><article class="code"><pre><code class="bash">tree <wbr>-d <wbr>/home
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="console">/home
+├── <wbr>midori
+└── <wbr>shigeru
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>まさに </span><code>pstree</code><span> の</span></span><span><span>ディレクトリ版という感じだね！</span></span><span><span>色々な表示オプションがあるので</span></span><span><span>細かな情報も確認できるね！</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は </span><code>time</code><span> と </span><code>tree</code><span> を学んだよ！</span></span><span><span>確かに分類には困るけど</span></span><span><span>便利なコマンドたちだね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これで基本的なコマンドの</span></span><span><span>紹介はおしまいだよ！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>2章67話</div><div><a href="2/67/">ネットワーク関連コマンド</a></div></div><div><div>今</div><div>2章68話 その他のコマンド</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>3章1話</div><div><a href="3/1/">シェルスクリプト</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>
