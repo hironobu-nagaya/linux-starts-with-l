@@ -1,0 +1,59 @@
+#!/bin/bash
+# Begin libexec/minify-html
+
+set -e
+
+function cleanup() {
+  [ -f "$HTML.out" ] || rm -f "$HTML.out"
+  [ -f "$HTML.original" ] || return "$1"
+  [ "$1" -eq 0 ] \
+      && rm -f "$HTML.original" \
+      || mv "$HTML"{.original,}
+  return "$1"
+}
+
+function print-help() {
+  echo "${0##*/}: USAGE: ${0##*/} HTML" >&2
+}
+
+if [ "$#" -ne 1 ]
+then
+  print-help
+  exit 1
+fi
+
+readonly GREP="${GREP:=grep}"
+readonly AWK="${AWK:=awk}"
+readonly HTML="$1"
+trap 'cleanup 0' 0
+trap 'cleanup 1' 1 2 3 15
+
+cp -a "$HTML"{,.original}
+
+readonly FIRST_LINE="$(head -1 "$HTML")"
+if "$GREP" -sqm1 '^<!DOCTYPE' <<< "$FIRST_LINE"
+then
+  echo "$FIRST_LINE" > "$HTML"
+else
+  : > "$HTML"
+fi
+
+"$AWK" -v 'ORS=' '
+  BEGIN {
+    pre = 0
+  }
+  NR > 1 {
+    if (/<pre>/) {
+      pre = 1
+    } else if (/<\/pre>/) {
+      pre = 0
+    }
+    if (pre == 0) {
+      print gensub(/[ \t]*$/, "", "g", gensub(/^[ \t]*/, "", "g", $0))
+    } else {
+      print $0 "\n"
+    }
+  }
+' "$HTML.original"  >> "$HTML"
+
+# End libexec/minify-html

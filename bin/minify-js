@@ -1,0 +1,48 @@
+#!/bin/bash
+# Begin libexec/minify-js
+
+set -e
+
+function cleanup() {
+  [ -f "$JS.out" ] || rm -f "$JS.out"
+  [ -f "$JS.original" ] || return "$1"
+  [ "$1" -eq 0 ] \
+      && rm -f "$JS.original" \
+      || mv "$JS"{.original,}
+  return "$1"
+}
+
+function print-help() {
+  echo "${0##*/}: USAGE: ${0##*/} JS" >&2
+}
+
+if [ "$#" -ne 1 ]
+then
+  print-help
+  exit 1
+fi
+
+readonly GREP="${GREP:=grep}"
+readonly SED="${SED:=sed}"
+readonly JS="$1"
+trap 'cleanup 0' 0
+trap 'cleanup 1' 1 2 3 15
+
+sed -i.original \
+    -e '/^[ \t]*$/d' \
+    -e 's/^[ \t]*//' \
+    -e 's/[ \t]*$//' \
+    -e 's%[ \t]*//.*$%%g' \
+    "$JS"
+
+readonly FIRST_LINE="$(head -1 "$JS")"
+if "$GREP" -sqm1 'use strict' <<< "$FIRST_LINE"
+then
+  echo "$FIRST_LINE" > "$JS.out"
+  "$SED" -n '2,$p' "$JS" | "$SED" -z 's/\n//g' >> "$JS.out"
+  mv "$JS.out" "$JS"
+else
+  "$SED" -zi 's/\n//g' "$JS"
+fi
+
+# End libexec/minify-js
