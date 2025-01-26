@@ -1,0 +1,105 @@
+<html lang="ja">
+<head>
+<title>Lから始まるLinux - 7章4話 DHCP設定</title>
+<base href="../..">
+<meta charset="utf-8">
+<meta name="author" content="Hironobu Nagaya">
+<meta name="robots" content="all">
+<meta name="keywords" content="Lから始まるLinux,Linux starts with L,linux,Raspberry Pi,DHCP">
+<meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+<meta name="format-detection" content="telephone=no, email=no, address=no" />
+<link rel="prev" href="7/3/" />
+<link rel="next" href="7/5/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/normalize.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/story.css" type="text/css">
+</head>
+<body>
+<header>
+<h1>Lから始まるLinux</h1>
+<div class="relation">
+<div>
+<div>前</div>
+<div>7章3話</div>
+<div><a href="7/3/">Raspberry Pi OS</a></div>
+</div>
+<div>
+<div>今</div>
+<div>7章4話 DHCP設定</div>
+<div><a href=".">もくじ</a></div>
+</div>
+<div>
+<div>次</div>
+<div>7章5話</div>
+<div><a href="7/5/">ローカライズ</a></div>
+</div>
+</div>
+</header>
+<main>
+<section>
+<article class="header1"><span>DHCP設定</span></article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>お兄ちゃん！</span></span>
+<span><span>Raspberry Pi を起動するたびに</span></span>
+<span><span>IP アドレスが変わるんだ</span></span>
+<span><span>いつも同じ IP アドレスを</span></span>
+<span><span>使うことってできないのかな？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>もちろんできるよ！</span></span>
+<span><span>今回は<wbr>「DHCP</span></span>
+<span><span>(Dynamic Host Configuration Protocol)」<wbr></span></span>
+<span><span>の設定を行おう！</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/midori.svg" alt="若木 みどり" /></div>
+<div>
+<span><span>DHCP？</span></span>
+</div>
+</article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>ネットワーク機器に</span></span>
+<span><span>IP アドレスを割り当てる仕組みだよ</span></span>
+<span><span>これを設定して Raspberry Pi に</span></span>
+<span><span>いつも同じ IP アドレスを</span></span>
+<span><span>割り当てるようにできるんだ</span></span>
+</div>
+</article>
+<article class="header2"><span>MAC アドレス確認</span></article>
+<article class="talk">
+<div><img src="img/shigeru.svg" alt="若木 しげる" /></div>
+<div>
+<span><span>最初に Raspberry Pi の</span></span>
+<span><span>ネットワークデバイスを確認しよう</span></span>
+<span><span>以下を入力してみてね</span></span>
+</div>
+</article>
+<article class="code"><pre><code class="bash">ip <wbr>address <wbr>show
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span></div></article><article class="code"><pre><code class="console">1: <wbr>lo: <wbr>&lt;LOOPBACK,UP,LOWER_UP&gt; <wbr>mtu <wbr>65536 <wbr>qdisc <wbr>noqueue <wbr>state <wbr>UNKNOWN <wbr>group <wbr>default <wbr>qlen <wbr>1000
+    <wbr>link/loopback <wbr>00:00:00:00:00:00 <wbr>brd <wbr>00:00:00:00:00:00
+    <wbr>inet <wbr>127.0.0.1/8 <wbr>scope <wbr>host <wbr>lo
+       <wbr>valid_lft <wbr>forever <wbr>preferred_lft <wbr>forever
+    <wbr>inet6 <wbr>::1/128 <wbr>scope <wbr>host <wbr>noprefixroute
+       <wbr>valid_lft <wbr>forever <wbr>preferred_lft <wbr>forever
+2: <wbr>eth0: <wbr>&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; <wbr>mtu <wbr>1500 <wbr>qdisc <wbr>mq <wbr>state <wbr>UP <wbr>group <wbr>default <wbr>qlen <wbr>1000
+    <wbr>link/ether <wbr>12:34:56:78:90:ab <wbr>brd <wbr>ff:ff:ff:ff:ff:ff
+    <wbr>inet <wbr>192.168.0.100/24 <wbr>brd <wbr>192.168.0.255 <wbr>scope <wbr>global <wbr>dynamic <wbr>noprefixroute <wbr>eth0
+       <wbr>valid_lft <wbr>43376sec <wbr>preferred_lft <wbr>43376sec
+    <wbr>inet6 <wbr>240b:13:a120:1800:2e9b:cfb5:c0a7:7050/64 <wbr>scope <wbr>global <wbr>dynamic <wbr>noprefixroute
+       <wbr>valid_lft <wbr>279sec <wbr>preferred_lft <wbr>279sec
+    <wbr>inet6 <wbr>fe80::207:878:e024:218a/64 <wbr>scope <wbr>link <wbr>noprefixroute
+       <wbr>valid_lft <wbr>forever <wbr>preferred_lft <wbr>forever
+3: <wbr>wlan0: <wbr>&lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; <wbr>mtu <wbr>1500 <wbr>qdisc <wbr>pfifo_fast <wbr>state <wbr>DOWN <wbr>group <wbr>default <wbr>qlen <wbr>1000
+    <wbr>link/ether <wbr>34:56:78:90:ab:cd <wbr>brd <wbr>ff:ff:ff:ff:ff:ff
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>いっぱい情報が</span></span><span><span>出てきたね</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>これは Raspberry Pi の</span></span><span><span>ネットワークデバイス情報だよ</span></span><span><span>項目別に別れているので</span></span><span><span>自分の必要な所を見よう</span></span></div></article><article class="table"><table><thead><tr><th><span>ネットワークデバイス</span></th><th><span>用途</span></th></tr></thead><tbody><tr><td><code>lo</code></td><td><span>ループバック(今回は無関係)</span></td></tr><tr><td><code>eth0</code></td><td><span>有線(Ethernet)</span></td></tr><tr><td><code>wlan0</code></td><td><span>無線(Wi-Fi)</span></td></tr></tbody></table></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>有線のつもりだから</span></span><span><code>2: eth0</code><span> を見るね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><code>link/ether</code><span> という</span></span><span><span>項目があるはずだよ</span></span><span><span>その直後にある</span></span><span><span>英数字とコロンが並んだ</span></span><span><span>文字列を探そう</span></span></div></article><article class="code"><pre><code class="console">    <wbr>link/ether <wbr>12:34:56:78:90:ab <wbr>brd <wbr>ff:ff:ff:ff:ff:ff
+</code></pre></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><code>12:34:56:78:90:ab</code><span> だね！</span></span><span><span>これは何を表しているのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span><wbr>「MAC アドレス」<wbr>という</span></span><span><span>ネットワーク機器を</span></span><span><span>識別するための番号だよ</span></span><span><span>このアドレスを元にルータが</span></span><span><span>Raspberry Pi を識別しているんだ</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>わかった！</span></span><span><span>メモしておくね</span></span></div></article><article class="header2"><span>DHCP 固定割り当て</span></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>自宅ネットワークでの</span></span><span><span>IP アドレス割り当ては</span></span><span><span>ほとんどの場合ルータが行っているよ</span></span><span><span>今度は自宅のルータの設定に進もう</span></span><span><span><wbr>「DHCP 固定割り当て」<wbr>や</span></span><span><span><wbr>「アドレス予約」<wbr>のような</span></span><span><span>項目を探してそこを開いてみよう！</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>あっ、<wbr>見つけた！</span></span><span><span>MAC アドレスと</span></span><span><span>IP アドレスを設定できるね！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>そこにさっきの</span></span><span><span>MAC アドレスと</span></span><span><span>固定で割り当てたい</span></span><span><span>IP アドレスを指定しよう</span></span></div></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>うん！</span></span><span><span>設定したけど</span></span><span><span>すぐに使えるように</span></span><span><span>なるのかな？</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>場合によっては</span></span><span><span>ルーターや Raspberry Pi を</span></span><span><span>再起動する必要があるよ</span></span><span><span>設定が反映されない時は</span></span><span><span>これらを再起動してみよう</span></span></div></article><article class="header2"><span>まとめ</span></article><article class="talk"><div><img src="img/midori.svg" alt="若木 みどり" /></div><div><span><span>今回は Raspberry Pi に</span></span><span><span>固定の IP アドレスが</span></span><span><span>割り当てられるよう設定したよ！</span></span><span><span>DHCP を使って</span></span><span><span>そのよう設定できるんだ！</span></span></div></article><article class="talk"><div><img src="img/shigeru.svg" alt="若木 しげる" /></div><div><span><span>IP アドレスが変わると</span></span><span><span>SSH 接続設定を接続のたびに</span></span><span><span>変更しないといけなくなるんだ</span></span><span><span>リモート接続で使うつもりなら</span></span><span><span>固定の IP アドレスが</span></span><span><span>割り当てられるようにしよう！</span></span></div></article></section></main><footer><div class="relation"><div><div>前</div><div>7章3話</div><div><a href="7/3/">Raspberry Pi OS</a></div></div><div><div>今</div><div>7章4話 DHCP設定</div><div><a href=".">もくじ</a></div></div><div><div>次</div><div>7章5話</div><div><a href="7/5/">ローカライズ</a></div></div></div></footer><script src="js/jquery.js"></script><script src="js/common.js"></script></body></html>
