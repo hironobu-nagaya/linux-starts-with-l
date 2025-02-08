@@ -141,7 +141,7 @@ ls -l
   実行権限が付いていれば良いんだね！
 
 ```bash
--rwxr-xr-x 1 hironobu hironobu 104 Jan  3 19:10 omikuji
+-rwxr-xr-x 1 midori midori 104 Jan  3 19:10 omikuji
 ```
 
 みどり（通常）：
