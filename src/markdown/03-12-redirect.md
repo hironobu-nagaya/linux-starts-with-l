@@ -1,13 +1,13 @@
 chapter=3
-story=13
+story=12
 title=制御文とリダイレクト
 keyword=shell script
 keyword=control statement
 keyword=redirect
-prev=3/12/
-prev-title=exitコマンド
-next=3/14/
-next-title=ヌルコマンド
+prev=3/11/
+prev-title=while文(実践)
+next=3/13/
+next-title=exitコマンド
 
 # 制御文とリダイレクト
 
