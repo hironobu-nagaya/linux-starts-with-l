@@ -4,7 +4,7 @@ title=ヌルコマンド
 keyword=shell script
 keyword=null command
 prev=3/13/
-prev-title=制御文とリダイレクト
+prev-title=exitコマンド
 next=3/15/
 next-title=引数処理
 
