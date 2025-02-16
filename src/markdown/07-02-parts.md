@@ -30,10 +30,10 @@ next-title=Raspberry Pi OS
 
 モデル                                                                            | CPU(コア数) | メモリ       | USB 端子                 | HDMI 端子     | 有線速度 | 無線LAN周波数 | 電源端子   | 電源要求 | 他の特徴
 --------------------------------------------------------------------------------- | ----------- | ------------ | ------------------------ | ------------- | -------- | ------------- | ---------- | -------- | --------
-[Raspberry Pi 3B](https://raspberrypi.com/products/raspberry-pi-3-model-b/)       | 1.2GHz x 4  | 1GB          | USB 2.0 x 4              | HDMI x 1      | 100Mbps  | 2.4GHz        | microUSB   | 5V 2.5A  | 低発熱・低消費電力
-[Raspberry Pi 3B+](https://raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | 1.4GHz x 4  | 1GB          | USB 2.0 x 4              | HDMI x 1      | 300Mbps  | 2.4GHz / 5GHz | microUSB   | 5V 2.5A  | 3B より発熱や消費電力が微増
-[Raspberry Pi 4B](https://raspberrypi.com/products/raspberry-pi-4-model-b/)       | 1.8GHz x 4  | 1/2/4/8GB    | USB 2.0 x 2, USB 3.0 x 2 | microHDMI x 2 | 1Gbps    | 2.4GHz / 5GHz | USB Type-C | 5V 3A    | 性能と発熱が程よいバランス
-[Raspberry Pi 5](https://raspberrypi.com/products/raspberry-pi-5/)                | 2.4GHz x 4  | 1/2/4/8/16GB | USB 2.0 x 2, USB 3.0 x 2 | microHDMI x 2 | 1Gbps    | 2.4GHz / 5GHz | USB Type-C | 5V 5A    | 高性能・高発熱、PCI Express 端子
+[Raspberry Pi 3B](https://raspberrypi.com/products/raspberry-pi-3-model-b/)       | 1.2GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | 100Mbps  | 2.4GHz        | microUSB   | 5V 2.5A  | 低発熱・低消費電力
+[Raspberry Pi 3B+](https://raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | 1.4GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | 300Mbps  | 2.4GHz / 5GHz | microUSB   | 5V 2.5A  | 3B より発熱や消費電力が微増
+[Raspberry Pi 4B](https://raspberrypi.com/products/raspberry-pi-4-model-b/)       | 1.8GHz × 4  | 1/2/4/8GB    | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | 1Gbps    | 2.4GHz / 5GHz | USB Type-C | 5V 3A    | 性能と発熱が程よいバランス
+[Raspberry Pi 5](https://raspberrypi.com/products/raspberry-pi-5/)                | 2.4GHz × 4  | 1/2/4/8/16GB | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | 1Gbps    | 2.4GHz / 5GHz | USB Type-C | 5V 5A    | 高性能・高発熱、PCI Express 端子
 
 みどり（通常）：
   発熱の話があるけどどのぐらいの発熱なの？
@@ -43,9 +43,9 @@ next-title=Raspberry Pi OS
 
 モデル               | 発熱状況
 -------------------- | --------
-Raspberry Pi 3B, 3B+ | ヒートシンク不要
+Raspberry Pi 3B, 3B+ | ヒートシンクがあれば良いが無くても十分
 Raspberry Pi 4B      | 放熱がしっかりしていればファンレス可能
-Raspberry Pi 5       | 冷却しないと性能を発揮できない
+Raspberry Pi 5       | ファンが無いと不安
 
 しげる（通常）：
   Raspberry Pi の上限温度は 85 ℃だよ
@@ -57,7 +57,7 @@ Raspberry Pi 5       | 冷却しないと性能を発揮できない
   また Raspberry Pi 5 からアクティブクーラが使えるよ
 みどり（通常）：
   温度によってファンの速度をコントロールするやつだよね！
-  負荷が少ないときに静かに運用できるのは嬉しいなぁ！
+  負荷が少ないときに静かに運用できるのは嬉しいなぁ
 
 ## ケース
 
@@ -88,8 +88,9 @@ Rapberry Pi 4B, 5    | USB Type-C
 しげる（通常）：
   Raspberry Pi 4 までならそれで十分動く見込みがあるよ
 しげる（通常）：
-  Raspberry Pi 5 は 5V 5A という特殊な電源を要求するんだ
-  専用電源アダプタも一緒に用意しよう
+  Raspberry Pi 5 は 5V 5A という特殊な電源を要求するよ
+  アンペア数が定格より低くても動作はするけど制限があったり不安定になったりするんだ
+  可能であれば専用電源アダプタも一緒に用意しよう
 
 ## microSD カード
 
