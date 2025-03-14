@@ -25,7 +25,8 @@ Lから始まるLinux
 ビルド
 ------
 
-[linux-starts-with-l/bin/markdown2html](https://github.com/hironobu-nagaya/linux-starts-with-l/blob/main/bin/markdown2html) を実行すると linux-starts-with-l/src/marcdown 配下の Markdown ファイルから HTML を生成します。  
+[linux-starts-with-l/bin/markdown2html](https://github.com/hironobu-nagaya/linux-starts-with-l/blob/main/bin/markdown2html) を実行すると  
+[linux-starts-with-l/src/marcdown](https://github.com/hironobu-nagaya/linux-starts-with-l/tree/main/src/markdown) 配下の Markdown から HTML を生成します。  
 生成された HTML の出力先は `DEST_DIR` で指定可能です。  
 指定がなければ linux-starts-with-l/dest となります。
 
