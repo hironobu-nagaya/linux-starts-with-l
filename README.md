@@ -22,3 +22,10 @@ Lから始まるLinux
 * 本連載に登場する製品名などは、一般に各社の商標または登録商標です
 * 本連載に、 ™, ©, ® などの記号は記載していません
 
+ビルド
+------
+
+[linux-starts-with-l/bin/markdown2html](https://github.com/hironobu-nagaya/linux-starts-with-l/blob/main/bin/markdown2html) を実行すると linux-starts-with-l/src/marcdown 配下の Markdown ファイルから HTML を生成します。  
+生成された HTML の出力先は `DEST_DIR` で指定可能です。  
+指定がなければ linux-starts-with-l/dest となります。
+
