@@ -7,6 +7,8 @@ prev=2/54/
 prev-title=バイナリ関連コマンド
 next=2/56/
 next-title=数学関連コマンド
+javascripts=jquery.js
+javascripts=timedate.js
 
 # 日時関連コマンド
 
@@ -41,7 +43,7 @@ cal
   いつも確認するわけじゃないけど
   確認できないと不便だよね！
 
-```console
+```bash calendar
     December 2024   
 Su Mo Tu We Th Fr Sa
  1  2  3  4  5 !start-class-revert! 6!end!  7
@@ -69,7 +71,7 @@ date [オプション]... [+書式]
   日付も確認できるのなら
   時間も確認したいよね！
 
-```console
+```bash date
 Thu Dec 26 17:42:52 JST 2024
 ```
 
@@ -85,7 +87,8 @@ man date
 ```
 
 みどり（通常）：
-  書式を指定できると何が嬉しいの？
+  書式を指定できると
+  どんなことができるのかな？
 しげる（通常）：
   ファイル名に日付を含めたい場合などに便利なんだ
   例えば以下のような感じだよ
@@ -96,10 +99,10 @@ touch "backup-$(date +%Y%m%d)"
 
 みどり（通常）：
   どれどれ？
-みどり（通常）：
+みどり（驚き）：
   おおっ！
-  `backup-20241226` というファイルができたよ！
-  こういう使い方もあるんだね！
+  `backup-!start-id-date-suffix!20241226!end!` というファイルができたよ！
+  末尾に本日(!start-id-today!2024年12月26日!end!)を表す数字が付くんだね！
 
 ## まとめ
 

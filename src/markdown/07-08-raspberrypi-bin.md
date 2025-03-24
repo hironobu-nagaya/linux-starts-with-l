@@ -21,7 +21,8 @@ next-title=ウォッチドッグ
 ## モデル確認
 
 しげる（通常）：
-  Raspberry Pi のモデル情報は `/proc/device-tree/model` にあるよ
+  Raspberry Pi のモデル情報は
+  `/proc/device-tree/model` にあるよ
   このファイルでモデルを確認できるんだ
 
 ```bash
@@ -36,29 +37,32 @@ cat /proc/device-tree/model
 Raspberry Pi 5 Model B Rev 1.0
 ```
 
-みどり（通常）：
-  Raspberry Pi を何台も動かしている場合に便利そうだね！
-
 ## `raspi-config` コマンド
 
 しげる（通常）：
-  `raspi-config` は Raspberry Pi の各種設定を簡単に行えるようにした公式ツールだよ
-  `root` ユーザで実行する必要があるから以下のように実行しよう
+  `raspi-config` は Raspberry Pi の各種設定を
+  簡単に行えるようにした公式ツールだよ
+  `root` ユーザで実行する必要があるから
+  以下のように実行しよう
 
 ```bash
 sudo raspi-config
 ```
 
 みどり（通常）：
-  Raspberry Pi Imager のカスタマイズで行ったような設定のほかさまざまな設定項目があるね
+  Raspberry Pi Imager のカスタマイズで
+  行ったような設定のほか
+  さまざまな設定項目があるね
 しげる（通常）：
-  このコマンド1つで Raspberry Pi の基本的な設定が全てできるんだ
+  このコマンド1つで Raspberry Pi の
+  基本的な設定が全てできるんだ
 
 ## `vcgencmd` コマンド
 
 しげる（通常）：
   `vcgencmd` は Raspberry Pi のハードウェア情報を取得するよ
-  `libraspberrypi-bin` パッケージに含まれているのでコマンドが見つからなければインストールしよう
+  `libraspberrypi-bin` パッケージに含まれているので
+  コマンドが見つからなければインストールしよう
 
 ```bash
 sudo apt install -y libraspberrypi-bin

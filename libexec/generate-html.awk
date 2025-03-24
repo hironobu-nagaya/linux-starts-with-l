@@ -173,8 +173,8 @@ function draw_ordered_list(content) {
   print "</article>"
 }
 
-function draw_code(content) {
-  print "<article class=\"code\"><pre><code>" replace_code(sanitize(content[1]))
+function draw_code(content, code) {
+  print "<article class=\"code\"><pre><code class=\"" code "\">" replace_code(sanitize(content[1]))
   for (i = 2; i <= length(content); i++) {
     print replace_code(sanitize(content[i]))
   }
@@ -247,7 +247,7 @@ BEGIN {
   } else if (/^```/) {
     switch(state) {
       case "code":
-        draw_code(content)
+        draw_code(content, code)
         state = "body"
         break
       case "head":
@@ -255,6 +255,7 @@ BEGIN {
         start_body(rel_prev, prev_chapter, prev_story, prev_title, chapter, story, title, rel_next, next_chapter, next_story, next_title)
       case "body":
         state = "code"
+        code = gensub(/^```(.*)$/, "\\1", 1, $0)
         split("", content)
         break
       case "unordered-list":
