@@ -1,11 +1,11 @@
 chapter=6
-story=11
+story=12
 title=sysstat
 keyword=resource
 keyword=sysstat
-prev=6/10/
+prev=6/11/
 prev-title=systemd-timesyncd
-next=6/12/
+next=6/13/
 next-title=smartmontools
 
 # `sysstat`

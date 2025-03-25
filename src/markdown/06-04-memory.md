@@ -1,12 +1,12 @@
 chapter=6
-story=3
+story=4
 title=メモリ
 keyword=memory
 keyword=free
 keyword=vmstat
-prev=6/2/
+prev=6/3/
 prev-title=CPU
-next=6/4/
+next=6/5/
 next-title=ストレージ
 
 # メモリ

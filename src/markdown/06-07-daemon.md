@@ -1,12 +1,12 @@
 chapter=6
-story=6
+story=7
 title=デーモン
 keyword=daemon
 keyword=systemd
 keyword=systemctl
-prev=6/5/
+prev=6/6/
 prev-title=ポート
-next=6/7/
+next=6/8/
 next-title=ログ
 
 # デーモン

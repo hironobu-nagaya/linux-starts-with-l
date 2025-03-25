@@ -1,9 +1,9 @@
 chapter=6
-story=17
+story=18
 title=S-nail
 keyword=S-nail
 keyword=MUA
-prev=6/16/
+prev=6/17/
 prev-title=Postfix
 next=7/1/
 next-title=Raspberry Pi

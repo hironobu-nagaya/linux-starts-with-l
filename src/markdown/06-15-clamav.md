@@ -1,5 +1,5 @@
 chapter=6
-story=14
+story=15
 title=ClamAV
 keyword=daemon
 keyword=ClamAV
@@ -8,9 +8,9 @@ keyword=freshclam
 keyword=clamdscan
 keyword=clamscan
 keyword=Eicar
-prev=6/13/
+prev=6/14/
 prev-title=Samba
-next=6/15/
+next=6/16/
 next-title=Apache HTTP Server
 
 # ClamAV

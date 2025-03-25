@@ -1,12 +1,12 @@
 chapter=6
-story=16
+story=17
 title=Postfix
 keyword=daemon
 keyword=Postfix
 keyword=MTA
-prev=6/15/
+prev=6/16/
 prev-title=Apache HTTP Server
-next=6/17/
+next=6/18/
 next-title=S-nail
 
 # Postfix
