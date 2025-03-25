@@ -1,12 +1,12 @@
 chapter=6
-story=10
+story=11
 title=systemd-timesyncd
 keyword=daemon
 keyword=systemd-timesyncd
 keyword=timedatectl
-prev=6/9/
+prev=6/10/
 prev-title=/runディレクトリ
-next=6/11/
+next=6/12/
 next-title=sysstat
 
 # `systemd-timesyncd`

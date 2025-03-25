@@ -1,12 +1,12 @@
 chapter=6
-story=4
+story=5
 title=ストレージ
 keyword=storage
 keyword=df
 keyword=du
-prev=6/3/
+prev=6/4/
 prev-title=メモリ
-next=6/5/
+next=6/6/
 next-title=ポート
 
 # ストレージ

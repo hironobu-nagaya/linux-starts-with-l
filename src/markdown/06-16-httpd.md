@@ -1,13 +1,13 @@
 chapter=6
-story=15
+story=16
 title=Apache HTTP Server
 keyword=daemon
 keyword=Apache HTTP Server
 keyword=apache2
 keyword=httpd
-prev=6/14/
+prev=6/15/
 prev-title=ClamAV
-next=6/16/
+next=6/17/
 next-title=Postfix
 
 # Apache HTTP Server

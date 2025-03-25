@@ -8,7 +8,7 @@ keyword=storage
 prev=5/25/
 prev-title=BOINC
 next=6/2/
-next-title=CPU
+next-title=アーキテクチャ
 
 # リソース
 

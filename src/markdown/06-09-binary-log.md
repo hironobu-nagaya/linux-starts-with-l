@@ -1,14 +1,14 @@
 chapter=6
-story=8
+story=9
 title=バイナリログ
 keyword=log
 keyword=last
 keyword=lastlog
 keyword=lastb
 keyword=dmesg
-prev=6/7/
+prev=6/8/
 prev-title=ログ
-next=6/9/
+next=6/10/
 next-title=/runディレクトリ
 
 # バイナリログ

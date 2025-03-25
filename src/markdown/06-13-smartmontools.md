@@ -1,13 +1,13 @@
 chapter=6
-story=12
+story=13
 title=smartmontools
 keyword=daemon
 keyword=S.M.A.R.T
 keyword=smartmontools
 keyword=smartctl
-prev=6/11/
+prev=6/12/
 prev-title=sysstat
-next=6/13/
+next=6/14/
 next-title=Samba
 
 # smartmontools

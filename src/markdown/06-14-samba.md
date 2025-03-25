@@ -1,11 +1,11 @@
 chapter=6
-story=13
+story=14
 title=Samba
 keyword=daemon
 keyword=Samba
-prev=6/12/
+prev=6/13/
 prev-title=smartmontools
-next=6/14/
+next=6/15/
 next-title=ClamAV
 
 # Samba
