@@ -6,6 +6,7 @@ prev=6/17/
 prev-title=S-nail
 next=7/2/
 next-title=Raspberry Pi に必要な部品
+stylesheets=raspberry-pi.css
 
 # Raspberry Pi
 
