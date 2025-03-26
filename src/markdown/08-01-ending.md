@@ -104,7 +104,7 @@ next-title=
 言語                                  | 方式         | 特徴
 ------------------------------------- | ------------ | ----
 [Python](https://www.python.org/)     | インタプリタ | 標準的に導入されている場合が多い、機械学習や深層学習に強い
-[Java](https://www.java.com/ja/)      | コンパイラ   | ほとんど OS で同じように動かせる
+[Java](https://www.java.com/ja/)      | コンパイラ   | ほとんどの OS やアーキテクチャで実行できる
 [Ruby](https://www.ruby-lang.org/ja/) | インタプリタ | 書きやすい
 [PHP](https://www.php.net/)           | インタプリタ | Webアプリケーションに強い
 [Perl](https://www.perl.org/)         | インタプリタ | ほとんどの Linux に標準的に導入されている、正規表現に強い
