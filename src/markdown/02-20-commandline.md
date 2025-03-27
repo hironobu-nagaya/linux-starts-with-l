@@ -13,10 +13,13 @@ next-title=オプション
 # コマンドライン
 
 しげる（通常）：
-  今回はいつも入力しているコマンドを詳しく見ていこう！
+  今回はいつも入力している
+  コマンドを詳しく見ていこう！
 みどり（通常）：
-  実行して動いてくれたらそれ以上はあまり意識しないよね
-  ちゃんと「コマンド」を見直すのは大事だと思う！
+  実行して動いてくれたら
+  それ以上はあまり意識しないよね
+  ちゃんと「コマンド」を見直すのは
+  大事だと思う！
 
 ## 構造
 
@@ -86,9 +89,9 @@ touch very-long-name-diary very-long-name-poet very-long-name-memo
 
 ```bash
 touch \
-  very-long-name-diary \
-  very-long-name-poet \
-  very-long-name-memo
+    very-long-name-diary \
+    very-long-name-poet \
+    very-long-name-memo
 ```
 
 みどり（驚き）：

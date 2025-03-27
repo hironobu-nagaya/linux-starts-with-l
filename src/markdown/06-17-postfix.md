@@ -17,7 +17,8 @@ next-title=S-nail
   自分でメールの運営もできるの？
 しげる（通常）：
   もちろん！
-  そのようなメールサーバプログラムを「MTA(mail transfer agent)」というよ
+  そのようなメールサーバプログラムを
+  「MTA(mail transfer agent)」というよ
   今回は代表的な MTA である [Postfix](https://www.postfix.org/) を扱おう！
 
 ## インストール
@@ -37,7 +38,8 @@ sudo apt install -y postfix
 ## 設定
 
 しげる（通常）：
-  今回は Postfix をこの Linux 上だけで動くよう設定するよ
+  今回は Postfix をこの Linux 上だけで
+  動くよう設定するよ
 みどり（通常）：
   Linux 上だけで動くメールサーバ…
   どんなふうに使うのかな？

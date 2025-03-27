@@ -46,7 +46,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    const year = now.getFullYear().toString();
     const weekday = new Intl.DateTimeFormat('en-US', {
         weekday: 'short'
     }).format(now);
@@ -58,9 +57,13 @@ $(document).ready(function() {
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const seconds = now.getSeconds().toString().padStart(2, '0');
     const timezone = 'JST';
-    const dateOutput = weekday + ' ' + monthName + ' ' + date
+    const year = now.getFullYear().toString();
+    const dateOutput = weekday
+        + ' ' + monthName
+        + ' ' + date
         + ' ' + hours + ':' + minutes + ':' + seconds
-        + ' ' + timezone + ' ' + year;
+        + ' ' + timezone
+        + ' ' + year;
     $('.date').text(dateOutput);
 });
 
