@@ -36,6 +36,11 @@ article.talk > *:first-child {
   align-content: center;
 }
 
+article.talk > *:first-child img {
+  width: 128px;
+  height: 128px;
+}
+
 article.talk > *:last-child {
   display: flex;
   flex-direction: column;

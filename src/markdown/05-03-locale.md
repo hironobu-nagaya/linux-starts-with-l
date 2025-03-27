@@ -7,6 +7,8 @@ prev=5/2/
 prev-title=エイリアス
 next=5/4/
 next-title=dircolorsコマンド
+javascripts=jquery.js
+javascripts=locale.js
 
 # ロケール
 
@@ -119,7 +121,7 @@ LC_ALL=
 LC_TIME=ja_JP.utf8 date
 ```
 
-```console
+```console ja-date
 2025年  1月 15日 水曜日 17:49:32 JST
 ```
 
@@ -129,7 +131,7 @@ LC_TIME=ja_JP.utf8 date
 LC_TIME=POSIX date
 ```
 
-```console
+```console date
 Wed Jan 15 17:49:32 JST 2025
 ```
 
