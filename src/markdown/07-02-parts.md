@@ -32,16 +32,18 @@ next-title=Raspberry Pi OS
   入手性の良いものがいいね
   僕のおすすめは以下だよ
 
-モデル                                                                            | CPU(コア数) | メモリ       | USB 端子                 | HDMI 端子     | 電源端子   | 無線LAN周波数 | 他の特徴
---------------------------------------------------------------------------------- | ----------- | ------------ | ------------------------ | ------------- | ---------- | ------------- | --------
-[Raspberry Pi 3B](https://raspberrypi.com/products/raspberry-pi-3-model-b/)       | 1.2GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | microUSB   | 2.4GHz        | 低発熱・低消費電力
-[Raspberry Pi 3B+](https://raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | 1.4GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | microUSB   | 2.4GHz / 5GHz | 3B より発熱や消費電力が微増
-[Raspberry Pi 4B](https://raspberrypi.com/products/raspberry-pi-4-model-b/)       | 1.8GHz × 4  | 1/2/4/8GB    | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | USB Type-C | 2.4GHz / 5GHz | 性能と発熱が程よいバランス
-[Raspberry Pi 5](https://raspberrypi.com/products/raspberry-pi-5/)                | 2.4GHz × 4  | 1/2/4/8/16GB | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | USB Type-C | 2.4GHz / 5GHz | 高性能・高発熱、PCI Express 端子
+モデル                                                                            | CPU(コア数) | メモリ       | USB 端子                 | HDMI 端子     | 電源端子   | 無線LAN周波数
+--------------------------------------------------------------------------------- | ----------- | ------------ | ------------------------ | ------------- | ---------- | -------------
+[Raspberry Pi 3B](https://raspberrypi.com/products/raspberry-pi-3-model-b/)       | 1.2GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | microUSB   | 2.4GHz
+[Raspberry Pi 3B+](https://raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | 1.4GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | microUSB   | 2.4GHz / 5GHz
+[Raspberry Pi 4B](https://raspberrypi.com/products/raspberry-pi-4-model-b/)       | 1.8GHz × 4  | 1/2/4/8GB    | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | USB Type-C | 2.4GHz / 5GHz
+[Raspberry Pi 5](https://raspberrypi.com/products/raspberry-pi-5/)                | 2.4GHz × 4  | 1/2/4/8/16GB | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | USB Type-C | 2.4GHz / 5GHz
 
 みどり（通常）：
-  発熱の話があるけど…
-  どのぐらいの発熱なの？
+  コンピュータである以上
+  発熱があると思うんだけど
+  どのぐらいの発熱なのかな？
+  ファンとかは必要？
 しげる（通常）：
   あくまで僕の印象で
   環境や用途によっても変わるよ
@@ -160,7 +162,8 @@ Raspberry Pi 4B, 5 | Gigabit Ethernet              | 1Gbps
 ## HDMI ケーブル、ディスプレイ
 
 しげる（通常）：
-  ディスプレイ接続するなら HDMI ケーブルが必要だよ
+  ディスプレイ接続するなら
+  HDMI ケーブルが必要だよ
   モデルごとに端子が違うから注意してね！
 
 モデル               | HDMI 端子
@@ -204,6 +207,39 @@ Raspberry Pi 4B, 5   | microHDMI × 2
   USB に対応機器を接続してもいいよ
   Raspberry Pi 用の「DAC(digital to analog converter)」基板もあるんだ
 
+## PCI Express ボード(Raspberry Pi 5)
+
+しげる（通常）：
+  Raspberry Pi 5 から
+  PCI Express 端子が追加されたんだ
+みどり（通常）：
+  PC に追加基板を繋ぐための
+  インタフェースだね！
+しげる（通常）：
+  Raspberry Pi の小さな
+  基板上に収めるために
+  端子が専用規格なんだ
+  なので PC 用のパーツが
+  そのまま使える訳ではないよ
+みどり（通常）：
+  Raspberry Pi 用の
+  PCI Express 端子を持った
+  パーツを買う必要があるんだね
+  どんなものがあるの？
+しげる（通常）：
+  NVMe SSD 拡張ボードや
+  AI 処理専用チップなどがあるよ
+しげる（通常）：
+  必須では無いけど
+  追加基板を接続することで
+  機能を追加できるんだ
+しげる（通常）：
+  特に NVMe SSD はブート可能な上
+  microSD カードよりも高速に動作し
+  S.M.A.R.T 等の機能も使えるので
+  NVMe SSD 拡張ボードを
+  選んでいる人が多い印象だよ
+
 ## まとめ
 
 みどり（通常）：
@@ -212,7 +248,10 @@ Raspberry Pi 4B, 5   | microHDMI × 2
   Raspberry Pi 本体だけじゃなく
   他にも色々必要なんだね！
 しげる（通常）：
-  Raspberry Pi を動かすまでに初期費用が掛かるよ
-  でも一度そろえれば追加の出費はほとんどないんだ
-  これで Raspberry Pi を動かす準備ができたよ！
+  Raspberry Pi を動かすまでに
+  初期費用が掛かるよ
+  でも一度そろえれば
+  追加の出費はほとんどないんだ
+  これで Raspberry Pi を
+  動かす準備ができたよ！
 
