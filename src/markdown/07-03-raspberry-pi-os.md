@@ -138,7 +138,8 @@ SSH 有効化 | リモート接続
 ## まとめ
 
 みどり（通常）：
-  今回は microSD に Raspberry Pi OS を書き込んで
+  今回は microSD に
+  Raspberry Pi OS を書き込んで
   Raspberry Pi を動かしたよ！
   これから何しようかな？！
 しげる（通常）：

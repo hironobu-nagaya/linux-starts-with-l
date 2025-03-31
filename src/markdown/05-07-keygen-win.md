@@ -22,7 +22,8 @@ next-title=SSH鍵生成(macOS,Linux)
 ## PuTTY
 
 しげる（通常）：
-  Windows の場合「ターミナル」や「Windows PowerShell」のかわりに「ターミナルエミュレータ」を使うと便利だよ
+  Windows の場合「ターミナル」や「Windows PowerShell」のかわりに
+  「ターミナルエミュレータ」を使うと便利だよ
   リモート接続先の端末画面を再現してくれるソフトウェアなんだ
 みどり（通常）：
   へぇ…
@@ -111,7 +112,8 @@ next-title=SSH鍵生成(macOS,Linux)
   2つの鍵がちゃんと保存されるまでは PuTTYgen を閉じないでね
 しげる（通常）：
   最初は「秘密鍵」からだよ
-  「Actions」にある Save the generated key の「Save private key」ボタンを押そう！
+  「Actions」にある Save the generated key の
+  「Save private key」ボタンを押そう！
 みどり（通常）：
   保存ダイアログが出てきたね！
   PuTTY で生成した SSH 秘密鍵の拡張子は `.ppk` なんだ！
@@ -153,7 +155,8 @@ next-title=SSH鍵生成(macOS,Linux)
   今回は PuTTY 付属の PuTTYgen を使って SSH 鍵を生成したよ！
   公開鍵認証でリモート接続するための第一歩なんだ！
 しげる（通常）：
-  PuTTY は日本語に対応していないけど有志がカスタマイズして日本語対応した [PuTTY-ranvis](https://www.ranvis.com/putty) があるよ
+  PuTTY は日本語に対応していないけど
+  有志がカスタマイズして日本語対応した [PuTTY-ranvis](https://www.ranvis.com/putty) があるよ
   また [TeraTerm](https://teratermproject.github.io/) を使うユーザも多いよ
-  国産で日本語対応がしっかりしているのが強みなんだ
+  こちらは国産で日本語対応がしっかりしているのが強みなんだ
 
