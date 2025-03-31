@@ -32,12 +32,12 @@ next-title=Raspberry Pi OS
   入手性の良いものがいいね
   僕のおすすめは以下だよ
 
-モデル                                                                            | CPU(コア数) | メモリ       | USB 端子                 | HDMI 端子     | 有線速度 | 無線LAN周波数 | 電源端子   | 電源要求 | 他の特徴
---------------------------------------------------------------------------------- | ----------- | ------------ | ------------------------ | ------------- | -------- | ------------- | ---------- | -------- | --------
-[Raspberry Pi 3B](https://raspberrypi.com/products/raspberry-pi-3-model-b/)       | 1.2GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | 100Mbps  | 2.4GHz        | microUSB   | 5V 2.5A  | 低発熱・低消費電力
-[Raspberry Pi 3B+](https://raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | 1.4GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | 300Mbps  | 2.4GHz / 5GHz | microUSB   | 5V 2.5A  | 3B より発熱や消費電力が微増
-[Raspberry Pi 4B](https://raspberrypi.com/products/raspberry-pi-4-model-b/)       | 1.8GHz × 4  | 1/2/4/8GB    | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | 1Gbps    | 2.4GHz / 5GHz | USB Type-C | 5V 3A    | 性能と発熱が程よいバランス
-[Raspberry Pi 5](https://raspberrypi.com/products/raspberry-pi-5/)                | 2.4GHz × 4  | 1/2/4/8/16GB | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | 1Gbps    | 2.4GHz / 5GHz | USB Type-C | 5V 5A    | 高性能・高発熱、PCI Express 端子
+モデル                                                                            | CPU(コア数) | メモリ       | USB 端子                 | HDMI 端子     | 電源端子   | 無線LAN周波数 | 他の特徴
+--------------------------------------------------------------------------------- | ----------- | ------------ | ------------------------ | ------------- | ---------- | ------------- | --------
+[Raspberry Pi 3B](https://raspberrypi.com/products/raspberry-pi-3-model-b/)       | 1.2GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | microUSB   | 2.4GHz        | 低発熱・低消費電力
+[Raspberry Pi 3B+](https://raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | 1.4GHz × 4  | 1GB          | USB 2.0 × 4              | HDMI × 1      | microUSB   | 2.4GHz / 5GHz | 3B より発熱や消費電力が微増
+[Raspberry Pi 4B](https://raspberrypi.com/products/raspberry-pi-4-model-b/)       | 1.8GHz × 4  | 1/2/4/8GB    | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | USB Type-C | 2.4GHz / 5GHz | 性能と発熱が程よいバランス
+[Raspberry Pi 5](https://raspberrypi.com/products/raspberry-pi-5/)                | 2.4GHz × 4  | 1/2/4/8/16GB | USB 2.0 × 2, USB 3.0 × 2 | microHDMI × 2 | USB Type-C | 2.4GHz / 5GHz | 高性能・高発熱、PCI Express 端子
 
 みどり（通常）：
   発熱の話があるけど…
@@ -90,10 +90,11 @@ Raspberry Pi 5       | ファンが無いと不安
   USB 端子に電源供給できれば十分だよ
   端子の違いには気をつけよう！
 
-モデル               | 電源端子
--------------------- | --------
-Raspberry Pi 3B, 3B+ | microUSB
-Rapberry Pi 4B, 5    | USB Type-C
+モデル               | 電源端子   | 電源要求
+-------------------- | ---------- | --------
+Raspberry Pi 3B, 3B+ | microUSB   | 5V 2.5A
+Rapberry Pi 4B       | USB Type-C | 5V 3A
+Rapberry Pi 5        | USB Type-C | 5V 5A
 
 みどり（通常）：
   スマートフォン充電に使うような
