@@ -16,8 +16,7 @@ $(document).ready(function() {
     const startDate = new Date()
     startDate.setDate(1);
     const endDate = new Date();
-    endDate.setMonth(endDate.getMonth() + 1);
-    endDate.setDate(0);
+    endDate.setMonth(endDate.getMonth() + 1, 0);
     const start =  1 - startDate.getDay() % 7;
     const end = endDate.getDate();
     const current = now.getDate();
