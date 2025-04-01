@@ -207,39 +207,6 @@ Raspberry Pi 4B, 5   | microHDMI × 2
   USB に対応機器を接続してもいいよ
   Raspberry Pi 用の「DAC(digital to analog converter)」基板もあるんだ
 
-## PCI Express ボード(Raspberry Pi 5)
-
-しげる（通常）：
-  Raspberry Pi 5 から
-  PCI Express 端子が追加されたんだ
-みどり（通常）：
-  PC に追加基板を繋ぐための
-  インタフェースだね！
-しげる（通常）：
-  Raspberry Pi の小さな
-  基板上に収めるために
-  端子が専用規格なんだ
-  なので PC 用のパーツが
-  そのまま使える訳ではないよ
-みどり（通常）：
-  Raspberry Pi 用の
-  PCI Express 端子を持った
-  パーツを買う必要があるんだね
-  どんなものがあるの？
-しげる（通常）：
-  NVMe SSD 拡張ボードや
-  AI 処理専用チップなどがあるよ
-しげる（通常）：
-  必須では無いけど
-  追加基板を接続することで
-  機能を追加できるんだ
-しげる（通常）：
-  特に NVMe SSD はブート可能な上
-  microSD カードよりも高速に動作し
-  S.M.A.R.T 等の機能も使えるので
-  NVMe SSD 拡張ボードを
-  選んでいる人が多い印象だよ
-
 ## まとめ
 
 みどり（通常）：

@@ -179,7 +179,8 @@ From: shigeru@localhost
   以下のようなコマンドはどうかな？
 
 ```bash
-s-nail -H | grep -sqm1 '^[▸ ][NU]' && echo "新着/未読メールがあります！"
+s-nail -H | grep -sqm1 '^[▸ ][NU]' \
+    && echo "新着/未読メールがあります！"
 ```
 
 みどり（通常）：
