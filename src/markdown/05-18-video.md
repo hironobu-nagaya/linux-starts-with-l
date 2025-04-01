@@ -23,8 +23,8 @@ next-title=テキストブラウザ
   …えっ？！
   どういう仕組みなの？！
 しげる（通常）：
-  ライブラリを使って動画を文字に変換して再生するよ
-  今回は [AAlib](https://aa-project.sourceforge.net/aalib/) と [libcaca](http://caca.zoy.org/wiki/libcaca) を紹介しよう
+  ライブラリを使って動画を文字に変換して再生するんだ
+  今回は [AAlib](https://aa-project.sourceforge.net/aalib/) と [libcaca](http://caca.zoy.org/wiki/libcaca) を紹介するね
 
 ## `AAlib` ライブラリ
 
@@ -102,7 +102,8 @@ cacafire
   探してインストールしてみよう！
 しげる（通常）：
   仮想端末を使っている場合
-  フォントを小さくするだけ動画の解像度が上がるよ
+  フォントを小さくするだけ
+  動画の解像度が上がるよ
 みどり（通常）：
   どんな風に再生されるかに興味があるんだけど
   簡単に確認できないかな？

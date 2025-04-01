@@ -12,8 +12,10 @@ next-title=UASP無効化
 
 みどり（通常）：
   お兄ちゃん！
-  Raspbrerry Pi が応答しないと思ったらハングアップしていたんだ！
-  こういう場合に自動で再起動してくれたりすると助かるんだけど…
+  Raspbrerry Pi が応答しないと思ったら
+  ハングアップしていたんだ！
+  こういう場合に自動で再起動して
+  くれたりすると助かるんだけど…
 しげる（通常）：
   実はそういう機能があるんだ！
   「ウォッチドッグ(watchdog)」と呼ばれるよ
@@ -65,7 +67,9 @@ dtparam=watchdog=on
   これは以下で実行できるよ
 
 ```bash
-sudo sed -i.dist '/^\[all\]'/a dtparam=watchdog=on' /boot/firmware/config.txt
+sudo sed -i.dist \
+    '/^\[all\]'/a dtparam=watchdog=on' \
+    /boot/firmware/config.txt
 ```
 
 みどり（通常）：
@@ -135,7 +139,9 @@ RuntimeWatchdogSec=10
   この変更は以下のコマンドで実現可能だよ
 
 ```bash
-sudo sed -i.dist 's/^#\(RuntimeWatchdogSec\)=.*/\1=10/' /etc/systemd/system.conf
+sudo sed -i.dist \
+    's/^#\(RuntimeWatchdogSec\)=.*/\1=10/' \
+    /etc/systemd/system.conf
 ```
 
 みどり（通常）：
@@ -159,7 +165,7 @@ RuntimeWatchdogSec=10
   うん！
   ちゃんと設定があったよ！
 しげる（通常）：
-  後は再起動すればウォッチドッグの仕組みが動き始めるよ！
+  後は再起動すればウォッチドッグが動き始めるよ！
 
 ```bash
 sudo systemctl reboot

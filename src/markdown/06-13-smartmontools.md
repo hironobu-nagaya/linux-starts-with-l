@@ -15,7 +15,8 @@ next-title=Samba
 みどり（通常）：
   お兄ちゃん！
   この前 HDD が故障したんだ！
-  データのバックアップは取っていたけど突然の故障って怖いよね…
+  バックアップは取っていたけど
+  突然の故障って怖いよね…
 しげる（通常）：
   SSD や HDD は自己診断機能を持っているんだ
   これで故障の予兆を知れる場合もあるよ
@@ -24,7 +25,8 @@ next-title=Samba
   サーバの安全稼働のためにもぜひ知りたいよ！
 しげる（通常）：
   その機能を S.M.A.R.T(Self-Monitoring, Analysis and Reporting Technology) と呼ぶんだ
-  ディスクの健康状態の指標を自動収集し故障の予兆があれば知らせてくれるよ
+  ディスクの健康状態の指標を自動収集し
+  故障の予兆があれば知らせてくれるよ
   今回は S.M.A.R.T を扱う[smartmontools](https://www.smartmontools.org) を学ぼう！
 
 ## インストール
@@ -37,13 +39,15 @@ sudo apt install -y smartmontools
 ```
 
 みどり（通常）：
-  パッケージ名さえわかれば簡単にインストールできて楽だね！
+  パッケージ名さえわかれば
+  簡単にインストールできて楽だね！
 
 ## 設定
 
 しげる（通常）：
   設定は `/etc/smartmontools` 配下にあるよ
-  でも基本的な使い方では変更することが無いから気にしなくても大丈夫
+  でも基本的な使い方では変更することが無いから
+  気にしなくても大丈夫
   設定ファイルがあるということだけ覚えておこう
 みどり（通常）：
   デフォルトでよしなに動いてくれる設定になっているんだね！
@@ -51,7 +55,8 @@ sudo apt install -y smartmontools
 ## 起動
 
 しげる（通常）：
-  では `smartmontools` を動かし自動起動を設定しよう
+  では `smartmontools` を動かし
+  自動起動を設定しよう
 
 ```bash
 sudo systemctl enable --now smartmontools
@@ -71,7 +76,8 @@ sudo systemctl status smartmontools
 ## 確認
 
 しげる（通常）：
-  `smartmontools` では `smartd` デーモンが S.M.A.R.T 情報を監視しているよ
+  `smartmontools` では `smartd` デーモンが
+  S.M.A.R.T 情報を監視しているよ
 しげる（通常）：
   `smartctl` は `smartd` 管理ツールだよ
   `smartctl` 経由で S.M.A.R.T 情報を扱えるよ
@@ -83,7 +89,8 @@ smartctl [オプション]... デバイス
 みどり（通常）：
   `systemctl` と `systemd` の関係に似ているね！
 しげる（通常）：
-  まずは S.M.A.R.T 機能を持っているストレージ一覧を確認しよう！
+  まずは S.M.A.R.T 機能を持っている
+  ストレージ一覧を確認しよう！
 
 ```bash
 smartctl --scan
@@ -120,8 +127,10 @@ SMART overall-health self-assessment test result: PASSED
   結果は `PASSED` だったよ！
   簡易診断だけど「問題なし」と出るとちょっと安心だね
 しげる（通常）：
-  もし結果が `FAILED` だったらそのストレージに問題がある可能性が高いんだ
-  すみやかにバックアップを取りそのストレージを入れ替えるのをおすすめするよ
+  もし結果が `FAILED` だったら
+  そのストレージに問題がある可能性が高いんだ
+  すみやかにバックアップを取り
+  ストレージを入れ替えるのをおすすめするよ
 みどり（通常）：
   `FAILED` の原因を調べるにはどうすれば良いのかな？
 しげる（通常）：
@@ -135,8 +144,10 @@ sudo systemctl -a /dev/sda
 
 みどり（通常）：
   今回は `smartmontools` の使い方を学んだよ！
-  SSD や HDD の S.M.A.R.T を `smartd` が監視して `smartctl` 経由で管理するんだ！
+  S.M.A.R.T を `smartd` が監視して
+  `smartctl` 経由で管理するんだ！
 しげる（通常）：
   今回は簡易診断だけの紹介だよ
-  他にも時間が掛かるが詳細な診断ができたり故障の兆候を発見したらメールを送るなどもできるんだ！
+  他にも時間が掛かるが詳細な診断ができたり
+  故障の兆候を発見したらメールを送るなどもできるんだ！
 

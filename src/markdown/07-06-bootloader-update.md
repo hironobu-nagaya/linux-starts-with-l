@@ -40,7 +40,8 @@ rpi-eeprom-update [オプション]...
 ```
 
 しげる（通常）：
-  `rpi-eeprom-update` は `rpi-eeprom` パッケージに含まれているよ
+  `rpi-eeprom-update` は
+  `rpi-eeprom` パッケージに含まれているよ
   もしコマンドが見つからなければインストールしよう！
 
 ```bash
@@ -50,7 +51,8 @@ sudo apt install -y rpi-eeprom
 みどり（通常）：
   `rpi-eeprom-update` を使う準備は OK だよ！
 しげる（通常）：
-  まずはアップデートがあるかどうかを確認しよう
+  まずは `rpi-eeprom-update` を実行しよう
+  アップデートがあるかどうかを確認できるんだ
 
 ```bash
 rpi-eeprom-update
@@ -146,6 +148,7 @@ BOOTLOADER: up to date
 
 みどり（通常）：
   「UPDATE AVAILABLE」の表示がなくなったよ
+  「最新(up to date)」とも表示があるね
   確認できるのも安心だね！
 
 ## まとめ

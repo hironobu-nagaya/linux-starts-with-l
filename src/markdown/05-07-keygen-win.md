@@ -22,7 +22,8 @@ next-title=SSH鍵生成(macOS,Linux)
 ## PuTTY
 
 しげる（通常）：
-  Windows の場合「ターミナル」や「Windows PowerShell」のかわりに
+  Windows の場合
+  「ターミナル」や「Windows PowerShell」のかわりに
   「ターミナルエミュレータ」を使うと便利だよ
   リモート接続先の端末画面を再現してくれるソフトウェアなんだ
 みどり（通常）：
