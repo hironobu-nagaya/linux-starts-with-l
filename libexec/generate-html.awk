@@ -22,20 +22,21 @@ function prepare_speakers(speaker_str) {
 function draw_head(chapter, story, title, keywords, description, rel_prev, rel_next, stylesheet) {
   print "<head>"
   print "<title>Lから始まるLinux - " chapter "章" story "話 " sanitize(title) "</title>"
-  print "<meta charset=\"UTF-8\">"
-  print "<meta http-equiv=\"content-language\" content=\"ja\">"
+  print "<base href=\"../..\">"
+  print "<meta charset=\"utf-8\">"
+  print "<meta name=\"author\" content=\"Hironobu Nagaya\">"
+  print "<meta name=\"robots\" content=\"all\">"
   print "<meta name=\"keywords\" content=\"" to_keywords_content(keywords) "\">"
   print "<meta name=\"description\" content=\"" sanitize(description) "\">"
-  print "<base href=\"../..\">"
   if (length(rel_prev) > 0) {
     print "<link rel=\"prev\" href=\"" rel_prev "\" />"
   }
   if (length(rel_next) > 0) {
     print "<link rel=\"next\" href=\"" rel_next "\" />"
   }
-  print "<link rel=\"icon\" href=\"favicon.svg\">"
+  print "<link rel=\"icon\" href=\"favicon.svg\" type=\"image/svg+xml\">"
   for (i = 1; i <= length(stylesheets); i++) {
-    print "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/" stylesheets[i] "\">"
+    print "<link rel=\"stylesheet\" href=\"css/" stylesheets[i] "\" type=\"text/css\">"
   }
   print "</head>"
 }
@@ -203,7 +204,7 @@ BEGIN {
   split("", content)
 
   print "<!DOCTYPE html>"
-  print "<html>"
+  print "<html lang=\"ja\">"
 }
 
 {
