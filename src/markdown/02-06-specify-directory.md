@@ -9,7 +9,7 @@ keyword=home directory
 prev=2/5/
 prev-title=ディレクトリ移動
 next=2/7/
-next-title=履歴
+next-title=pushdとpopd
 
 # ディレクトリ指定
 

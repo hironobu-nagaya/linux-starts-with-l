@@ -14,13 +14,13 @@ function generate-index() {
   [ -d "$DEST_DIR" ] || mkdir -p "$DEST_DIR"
   cat > "$MAIN_INDEX" << \EOF
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <title>Lから始まるLinux - もくじ</title>
-  <meta charset="UTF-8">
-  <meta http-equiv="content-language" content="ja">
-  <meta name="keywords" content="Lから始まるLinux,Linux starts with L,Linux">
-  <meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+  <meta charset="utf-8" />
+  <meta name="robots" content="all" />
+  <meta name="keywords" content="Lから始まるLinux,Linux starts with L,Linux" />
+  <meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です" />
   <link rel="icon" href="favicon.svg" />
   <link rel="stylesheet" type="text/css" href="css/common.css" />
   <link rel="stylesheet" type="text/css" href="css/index.css" />
