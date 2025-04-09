@@ -10,7 +10,7 @@ keyword=chmod
 prev=4/10/
 prev-title=特殊なパーミッション
 next=4/12/
-next-title=マウント
+next-title=nologin
 
 # 特殊なパーミッション操作
 

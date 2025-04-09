@@ -1,14 +1,14 @@
 chapter=4
-story=16
+story=17
 title=ユーザ設定ファイル
 keyword=super user
 keyword=root
 keyword=passwd
 keyword=shadow
 keyword=vipw
-prev=4/15/
+prev=4/16/
 prev-title=ファイルシステム
-next=4/17/
+next=4/18/
 next-title=グループ設定ファイル
 
 # ユーザ設定ファイル

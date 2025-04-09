@@ -1,9 +1,9 @@
 chapter=4
-story=18
+story=19
 title=hostsファイル
-prev=4/17/
+prev=4/18/
 prev-title=グループ設定ファイル
-next=4/19/
+next=4/20/
 next-title=fstabファイル
 
 # `hosts` ファイル
