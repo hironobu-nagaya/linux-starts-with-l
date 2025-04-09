@@ -1,14 +1,14 @@
 chapter=4
-story=13
+story=14
 title=パーティション
 keyword=super user
 keyword=root
 keyword=partition
 keyword=MBR
 keyword=GPT
-prev=4/12/
+prev=4/13/
 prev-title=マウント
-next=4/14/
+next=4/15/
 next-title=fdiskコマンド
 
 # パーティション

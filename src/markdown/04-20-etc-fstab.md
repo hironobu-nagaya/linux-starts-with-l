@@ -1,5 +1,5 @@
 chapter=4
-story=19
+story=20
 title=fstabファイル
 keyword=super user
 keyword=root
@@ -7,9 +7,9 @@ keyword=fstab
 keyword=mount
 keyword=systemd
 keyword=systemctl
-prev=4/18/
+prev=4/19/
 prev-title=hostsファイル
-next=4/20/
+next=4/21/
 next-title=motdファイル
 
 # `fstab` ファイル

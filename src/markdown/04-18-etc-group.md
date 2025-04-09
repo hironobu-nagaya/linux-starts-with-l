@@ -1,14 +1,14 @@
 chapter=4
-story=17
+story=18
 title=グループ設定ファイル
 keyword=super user
 keyword=root
 keyword=group
 keyword=gshadow
 keyword=vigr
-prev=4/16/
+prev=4/17/
 prev-title=ユーザ設定ファイル
-next=4/18/
+next=4/19/
 next-title=hostsファイル
 
 # グループ設定ファイル

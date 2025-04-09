@@ -1,13 +1,13 @@
 chapter=4
-story=14
+story=15
 title=fdiskコマンド
 keyword=super user
 keyword=root
 keyword=fdisk
 keyword=partition
-prev=4/13/
+prev=4/14/
 prev-title=パーティション
-next=4/15/
+next=4/16/
 next-title=ファイルシステム
 
 # `fdisk` コマンド

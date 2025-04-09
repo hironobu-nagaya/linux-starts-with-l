@@ -1,12 +1,12 @@
 chapter=4
-story=20
+story=21
 title=motdファイル
 keyword=super user
 keyword=root
 keyword=motd
-prev=4/19/
+prev=4/20/
 prev-title=fstabファイル
-next=4/21/
+next=4/22/
 next-title=PAM
 
 # `motd`ファイル

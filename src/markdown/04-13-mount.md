@@ -1,14 +1,14 @@
 chapter=4
-story=12
+story=13
 title=マウント
 keyword=super user
 keyword=root
 keyword=mount
 keyword=unmount
 keyword=lsusb
-prev=4/11/
-prev-title=特殊なパーミッション操作
-next=4/13/
+prev=4/12/
+prev-title=nologin
+next=4/14/
 next-title=パーティション
 
 # マウント
