@@ -131,7 +131,7 @@ sudo bash -c 'cat > /etc/samba/smb.conf << \EOF
 [global]
   guest account = samba
   workgroup = WORKGROUP
-  security =uesr
+  security = user
 
 [share]
   path = /srv/samba/share
@@ -151,7 +151,7 @@ EOF'
 [global]                  !start-class-silver!# 全体設定!end!
   guest account = samba   !start-class-silver!# ゲストアクセスで使用されるアカウント!end!
   workgroup = WORKGROUP   !start-class-silver!# Windows のデフォルトワークグループ名!end!
-  security =uesr          !start-class-silver!# 認証方式!end!
+  security = user          !start-class-silver!# 認証方式!end!
 
 [share]                   !start-class-silver!# share 設定!end!
   path = /srv/samba/share !start-class-silver!# 共有ディレクトリのパス!end!
