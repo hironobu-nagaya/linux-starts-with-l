@@ -28,6 +28,7 @@ function draw_head(chapter, story, title, keywords, description, rel_prev, rel_n
   print "<meta name=\"robots\" content=\"all\">"
   print "<meta name=\"keywords\" content=\"" to_keywords_content(keywords) "\">"
   print "<meta name=\"description\" content=\"" sanitize(description) "\">"
+  print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=0.5\" />"
   if (length(rel_prev) > 0) {
     print "<link rel=\"prev\" href=\"" rel_prev "\" />"
   }

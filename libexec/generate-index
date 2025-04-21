@@ -21,6 +21,7 @@ function generate-index() {
   <meta name="robots" content="all" />
   <meta name="keywords" content="Lから始まるLinux,Linux starts with L,Linux" />
   <meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.65" />
   <link rel="icon" href="favicon.svg" />
   <link rel="stylesheet" type="text/css" href="css/common.css" />
   <link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -51,6 +52,7 @@ EOF
   <meta http-equiv="content-language" content="ja">
   <meta name="keywords" content="Lから始まるLinux,Linux starts with L,Linux">
   <meta name="description" content="兄妹の対話を通してLinuxへの理解を深めていくお話です">
+  <meta name="viewport" content="width=device-width, initial-scale=0.65" />
   <base href="..">
 $([ "$CHAPTER" -gt 1 ] && echo "  <link rel=\"prev\" href=\"$PREV_CHAPTER/\" />")
 $([ "$CHAPTER" -lt "$LAST_CHAPTER" ] && echo "  <link rel=\"next\" href=\"$NEXT_CHAPTER/\" />")
