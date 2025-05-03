@@ -26,11 +26,11 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     const year = now.getFullYear().toString();
-    }).format(now);
     const month = (now.getMonth() + 1).toString().padStart(2, ' ');
     const date = now.getDate().toString().padStart(2, ' ');
     const weekday = new Intl.DateTimeFormat('ja-JP', {
         weekday: 'long'
+    }).format(now);
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const seconds = now.getSeconds().toString().padStart(2, '0');

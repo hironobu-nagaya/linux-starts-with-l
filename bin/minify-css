@@ -1,0 +1,48 @@
+#!/bin/bash
+# Begin libexec/minify-css
+
+set -e
+
+function cleanup() {
+  [ -f "$CSS.out" ] || rm -f "$CSS.out"
+  [ -f "$CSS.original" ] || return "$1"
+  [ "$1" -eq 0 ] \
+      && rm -f "$CSS.original" \
+      || mv "$CSS"{.original,}
+  return "$1"
+}
+
+function print-help() {
+  echo "${0##*/}: USAGE: ${0##*/} CSS" >&2
+}
+
+if [ "$#" -ne 1 ]
+then
+  print-help
+  exit 1
+fi
+
+CSS="$1"
+trap 'cleanup 0' 0
+trap 'cleanup 1' 1 2 3 15
+
+sed -i.original \
+    -e '/^[ \t]*$/d' \
+    -e 's/^[ \t]*//' \
+    -e 's/[ \t]*$//' \
+    -e 's/:[ \t]*/:/g' \
+    -e 's/[ \t]*{/{/g' \
+    -e 's%[ \t]*/\*.*\*/[ \t]*%%g' \
+    "$CSS"
+
+FIRST_LINE="$(head -1 "$CSS")"
+if grep -sqm1 '@charset' <<< "$FIRST_LINE"
+then
+  echo "$FIRST_LINE" > "$CSS.out"
+  sed -n '2,$p' "$CSS" | sed -z 's/\n//g' >> "$CSS.out"
+  mv "$CSS.out" "$CSS"
+else
+  sed -zi 's/\n//g' "$CSS"
+fi
+
+# End libexec/minify-css

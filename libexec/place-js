@@ -15,12 +15,22 @@ function place-js() {
   awk '/^http.*\.js$/' "$PROJECT_HOME_DIR/share/downloads" |
   while read URL
   do
-    local JS="${URL##*/}"
-    curl -Lso "$DEST_JS_DIR/$JS" "$URL" &
+    {
+      curl -Lso "$DEST_JS_DIR/${URL##*/}" "$URL"
+      grep -sq '^jquery-.*\.js$' <<< "${URL##*/}" && ln -sfn "${URL##*/}" "$DEST_JS_DIR/jquery.js"
+    } &
     PIDS="$PIDS${PIDS:+ }$!"
-    grep -sq '^jquery-.*\.js$' <<< "$JS" && ln -sfn "$JS" "$DEST_JS_DIR/jquery.js"
   done
-  [ -z "$(ls "$SOURCE_JS_DIR"/*.js 2> /dev/null)" ] || cp -a "$SOURCE_JS_DIR"/*.js "$DEST_JS_DIR/"
+
+  for JS in "$SOURCE_JS_DIR"/*.js
+  do
+    {
+      cp -a "$JS" "$DEST_JS_DIR/"
+      "$PROJECT_HOME_DIR/bin/minify-js" "$DEST_JS_DIR/${JS##*/}"
+    } &
+    PIDS="$PIDS${PIDS:+ }$!"
+  done
+
   [ -z "$PIDS" ] || wait $PIDS
 }
 

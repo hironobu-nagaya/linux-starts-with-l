@@ -4,7 +4,6 @@ section {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  max-width: calc(100% - 5em);
   min-width: 400px;
   margin: auto;
 }
@@ -46,11 +45,11 @@ article.talk > *:last-child {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  margin: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   margin-left: 2em;
   padding: 1em;
-  min-width: 120px;
-  max-width: 100%;
+  min-width: 100px;
   font-size: large;
   background: #FFF;
   border: solid 4px #555555;
@@ -84,12 +83,17 @@ article.talk > *:last-child:after {
 }
 
 article.image {
-   justify-content: center;
+  justify-content: center;
 }
 
 article.unordered-list, article.ordered-list, article.table, article.code {
-   justify-content: left;
-   padding-left: calc(128px + 2.5em);
+  justify-content: left;
+}
+
+@media (600px < width) {
+  article.unordered-list, article.ordered-list, article.table, article.code {
+    padding-left: calc(128px + 2em);
+  }
 }
 
 article:not(.code) code {

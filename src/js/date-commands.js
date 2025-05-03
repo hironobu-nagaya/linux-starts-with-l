@@ -13,7 +13,7 @@ $(document).ready(function() {
     const title = ' '.repeat(lengthDiff / 2 + (lengthDiff & 1))
         + bareTitle
         + ' '.repeat(lengthDiff / 2);
-    const startDate = new Date()
+    const startDate = new Date();
     startDate.setDate(1);
     const endDate = new Date();
     endDate.setMonth(endDate.getMonth() + 1, 0);
