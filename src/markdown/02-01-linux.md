@@ -97,12 +97,29 @@ next-title=ログイン
 しげる（通常）：
   最初は初心者に優しくユーザ数の多い
   ディストリビューションを選ぶと良いよ
-  以下はどうだろう
+  以下はどうだろう？
 
 ディストリビューション             | 特徴
 ---------------------------------- | ----
 [Debian](https://www.debian.or.jp) |  歴史が長く、安定性・信頼性が高い
 [Ubuntu](https://ubuntulinux.jp)   |  Debian ベースで初心者に優しい
+
+しげる（通常）：
+  商用 Linux で大きなシェアを占めているのは
+  [Red Hat Enterprise Linux](https://redhat.com/ja/technologies/linux-platforms/enterprise-linux)(RHEL) だよ
+  Linux を業務目的でを学びたいのなら
+  Red Hat Enterprise Linux に含まれているソフトウェアを
+  全てオープンソースに置き換えた
+  互換ディストリビューションが無料で利用可能なので
+  それを使うのもよいかも知れないよ
+
+ディストリビューション                        | 特徴
+--------------------------------------------- | ----
+[CentOS](https://www.centos.org)              | 歴史が長い RHEL 互換 Linux
+[Fedora](https://fedoraproject.org/ja/)       | 新しい機能を積極的に取り入れる
+[Rocky Linux](https://rockylinux.org/ja-JP)   | CentOS から分離
+[AlmaLinux](https://almalinux.org/ja/)        | CentOS の置き換えを目指している
+
 
 みどり（通常）：
   ディストリビューション選びで何が変わるの？
