@@ -41,7 +41,7 @@ uname [オプション]...
 `-n`, `--nodename`          | ホスト名を表示
 `-r`, `--kernel-release`    | カーネルリリースを表示
 `-v`, `--kernel-version`    | カーネルバージョンを表示
-`-m`, `--machine`           | マシンアーキテクチャを表示
+`-m`, `--machine`           | アーキテクチャを表示
 `-i`  `--hardware-platform` | ハードウェアプラットフォーム表示
 `-o`, `--operationg-system` | OS 名を表示
 `-a`, `--all`               | 全情報を表示
@@ -68,7 +68,7 @@ Linux
 ## `arch` コマンド
 
 しげる（通常）：
-  `arch` はマシンアーキテクチャを表示するよ
+  `arch` はアーキテクチャを表示するよ
   archtecture の略なんだ
 
 ```bash

@@ -198,14 +198,16 @@ Raspberry Pi 4B, 5   | microHDMI × 2
   Raspberry Pi 5 には無いのね…
 しげる（通常）：
   基板上にチップがそのままあるだけだからね
-  シールドなどのノイズ対策が無く音質が良くないんだ
+  シールドなどのノイズ対策が無く
+  音質が良くないと言われていて
   人気がなく廃止されたみたいだよ
 みどり（通常）：
   Raspberry Pi 5 ではサウンドを聴けないの？
 しげる（通常）：
   HDMI 経由でサウンド出力できるし
   USB に対応機器を接続してもいいよ
-  Raspberry Pi 用の「DAC(digital to analog converter)」基板もあるんだ
+  Raspberry Pi 用の
+  「DAC(digital to analog converter)」基板もあるんだ
 
 ## まとめ
 

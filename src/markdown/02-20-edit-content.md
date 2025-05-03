@@ -9,6 +9,8 @@ prev=2/19/
 prev-title=端末操作
 next=2/21/
 next-title=コマンドライン
+javascripts=jquery.js
+javascripts=edit-content.js
 
 # ファイル編集
 
@@ -71,7 +73,7 @@ vim diary
   「`i` キー」を押してから文字を打ち込むね！
 
 ```plaintext
-○月×日 今回は vim でファイル編集！!cursor!
+!start-class-today!○月×日!end! 今回は vim でファイル編集！!cursor!
 ```
 
 みどり（通常）：
@@ -100,7 +102,7 @@ cat diary
   どきどき…
 
 ```console
-○月×日 今回は vim でファイル編集！
+!start-class-today!○月×日!end! 今回は vim でファイル編集！
 ```
 
 みどり（笑顔）：

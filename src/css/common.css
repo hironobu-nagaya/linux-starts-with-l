@@ -12,10 +12,10 @@ html {
 header, footer {
   font-size: x-large;
   text-align: center;
-  margin: 0.5em;
 }
 
 header {
+  margin-top: 0.5em;
   margin-bottom: 3em;
 }
 
@@ -31,9 +31,21 @@ header > h1 {
 
 footer {
   margin-top: 3em;
+  margin-bottom: 0.5em;
+}
+
+@media handheld {
+  footer {
+    margin-bottom: 3em;
+  }
+}
+
+pre {
+  width: 100%;
 }
 
 table {
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -86,5 +98,19 @@ span.lime {
 
 span.silver {
   color: silver;
+}
+
+@media (400px < width) {
+  body {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+
+@media (width <= 400px) {
+  body {
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+  }
 }
 

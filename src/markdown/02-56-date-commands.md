@@ -8,7 +8,7 @@ prev-title=バイナリ関連コマンド
 next=2/57/
 next-title=数学関連コマンド
 javascripts=jquery.js
-javascripts=timedate.js
+javascripts=date-commands.js
 
 # 日時関連コマンド
 

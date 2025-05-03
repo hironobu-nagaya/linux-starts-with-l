@@ -15,10 +15,14 @@ function generate-html() {
     local CHAPTER="$(awk -F- '{print $1}' <<< "${MARKDOWN##*/}" | sed 's/^0*//')"
     local STORY="$(awk -F- '{print $2}' <<< "${MARKDOWN##*/}" | sed 's/^0*//')"
     [ -d "$DEST_DIR/$CHAPTER/$STORY" ] || mkdir -p "$DEST_DIR/$CHAPTER/$STORY"
-    awk \
-      -v emotion_str="$(awk -F, 'NF >= 2' "$PROJECT_HOME_DIR/share/emotions" | sed -z -e 's/\n/;/g' -e 's/;*$//')" \
-      -v speaker_str="$(awk -F, 'NF >= 2' "$PROJECT_HOME_DIR/share/speakers" | sed -z -e 's/\n/;/g' -e 's/;*$//')" \
-      -f "$PROJECT_HOME_DIR/libexec/generate-html.awk" "$MARKDOWN" > "$DEST_DIR/$CHAPTER/$STORY/index.html" &
+    {
+      awk \
+        -v emotion_str="$(awk -F, 'NF >= 2' "$PROJECT_HOME_DIR/share/emotions" | sed -z -e 's/\n/;/g' -e 's/;*$//')" \
+        -v speaker_str="$(awk -F, 'NF >= 2' "$PROJECT_HOME_DIR/share/speakers" | sed -z -e 's/\n/;/g' -e 's/;*$//')" \
+        -f "$PROJECT_HOME_DIR/libexec/generate-html.awk" "$MARKDOWN" > "$DEST_DIR/$CHAPTER/$STORY/index.html"
+      "$PROJECT_HOME_DIR/bin/minify-html" "$DEST_DIR/$CHAPTER/$STORY/index.html"
+
+    } &
     PIDS="$PIDS${PIDS:+ }$!"
   done
   [ -z "$PIDS" ] || wait $PIDS

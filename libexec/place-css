@@ -18,8 +18,16 @@ function place-css() {
     curl -Lso "$DEST_CSS_DIR/${URL##*/}" "$URL" &
     PIDS="$PIDS${PIDS:+ }$!"
   done
-  [ -z "$(ls "$SOURCE_CSS_DIR"/*.css 2> /dev/null)" ] || cp -a "$SOURCE_CSS_DIR"/*.css "$DEST_CSS_DIR/"
-  PIDS="$PIDS${PIDS:+ }$!"
+
+  for CSS in "$SOURCE_CSS_DIR"/*.css
+  do
+    {
+      cp -a "$CSS" "$DEST_CSS_DIR/"
+      "$PROJECT_HOME_DIR/bin/minify-css" "$DEST_CSS_DIR/${CSS##*/}"
+    } &
+    PIDS="$PIDS${PIDS:+ }$!"
+  done
+
   [ -z "$PIDS" ] || wait $PIDS
 }
 
