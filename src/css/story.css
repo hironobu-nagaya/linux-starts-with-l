@@ -90,7 +90,7 @@ article.unordered-list, article.ordered-list, article.table, article.code {
   justify-content: left;
 }
 
-@media (600px < width) {
+@media (min-width: 600px) {
   article.unordered-list, article.ordered-list, article.table, article.code {
     padding-left: calc(128px + 2em);
   }
