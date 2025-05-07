@@ -100,17 +100,17 @@ span.silver {
   color: silver;
 }
 
-@media (400px < width) {
-  body {
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-}
-
-@media (width <= 400px) {
+@media (max-width: 400px) {
   body {
     padding-left: 0.25em;
     padding-right: 0.25em;
+  }
+}
+
+@media (min-width: 400px) {
+  body {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
 
