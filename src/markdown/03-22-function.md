@@ -6,7 +6,7 @@ keyword=shell function
 keyword=return
 keyword=local
 prev=3/21/
-prev-title=envコマンド
+prev-title=パラメータ展開(拡張)
 next=3/23/
 next-title=ドットコマンド
 

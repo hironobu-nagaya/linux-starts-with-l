@@ -6,7 +6,7 @@ keyword=readonly
 prev=3/16/
 prev-title=オプション処理
 next=3/18/
-next-title=パラメータ展開(基本)
+next-title=exportコマンド
 
 # `readonly` コマンド
 
