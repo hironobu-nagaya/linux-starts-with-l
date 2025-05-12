@@ -9,7 +9,7 @@ keyword=xargs
 prev=2/34/
 prev-title=パイプ
 next=2/36/
-next-title=バックグラウンド実行
+next-title=差分
 
 # ファイル検索
 
